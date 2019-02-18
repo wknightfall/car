@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+
+
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+
+        <volist name="nav" id="v">
+            <li <if condition="$v.id eq $navid">class="inva_chk"</if>  ><a href="{$v.href}">{$v.title}</a></li>
+        </volist>
+    </ul>
+
+</div>
+<!--正文-->
+<div class="lvxin_youji">
+
+    <ul id="food">
+        <volist name="lists" id="vo">
+        <li>
+            <a href="{:U('wap/food/detail?id='.$vo['id'].'&model=localhistory')}">
+                <img src="{$vo.icon|picture}" alt="">
+            </a>
+            <span>
+                <p><a href="{:U('wap/food/detail?id='.$vo['id'].'&model=localhistory')}">{$vo.name|mb_substr=###,0,45}</a></p>
+                <i>{$vo.content}...</i>
+                <p>{$vo.create_time|date='Y-m-d',###}</p>
+
+            </span>
+        </li>
+
+        </volist>
+    </ul>
+</div>
+<!--more-->
+<div class="see_more">
+
+    <a href="javascript:" class="molink">查看更多+</a>
+</div>
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+
+    page=1;
+    var    url="{:U('Culture/index')}";
+    var navid='{$Think.get.navid}'
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page,'navid':navid},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+
+        }
+    })
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':'food'},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                collection.html(parseInt(num)+1);
+                collection.css("background-image","url('/Public/Home/img/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                collection.html(parseInt(num)-1);
+                collection.css("background-image","url('/Public/Home/img/gud/dtjg_05.jpg')");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+</script>
+</html>

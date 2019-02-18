@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        订单管理
+
+    </div>
+
+    <div class="celec_nva">
+
+        <ul>
+            <if condition="$state eq 0 || $state eq 1|| $state eq 3">
+                <li><a href="{:U('mer/dingdan?state=2')}">全部</a></li>
+                <else />
+                <li class="this_pag"><a href="{:U('mer/dingdan?state=2')}">全部</a></li>
+            </if>
+            <if condition="$state eq 0">
+                <li class="this_pag"><a href="{:U('mer/dingdan?state=0')}">待付款</a></li>
+                <else />
+                <li><a href="{:U('mer/dingdan?state=0')}">待付款</a></li>
+            </if>
+            <if condition="$state eq 1">
+                <li class="this_pag"><a href="{:U('mer/dingdan?state=1')}">已付款</a></li>
+                <else />
+                <li><a href="{:U('mer/dingdan?state=1')}">已付款</a></li>
+            </if>
+            <if condition="$isover eq 1">
+                <li class="this_pag"><a href="{:U('mer/dingdan?isover=1')}">已完成</a></li>
+                <else />
+                <li><a href="{:U('mer/dingdan?isover=1')}">已完成</a></li>
+            </if>
+        </ul>
+    </div>
+
+    <!--list-->
+    <div class="dind_list">
+        <ul id="food">
+            <notempty name="lists">
+                <volist name="lists" id="vo">
+            <li>
+                <p class="list_tt">
+                    <i>订单号:{$vo.orderno}</i>
+                    <eq name="vo.state" value="1"><em>已付款</em><else  /><em class="daifu">待付款</em></eq>
+                </p>
+                <span class="list_ma">
+                    <img src="{$vo.icon|picture}" alt="">
+                    <span>
+                        <p>{$vo.name}</p>
+                        <p>{$vo.content}</p>
+                        <em class="lsi_em">
+                           <!-- <i>人数：5人</i>
+                            <i>单价：¥500</i>-->
+                            <i>数量：{$vo.num}</i>
+                        </em>
+                    </span>
+                </span>
+
+                <p class="list_ft">
+                    <i>订单金额：<em>￥{$vo.money}</em></i>
+                    <span>
+                        <eq name="vo.state" value="1">
+                            <if condition="$vo.isover neq 1">
+                                <input type="button" value="确认完成" class="ovfuk" data-id="{$vo.id}"></if>
+
+                            <else />
+                            <!--<input type="button" value="查看评价" class="checkpl" data-id="{$vo.hid}">-->
+                            </eq>
+                    </span>
+                </p>
+
+            </li>
+
+                </volist>
+                <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+            </notempty>
+
+        </ul>
+    </div>
+
+
+    <include file="public/merfooter" />
+
+</div>
+
+</body>
+<script>
+    page=1;
+    var   url="{:U('mer/dingdan')}";
+    var state='{$state}'
+    $(window).scroll(
+            function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+
+                    $.post(url,{'page':page,'state':state},function (da) {
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            $('#food').append(obj.msg);
+                            page++;
+                        }else{
+                            //$('.molink').addClass('nothing');
+
+                            layer.msg('没有更多了哦~');
+                        }
+                    })
+
+                }
+            });
+
+    $(document).on("click","#chaxun",function () {
+
+
+        var date1=$('#date_demo1').val();
+        var date2=$('#date_demo2').val();
+        console.log(date1,date2);
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Home/mer/dingdan/date1/'+date1+'/date2/'+date2;
+    })
+    $(document).on("click",".delorder",function () {
+        var id = $(this).attr('data-id')
+        layer.confirm('确定删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function(index) {
+            layer.close(index);
+
+
+            $.post("/Home/mer/dingdan",{'id':id,'type':'del'},function(da){
+
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg('删除成功',function () {
+                        location.reload();
+                    })
+
+
+                }else{
+                    layer.msg('删除失败')
+
+                }
+
+            });
+        });
+    })
+    $(document).on("click",".ovfuk",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/mer/dingdan",{'id':id,'type':'isover'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('确认成功',function () {
+                    location.reload();
+                })
+
+
+            }else{
+                layer.msg('确认失败')
+
+            }
+        });
+    })
+    $(document).on("click",".checkpl",function () {
+        var id = $(this).attr('data-id')
+        var shoptype='{$shoptype}'
+       if(shoptype==1){
+           location.href='/Wap/house/hoteldetail/id/'+id+'/type/'+shoptype;
+       }else if(shoptype==2){
+            location.href='/Wap/food/dingcan/id/'+id+'/type/'+shoptype;
+        }else if(shoptype==3){
+            location.href='/Wap/project/scenicdetial/id/'+id+'/type/'+shoptype;
+        }
+
+    })
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo2',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo1',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>

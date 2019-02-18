@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+
+    <script type="text/javascript" src="__JS__/ajaxupload.3.5.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        发评论
+    </div>
+
+    <!--list-->
+
+    <div class="content_fa">
+        <ul>
+            <li>评分:</li>
+            <li>
+                <img src="__IMG__/fpll_05.jpg" alt="">
+                <img src="__IMG__/fpll_05.jpg" alt="">
+                <img src="__IMG__/fpll_05.jpg" alt="">
+                <img src="__IMG__/fpll_05.jpg" alt="">
+                <img src="__IMG__/fpll_05.jpg" alt="">
+            </li>
+        </ul>
+        <ul>
+            <li>内容:</li>
+            <li>
+                <textarea name="" placeholder=""  id="content" cols="30" rows="10">{$comment.content}</textarea>
+            </li>
+        </ul>
+    </div>
+
+    <div class="btn_dom">
+        <if condition="$Think.get.edit eq 1"><input type="button" value="编辑" id="editcomment">
+            <else /><input type="button" value="发布" id="pubcomment"></if>
+
+    </div>
+
+
+</div>
+
+</body>
+<script>
+    var star=5;
+    $('#pubcomment').click(function(){
+        var id ="{$Think.get.id}";
+        var type="{$Think.get.type}";
+        var content= $('#content').val()
+        if(content == ''){
+            layer.tips('请填写评论内容', '#content', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            }); return false;
+        }
+        //var icon=$('input[name=iconid]').val()
+
+        //console.log(star,content);return;
+
+        $.post("/Home/Ajax/pubcomment",{'id':id,'content':content,'type':type,'star':star},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg(obj.msg,function () {
+                    var shoptype='{$shoptype}'
+                    if(shoptype == 0){
+                        location.href="/wap/user/pl";
+                    }else{
+                        location.href="/wap/mer/pl";
+                    }
+
+                });
+            }else{
+                layer.msg(obj.msg);
+
+            }
+        });
+    })
+    $('#editcomment').click(function(){
+        var aid ="{$Think.get.plid}";
+        //var icon=$('input[name=iconid]').val()
+        var content= $('#content').val()
+        if(content == ''){
+            layer.tips('请填写评论内容', '#content', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            }); return false;
+        }
+//console.log(icon,content);return;
+        $.post("/Home/Ajax/editcomment",{'id':aid,'content':content,'star':star},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg(obj.msg,function () {
+                    var shoptype='{$shoptype}'
+                    if(shoptype == 0){
+                        location.href="/wap/user/pl";
+                    }else{
+                        location.href="/wap/mer/pl";
+                    }
+                    //location.href=document.referrer
+                });
+            }else{
+                layer.msg(obj.msg);
+
+            }
+        });
+    })
+
+</script>
+<script>
+    $(".content_fa ul:first-child li:nth-child(2) img").click(function () {
+        star=$(this).index()+1
+
+        $(".content_fa ul:first-child li:nth-child(2) img").attr("src","/Public/Home/img/psc/fpll_05.jpg");
+        $(this).attr("src","/Public/Home/img/psc/fpll_03.jpg");
+        $(this).prevAll().attr("src","/Public/Home/img/psc/fpll_03.jpg");
+    })
+</script>
+<script>
+
+    $('#xgpassword').click(function () {
+        location.href='/wap/public/xiugai'
+    })
+    $('#xiugshouji').click(function () {
+        location.href='/wap/public/xiugshouji'
+    })
+
+    $('#logo').click(function () {
+        /*$('#fomr1').submit();*/
+        var username=$('input[name=username]').val();
+        var password=$('input[name=password]').val();
+        var remember=$('input[name=remember]').prop('checked');
+        if(remember){
+            remember=1;
+        }else{
+            remember=0;
+        }
+        $.post("{:U('Ajax/login')}",{'username':username,'password':password,'remember':remember},function (data) {
+            if(data.status==1){
+                layer.msg(data.msg);
+                $('.login').hide();
+                location.href='Home/Index/index';
+            }else{
+
+                layer.msg(data.msg);
+            }
+        })
+    })
+</script>
+<!--<script>
+    $(document).on("click","#submit",function () {
+        var oldicon = $('input[name=oldicon]').val();
+        var icon = $('input[name=iconid]').val();
+        var oldname = $('input[name=oldname]').val();
+        var name = $('input[name=name]').val();
+        if(icon==0){
+            layer.msg('请选择头像');return false;
+        }else if(name==''){
+            layer.msg('请输入昵称');return false;
+        }else if(name.length>12){
+            layer.msg('昵称不能超过12个字符');return false;
+        }else if(oldicon == icon && oldname == name){
+            layer.msg('请修改头像或昵称');return false;
+        }
+        $.post("/Home/user/geren",{'icon':icon,'name':name},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200) {
+                layer.msg('编辑成功',function () {
+                    location.reload()
+                })
+
+            }else{
+                layer.msg('编辑失败')
+
+            }
+        });
+
+    })
+
+</script>-->
+<!--<script>
+    $(document).ready(function(){
+        uploadsasa();
+    });
+    //上传头像
+    function uploadsasa(){
+        ajaxUploadicon(
+                'icon', //上传的按钮id名称
+                1000000000,  //允许上传的文件大小（单位：kb）
+                '/Home/Public/upload?form_name=userfile&file_size=10000', //提交服务器端地址
+                'userfile', //提交服务器文件表单名称
+                "$(\".img_div\").show();$(\"#img_path\").attr('src', obj.filename);$(\"#is_upload\").val('1');", //上传成功后执行的 js callback
+                'loadimg'  //loading 图片id
+        );
+    }
+
+    function ajaxUploadicon(id_name, filesize, url, filename, callback, loadingid) {
+        var index;
+        var button = $('#'+id_name), interval;
+        var fileType = "pic", fileNum = "one";
+        new AjaxUpload(button,{
+            action: url,
+            name: filename,
+            onSubmit : function(file, ext){
+                index = layer.load(1, {
+                    shade: [0.4,'#000000']
+                });
+                if(fileType == "pic") {
+                    if (ext && /^(jpg|png|gif|jpeg)$/.test(ext)){
+                        this.setData({
+                            'info': '上传类型为图片'
+                        });
+
+                    } else {
+                        alert('提示：您上传的是非图片类型！');
+                        layer.close(index);
+                        return false;
+                    }
+                }
+                $("#"+loadingid).show();
+                if(fileNum == 'one') this.disable();
+            },
+            onComplete: function(file, response){
+
+                layer.close(index);
+                var obj = jQuery.parseJSON(response);
+                if (obj['ok'] == 'ok') {
+                    $('#icon').attr('src',obj['filename']);
+                    $('input[name=iconid]').val(obj['id']);
+
+                    uploadsasa();
+                } else {
+                    switch (response) {
+                        case '1':
+                            alert('提示：上传失败，图片不能大于100M');
+
+                            break;
+                        case '3':
+                            alert('提示：图片只有部分文件被上传，请重新上传！');
+
+                            break;
+                        case '4':
+                            alert('提示：没有任何文件被上传！');
+
+                            break;
+                        case '5':
+                            alert('提示：非图片类型，请上传jpg|png|gif图片！');
+
+                            break;
+                        default:
+                            alert('提示：上传失败，错误未知，请您及时联系网站客服人员！');
+
+                            break;
+                    }
+                }
+                $("#"+loadingid).hide();
+                window.clearInterval(interval);
+                this.enable();
+            }
+        });
+    }
+</script>-->
+
+</html>

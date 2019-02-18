@@ -1,0 +1,33 @@
+<div class="navBox">
+
+    <div class="publicContent">
+        <div class="navCon">
+
+            <div class="navTitleImg"><img src="__IMG__/0_head_03.jpg" alt="贵州杉乡文化旅游发展集团有限公司" /></div>
+
+            <div class="navLink">
+                <ul>
+                    <li <eq name="$cname" value="Index">class="tagLink" </eq> >
+                    <a href="{:U('Index/index')}"><p>网站首页</p><span>Home</span></a>
+                    </li>
+
+                    <volist name="mynav" id="vov">
+                        <li <eq name="$cname" value="$vov.name">class="tagLink" </eq> >
+                            <a href="{$vov.url}"><p>{$vov.title}</p><span>{$vov.name}</span></a>
+                            <div class="nv_lkist">
+                                <ul>
+                                    <volist name="vov.son" id="vv" key="k">
+
+                                    <li <if condition="$k eq 1">class="cked_list"</if> ><a href="{$vv.url}">{$vv.title}</a></li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </li>
+                    </volist>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

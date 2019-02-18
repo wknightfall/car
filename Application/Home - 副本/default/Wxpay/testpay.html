@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta name="Keywords" content="Keywords">
+    <meta name="description" content="description">
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__ROOT__/Public/Home/layer/layer.js"></script>
+    <title>{:C('WEB_SITE_TITLE')}-微信支付</title>
+    <style>
+	    .weixin_pay{background:rgb(48,51,63)}
+		.pay_img{width:100%; text-align:center;}
+		.pay_img>img{margin-top:12%;}
+	</style> 
+</head>
+<body class="weixin_pay">
+
+  <div class="pay_img"><img src="{$url}" ></div>
+
+</body>
+
+
+<script>
+
+    var shoptype='{$shoptype}'
+    var orderno = "{$orderno}";
+    var tyu =setInterval("startRequest()",2000);
+    function startRequest()
+    {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        $.post('/Home/Wxpay/select_order',{orderno:orderno},function (d) {
+            //成功
+            if(d.code>0){
+                clearInterval(tyu);
+                layer.alert(d.msg,function () {
+                   // parent.layer.close(index);  // 关闭layer
+
+                    if(shoptype==0){
+                        parent.location.href='/Home/user/rest';
+                    }else{
+                        parent.location.href='/Home/mer/caiwu';
+                    }
+
+                });
+            }
+        })
+    }
+
+</script>
+
+</html>

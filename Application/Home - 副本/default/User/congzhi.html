@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>会员充值</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/psc.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="psc_mb">
+
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('user/rest')}"><li class="per_chd"><span><p>余额</p></span></li></a>
+                    <a href="{:U('user/dingdan?state=2')}"><li><span><p>订单</p></span></li></a>
+                    <a href="{:U('user/luntan')}"><li  ><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('user/message')}"><li><span><p>我的留言</p></span></li></a>
+                    <a href="{:U('user/pl')}"><li><span><p>我的评论</p></span></li></a>
+                    <a href="{:U('user/geren')}"><li><span><p>个人资料</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="perrg_imsg">
+            <div class="rtt_top">
+                <div class="kyye_mon">
+                    <img src="__IMG__/psc/cer_03.jpg" alt="">
+                    <div>
+                        <i>可用余额</i>
+                        <span>
+                            <em>{$user.balance}</em>
+                            <a href="{:U('user/tixian')}" style=""><p class="tx_btn">提现</p></a>
+                            <a href="{:U('user/congzhi')}" style=""><p class="cz_btn">充值</p></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="jifen_tol">
+                    <img src="__IMG__/psc/cer_03.jpg" alt="">
+                    <div>
+                        <i>可用余额</i>
+                        <span>
+                            <em>{$user.balance}</em>
+                            <p class="sy_btn">使用</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="shouzi_mx">
+                <div class="per_ttmg">
+                    <p>充值</p>
+                    <div class="mx_lin">
+                        <span class="lin_00"></span>
+                        <span class="lin_11"></span>
+                    </div>
+                </div>
+                <!--微信-->
+                <div class="weix_or">
+                    <p>请选择充值方式</p>
+                    <ul>
+                        <li class="zfb_or_weix"><img src="__IMG__/psc/0cer_06.jpg" alt=""></li>
+                        <li><img src="__IMG__/psc/0cer_09.jpg" alt=""></li>
+                        <li><img src="__IMG__/psc/0cer_03.jpg" alt=""></li>
+                    </ul>
+                </div>
+                <div class="user_add">
+                    <span style="visibility: hidden">
+                        <i>充值账号：</i>
+                        <input type="text" class="sele_ll sele_ee" value="平安银行  尾号8728" >
+                        <div class="sele_chd">
+                            <ul>
+                                <li>中国银行  尾号8728</li>
+                                <li>建设银行  尾号8728</li>
+                                <li>工商银行  尾号8728</li>
+                                <li>农业银行  尾号8728</li>
+                            </ul>
+                        </div>
+                    </span>
+                    <p>
+                        <i>充值金额：</i>
+                        <input type="text" name="money" id="money">
+                        <i>元</i>
+                        <em>可用余额：￥{$user.balance}</em>
+                    </p>
+                </div>
+                <div class="boot_bt">
+                    <div class="lij_sbm" id="pay">立即充值</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<include file="Public/footer" />
+
+</footer>
+</body>
+</html>
+<script>
+    var type=0;//支付方式
+    $(document).on("click","#pay",function () {
+        var money=$('input[name=money]').val();
+        var isnum=/^\d+$/
+        if(!isnum.test(money)){
+            layer.tips('金额必须是数字', '#money', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            }); return false;
+        }
+        if(type==0){
+            layer.msg('请选择支付方式');return;
+        }
+
+        //console.log(money);return;
+        $.post("/Home/Ajax/order",{'money':money, 'actiontype':1},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                var orderno = obj.msg;
+                //console.log(orderno);return;
+
+                if(type == 1){
+                    location.href='/Home/Pay/testpay/orderno/'+orderno;
+                }else if(type == 2){
+                    location.href='/Home/Wxpay/testpay/orderno/'+orderno;
+                }else if(type == 3){
+                    layer.msg('暂不支持银联支付');
+                }
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(function () {
+
+        $(".weix_or ul li").click(function () {
+            type=$(this).index()+1;
+            $(".weix_or ul li").removeClass("zfb_or_weix");
+            if ($(this).hasClass("zfb_or_weix")) {
+                $(this).removeClass("zfb_or_weix");
+            } else {
+                $(this).addClass("zfb_or_weix");
+            }
+        })
+
+        /*下拉*/
+        $(".sele_ee").click(function () {
+
+            $(this).addClass("blk_fon");
+            if ($(this).next(".sele_chd").hasClass("dow_sele")) {
+
+                $(this).next(".sele_chd").removeClass("dow_sele");
+            } else {
+
+                $(".sele_ee").next(".sele_chd").removeClass("dow_sele");
+                $(this).next(".sele_chd").addClass("dow_sele");
+            }
+            ;
+        })
+
+        $(".sele_chd ul li").click(function () {
+
+            $(".sele_chd").removeClass("dow_sele");
+            $(this).parent().parent().prev(".sele_ee").val($(this).text());
+        })
+
+    })
+
+</script>

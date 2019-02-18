@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+<!--正文-->
+<div class="hotel_name">
+    <img src="__IMG__/icon/return.png" alt="" onclick="history.go(-1)">
+    <p>{$room.hid|modelField='usermember','name'}</p>
+</div>
+<div class="hotel_info">
+    <p>{$room.name}</p>
+    <span class="info_time">
+        <p>入住：{$Think.get.date1}</p>
+        <p>离店：{$Think.get.date2}（{$date2}）{$day}晚</p>
+    </span>
+    <span class="info_bed">
+        <p>大床 | 免费有线宽带 | 有窗</p>
+        <p>房型信息 <img src="__IMG__/icon/left.png" alt=""></p>
+    </span>
+</div>
+<div class="user_info">
+    <ul style="display: none">
+        <li>房间数</li>
+        <li>
+            <div class="sele_ll sele_click"><i>1间</i><em>每间最多住两人</em></div>
+            <div class="sele_chd">
+                <ul>
+                    <li>1间</li>
+                    <li>2间</li>
+                    <li>3间</li>
+                    <li>4间</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <ul>
+        <li>入住人</li>
+        <li><input type="text" placeholder="请输入您的姓名" name="name" id="name"></li>
+    </ul>
+    <ul>
+        <li>手机号码</li>
+        <li><input type="text" placeholder="请输入手机号" name="phone" id="phone"></li>
+    </ul>
+    <ul>
+        <li>电子邮箱</li>
+        <li><input type="text" placeholder="请输入邮箱" name="email" id="email"></li>
+    </ul>
+</div>
+
+<div class="pay_dom">
+
+    <div class="invoice_e">
+        <p>发票</p>
+        <i>如需发票，可向酒店索取</i>
+    </div>
+    <div class="yuding_inf">
+        <i><p>预定规则</p>订单提交需支付全部房费，如订单不确认将全额退款至您的付款账户。订单确认后不可取消修改</i>
+    </div>
+
+    <div class="fs_titl">请选择支付方式 </div>
+
+    <ul class="list_zf">
+        <li>
+            <div class="list_left">
+                <img src="__IMG__/icon/zhifu_1.png" alt="">
+                <p>余额 (¥{$user.balance})</p>
+            </div>
+            <div class="list_chked">
+                <p></p>
+            </div>
+        </li>
+        <li>
+            <div class="list_left">
+                <img src="__IMG__/icon/zhifu_2.png" alt="">
+                <p>支付宝支付</p>
+            </div>
+            <div class="list_chked">
+                <p></p>
+            </div>
+        </li>
+        <li>
+            <div class="list_left">
+                <img src="__IMG__/icon/zhifu_3.png" alt="">
+                <p>微信支付</p>
+            </div>
+            <div class="list_chked">
+                <p></p>
+            </div>
+        </li>
+    </ul>
+
+    <div class="pay_mony">
+        <i> <p>总支付：</p>￥{$money}</i>
+    </div>
+    <div class="warning_info">温馨提示：提交订单后，将为您保留15分钟，请及时支付。</div>
+</div>
+
+<div class="pay_butt_box"></div>
+<div class="pay_tutt">
+    <p><i>￥</i>{$money}</p>
+    <p id="pay">提交订单</p>
+</div>
+<input type="hidden" name="hid" value="{$hid}">
+<input type="hidden" name="id" value="{$room.id}">
+<input type="hidden" name="price" value="{$price}">
+<input type="hidden" name="money" value="{$money}">
+<input type="hidden" name="num" value="1">
+</body>
+<script>
+    /*var price=$('input[name=price]').val();
+    var num=0;
+    var money=0;
+    $(document).on("click",".piaonum",function () {
+        num=$('#piaonum').val();
+        money=num*price;
+        $('#money').html('￥'+money);
+        $('input[name=money]').val(money);
+        $('input[name=num]').val(num);
+    })*/
+
+
+
+    $(document).on("click","#pay",function () {
+        if(paytype==0){
+            layer.msg('请选择支付方式');return;
+        }
+        var hid=$('input[name=hid]').val();
+        var id=$('input[name=id]').val();
+
+        var paymoney=$('input[name=money]').val();
+        var paynum=$('input[name=num]').val();
+
+        var name=$('input[name=name]').val();
+        var phone=$('input[name=phone]').val();
+        var email=$('input[name=email]').val();
+        if(name==''){
+            layer.tips('请填写内容', '#name', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return;
+        }else if(phone==''){
+            layer.tips('请填写内容', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return;
+        }else if(email==''){
+            layer.tips('请填写内容', '#email', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return;
+        }
+
+        //console.log(id,paynum,paymoney,name,date);return;
+
+        var date1='{$Think.get.date1}'
+        var date2='{$Think.get.date2}'
+        $.post("/Home/Ajax/order",{'actiontype':3,  'hid':hid, 'id':id, 'money':paymoney, 'num':paynum, 'date1':date1, 'date2':date2,'name':name, 'phone':phone, 'email':email},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                var orderno = obj.msg;
+                //console.log(orderno);return;
+
+                $.post("/Home/Ajax/checkorder",{'orderno':orderno},function(da){
+                    var checkobj = jQuery.parseJSON(da);
+                    if(checkobj.code==200){
+                        layer.msg('此订单已支付完成');
+                    }else {
+
+                        //余额支付
+                        if (paytype == 1) {
+                            $.post("/Home/Pay/pay", {'orderno': orderno}, function (da) {
+                                var payobj = jQuery.parseJSON(da);
+                                if (payobj.code == 200) {
+                                    layer.msg(payobj.msg, function () {
+                                        location.reload()
+                                        //location.href='/Home/Ajax/pay/id/'+id+'/orderno/'+obj.msg;
+                                    });
+                                } else {
+                                    layer.msg(payobj.msg);
+                                }
+                            });
+                        } else if (paytype == 2) {
+                            location.href = '/Home/Pay/testpay/orderno/' + orderno;return;
+
+                        } else if (paytype == 3) {
+                            layer.msg('暂不支持微信支付');
+                        }
+                    }
+                })
+
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+
+    /*$(function () {
+        $(document).on("click","#pay",function () {
+            //alert(paytype);return;
+            var orderno = "{$Think.get.orderno}";
+            $.post("/Home/Ajax/checkorder",{'orderno':orderno},function(da){
+                var checkobj = jQuery.parseJSON(da);
+                if(checkobj.code==200){
+                    layer.msg('此订单已支付完成');
+                }else{
+                    //console.log(orderno,type);return;
+                    //余额支付
+                    if(type == 1){
+                        $.post("/Home/Ajax/pay",{'orderno':orderno},function(da){
+                            var obj = jQuery.parseJSON(da);
+                            if(obj.code==200){
+                                layer.msg(obj.msg,function () {
+                                    //location.href='/Home/Pay/pay/id/'+id+'/orderno/'+obj.msg;
+                                });
+                            }else{
+                                layer.msg(obj.msg);
+                            }
+                        });
+                    }else if(type == 2){
+                        location.href='/Home/Pay/testpay/orderno/'+orderno;return;
+                    }else if(type == 3){
+
+                    }
+
+                }
+            });
+
+        })
+
+        $(".bodr_pay ul li").click(function () {
+            type=$(this).index()+1;
+
+            $(".bodr_pay ul li").removeClass("pay_red");
+            if ($(this).hasClass("pay_red")){
+                $(this).removeClass("pay_red");
+            } else {
+                $(this).addClass("pay_red");
+            }
+        })
+    })*/
+</script>
+</html>

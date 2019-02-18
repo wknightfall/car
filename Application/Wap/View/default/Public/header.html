@@ -1,0 +1,187 @@
+<script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script type="text/javascript" src="__JS__/qq.js"></script>
+
+<div class="head_dom">
+    <div class="head_left">
+        <img src="__IMG__/head/log.png" alt="">
+        <img src="__IMG__/head/name.jpg" alt="">
+    </div>
+    <div class="head_right">
+        <if condition="$islogin eq 1">
+            <if condition="$shoptype eq 0">
+                    <a href="{:U('user/index')}">
+                        <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 15px;border-radius:50%;">
+                    </a>
+                <else />
+                    <a href="{:U('mer/index')}">
+                        <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 15px;border-radius:50%;">
+                    </a>
+            </if>
+
+           <!-- <if condition="$shoptype eq 0">
+                <li style="width: 150px">
+                    <a href="{:U('user/luntan')}">
+                        <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 5px;border-radius:50%;float: left;">
+                        <span style="display:inline-block;width:80px;height:35px;text-align: left;text-indent: 5px;line-height:35px;vertical-align: middle;white-space: normal;float: left;text-overflow: ellipsis;overflow: hidden;color: #808080;font-family: 微软雅黑;font-size:13px;">{$user.name}</span>
+                    </a>
+                    <a href="{:U('Public/logout')}" style="width: 30px;display: inline-block;color: #808080;font-family: 微软雅黑;cursor: pointer;float: left;text-align: left;">退出</a>
+                </li>
+                <elseif condition="$shoptype eq 1" />
+                <li style="width: 150px">
+                    <a href="{:U('mer/luntan')}">
+                        <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 5px;border-radius:50%;float: left;">
+                        <span style="display:inline-block;width:80px;height:35px;text-align: left;text-indent: 5px;line-height:35px;vertical-align: middle;white-space: normal;float: left;text-overflow: ellipsis;overflow: hidden;color: #808080;font-family: 微软雅黑;font-size:13px;">{$user.name}</span></a>
+                    <a href="{:U('Public/logout')}" style="width: 30px;display: inline-block;color: #808080;font-family: 微软雅黑;cursor: pointer;float: left;text-align: left;">退出</a></li>
+                <elseif condition="$shoptype eq 2" />
+                <li style="width: 150px">
+                    <a href="{:U('mer/luntan')}">
+                        <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 5px;border-radius:50%;float: left;">
+                        <span style="display:inline-block;width:80px;height:35px;text-align: left;text-indent: 5px;line-height:35px;vertical-align: middle;white-space: normal;float: left;text-overflow: ellipsis;overflow: hidden;color: #808080;font-family: 微软雅黑;font-size:13px;">{$user.name}</span></a>
+                    <a href="{:U('Public/logout')}" style="width: 30px;display: inline-block;color: #808080;font-family: 微软雅黑;cursor: pointer;float: left;text-align: left;">退出</a></li>
+                <elseif condition="$shoptype eq 3" />
+                <li style="width: 150px">
+                    <a href="{:U('mer/luntan')}">
+                        <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 5px;border-radius:50%;float: left;">
+                        <span style="display:inline-block;width:80px;height:35px;text-align: left;text-indent: 5px;line-height:35px;vertical-align: middle;white-space: normal;float: left;text-overflow: ellipsis;overflow: hidden;color: #808080;font-family: 微软雅黑;font-size:13px;">{$user.name}</span></a>
+                    <a href="{:U('Public/logout')}" >退出</a></li>
+            </if>-->
+
+            <else />
+            <img src="__IMG__/head/user_p.png" alt="">
+        </if>
+
+        <img src="__IMG__/head/list_p.png" alt="">
+    </div>
+</div>
+<div class="head_dom_sw"></div>
+<div class="mm_all">
+
+    <div class="ind_nalist">
+
+        <if condition="$islogin eq 1">
+            <div class="naa_tt">
+                <p> <if condition="$shoptype eq 0"><a href="{:U('user/index')}"><img src="{$user.icon|picture}" alt=""></a>
+                                             <else /><a href="{:U('mer/index')}"><img src="{$user.icon|picture}" alt=""></a></if>
+                </p>
+                <p><a href="javascript:">{$user.name}</a></p>
+            </div>
+            <else />
+            <div class="naa_tt">
+                <p><a href="javascript:"><img src="__IMG__/icon/head_im.png" alt=""></a></p>
+                <p><a href="{:U('public/login')}">登录</a>|<a href="{:U('public/register')}">注册</a></p>
+            </div>
+        </if>
+
+        <div class="nac_listr">
+
+            <ul>
+                <li>
+                    <a href="{:U('index/index')}">网站首页</a>
+
+                </li>
+
+                <volist name="mynav" id="vov">
+                    <li <eq name="$cname" value="$vov.name">class="tagLink" </eq> >
+                    <a href="javascript:">{$vov.title}</a>
+                    <div>
+                        <ul>
+                            <volist name="vov.son" id="vv" key="k">
+
+                                <li <if condition="$k eq 1">class="cked_list"</if> ><a href="{$vv.url}">{$vv.title}</a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                    </li>
+                </volist>
+
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" src="__JS__/swiper.min.js"></script>
+<script type="text/javascript">
+
+    console.log(window.screen.availHeight);
+    $(".nac_listr").height(window.screen.availHeight-$(".naa_tt").height());
+    /*侧边菜单*/
+    var imsw = true;
+    $(".head_right img:last-child").click(function () {
+
+        $("body").css("overflow","hidden");
+        $(".mm_all").css("display","block");
+        $(".mm_all").height($(document).height());
+
+        /*if (imsw == true){
+
+         $("body").css("overflow","hidden");
+         $(".mm_all").css("display","block");
+
+         imsw = false;
+         }else {
+
+         $("body").css("overflow","auto");
+         $(".mm_all").css("display","none");
+
+         imsw = true;
+         }*/
+    })
+    $(".mm_all").click(function (even) {
+
+        even.stopPropagation();
+        $("body").css("overflow","auto");
+        $(".mm_all").css("display","none");
+    })
+
+    $(".ind_nalist").click(function (even) {
+        even.stopPropagation();
+    });
+
+    $(".nac_listr > ul > li").click(function () {
+
+        event.stopPropagation();
+        if($(this).hasClass("this_lislla")){
+
+            $(this).removeClass("this_lislla");
+        }else {
+
+            $(".nac_listr > ul > li").removeClass("this_lislla");
+            $(this).addClass("this_lislla");
+        }
+
+        if($(this).children("div").hasClass("hs_conct")){
+
+            $(this).children("div").removeClass("hs_conct");
+        }else {
+
+            $(".nac_listr > ul > li").children("div").removeClass("hs_conct");
+            $(this).children("div").addClass("hs_conct");
+        }
+
+    })
+
+    $(".nac_listr > ul > li > div > ul > li").click(function (event) {
+
+        event.stopPropagation();
+        if($(this).hasClass("chid_this")){
+
+            // $(this).removeClass("chid_this");
+            return ;
+        }else {
+
+            $(".nac_listr > ul > li > div > ul > li").removeClass("chid_this");
+            $(this).addClass("chid_this");
+        }
+    })
+
+
+    /*swiper*/
+    var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        autoplay:3000,
+        pagination : '.swiper-pagination',
+    });
+
+</script>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/mer.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <!--时间=插件-->
+    <script type="text/javascript" src="__JS__/timeDate/dateRange.js"></script>
+    <script type="text/javascript" src="__JS__/timeDate/monthPicker.js"></script>
+    <link type="text/css" href="__CSS__/timeDate/dateRange.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/timeDate/monthPicker.css" rel="stylesheet" />
+
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="mer_dindd">
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('mer/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('mer/message')}"><li><span><p>我的留言</p></span></li></a>
+                    <a href="{:U('mer/goods?issale=2')}"><li><span><p>商品管理</p></span></li></a>
+                    <a href="{:U('mer/youhui')}"><li><span><p>优惠活动</p></span></li></a>
+                    <a href="{:U('mer/dingdan?isover=2')}"><li class="per_chd" ><span><p>订单管理</p></span></li></a>
+                    <a href="{:U('mer/caiwu')}"><li><span><p>财务</p></span></li></a>
+                    <a href="{:U('mer/shangjia')}"><li><span><p>商家信息</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="dindd_hu">
+            <!--订单部分-->
+            <div class="dinmr_list">
+                <div class="per_ttmg">
+                    <!--最新订单-->
+                    <div class="lun_ttle dind_li">
+                        <ul>
+
+                            <if condition="$isover eq 0 || $isover eq 1">
+                                <li><a href="{:U('mer/dingdan?isover=2')}">最新订单</a></li>
+                                <else />
+                                <li class="fatie_genb"><a href="{:U('home/mer/dingdan?isover=2')}">最新订单</a></li>
+                            </if>
+                            <if condition="$isover eq 0">
+                                <li class="fatie_genb"><a href="{:U('mer/dingdan?isover=0')}">待完成订单</a></li>
+                                <else />
+                                <li><a href="{:U('mer/dingdan?isover=0')}">待完成订单</a></li>
+                            </if>
+                            <if condition="$isover eq 1">
+                                <li class="fatie_genb"><a href="{:U('mer/dingdan?isover=1')}">已完成订单</a></li>
+                                <else />
+                                <li><a href="{:U('mer/dingdan?isover=1')}">已完成订单</a></li>
+                            </if>
+                        </ul>
+                        <div class="aga_mer">
+                            <span class="aga_tim">
+                                <p class="aga_ipu" id="date_demo1"></p>
+                                <script>laydate.render({elem: '#date_demo1'});</script>
+                                <i>-</i>
+                                <p class="aga_ipu"  id="date_demo2" ></p>
+                                <script>laydate.render({elem: '#date_demo2'});</script>
+                                <p class="sel_btuu" id="chaxun" style="cursor:pointer">查询</p>
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!---->
+                <div class="spxx_tt">
+                    <ul>
+                        <li>商品信息</li>
+                        <li>预定人数</li>
+                        <li>预定日期</li>
+                        <li>单价（元）</li>
+                        <li>数量</li>
+                        <li>订单金额</li>
+                        <li>操作</li>
+                    </ul>
+                </div>
+                <!---->
+                <div class="list_dgg">
+                    <ul><notempty name="lists">
+                        <volist name="lists" id="vo">
+                            <li>
+                                <p><i>订单号:{$vo.orderno}</i><img src="__IMG__/psc/2cer_03.jpg" data-id="{$vo.id}" class="delorder"  style="cursor:pointer"></p>
+                                <ul>
+                                    <li><img src="{$vo.icon|picture}" alt="">
+                                        <div>
+                                            <p>{$vo.name}</p>
+                                            <em>{$vo.content}<i>
+                                                <!--<a href="{:U('house/hoteldetail?id='.$vo['hid'])}" style="color:#f15c0a">【详情】</a>-->
+
+                                                <if condition="$vo['shoptype'] eq 1">
+                                                    <a href="{:U('house/hoteldetail?id='.$vo['hid'])}" style="color:#f15c0a">【详情】</a>
+                                                    <elseif condition="$vo['shoptype'] eq 2" />
+                                                    <a href="{:U('food/dingcan?id='.$vo['hid'])}" style="color:#f15c0a">【详情】</a>
+                                                    <elseif condition="$vo['shoptype'] eq 3" />
+                                                    <a href="{:U('project/scenicdetail?id='.$vo['scenicid'])}" style="color:#f15c0a">【详情】</a>
+                                                </if>
+                                            </i></em>
+                                        </div>
+                                    </li>
+                                    <li>{$vo.num}人</li>
+                                    <li>{$vo.time|date='Y-m-d',###}</li>
+                                    <li>{$vo.price}</li>
+                                    <li>{$vo.num}</li>
+                                    <li>{$vo.money}</li>
+                                    <if condition="$vo.isover eq 0">
+                                        <li><p class="isover" data-id="{$vo.id}">确认完成</p></li>
+                                        <else/>
+                                        <li><p class="paid_alr">已完成</p></li>
+                                    </if>
+                                </ul>
+                            <span>
+                                <div><img src="{$vo.usericon|picture}" alt=""><p>{$vo.username}</p></div>
+                                <p><i>合计：</i><em>￥{$vo.money}</em></p>
+                            </span>
+                            </li>
+                        </volist>
+                        <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+                        </notempty>
+                    </ul>
+                </div>
+                <!---->
+                <div class="dd_fnaal">
+                    <div class="page_ll">
+                        <if condition="$fanye eq 1">
+                            <ul>{$page}</ul>
+
+                            <span><p>到</p><input type="text"  id="pagenum" value="{$Think.get.p}"><p>页</p><i id="gotopage">确定</i></span>
+                        </if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<include file="Public/footer" />
+</body>
+<script>
+    $(document).on("click","#chaxun",function () {
+
+
+        var date1=$('#date_demo1').html();
+        var date2=$('#date_demo2').html();
+        console.log(date1,date2);
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Home/mer/dingdan/date1/'+date1+'/date2/'+date2;
+    })
+    $(document).on("click",".delorder",function () {
+        var id = $(this).attr('data-id')
+        layer.confirm('确定删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function(index) {
+            layer.close(index);
+
+
+        $.post("/Home/mer/dingdan",{'id':id,'type':'del'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('删除成功',function () {
+                    location.reload();
+                })
+
+
+            }else{
+                layer.msg('删除失败')
+
+            }
+
+        });
+        });
+    })
+    $(document).on("click",".isover",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/mer/dingdan",{'id':id,'type':'isover'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('确认成功',function () {
+                    location.reload();
+                })
+
+
+            }else{
+                layer.msg('确认失败')
+
+            }
+        });
+    })
+    $(document).on("click","#gotopage",function () {
+
+        var page = $('#pagenum').val();
+        if(/^\d+$/.test(page)){
+
+        }else{
+            layer.msg('页码必要是数字！');
+            return;
+        }
+        var url=location.href
+        if(url.indexOf('p/')>0){
+            var a=url.split('/')
+            a.pop()
+            var c=a.join('/');
+            var u=c+'/'+page+'.html'
+            location.href=u
+        }else{
+            var a=url.split('.')
+            location.href=a[0]+'/p/'+page+'.html';
+        }
+
+
+    })
+
+</script>
+</html>

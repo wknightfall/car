@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        财务
+        <img src="__IMG__/person/icon/timl.png" alt="" class="ch_cel">
+
+        <div class="data_up">
+            <input type="text" id="date_demo1">
+            <i>-</i>
+            <input type="text" id="date_demo2">
+            <input type="button" value="查询" id="chaxun">
+        </div>
+
+    </div>
+
+    <p class="txfs_pp">收支明细</p>
+
+    <div class="tx_list">
+        <ul id="food">
+            <notempty name="lists">
+                <volist name="lists" id="vo">
+            <li>
+
+                <if condition="$vo.income eq 1">
+                    <p><i class="txz">+{$vo.money}</i><em>{$vo.payment}</em></p>
+                    <p><i class="txz">{$vo.time|date='Y-m-d h:i',###}</i><em>订单交易：{$vo.orderno}</em></p>
+                    <else />
+                    <p><i class="xfcg">-{$vo.money}</i><em>{$vo.payment}</em></p>
+                    <p><i class="txz">{$vo.time|date='Y-m-d h:i',###}</i><em>订单交易：{$vo.orderno}</em></p>
+                </if>
+            </li>
+                </volist>
+                <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+            </notempty>
+
+        </ul>
+    </div>
+
+</div>
+
+</body>
+<script>
+    page=1;
+
+    var   url="{:U('mer/caiwu')}";
+
+    $(window).scroll(
+            function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+
+                    $.post(url,{'page':page},function (da) {
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            $('#food').append(obj.msg);
+                            page++;
+                        }else{
+                            //$('.molink').addClass('nothing');
+
+                            layer.msg('没有更多了哦~');
+                        }
+                    })
+
+                }
+            });
+
+
+
+
+
+    $(document).on("click","#chaxun",function () {
+        var date1=$('#date_demo1').val();
+        var date2=$('#date_demo2').val();
+        //console.log(date1,date2);return;
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Wap/mer/caiwu/date1/'+date1+'/date2/'+date2;
+    })
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo2',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo1',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>

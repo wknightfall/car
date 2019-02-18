@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="tt_heada">
+        <img src="__IMG__/person/icon/iconfont.png" onclick="history.go(-1)" >
+        充值
+    </div>
+
+    <div class="txmon">
+        <p>充值金额</p>
+        <input type="text" placeholder="请输入充值金额"  name="money" id="money">
+    </div>
+
+    <p class="txfs_pp">充值方式</p>
+    <div class="zhif_list">
+        <ul>
+            <li><img src="__IMG__/person/icon/zfbz.png" alt=""><em value="1">支付宝</em> <i><img src="__IMG__/person/icon/chaa.png" alt=""></i></li>
+            <li><img src="__IMG__/person/icon/wiz.png" alt=""><em  value="2">微信</em> <i><img src="__IMG__/person/icon/chaa.png" alt=""></i></li>
+           <!-- <li><img src="__IMG__/person/icon/yhk.png" alt=""><em  value="3">银行卡</em> <i><img src="__IMG__/person/icon/chaa.png" alt=""></i></li>-->
+        </ul>
+    </div>
+
+    <div class="tix_btn">
+        <input type="button" value="确认充值" id="pay">
+    </div>
+
+</div>
+
+</body>
+<script>
+var paytype = 0;
+    $(".zhif_list > ul > li").click(function () {
+        $(".zhif_list > ul > li > i > img").attr("src","/Public/Wap/image/person/icon/chaa.png");
+        $(this).children("i").children("img").attr("src","/Public/Wap/image/person/icon/ckcc.png");
+
+        if($(this).children("i").children("img").attr("src") =="/Public/Wap/image/person/icon/ckcc.png" ){
+
+            paytype=$(this).children("em").attr('value');
+        }
+
+    })
+
+
+    $(document).on("click","#pay",function () {
+        var money=$('input[name=money]').val();
+        var isnum=/^\d+$/
+
+        if(!isnum.test(money)){
+            layer.tips('金额必须是数字', '#money', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            }); return false;
+        }
+        if(paytype == 0){
+            layer.msg('请选择充值方式');return;
+        }
+
+        //console.log(money);return;
+        $.post("/Home/Ajax/order",{'money':money, 'actiontype':1},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                var orderno = obj.msg;
+                //console.log(orderno);return;
+
+                if(paytype == 1){
+                    location.href='/Home/Pay/testpay/orderno/'+orderno;return;
+                }else if(paytype == 2){
+                    layer.msg('暂不支持微信支付');
+                }else if(paytype == 3){
+
+                }
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+</script>

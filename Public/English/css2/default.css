@@ -1,0 +1,76 @@
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,span,i,td,dl,dd,form,fieldset,legend,input,textarea,select{ margin:0; padding:0; outline: none; font-size: 14px;}
+body{
+    /*background:#efefef;*/
+    color:#666;
+    font-family:"微软雅黑";
+}
+ul,ol{ list-style: none;}
+img{ border: none;}
+em,i,u{ font-style: normal;}
+table{
+    cellspacing: 0;
+    cellpadding: 0;
+    border-collapse: collapse;
+    border: 1px solid #e6e6e6;
+}
+table tr{ margin: 0; padding: 0;}
+table tr td{ border: 1px solid #d9cfbe;}
+input, select, textarea{ outline: none;}
+textarea{
+    resize: none;
+}
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    appearance: none;
+    -o-appearance:none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="radio"],
+input[type="checkbox"]{
+    cursor: pointer;
+}
+a{
+    color: #666;
+    text-decoration: none;
+    cursor:pointer;
+    background: transparent;
+    outline:none;
+    blr:expression(this.onFocus=this.blur());
+}
+a:link { text-decoration: none;}
+a:visited{ text-decoration: none;}
+a:active { text-decoration: none;}
+
+::-webkit-input-placeholder{ color: #c7c7cd;}
+:-moz-placeholder{ color: #bcbcbc;}
+::-moz-placeholder{ color: #bcbcbc;}
+:-ms-input-placeholder{ color: #bcbcbc;}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+.col-7, .col-8, .col-9, .col-10, .col-11, .col-12{ float: left;}
+.col-1{ width: 100%;}
+.col-2{ width: 50%;}
+.col-3{ width: 33.33333333%;}
+.col-4{ width: 25%;}
+.col-5{ width: 20%;}
+.col-6{ width: 16.66666667%;}
+.col-7{ width: 14.28571429%;}
+.col-8{ width: 12.5%;}
+.col-9{ width: 11.11111111%;}
+.col-10{ width: 10%;}
+.col-11{ width: 9.09090909%;}
+.col-12{ width: 8.33333333%;}
+
+.width1200{
+	display: block;
+	margin: auto;
+}
+
+
+
+
+
+

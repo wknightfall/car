@@ -1,0 +1,126 @@
+<div class="widthall header">
+    	 <div class="width1200">
+    	 	<div class="header_left"><img src="{:picture($logo[icon])}"/></div>
+
+    	 	<div class="header_right">
+    	 	    <!--搜索-->
+    	 		<div class="hdright_top">
+				    <form action="{:U('Search/index')}" method="get" id="form4">
+    	 			<input type="text" name="title" value="{$_GET[title]}" placeholder="搜索产品" />
+    	 			<div class="search_pos" id="search_pos"><img src="__IMG__/sousuo.png"/></div>
+					</form>
+    	 		</div>
+
+    	 		<div class="nav">
+    	 			
+    	 			<ul>
+    	 				<li class="<?php if($indexnav==2){echo 'navon';} ?>">
+	    	 				<a href="/">
+	    	 					<p>首页</p>
+	    	 				</a>
+    	 				</li>
+						<volist name="navList" id="navtop">
+    	 				<li class="<?php $mm=strtolower(CONTROLLER_NAME); $aaer=strtolower($navtop[url]); $aaerarr=explode('/',$aaer);  if(strpos($aaerarr[0],$mm)!==false){echo 'navon'; } ?>">
+	    	 				<a href="{:U($navtop[url],array('topid'=>$navtop[id]))}">
+	    	 					<p>{$navtop[title]}</p>
+	    	 				</a>
+
+                <!--二级-->
+                <if condition="$navtop[id] eq 1">
+                <div class="two_menu">
+                    <div class="mids">
+                      <volist name="navbn[$navtop[id]]" id="navb">
+                      <p onclick="window.location.href='{:U($navb[url],array('topid'=>$navb[pid],'twoid'=>$navb[id]))}'">{$navb[title]}</p>
+                      </volist> 
+                    </div>
+                </div>
+                </if>
+
+    	 				</li>
+    	 				</volist>
+
+    	 			</ul>
+
+    	 		</div>
+    	 	</div>
+    	 </div>
+    </div>
+	
+<script>
+
+$("#search_pos").click(function(){
+
+    var titles = $("input[name='title']").val();
+	if($.trim(titles).length==0){
+	   
+	   layer.alert('关键词不能为空');
+	   return false;
+	   
+	}
+	
+	$("#form4").submit();
+	
+});
+
+</script>
+	
+	
+
+
+<!--手机导航-->
+
+<div class="tel_header">
+      <div class="logo"><img src="__IMG__/logo.jpg"/></div>
+      <div class="menu"><i class="fa fa-bars mo_cd" style="color:#a20400;"></i></div>
+   </div>
+   <div class="navbar_nav1">
+    <div class="navbar_body">
+      <div>
+        <ul>
+
+                    <li>
+
+                     <a href="/">首 页<i class="fa fa-angle-right rt"></i></a>
+                        
+                    </li>
+
+                   <volist name="navList" id="fonav">
+                    
+                    <li>
+                        <a
+                         <if condition="getTwoNavStatus($fonav[id]) eq 100">
+                             href="javascript:;"
+                             <else />
+                             href="{:U($fonav[url],array('topid'=>$fonav[id]))}"
+                             
+                             </if>
+                         >{$fonav[title]} <i class="fa fa-angle-right rt"></i></a>
+                        <ol>
+                            <volist name="ernav[$fonav[id]]" id="fonavb">
+                            <li><a href="{:U($fonavb[url],array('topid'=>$fonav[id],'twoid'=>$fonavb[id]))}">{$fonavb[title]}</a></li>
+                            </volist>
+                        </ol>
+                    </li>
+                    
+                    </volist>
+                    
+                </ul>
+      </div>
+    </div>
+  </div>
+  <div class="zz1" id="zz1" style="z-index: 13;"></div>
+
+<!--手机导航结束-->
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="__IMG__/x-icon"/>
+    <meta name=”viewport” content=”initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no”>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>会员中心</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/psc.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+
+</head>
+<body>
+<!--标题信息栏-->
+<div class="her_imsg">
+    <header>
+        <span><em>游客您好，欢迎访问贵州彬乡文化旅游发展集团有限公司！</em></span>
+        <ul>
+            <li><p>登录</p>
+                <p style="width: 7px;height: 14px;display: inline-block;border-right: #808080 1px solid;margin-right: 7px;margin-top: 10px;">
+                    &nbsp;</p>
+                <p>注册</p></li>
+            <li><em>加入收藏</em></li>
+            <li><em>设为首页</em></li>
+            <li><em>分享</em></li>
+        </ul>
+    </header>
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <div class="navBox">
+        <!--nav-->
+        <div class="publicContent">
+            <div class="navCon">
+                <!--title-->
+                <div class="navTitleImg"><img src="__IMG__/titleNav.png" alt="贵州杉乡文化旅游发展集团有限公司" /></div>
+                <!--link-->
+                <div class="navLink">
+                    <ul>
+                        <li >
+                            <a href="{:U('Index/index')}">
+                                <p>网站首页</p><span>Home</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('About/index')}">
+                                <p>关于我们</p><span>About</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('news/index')}">
+                                <p>新闻动态</p><span>News</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('works/index')}">
+                                <p>党群工作</p><span>Work</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('project/index')}">
+                                <p>文旅项目</p><span>Project</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('culture/index')}">
+                                <p>文化锦屏</p><span>Culture</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="psc_mb">
+
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.username}</p>
+                    <em>ID:{$user.uid}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('user/rest')}"><li class="per_chd" ><span><p>余额</p></span></li></a>
+                    <a href="{:U('user/dingdan')}"><li><span><p>订单</p></span></li></a>
+                    <a href="{:U('user/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('user/pl')}"><li><span><p>我的评论</p></span></li></a>
+                    <a href="{:U('user/geren')}"><li><span><p>个人资料</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="perrg_imsg">
+            <div class="rtt_top">
+                <div class="kyye_mon">
+                    <img src="__IMG__/psc/cer_03.jpg" alt="">
+                    <div>
+                        <i>可用余额</i>
+                        <span>
+                            <em>1250.00</em>
+                            <p class="tx_btn">提现</p>
+                            <p class="cz_btn">充值</p>
+                        </span>
+                    </div>
+                </div>
+                <div class="jifen_tol">
+                    <img src="__IMG__/psc/cer_03.jpg" alt="">
+                    <div>
+                        <i>可用余额</i>
+                        <span>
+                            <em>1250</em>
+                            <p class="sy_btn">使用</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="shouzi_mx">
+                <div class="per_ttmg">
+                    <p>提现</p>
+                    <div class="mx_lin">
+                        <span class="lin_00"></span>
+                        <span class="lin_11"></span>
+                    </div>
+                </div>
+                <!--微信-->
+                <div class="weix_or">
+                    <p>请选择提现方式</p>
+                    <ul>
+                        <li class="zfb_or_weix"><img src="__IMG__/psc/0cer_06.jpg" alt=""></li>
+                        <li><img src="__IMG__/psc/0cer_09.jpg" alt=""></li>
+                        <li><img src="__IMG__/psc/0cer_03.jpg" alt=""></li>
+                    </ul>
+                </div>
+                <div class="user_add">
+                    <span>
+                        <i>提现账号：</i>
+                        <input type="text" class="sele_ll sele_ee" value="13545a4sfaw@qq.com" >
+                        <div class="sele_chd">
+                            <ul>
+                                <li>qwe13545a4sfaw@qq.com</li>
+                                <li>hhd13545a4sfaw@qq.com</li>
+                                <li>aha13545a4sfaw@qq.com</li>
+                                <li>uoyului13545a4sfaw@qq.com</li>
+                            </ul>
+                        </div>
+                    </span>
+                    <p>
+                        <i>提现金额：</i>
+                        <input type="text">
+                        <i>元</i>
+                        <em>可用余额：￥500.00</em>
+                    </p>
+                </div>
+                <div class="boot_bt">
+                    <div class="lij_sbm">立即提现</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<footer>
+    <div class="foote">
+        <div class="foot_nav">
+            <span>友情链接：</span>
+            <ul>
+                <li>锦屏官网</li>
+                <li>旅游网站</li>
+                <li>旅游网站</li>
+                <li>锦屏官网</li>
+                <li>锦屏官网</li>
+                <li>旅游网站</li>
+            </ul>
+            <div class="foot_to_top"><p>返回</p>
+                <p>顶部</p></div>
+        </div>
+        <div class="foot_bot">
+            <div class="foot_text1"><span>关于我们：</span>
+                <ul>
+                    <li>联系方式</li>
+                    <li>法律申明</li>
+                    <li>合作伙伴</li>
+                </ul>
+            </div>
+            <div class="foot_text2"><span>公司地址：</span>
+                <ul>
+                    <li>锦屏县三江镇赤溪坪社区（锦屏文书特藏馆）</li>
+                    <li>电话：0855——3900890</li>
+                    <li>邮编：55000</li>
+                    <li>gzsxwhlyfzjt@sina.com</li>
+                </ul>
+            </div>
+            <div class="foot_text3"><span>版权所有：</span>
+                <ul>
+                    <li>贵州杉乡文化旅游发展集团有限公司</li>
+                </ul>
+            </div>
+        </div>
+        <div class="foot_code">
+            <ul>
+                <li><img src="__IMG__/centre/img_10.jpg" alt=""></li>
+                <li>关注企业微博</li>
+            </ul>
+            <ul>
+                <li><img src="__IMG__/centre/img_10.jpg" alt=""></li>
+                <li>关注公众号</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</footer>
+</body>
+</html>
+<script>
+    $(function () {
+
+        $(".weix_or ul li").click(function () {
+
+            $(".weix_or ul li").removeClass("zfb_or_weix");
+            if ($(this).hasClass("zfb_or_weix")) {
+                $(this).removeClass("zfb_or_weix");
+            } else {
+                $(this).addClass("zfb_or_weix");
+            }
+        })
+
+        /*下拉*/
+            $(".sele_ee").click(function () {
+
+                $(this).addClass("blk_fon");
+                if ($(this).next(".sele_chd").hasClass("dow_sele")) {
+
+                    $(this).next(".sele_chd").removeClass("dow_sele");
+                } else {
+
+                    $(".sele_ee").next(".sele_chd").removeClass("dow_sele");
+                    $(this).next(".sele_chd").addClass("dow_sele");
+                }
+                ;
+            })
+
+            $(".sele_chd ul li").click(function () {
+
+                $(".sele_chd").removeClass("dow_sele");
+                $(this).parent().parent().prev(".sele_ee").val($(this).text());
+            })
+
+    })
+
+</script>

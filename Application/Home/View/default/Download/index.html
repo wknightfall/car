@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+	
+	<include file="Public/top" />
+	
+	<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/default.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/members.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/page.css"/>
+
+	<script src="__JS__/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__JS__/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="__JS__/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <script type="text/javascript" src="__JS__/default.js"></script>
+</head>
+<body>
+	<!-- hade -->
+	<include file="Public/header" />
+	
+	<!-- kuai -->
+	<div class="kBox"></div>
+	
+	<section class="contentBox">
+		<!--  -->
+		<div class="opt_tabBox">
+			<div class="optionsBox">
+				<div class="width1200 optionsCon">
+					<div class="crumbsBox">
+						<a href="{:U('Index/index')}"><i class="glyphicon glyphicon-home"></i>首页</a>
+						<span class="icon-rightjt"></span>
+						<a href="{:U('Down/index')}">下载中心</a>
+						<span class="icon-rightjt"></span>
+						<a class="crumbsTxt" >{$get['typeid']|modelField='category','title'}</a>
+					</div>
+					<!-- xiao nav -->
+					<div class="s_nav">
+						<ul>
+
+
+							<volist name="twonav" id="twnav" key="kk">
+								<li class="<?php if($get[typeid]==$twnav['id']){echo 'active';} ?>">
+									<a href="{:U($twnav['url'],array('typeid'=>$twnav['id']))}">{$twnav['title']}</a></li>
+
+							</volist>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<div class="opt_Box">
+
+				<div style="<?php if($get[typeid]==19){echo 'display:block';}else{echo 'display:none';} ?>">
+					<div class="width1200">
+						<div class="downBox">
+							<div class="downloadlist">
+								<ul>
+									<volist name="txlist" id="voa">
+										<li>
+											<a href="{:U('lists',array(typeid=>$voa['pid'],'id'=>$voa['id']))}">
+												<div class="down_img">
+													<img src="{:picture($voa['icon'])}">
+												</div>
+												<p>{$voa['title']}</p>
+												<span>{$voa['egname']}</span>
+											</a>
+										</li>
+									</volist>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+                <volist name="list" id="vot">
+				<div class="hidddes" style="<?php if($get[typeid]==$vot[id]){echo 'display:block';}else{echo 'display:none';} ?>">
+					<div class="width1200">
+						<div class="deslist">
+							<ul>
+								<volist name="vot['son_list']" id="vob" key="kk">
+									<li>
+										<p>{$kk}、{$vob['title']}</p>
+										<div class="tideli"><span>{$vob['create_time']|date='Y-m-d',###}</span>
+										<a href="{$vob['file_url']}" download></a></div>
+									</li>
+								</volist>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</volist>
+
+			</div>
+		</div>
+		
+	</section>
+	
+	<!-- footer -->
+    <include file="Public/footer" />
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".opt_tabBox .s_nav ul > li").mouseover(function(){
+			var _index = $(this).index();
+			$(".opt_Box > div").eq(_index).show().siblings().hide();
+			$(this).addClass("active").siblings().removeClass("active");
+			var act = $(this).text();
+			$('.crumbsTxt').html(act);
+		});
+		$(".a_news_left .a_nL_item").mouseover(function(){
+			$(this).addClass('nl_active').siblings().removeClass('nl_active');
+		});
+		var mySwiper = new Swiper('.a_nr_Con',{
+				loop:false,
+				slidesPerView:4,
+				slidesPerGroup :1,
+				mode:'vertical',
+				watchActiveIndex: true,
+		});
+		var mySwiper = new Swiper('.latestCon',{
+				loop:false,
+				slidesPerView:4,
+				slidesPerGroup :1,
+				watchActiveIndex: true,
+				onInit: function(swiper){
+				  swiper.swipeNext()
+				},
+		});
+		$('#TestPrev').click(function(){
+			mySwiper.swipePrev(); 
+		});
+		$('#TestNext').click(function(){
+			mySwiper.swipeNext(); 
+		});
+	});
+	</script>
+</body>
+</html>

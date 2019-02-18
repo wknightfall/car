@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <!--<volist name="nav" id="v">
+            <li <if condition="$v.id eq $navid">class="inva_chk" </if> ><a href="{$v.href}">{$v.title}</a></li>
+        </volist>-->
+        <li class="inva_chk"><a href="{:U('project/index')}">主要景区</a></li>
+        <li><a href="{:U('scenic/route?navid=63')}">旅游路线</a></li>
+        <li><a href="{:U('project/videolist')}">景区视频</a></li>
+        <li><a href="{:U('project/note')}">旅行游记</a></li>
+    </ul>
+
+</div>
+<!--正文-->
+<div class="dis_list">
+
+    <ul id="food">
+        <volist name="food" id="vo">
+        <li>
+            <a href="{:U('project/scenicdetail?id='.$vo['id'].'&type=3')}"><img src="{$vo.icon|picture}" alt=""></a>
+            <span>
+                <p>{$vo.name}</p>
+                <i>{$vo.content}</i>
+            </span>
+            <div>
+                <p><img src="__IMG__/icon/aaa_seee.png" alt="">{$vo.view}</p>
+                <p><img src="__IMG__/icon/aa_ssoo.png" alt="">{$vo.pl}</p>
+                <if condition="$vo.collection eq 1">
+                    <p><img src="__IMG__/icon/hert.png" class="icon2" data-id="{$vo.id}" ><i>{$vo.collectionnum}</i></p>
+                    <else/>
+                    <p><img src="__IMG__/icon/aattt.png" class="icon2" data-id="{$vo.id}" ><i>{$vo.collectionnum}</i></p>
+                </if>
+            </div>
+        </li>
+
+        </volist>
+    </ul>
+</div>
+<!--more-->
+<div class="see_more">
+
+    <a href="javascript:" class="molink">查看更多+</a>
+</div>
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+
+    page=1;
+    var    url="{:U('Project/index')}";
+
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page,'type':3},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+        }
+    })
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        var colnum=$(this).next('i');
+        $.post("/Home/Ajax/collection",{'id':id,'type':'usermember'},function(da){
+            var num = colnum.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                colnum.html(parseInt(num)+1);
+                collection.attr("src","/Public/wap/image/icon/hert.png");
+
+            }else if(obj.code==201){
+                colnum.html(parseInt(num)-1);
+                collection.attr("src","/Public/wap/image/icon/aattt.png");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+
+
+</script>
+</html>

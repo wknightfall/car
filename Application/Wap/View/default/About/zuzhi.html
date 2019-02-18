@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <link>
+</head>
+<body>
+<!--头部-->
+<div class="head_dom">
+    <div class="head_left">
+        <img src="__IMG__/head/log.png" alt="">
+        <img src="__IMG__/head/name.jpg" alt="">
+    </div>
+    <div class="head_right">
+        <img src="__IMG__/head/user_p.png" alt="">
+        <img src="__IMG__/head/list_p.png" alt="">
+    </div>
+</div>
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="__IMG__/banner/ban_abt.jpg" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <li><a href="{:U('About/index')}">企业简介</a></li>
+        <li class="inva_chk"><a href="{:U('About/zuzhi')}">组织架构</a></li>
+        <li><a href="{:U('About/leader')}">领导介绍</a></li>
+        <li><a href="{:U('About/honor')}">集团荣誉</a></li>
+        <li><a href="{:U('About/zp')}">人才招聘</a></li>
+        <li><a href="{:U('About/thing')}">大事展示</a></li>
+    </ul>
+
+</div>
+<!--正文-->
+<div class="qymain_dom">
+    <div class="qymain_tt">
+        <p>组织架构</p>
+        <p>Const</p>
+    </div>
+    <div class="qyarticle_main">
+                {$vo.content}
+    </div>
+    <!--文章底部信息-->
+    <div class="info_dom">
+        <p>地址：锦屏县三江镇赤溪坪社区（锦屏文书特藏馆）</p>
+        <p>电话：<i>{:C('WEB_SITE_MOBILE')}</i></p>
+        <p>版权所有：贵州杉乡文化旅游发展集团有限公司</p>
+    </div>
+</div>
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>

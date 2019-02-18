@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>特色私房菜</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/hotel.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/zoom.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/zoom.js"></script>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+
+
+    <!--时间=插件-->
+    <script type="text/javascript" src="__JS__/timeDate/dateRange.js"></script>
+    <script type="text/javascript" src="__JS__/timeDate/monthPicker.js"></script>
+    <link type="text/css" href="__CSS__/timeDate/dateRange.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/timeDate/monthPicker.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=iD9NXuhXwdXoWMRfO6brtQcL"></script>
+    <style type="text/css">
+        #allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        .anchorBL{display:none;}
+    </style><!--
+    <style type="text/css">
+        #allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        .anchorBL{display:none;}
+        html, body {position: relative;height: 100%;}
+        body {background: #eee;font-family: Helvetica Neue, Helvetica, Arial, sans-serif;font-size: 14px;color:#000;margin: 0;padding: 0;}
+        .swiper-container {width: 100%;height: 100%;margin-left: auto;margin-right: auto;}
+        .swiper-slide {text-align: center;font-size: 18px;background: #fff; /* Center slide text vertically */display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;}
+    </style>-->
+
+</head>
+<body><include file="Public/zx" />
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div>
+    <em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="{:U('index/index')}">旅游指南</a><em>-</em><a>名菜馆</a>
+</div>
+<img src="" alt="" class="bigimg">
+<div class="mask">
+    <img src="__IMG__/close.png" alt="">
+</div>
+<section>
+    <div class="shan_hotel">
+
+        <div class="wheel_sw">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <img src="__IMG__/dish/di00_03.jpg" alt="" class="swiper-slide smallimg">
+
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"></div>
+            </div>
+        </div>
+        <div class="hotel_ims">
+            <span class="htl_tt"><p>{$res.name}</p><em></em></span>
+            <span class="htl_jj">{$res.content}</span>
+            <span class="htl_ad">
+                <p>酒店地址：{$res.addr}</p>
+                <em> 联系电话：</em>
+                <i>{$res.tel}</i>
+            </span>
+            <div class="mach_htl">
+                <p><i>￥</i>{$res.price}<i>起</i></p>
+            </div>
+            <div class="dis_sele">
+                <ul>
+                    <li>选择套餐</li>
+                    <li>
+                        <div class="pack_dis">
+                            <volist name="tao" id="vo">
+
+                            <div data-id="{$vo.id}" money="{$vo.price}">
+                                <i>￥ {$vo.price} {$vo.name}</i>
+                                <span class="taocan_lr">
+                                    <em></em>
+                                    <ul>
+                                        <li><em>套餐内容</em><em></em><em>单价</em><em>数量/规格</em><em>小计</em></li>
+                                        <li><em>干锅三选一</em><em>销魂三绝-糯米鸭掌</em><em>￥88</em><em>1份</em><em>￥99</em></li>
+                                        <li><em></em><em>销魂三绝-糯米鸭掌</em><em>￥88</em><em>1份</em><em>￥99</em></li>
+                                        <li><em></em><em>销魂三绝-糯米鸭掌</em><em>￥88</em><em>1份</em><em>￥99</em></li>
+                                        <li><em>其他</em><em>开心凉粉</em><em>￥12</em><em>1份</em><em>￥12</em></li>
+                                        <li><em></em><em>餐位</em><em>￥3</em><em>3份</em><em>￥9</em></li>
+                                    </ul>
+                                    <span>
+                                        <p>总计：￥109</p><p>优惠价：<em>￥88</em></p>
+                                    </span>
+
+                                </span>
+                            </div>
+                            </volist>
+
+                        </div>
+
+                    </li>
+                </ul>
+                <ul>
+                    <li>用餐日期</li>
+                    <li>
+                        <input class="sele_ll" id="date_demo1" />
+                        <script>
+                            laydate.render({
+                                elem: '#date_demo1',
+                                min:'today'//选择今天之后
+                            });
+                        </script>
+                    </li>
+                </ul>
+            </div>
+            <div class="now_ck">
+                <span id="taochanorder">立即下单</span>
+                <p><img src="__IMG__/dish/dtjg_05.jpg" alt=""><i class="icon2" data-id="{$Think.get.id}">收藏</i></p>
+            </div>
+        </div>
+    </div>
+    <!--介绍模块-->
+
+    <div class="jieso_mod">
+
+        <div class="htl_intr">
+            <div class="top_title">
+                <ul>
+                    <li class="chke_tt tjcp">推荐菜品</li>
+                    <li class="mcgjs">名菜馆介绍</li>
+                    <li class="yhdp">用户点评</li>
+                </ul>
+            </div>
+            <div class="dis-list" id="tjcp">
+                <ul>
+                    <volist name="dan" id="vo">
+                        <li>
+                            <img src="{$vo.icon|picture}" data-id="{$vo.id}">
+                        <span class="text-dis">
+                            <p>{$vo.name}</p>
+                            <p>{$vo.content}</p>
+                            <span>
+                                <em>￥{$vo.price}</em>
+                                <p>
+                                    <i style="visibility: hidden">1</i>
+                                    <img src="__IMG__/dish/di00_18.jpg" class="addtocart" data-id="{$vo.id}">
+                                </p>
+                            </span>
+                        </span>
+                        </li>
+                    </volist>
+
+                </ul>
+            </div>
+
+            <div class="ncg_jies" id="mcgjs">
+                <span>名菜馆介绍</span>
+                <p>名菜馆介绍:</p>
+                <p>万年矿化龄的森林氡温泉5000米森林登山步道……
+                    红珠山宾馆坐落在世界自然与文化遗产——峨眉山山麓，与名刹“报国寺”相距不足200米。宾馆拥有44万平方米原始森林，10万平方
+                    米天然湖泊，5000米散步小道，空气负氧离子监测值为城市平均数的3000倍，可以说是一个种在山林里的酒店。它不是简单的酒店建筑它呼
+                    吸森林气息，吐纳天然灵气。
+                </p>
+                <div>
+
+                </div>
+            </div>
+            <!--<div class="dis-list" id="jtzn">
+                <span>交通指南</span>
+                <div class="map_plg">
+                    <div id="container" style="width:500px;height:300px;"></div >
+                    <div class="route_prom">
+                        <p> 距离海口美兰国际机场23公里，乘坐出租车约40分钟</p>
+                        <p>距离海口火车站27.2公里，乘坐出租车约50分钟；</p>
+                    </div>
+                </div>
+            </div>-->
+
+            <ul>
+                <li class="htl_rev"  id="yhdp">
+                    <span>用户点评</span>
+                    <div class="rev_tex">
+                        <ul>
+                            <li class="rev_ched"><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=5')}">全部评价({$total}+)</a></li>
+                            <li><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=0')}" style="color:rgb(115, 115, 115)">嗮图({$pic}+)</a></li>
+                            <li><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=1')}" style="color:rgb(115, 115, 115)">好评({$good}+)</a></li>
+                            <li><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=2')}" style="color:rgb(115, 115, 115)">中评({$middle}+)</a></li>
+                            <li><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=3')}" style="color:rgb(115, 115, 115)">差评({$bad}+)</a></li>
+                        </ul>
+                    </div>
+                    <div class="comt_are">
+                        <ul>
+                            <volist name="comment" id="vo">
+                                <li>
+                                    <span class="avat_comt"><img src="{$vo.usericon|picture}" style="border-radius: 50%"></span>
+                                <span class="tet_comt">
+                                    <p><em>{$vo.username}</em><i>
+                                        <if condition="$vo.star eq 1"><img src="__IMG__/star1.png" style='width:90px' alt="">
+                                            <elseif condition="$vo.star eq 2"/><img src="__IMG__/star2.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 3"/><img src="__IMG__/star3.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 4"/><img src="__IMG__/star4.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 5"/><img src="__IMG__/star5.png" style='width:90px' alt="">
+                                        </if>
+                                    </i></p>
+                                    <p>{$vo.content}</p>
+                                    <if condition="$vo['icon'] neq 0">
+                                        <p><img src="{$vo.icon|picture}" alt="" style="width:40px;height:40px"></p>
+                                        <else /><p style="visibility: hidden"><img src="" alt="" style="width:40px;height:40px"></p></if>
+                                    <p>{$vo.time|date='Y-m-d h:i:s',###}</p>
+                                    <p class="spl_pp"></p>
+                                </span>
+                                </li>
+                            </volist>
+
+                        </ul>
+                        <div class="page_tt">
+                            <ul>
+                                {$page}
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="gouwu-car" id="">
+
+            <div class="gwc">购物车</div>
+            <div class="ccp" id="clearcart" >清空菜品</div>
+            <ul id="cart">
+
+
+
+            </ul>
+                <!--<div class="ssl_deta">
+                    <i>您选择的用餐日期</i>
+                    <p>2018-07-25</p>
+                </div>-->
+                <span>
+                     <p>共计 <em id="num">0</em> 份 , <i id="total">￥0</i></p>
+                    <input type="button" value="立即下单" id="order">
+                </span>
+        </div>
+    </div>
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="ck_hide">
+    <div class="retl_box">
+    <!--特色菜品-->
+    <div class="mincai">
+        <img src="__IMG__/dish/caipjj_03.jpg" alt="" >
+        <div class="tj_diss">
+            <img src="__IMG__/dish/caipjj_06.jpg" alt="" id="foodicon">
+        <span>
+            <p id="foodname">北滨010烤全羊</p>
+            <p>仅售788元！价值1508元的10人活羊点杀，可免 费使用包间，提供免费WiFi</p>
+            <ul class="ullis_01">
+                <li>单价：</li>
+                <li ><em>￥</em><span id="foodprice">788</span></li>
+            </ul>
+            <ul class="ullis_02">
+                <li>数量：</li>
+                <li>
+                    <div class="adds-te">
+                        <p id="foodjian"></p>
+                        <input type="text" value="1" name="foodnum">
+                        <p id="foodjia"></p>
+                    </div>
+                </li>
+            </ul>
+
+            <input type="button" value="立即抢购" id="buy" data-id="">
+        </span>
+        </div>
+
+        <p>菜品介绍</p>
+        <div class="text_mm">
+            <p>
+                嫩羊在宰杀前的过程就不必说了。都是清内脏去毛统一的一个流程。我们买的羊，一只嫩羊在当地250.260RMB
+                左右。卖羊人会将羊处理好，除皮留给卖羊人外，内脏。羊血等都可以自留。做做羊杂汤，羊血羹很是不错。
+            </p>
+            <img src="__IMG__/dish/caipjj_11.jpg" alt="">
+            <img src="__IMG__/dish/caipjj_11.jpg" alt="">
+
+            <p>
+                嫩羊在宰杀前的过程就不必说了。都是清内脏去毛统一的一个流程。我们买的羊，一只嫩羊在当地250.260RMB
+                左右。卖羊人会将羊处理好，除皮留给卖羊人外，内脏。羊血等都可以自留。做做羊杂汤，羊血羹很是不错。
+            </p>
+        </div><input type="hidden" name="foodprice">
+    </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(function(){
+        var obj = new zoom('mask', 'bigimg','smallimg');
+        obj.init();
+    })
+    $(function () {
+        var pl="{$Think.get.pl}"
+        var p="{$Think.get.p}"
+        if(pl!='' || p!=''){
+            $(window).scrollTop($('#yhdp').offset().top)
+        }
+    })
+    $(document).on("click","#fapinlun",function () {
+        var shoptype="{$shoptype}"
+        var id="{$Think.get.id}"
+        var type="{$Think.get.type}"
+
+        if(shoptype==0){
+            location.href='/Home/user/fapinlun?id='+id+'&type='+type
+        }else{
+            location.href='/Home/mer/fapinlun?id='+id+'&type='+type
+        }
+
+    })
+
+    var hid="{$Think.get.id}";
+    /*//进来先加载购物车
+    $.post("/Home/Ajax/loadcart",{},function(da){
+        var obj = jQuery.parseJSON(da);
+        if(obj.code==200){
+            $('#cart').empty();
+            $('#cart').append(obj.msg);
+            $('#num').html(obj.num);
+            $('#total').html('￥'+obj.total);
+        }
+    });*/
+    $.post("/Home/Ajax/clearcart",{},function(da){
+        var obj = jQuery.parseJSON(da);
+        if(obj.code==200){
+            $('#cart').empty();
+        }else{
+            layer.msg(obj.msg);
+        }
+    })
+    $(document).on("click","#order",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录！请先登录！');return false;
+            layer.msg('您还未登录！请先登录！',function () {
+                location.href='/Home/public/login'
+            });return false;
+        }
+        /*var id = $('input[name=id]').val();
+         var num = $('input[name=num]').val();
+         var money = $('input[name=money]').val();*/
+        $.post("/Home/Ajax/order",{'actiontype':3,'hid':hid,'type':'food'},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('下单成功！去支付！',function () {
+                    location.href='/Home/food/foodpay/orderno/'+obj.msg;
+                });
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(document).on("click","#taochanorder",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录！请先登录！');return false;
+            layer.msg('您还未登录！请先登录！',function () {
+                location.href='/Home/public/login'
+            });return false;
+        }
+        var id=$('.dispick').attr('data-id');
+
+        //var num = $('input[name=num]').val();
+        var money = $('.dispick').attr('money');
+        var date=   $("#date_demo1").val();
+        if($('.dispick').length==0){
+            layer.msg('请选择套餐');return;
+        }
+        if(date==''){
+            layer.msg('请选择用餐日期');return;
+        }
+        //console.log(hid,id,money,date);return;
+        $.post("/Home/Ajax/order",{'actiontype':3,'hid':hid, 'id':id ,'num':1,'money':money, 'date':date},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('下单成功！去支付！',function () {
+                    location.href='/Home/food/foodpay/id/'+id+'/orderno/'+obj.msg;
+                });
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(document).on("click","#buy",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录！请先登录！');return false;
+            layer.msg('您还未登录！请先登录！',function () {
+                location.href='/Home/public/login'
+            });return false;
+        }
+        var id=$(this).attr('data-id');
+        var num=$('input[name=foodnum]').val();
+        var money= $('#foodprice').html();
+        //console.log(hid,id,num,money);return;
+        $.post("/Home/Ajax/order",{'actiontype':3,'hid':hid, 'id':id ,'num':num,'money':money,'actiontype':3},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('下单成功！去支付！',function () {
+                    location.href='/Home/food/foodpay/id/'+id+'/orderno/'+obj.msg;
+                });
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(document).on("click","#foodjia",function () {
+        var price=$('input[name=foodprice]').val();
+        var num=$('input[name=foodnum]').val();
+        //console.log(price,num);return
+        $('#foodprice').html(price*num);
+    })
+    $(document).on("click","#foodjian",function () {
+        var price=$('input[name=foodprice]').val();
+        var num=$('input[name=foodnum]').val();
+        //console.log(price,num);return
+        $('#foodprice').html(price*num);
+    })
+    $(document).on("click","#clearcart",function () {
+        $.post("/Home/Ajax/clearcart",{},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                $('#cart').empty();
+            }else{
+                layer.msg(obj.msg);
+            }
+        })
+    })
+
+    $(document).on("click",".addtocart",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/Ajax/addtocart",{'id':id,'type':'usermember'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+
+                $('#cart').empty();
+                $('#cart').append(obj.msg);
+                $('#num').html(obj.num);
+                $('#total').html('￥'+obj.total);
+
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+    $(document).on("click",".jia",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/Ajax/addtocart",{'id':id,'type':'jia'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+
+                $('#cart').empty();
+                $('#cart').append(obj.msg);
+                $('#num').html(obj.num);
+                $('#total').html('￥'+obj.total);
+
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+    $(document).on("click",".jian",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/Ajax/addtocart",{'id':id,'type':'jian'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+
+                $('#cart').empty();
+                $('#cart').append(obj.msg);
+                $('#num').html(obj.num);
+                $('#total').html('￥'+obj.total);
+
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':'usermember'},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                collection.attr("src",'/Public/Home/__IMG__/gud/ligcjj_03.jpg');
+                //collection.css("background-image","url('/Public/Home/__IMG__/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                collection.attr("src",'/Public/Home/__IMG__/gud/dtjg_05.jpg');
+                collection.css("width",'17px');collection.css("height",'17px');
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+    /*名菜馆介绍*/
+    mingcai_js ();
+    function mingcai_js () {
+
+        $(document).on("click",".dis-list>ul>li>img",function () {
+            var id = $(this).attr('data-id')
+            $.post("/Home/Food/dingcan",{'id':id,},function(da){
+                var obj = jQuery.parseJSON(da);
+//console.log(obj);return;
+
+
+                if(1){
+                    $('#foodicon').attr("src",obj.icon);
+                    $('#foodname').html(obj.name);
+                    $('#foodprice').html(obj.price);
+                    $('input[name=foodprice]').val(obj.price);
+                    $('#buy').attr('data-id',obj.id);
+                    //$('#foodprice').html("<em>￥</em>"+obj.price);
+                    //$('#foodicon').attr("src",obj.icon);
+                    //collection.css("background-image","url('/Public/Home/__IMG__/gud/ligcjj_03.jpg')");
+
+
+                }else{
+                    alert(obj.msg);
+                }
+            });
+            $(".ck_hide").css("display","block");
+            $(".retl_box").css("display","block");
+            $(".mincai").css("display","block");
+            $("body").css("overflow","hidden");
+        })
+
+        $(".mincai>img").click(function () {
+
+            $(".ck_hide").css("display","none");
+            $(".retl_box").css("display","none");
+            $(".mincai").css("display","none");
+            $("body").css("overflow","auto");
+        })
+    }
+</script>
+
+<link rel="stylesheet" href="/Public/Home/plugin/swiper/dist/css/swiper.min.css">
+
+
+<script src="/Public/Home/plugin/swiper/dist/js/swiper.min.js"></script>
+<script type="text/javascript">
+
+    sel_dislis();
+
+    cill_ed();
+
+
+
+    var html = "";
+    $(".dis-list > ul > li > .text-dis > span > p > img").click(function () {
+
+        var tolt = parseInt($(this).prev("i").text());
+            tolt ++;
+        $(this).prev("i").text(tolt);
+        /*var tolt = parseInt($(this).prev("i").text());
+                var clas = $(this).parents(".text-dis").children("p:first").attr("class");
+            if ($(this).hasClass("cked")){
+                        tolt++;
+                    $(this).prev("i").text(tolt);
+                    $("."+clas+" input:text").val($(this).parents("span").children("p").children("i").text());
+                return;
+            }else {
+                tolt+=1;
+                $(this).prev("i").text(tolt);
+                html+="<li>\n" +
+                        "                    <i>"+$(this).parents(".text-dis").children("p:first").text()+"</i>\n" +
+                        "                    <div class=\"adds-dis "+$(this).parents(".text-dis").children("p:first").attr("class")+"\">\n" +
+                        "                        <p>-</p>\n" +
+                        "                        <input type=\"text\" value=\"1\">\n" +
+                        "                        <p>+</p>\n" +
+                        "                    </div>\n" +
+                        "                    <em>"+$(this).parents("span").children("em").text()+"</em>\n" +
+                        "                </li>";
+                $(".gouwu-car ul").html(html);
+                $(this).addClass("cked");
+                $(".dis-list > ul > li").each(function () {
+                    var num_tol =  $(this).children(".text-dis").children("span").children("p").children("i").text();
+                    var all_cls =  $(this).children(".text-dis").children("p:first").attr("class");
+                    $(".gouwu-car ul li ."+all_cls+" input:text").val(num_tol);
+                })
+                }
+*/
+
+
+    })
+/*
+    $(document).on('click', '.adds-dis>p:nth-child(1)', function() {
+
+        var max = 1;
+        var num = $(".adds-dis input").val();
+        var tot = parseInt(num);
+        if (max == num) {
+
+            $(".adds-dis input").val(max);
+        } else {
+
+            $(".adds-dis input").val(tot - 1);
+        }
+    })
+    $(document).on('click', '.adds-dis>p:nth-child(3)', function() {
+
+        var max = 100;
+        var num = $(".adds-dis input").val();
+        var tot = parseInt(num);
+        if (max == num) {
+            $(".adds-dis input").val(max);
+        } else {
+            $(".adds-dis input").val(tot + 1);
+        }
+    })
+*/
+
+
+
+    $(function () {
+
+        /*sweiper*/
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        /*特色菜推荐*/
+
+        $(".adds-te>p:nth-child(1)").click(function () {
+
+            var max = 1;
+            var num = $(".adds-te input").val();
+            var tot = parseInt(num);
+            if (max == num) {
+                $(".adds-te input").val(max);
+            } else {
+                $(".adds-te input").val(tot - 1);
+            }
+        })
+
+        $(".adds-te>p:nth-child(3)").click(function () {
+            var max = 100;
+            var num = $(".adds-te input").val();
+            var tot = parseInt(num);
+            if (max == num) {
+                $(".adds-te input").val(max);
+            } else {
+                $(".adds-te input").val(tot + 1);
+            }
+        })
+
+
+    })
+
+    $(".top_title ul li").click(function () {
+
+        $("html, body").animate({
+            scrollTop: $('#'+$(this).attr("class")).offset().top }, {duration: 500,easing: "swing"});
+        return false;
+    })
+
+        function sel_dislis() {
+
+            $(".pack_dis div").click(function () {
+
+                if ($(this).hasClass("dispick")){
+
+                    return;
+                }else {
+
+                    $(this).siblings().removeClass("dispick");
+                    $(this).addClass("dispick");
+                }
+            })
+        }
+
+        var clk = true;
+        function cill_ed() {
+            $(".now_ck>p>img").click(function () {
+                if (clk==true){
+                    $(this).attr("src","__IMG__/htl/htl_07.jpg")
+                    clk = false;
+                }else {
+                    $(this).attr("src","__IMG__/dish/dtjg_05.jpg");
+                    clk = true;
+                }
+            })
+        }
+
+
+
+</script>
+<script type="text/javascript">
+
+    var map = new BMap.Map("container");
+    map.enableScrollWheelZoom(true);
+    var point = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point, 15);
+    var marker = new BMap.Marker(point);  // 创建标注
+    map.addOverlay(marker);
+
+
+    $(".top_title ul li").click(function () {
+
+        $("html, body").animate({
+            scrollTop: $('#'+$(this).attr("class")).offset().top }, {duration: 500,easing: "swing"});
+        return false;
+    })
+
+</script>
+

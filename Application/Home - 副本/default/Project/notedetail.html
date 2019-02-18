@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name=”viewport” content=”initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no”>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>旅行详情</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/shop.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <!--特效-->
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+</head>
+<body><include file="Public/zx" />
+<include file="Public/header" />
+<!--顶部菜单-->
+<include file="Public/nav" />
+<!--分割线-->
+<div class="split_line"></div>
+<!---->
+<div class="travel_gbi" style="display: inline-block;" id="rippleria">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div><em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="{:U('project/index?navid=15')}">文旅项目</a><em>-</em><a>
+        <if condition="$Think.get.type eq 1">旅游概括
+        <elseif condition="$Think.get.type eq 2" />旅游攻略
+        <else />旅行游记</if>
+    </a>
+</div>
+<section>
+    <div class="rute_jing">
+        <div class="left_nav">
+            <ul>
+                <a href="{:U('Food/index')}" style="text-decoration: none;color:#fff"><li style="background: #ef5f02;"><div></div>美食</li></a>
+
+                <a href="{:U('House/index')}" style="text-decoration: none;color:#fff"><li style="background: #f29a00;"><div></div>住宿</li></a>
+                <a href="{:U('Transpot/index')}" style="text-decoration: none;color:#fff"><li style="background: #00b065;"><div></div>交通</li></a>
+                <a href="{:U('Scenic/index')}" style="text-decoration: none;color:#fff"><li  class="lenav_ok" style="background: #29a5f3;"><div></div>景区</li></a>
+                <a href="{:U('Shopping/index')}" style="text-decoration: none;color:#fff"><li style="background: #2970a5;"><div></div>购物</li></a>
+                <a href="{:U('Funny/index')}" style="text-decoration: none;color:#fff"><li style="background: #e00404;"><div></div>娱乐</li></a>
+            </ul>
+        </div>
+        <div class="jing_ping">
+            <span class="lu_xian">
+                <p>{$vo.name}</p>
+                <ul>
+                    <li>文章来源：锦屏旅游咨讯网</li>
+                    <if condition="$vo.uid eq 0"><li>作者：锦屏旅游咨讯网</li>
+                        <else/>
+                        <li>作者：{$vo.uid|modelField='usermember','name'}</li></if>
+
+                    <li>阅读：{$vo.view}</li>
+                    <li>发布时间{$vo.create_time|date='Y.m.d',###}</li>
+                </ul>
+            </span>
+            <p>
+
+            </p>
+            <p>
+                {$vo.content}
+            </p>
+
+            <div class="page_tura" style="">
+                <if condition="$prev neq 0">
+                    <ul>
+                        <li>上一篇：</li>
+                        <li><a href="{:U('home/project/notedetail?id='.$prev['id'].'&type='.$type)}">{$prev.name}</a></li>
+                    </ul>
+                </if>
+                <if condition="$next neq 0">
+                    <ul>
+                        <li>下一篇：</li>
+                        <li><a href="{:U('home/project/notedetail?id='.$next['id'].'&type='.$type)}">{$next.name}</a></li>
+                    </ul>
+                </if>
+            </div>
+            <if condition="$vo.collection eq 1">
+                <span class="lvyj_xq " > <i class='icon2' data-id="{$vo.id}" style="background: url(/Public/Home/img/gud/ligcjj_03.jpg) no-repeat ;background-position:0 center;background-size:16px 14px"  >收藏</i></span>
+                <else/>
+                <span class="lvyj_xq"  > <i class='icon2' data-id="{$vo.id}" style="background: url(/Public/Home/img/gud/dtjg_05.jpg) no-repeat ;background-position:0 center;background-size:16px 14px">收藏</i></span>
+
+            </if>
+
+         <!--   <span class="lvyj_xq">
+                <i>收藏</i>
+            </span>-->
+        </div>
+    </div>
+
+
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+<script>
+
+
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':'travelnote'},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+
+                collection.css("background-image","url('/Public/Home/img/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+
+                collection.css("background-image","url('/Public/Home/img/gud/dtjg_05.jpg')");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+</script>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name=”viewport” content=”initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no”>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/mer.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <!--时间=插件-->
+    <script type="text/javascript" src="__JS__/timeDate/dateRange.js"></script>
+    <script type="text/javascript" src="__JS__/timeDate/monthPicker.js"></script>
+    <link type="text/css" href="__CSS__/timeDate/dateRange.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/timeDate/monthPicker.css" rel="stylesheet" />
+
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <div class="navBox">
+        <!--nav-->
+        <div class="publicContent">
+            <div class="navCon">
+                <!--title-->
+                <div class="navTitleImg"><img src="__IMG__/titleNav.png" alt="贵州杉乡文化旅游发展集团有限公司" /></div>
+                <!--link-->
+                <div class="navLink">
+                    <ul>
+                        <li >
+                            <a href="{:U('Index/index')}">
+                                <p>网站首页</p><span>Home</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('About/index')}">
+                                <p>关于我们</p><span>About</span></a>
+                        </li>
+                        <li >
+                            <a href="{:U('news/index')}">
+                                <p>新闻动态</p><span>News</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('works/index')}">
+                                <p>党群工作</p><span>Work</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('project/index')}">
+                                <p>文旅项目</p><span>Project</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('culture/index')}">
+                                <p>文化锦屏</p><span>Culture</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="psc_mb">
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.username}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('mer/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('mer/goods?issale=2')}"><li class="per_chd" ><span><p>商品管理</p></span></li></a>
+                    <a href="{:U('mer/youhui')}"><li><span><p>优惠活动</p></span></li></a>
+                    <a href="{:U('mer/dingdan?isover=2')}"><li><span><p>订单管理</p></span></li></a>
+                    <a href="{:U('mer/caiwu')}"><li><span><p>财务</p></span></li></a>
+                    <a href="{:U('mer/shangjia')}"><li><span><p>商家信息</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="perrg_imsg">
+            <!--账户余额-->
+            <div class="rtt_top">
+                <div class="kyye_dao">
+                    <img src="__IMG__/psc/cer_03.jpg" alt="">
+                    <div>
+                        <i>可用余额</i>
+                        <span>
+                            <em>1250.00</em>
+                            <p class="tx_btn">提现</p>
+                            <p class="cz_btn">充值</p>
+                        </span>
+                    </div>
+                </div>
+                <div class="yanm_hex">
+                    <div>
+                        <input type="text" >
+                    </div>
+                    <input type="button" value="验证码核销">
+                </div>
+            </div>
+            <!--订单部分-->
+            <div class="dindan_gl">
+                <div class="per_ttmg">
+                    <!--最新订单-->
+                    <div class="lun_ttle">
+                        <ul>
+                            <li class="fatie_genb">最新订单</li>
+                        </ul>
+                        <span class="time_sel">
+                            <p class="sta_ipu" id="date_demo1"></p><i>-</i><p class="end_ipu"  id="date_demo2" ></p><p class="sel_btuu">查询</p>
+                            <script type="text/javascript">var dateRange = new pickerDateRange('date_demo1', {isTodayValid: true, defaultText: ' 至 ', inputTrigger: 'input_trigger_demo3', theme: 'ta', success: function (obj) {$("#date_demo1").html(obj.startDate);$("#date_demo2").html(obj.endDate);}});</script>
+                        </span>
+                    </span>
+                    </div>
+                </div>
+
+                <!---->
+                <div class="spxx_tt">
+                    <ul>
+                        <li>商品信息</li>
+                        <li>预定人数</li>
+                        <li>预定日期</li>
+                        <li>单价（元）</li>
+                        <li>数量</li>
+                        <li>订单金额</li>
+                        <li>操作</li>
+                    </ul>
+                </div>
+                <!---->
+                <div class="list_ddh">
+                    <ul>
+                        <!---->
+                        <li>
+                            <p><i>订单号:2011825121640</i><img src="__IMG__/psc/2cer_03.jpg" alt=""></p>
+                            <ul>
+                                <li><img src="__IMG__/psc/5dd_03.jpg" alt="">
+                                    <div>
+                                        <p>锦屏县大酒店</p>
+                                        <em>半溪草堂是纳西族传统的四合 院，院落旁小溪...<i>【详情】</i></em>
+                                    </div>
+                                </li>
+                                <li>5人</li>
+                                <li>2018-6-18</li>
+                                <li>1126.00</li>
+                                <li>126.00</li>
+                                <li>126.00</li>
+                                <li><p>待核销</p></li>
+                            </ul>
+                            <span>
+                                <div><img src="__IMG__/psc/cer21_03.jpg" alt=""><p>黄****沙</p></div>
+                                <p><i>合计：</i><em>￥1126.00</em></p>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <!---->
+                <div class="page_ll">
+                    <ul>
+                        <li>上一页</li>
+                        <li class="page_ck">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>...</li>
+                        <li>9</li>
+                        <li>下一页</li>
+                    </ul>
+                    <span><p>到</p><input type="text"><p>页</p><i>确定</i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<footer>
+    <div class="foote">
+        <div class="foot_nav">
+            <span>友情链接：</span>
+            <ul>
+                <li>锦屏官网</li>
+                <li>旅游网站</li>
+                <li>旅游网站</li>
+                <li>锦屏官网</li>
+                <li>锦屏官网</li>
+                <li>旅游网站</li>
+            </ul>
+            <div class="foot_to_top"><p>返回</p><p>顶部</p></div>
+        </div>
+        <div class="foot_bot">
+            <div class="foot_text1"><span>关于我们：</span>
+                <ul>
+                    <li>联系方式</li>
+                    <li>法律申明</li>
+                    <li>合作伙伴</li>
+                </ul>
+            </div>
+            <div class="foot_text2"><span>公司地址：</span>
+                <ul>
+                    <li>锦屏县三江镇赤溪坪社区（锦屏文书特藏馆）</li>
+                    <li>电话：0855——3900890</li>
+                    <li>邮编：55000</li>
+                    <li>gzsxwhlyfzjt@sina.com</li>
+                </ul>
+            </div>
+            <div class="foot_text3"><span>版权所有：</span><ul><li>贵州杉乡文化旅游发展集团有限公司</li></ul></div>
+        </div>
+        <div class="foot_code">
+            <ul><li><img src="__IMG__/centre/img_10.jpg" alt=""></li><li>关注企业微博</li></ul>
+            <ul><li><img src="__IMG__/centre/img_10.jpg" alt=""></li><li>关注公众号</li></ul>
+        </div>
+    </div>
+</footer>
+
+</footer>
+</body>
+</html>

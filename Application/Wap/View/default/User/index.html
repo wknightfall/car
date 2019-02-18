@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+</head>
+<body>
+
+    <!--head-->
+    <div class="bg_titlt">
+        <div class="ger_head">
+            <img src="__IMG__/person/icon/iconfont.png" alt=""  onclick="history.go(-1)">
+            用户中心
+            <img src="__IMG__/person/icon/sett.png">
+        </div>
+
+        <div class="toux_dom">
+            <img class="ouximg" src="{$user.icon|picture}" alt="">
+            <img class="camimg" src="__IMG__/person/icon/camera.png" alt="">
+        </div>
+
+        <div class="name_u">
+            <p>{$user.name}</p>
+            <i>{$user.phone}</i>
+        </div>
+    </div>
+
+    <div class="yue_jif">
+            <span class="yue">
+                <img src="__IMG__/person/icon/yang.png" alt=""><i>{$user.balance}</i><em>余额</em>
+                <p>
+                    <input type="button" value="提现" class="congzhi" id="tixian"/>
+                    <input type="button" value="充值" class="tixuna"  id="congzhi"/>
+                </p>
+            </span>
+        <span class="jif">
+                <img src="__IMG__/person/icon/jif.png" alt=""><i>0</i><em>积分</em>
+                <p>
+                    <input type="button" value="使用" class="shiyong" />
+                </p>
+            </span>
+    </div>
+
+    <div class="mynv_list">
+        <ul>
+            <li><a href="{:U('rest')}">
+                <img src="__IMG__/person/icon/list_1.png" alt="">
+                余额
+                <img src="__IMG__/person/icon/list_c.png" alt="">
+            </a></li>
+            <li><a href="{:U('dingdan?state=2')}">
+                <img src="__IMG__/person/icon/list_2.png" alt="">
+                订单
+                <img src="__IMG__/person/icon/list_c.png" alt="">
+            </a></li>
+            <li><a href="{:U('luntan')}">
+                <img src="__IMG__/person/icon/list_3.png" alt="">
+                我的论坛
+                <img src="__IMG__/person/icon/list_c.png" alt="">
+            </a></li>
+            <li><a href="{:U('pl?pl=0')}">
+                <img src="__IMG__/person/icon/list_4.png" alt="">
+                我的评论
+                <img src="__IMG__/person/icon/list_c.png" alt="">
+            </a></li>
+            <li><a href="{:U('geren')}">
+                <img src="__IMG__/person/icon/list_5.png" alt="">
+                个人资料
+                <img src="__IMG__/person/icon/list_c.png" alt="">
+            </a></li>
+        </ul>
+    </div>
+
+
+
+</body>
+</html>
+<script>
+    $('#tixian').click(function () {
+        location.href='/wap/user/tixian';
+    })
+    $('#congzhi').click(function () {
+        location.href='/wap/user/congzhi';
+    })
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+</script>

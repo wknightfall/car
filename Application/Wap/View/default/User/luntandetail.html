@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        我的论坛
+        <i class="tt_bianji">编辑</i>
+
+
+    </div>
+
+    <div class="celec_lun">
+
+        <ul>
+            <li <eq name="type" value="1">class="this_lunpag"</eq> ><a href="javascript:">我发表的</a></li>
+            <li <eq name="type" value="2">class="this_lunpag"</eq> ><a href="javascript:">我跟帖的</a></li>
+        </ul>
+    </div>
+
+    <!--list-->
+    <div class="luntan_list">
+        <ul>
+            <li>
+                <p>  {$tiezi.name}</p>
+                <em>
+                    <i><a href="javascript:">{$tiezi.pl}回应</a></i>
+                    <if condition="$tiezi.lasttime eq 0"><i>暂无回应</i><else />
+                    <i>{$tiezi.lasttime|format_date}</i></if>
+                    <span class="off_on" data-id="{$tiezi.id}"></span>
+                </em>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tiezi_mm">
+        <p>
+            {$tiezi.content}
+        </p>
+    </div>
+    <div class="ft_chao">
+        <i>{$tiezi.create_time|date='Y-m-d h:i:s',###}</i>
+        <em class="deltiezi" data-id="{$tiezi.id}"><img src="__IMG__/person/icon/del.png" alt="" >删除</em>
+    </div>
+
+
+
+</div>
+
+</body>
+<script>
+
+
+    $(document).on("click",".off_on",function () {
+        var id = $(this).attr('data-id');
+            $.post("/Home/Ajax/onoff", {'id': id}, function (da) {
+                var obj = jQuery.parseJSON(da);
+                /*if (obj.code == 200) {
+                    layer.msg('操作成功')
+                } else {
+                    layer.msg('操作失败')
+                }*/
+            });
+
+    })
+    $(document).on("click",".deltiezi",function () {
+        var id = $(this).attr('data-id');
+
+        layer.confirm('确定删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function(index) {
+            layer.close(index);
+            $.post("/Home/Ajax/deltiezi", {'id': id}, function (da) {
+                var obj = jQuery.parseJSON(da);
+                if (obj.code == 200) {
+                    layer.msg('删除成功',function () {
+                        //location.reload();
+                    })
+                } else {
+                    layer.msg('删除失败')
+                }
+            });
+        })
+    })
+    $(document).on("click","#chaxun",function () {
+        var date1=$('#date_demo1').html();
+        var date2=$('#date_demo2').html();
+        //console.log(date1,date2);return;
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Wap/user/dingdan/date1/'+date1+'/date2/'+date2;
+    })
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+        var off = true;
+    $(".off_on").click(function () {
+        
+        if (off == true){
+
+            $(this).addClass("off_on_aa");
+            off = false;
+        }else {
+            $(this).removeClass("off_on_aa");
+            off = true;
+        }
+    })
+
+</script>

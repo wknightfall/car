@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+	
+	<include file="Public/top" />
+	
+	<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/default.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/members.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/page.css"/>
+
+	<script src="__JS__/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__JS__/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="__JS__/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <script type="text/javascript" src="__JS__/default.js"></script>
+</head>
+<body>
+	<!-- hade -->
+	<include file="Public/header" />
+	
+	<!-- kuai -->
+	<div class="kBox"></div>
+	
+	<section class="contentBox">
+		<!--  -->
+		<div class="opt_tabBox">
+			<div class="optionsBox">
+				<div class="width1200 optionsCon">
+					<div class="crumbsBox">
+						<a href="{:U('Index/index')}"><i class="glyphicon glyphicon-home"></i>首页</a>
+						<span class="icon-rightjt"></span>
+						<a>{$typeInfo.title|default='媒体聚焦'}</a>
+					</div>
+					<!-- xiao nav -->
+					<div class="s_nav">
+						<ul>
+							<volist name="twonav" id="twnav" key="kk">
+								<li class="<?php if($get[typeid]==$twnav['id']){echo 'active';} ?>">{$twnav['title']}</li>
+							</volist>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<div class="opt_Box">
+				<div>
+					<div class="width1200 FocusingBox">
+						<div class="FocusingCon">
+							<ul>
+								<volist name="list" id="vo">
+								<li class="focu_item">
+									<a href="{:U('details',array('typeid'=>$vo['typeid'],'id'=>$vo['id']))}">
+                                        <if condition="$vo['icon'] gt 0">
+										<div class="focu_Img"><div class="focu_ImgBox"><i></i></div>
+											<img src="{:picture($vo['icon'])}" alt="">
+										</div>
+										</if>
+										<div class="focu_con">
+											<div class="focu_c_text">
+												<div class="focu_c_lt">
+													<p>{$vo['title']}</p>
+													<span>{$vo['descriptions']}</span>
+												</div>
+												<div class="focu_c_time">
+													<p>{$vo['create_time']|date='m-d',###}</p>
+													<a href="{:U('details',array('typeid'=>$vo['typeid'],'id'=>$vo['id']))}"><i class="icon-rightjt"></i></a>
+												</div>
+											</div>
+											<div class="focu_c_lk">
+												<a>{$vo['source_web']}</a>
+												<span>|</span>
+												<a>{$vo['author']}</a>
+											</div>
+										</div>
+									</a>
+								</li>
+								</volist>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+	
+	<!-- footer -->
+	<include file="Public/footer" />
+	<script type="text/javascript">
+	$(function(){
+		$(".opt_tabBox .s_nav ul > li").mouseover(function(){
+			var _index = $(this).index();
+			$(".opt_Box > div").eq(_index).show().siblings().hide();
+			$(this).addClass("active").siblings().removeClass("active");
+			var act = $(this).text();
+			$('.crumbsTxt').html(act);
+		});
+		$(".a_news_left .a_nL_item").mouseover(function(){
+			$(this).addClass('nl_active').siblings().removeClass('nl_active');
+		});
+		
+	});
+	</script>
+</body>
+</html>

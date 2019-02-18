@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+<!--头部-->
+    <div class="head_tdom">
+        <img src="__IMG__/icon/return.png" alt="" onclick="history.go(-1)">
+        订单信息
+    </div>
+    <div class="head_dd"></div>
+<!---->
+    <div class="buy_order">
+
+        <p>{$room.name} 门票</p>
+        <!--<p>{$room.name} <if condition="$Think.get.type eq 1">成人票<else />儿童票</if></p>-->
+
+        <ul>
+            <li>出游日期：</li>
+            <li>
+                <input type="text" id="date_demo1" name="date_demo1">
+                <script>
+                    laydate.render({
+                        elem: '#date_demo1',
+                        min: 'today',
+                        showBottom: false
+                    });
+                </script>
+            </li>
+        </ul>
+
+        <ul>
+            <li>购买数量：</li>
+            <li>
+                <div class="shop_num">
+                    <p class="piaonum"></p>
+                    <input type="text" value="1" id="piaonum">
+                    <p class="piaonum"></p>
+                </div>
+            </li>
+        </ul>
+
+        <ul>
+            <li></li>
+            <li>最多可预订99张</li>
+        </ul>
+
+        <ul>
+            <li>配送信息：</li>
+            <li>
+                <img src="__IMG__/icon/ckcc.png" alt="">
+                (门票自取)地址：锦屏县三江镇赤溪坪
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="pers_info">
+
+        <p>取票人/出游人信息</p>
+
+        <ul>
+            <li>
+                <i>姓名</i>
+                <input type="text" placeholder="请填写姓名" name='name'>
+            </li>
+            <li>
+                <i>身份证号</i>
+                <input type="text" placeholder="请填写身份证号" name='iccard'>
+            </li>
+            <li>
+                <i>手机号码</i>
+                <input type="text" placeholder="请填写手机号码" name='phone'>
+            </li>
+            <li>
+                <i>邮箱</i>
+                <input type="text" placeholder="请填写邮箱" name='email'>
+            </li>
+        </ul>
+
+    </div>
+
+    <p class="buy_mode">请选择支付方式</p>
+
+    <div class="select_ls">
+
+        <ul class="list_zf">
+            <li>
+                <div class="list_left">
+                    <img src="__IMG__/icon/zhifu_1.png" alt="">
+                    <p>余额 (¥{$user.balance})</p>
+                </div>
+                <div class="list_chked">
+                    <p></p>
+                </div>
+            </li>
+            <li>
+                <div class="list_left">
+                    <img src="__IMG__/icon/zhifu_2.png" alt="">
+                    <p>支付宝支付</p>
+                </div>
+                <div class="list_chked">
+                    <p></p>
+                </div>
+            </li>
+            <li>
+                <div class="list_left">
+                    <img src="__IMG__/icon/zhifu_3.png" alt="">
+                    <p>微信支付</p>
+                </div>
+                <div class="list_chked">
+                    <p></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="agree_sel">
+        <span>
+            <img src="__IMG__/person/icon/agree.png" alt="">
+            <em>
+                <i>我已阅读并同意</i>
+                旅游合同旅游合同旅游合同旅游合同
+            </em>
+        </span>
+        <p>总支付：<i id="money">￥{$price}</i></p>
+    </div>
+
+    <div class="warning_info">温馨提示：提交订单后，将为您保留15分钟，请及时支付。</div>
+
+    <div class="buy_btnto"></div>
+    <div class="buy_btna">
+
+        <p>共<i id="num">1</i>张，共计：<em id="totalmoney">￥{$price}</em></p>
+        <input type="button" value="提交订单"  id="submitpiao">
+    </div>
+<input type="hidden" name="hid" value="{$hid}">
+<input type="hidden" name="id" value="{$id}">
+<input type="hidden" name="price" value="{$price}">
+<input type="hidden" name="money" value="{$price}">
+<input type="hidden" name="num" value="1">
+</body>
+<script>
+
+
+    var price=$('input[name=price]').val();
+    var num=0;
+    var money=0;
+    $(document).on("click",".piaonum",function () {
+        num=$('#piaonum').val();
+        money=num*price;
+        $('#money').html('￥'+money);
+        $('#totalmoney').html('￥'+money);
+        $('input[name=money]').val(money);
+
+        $('#num').html(num);
+        $('input[name=num]').val(num);
+    })
+
+
+
+    $(document).on("click","#submitpiao",function () {
+        var hid=$('input[name=hid]').val();
+        var id=$('input[name=id]').val();
+
+        var paymoney=$('input[name=money]').val();
+        var paynum=$('input[name=num]').val();
+
+        var date=  $('input[name=date_demo1]').val();
+
+        var name=$('input[name=name]').val();
+        var iccard=$('input[name=iccard]').val();
+        var phone=$('input[name=phone]').val();
+        var email=$('input[name=email]').val();
+
+        if (date == '') {
+            layer.tips('请选择出游日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if (name == '' || iccard== ''|| phone== ''|| email== '') {
+            layer.msg('请填写出游人信息!');return false;
+        }
+        if (paytype == 0) {
+            layer.msg('请选择支付方式!');return false;
+        }
+        //console.log(id,paynum,paymoney,name,date);return;
+        $.post("/Home/Ajax/order",{'actiontype':3, 'piao':'piao', 'hid':hid, 'id':id, 'money':paymoney, 'num':paynum, 'date':date, 'name':name, 'iccard':iccard, 'phone':phone, 'email':email},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                var orderno = obj.msg;
+                //console.log(orderno);return;
+                //余额支付
+                if(paytype == 1){
+                    $.post("/Home/Pay/pay",{'orderno':orderno},function(da){
+                        var payobj = jQuery.parseJSON(da);
+                        if(payobj.code==200){
+                            layer.msg(payobj.msg,function () {
+                                location.reload()
+                            });
+                        }else{
+                            layer.msg(payobj.msg);
+                        }
+                    });
+                }else if(paytype == 2){
+                    location.href='/Home/Pay/testpay/orderno/'+orderno;return;
+                }else if(paytype == 3){
+                    layer.msg('暂未开通微信支付');
+                }
+
+
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(".bodr_pay1 ul li").click(function () {
+        type=$(this).index()+1;
+        $(".bodr_pay1 ul li").removeClass("pay_red");
+        if ($(this).hasClass("pay_red")){
+            $(this).removeClass("pay_red");
+        } else {
+            $(this).addClass("pay_red");
+        }
+    })
+</script>
+</html>

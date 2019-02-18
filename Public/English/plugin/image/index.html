@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Material Design鼠标点击波特效jQuery插件|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+	<link rel="stylesheet" href="css/jquery.rippleria.css">
+	<style type="text/css">
+		* {
+		      outline: none!important;
+		    }
+
+		    .btn {
+		      border-radius: 0;
+		      text-transform: uppercase;
+		    }
+
+		    .btn-sample { 
+		      color: #ffffff; 
+		      background-color: #9B4DCA; 
+		      border-color: #743997; 
+		    } 
+		     
+		    .btn-sample:hover, 
+		    .btn-sample:focus, 
+		    .btn-sample:active, 
+		    .btn-sample.active, 
+		    .open .dropdown-toggle.btn-sample { 
+		      color: #ffffff; 
+		      background-color: #743997; 
+		      border-color: #743997; 
+		    } 
+		     
+		    .btn-sample:active, 
+		    .btn-sample.active, 
+		    .open .dropdown-toggle.btn-sample { 
+		      background-image: none; 
+		    } 
+		     
+		    .btn-sample.disabled, 
+		    .btn-sample[disabled], 
+		    fieldset[disabled] .btn-sample, 
+		    .btn-sample.disabled:hover, 
+		    .btn-sample[disabled]:hover, 
+		    fieldset[disabled] .btn-sample:hover, 
+		    .btn-sample.disabled:focus, 
+		    .btn-sample[disabled]:focus, 
+		    fieldset[disabled] .btn-sample:focus, 
+		    .btn-sample.disabled:active, 
+		    .btn-sample[disabled]:active, 
+		    fieldset[disabled] .btn-sample:active, 
+		    .btn-sample.disabled.active, 
+		    .btn-sample[disabled].active, 
+		    fieldset[disabled] .btn-sample.active { 
+		      background-color: #9B4DCA; 
+		      border-color: #743997; 
+		    } 
+		     
+		    .btn-sample .badge { 
+		      color: #9B4DCA; 
+		      background-color: #ffffff; 
+		    }
+
+		    pre {
+		      background-color: white;
+		      border-radius: 0;
+		    }
+
+		    #rippleria img {
+		      width: 100%;
+		      height: auto;
+		    }
+	</style>
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>Material Design鼠标点击波特效jQuery插件 <span>jQuery plugin for implementing Material Design inspired ripple click / tap effects using CSS3 animations</span></h1>
+			<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
+				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Buttons-Icons/201604253386.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+			</div>
+		</header>
+		<div class="htmleaf-content">
+			<section class="container">
+			    <h3 class="text-center">按钮的点击波效果：</h3>
+			    <div class="col-md-8 col-md-offset-2">
+			      <pre>
+			      <code class="html">
+&#x3C;button data-rippleria class=&#x22;button&#x22;&#x3E;Click Me!&#x3C;/button&#x3E;
+&#x3C;button data-rippleria class=&#x22;button button-outline rippleria-dark&#x22;&#x3E;And Me!&#x3C;/button&#x3E;</code></pre></div>
+			    </div>
+			    <p class="text-center">
+			      <button data-rippleria class="btn btn-lg btn-sample">点击我查看效果</button>
+			      <button data-rippleria class="btn btn-lg btn-default rippleria-dark">反色效果</button>
+			    </p>
+
+			    <div class="row">
+			     <div class="col-md-8 col-md-offset-2">
+			     <h3 class="text-center">自定义动画曲线：</h3>
+			     <pre>
+			     <code class="html">
+&#x3C;button data-rippleria 
+  data-rippleria-color=&#x22;rgba(100,178,53,.35)&#x22; 
+  data-rippleria-duration=&#x22;1000&#x22; 
+  data-rippleria-easing=&#x22;cubic-bezier(0.680, -0.380, 0.385, 1.650)&#x22; 
+  class=&#x22;btn btn-lg btn-default&#x22;&#x3E;Custom&#x3C;/button&#x3E;</code></pre></div>
+    </div>
+			    
+			    <p class="text-center">
+			      <button data-rippleria 
+			        data-rippleria-color="rgba(100,178,53,.35)" 
+			        data-rippleria-duration="1000" 
+			        data-rippleria-easing="cubic-bezier(0.680, -0.380, 0.385, 1.650)" 
+			        class="btn btn-lg btn-default">自定义动画曲线</button>
+			    </p>
+
+			    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      <h3 class="text-center">图片点击波效果：</h3>
+        <div class="text-center">
+          <a style="display: inline-block;" id="rippleria" href="#">
+            <img src="img/girl.jpg" alt="image">
+          </a>
+        </div><br>
+        <pre><code class="html">&#x3C;div class=&#x22;text-center&#x22;&#x3E;
+  &#x3C;a style=&#x22;display: inline-block;&#x22; id=&#x22;rippleria&#x22; href=&#x22;#&#x22;&#x3E;
+    &#x3C;img src=&#x22;http://www.lovethispic.com/uploaded_images/15163-Pretty-Girl.jpg&#x22; alt=&#x22;image&#x22;&#x3E;
+  &#x3C;/a&#x3E;
+&#x3C;/div&#x3E;
+
+&#x3C;script&#x3E;
+  function randInt(min, max) {
+    var rand = min + Math.random() * (max - min)
+    rand = Math.round(rand);
+    return rand;
+  }
+
+  $(&#x27;#rippleria&#x27;).rippleria({
+    // aniamtion speed
+    duration: 750,
+    // custom easing effect
+    easing: &#x27;linear&#x27;,
+    // custom color
+    color: undefined
+  });
+
+  $(&#x27;#rippleria&#x27;).click(function(e) {
+    e.preventDefault();
+    $(this).rippleria(&#x27;changeColor&#x27;, 
+      &#x27;rgba(&#x27;+randInt(0,255)+&#x27;,&#x27;+randInt(0,255)+&#x27;,&#x27;+randInt(0,255)+&#x27;,0.&#x27;+randInt(3,5));
+  });
+&#x3C;/script&#x3E;</code></pre>
+      </div>
+    </div>
+			 </section>
+
+		</div>
+		<div class="related">
+		    <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
+		    <a href="http://www.htmleaf.com/jQuery/Layout-Interface/201603093199.html">
+			  <img src="related/1.jpg" width="300" alt="Material Design风格点击波和卡片阴影特效"/>
+			  <h3>Material Design风格点击波和卡片阴影特效</h3>
+			</a>
+			<a href="http://www.htmleaf.com/jQuery/Buttons-Icons/201503221558.html">
+			  <img src="related/2.jpg" width="300" alt="jQuery和CSS3炫酷图片和按钮点击波特效"/>
+			  <h3>jQuery和CSS3炫酷图片和按钮点击波特效</h3>
+			</a>
+		</div>
+	</div>
+	
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery.rippleria.js"></script>
+	<script>
+          function randInt(min, max) {
+            var rand = min + Math.random() * (max - min)
+            rand = Math.round(rand);
+            return rand;
+          }
+
+          $('#rippleria').rippleria({
+            // aniamtion speed
+            duration: 750,
+            // custom easing effect
+            easing: 'linear',
+            // custom color
+            color: undefined
+          });
+
+          $('#rippleria').click(function(e) {
+            e.preventDefault();
+            $(this).rippleria('changeColor', 
+              'rgba('+randInt(0,255)+','+randInt(0,255)+','+randInt(0,255)+',0.'+randInt(3,5));
+          });
+        </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>旅游咨讯</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/shop.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <!--特效-->
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body><include file="Public/zx" />
+<include file="Public/header" />
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!---->
+<div class="travel_gbi" style="display: inline-block;" id="rippleria">
+    <img src="__IMG__/gud/lyzhix_02.jpg" alt="">
+</div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div><em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="{:U('project/index?navid=15')}">文旅项目</a><em>-</em><a>旅行资讯</a>
+</div>
+<section>
+    <div class="zhiuxn_li">
+        <ul id="food">
+            <volist name="food" id="vo">
+            <li>
+                <p><a href="{:U('project/travelnewsdetail?id='.$vo['id'])}">{$vo.name}</a></p>
+                <span>
+                    <img src="{$vo.icon|picture}" alt="" style="display:none">
+                </span>
+                <i>发布时间：{$vo.create_time|date='Y-m-d h:i:s',###}</i>
+                <em>{$vo.description}</em>
+            </li>
+                </volist>
+
+        </ul>
+    </div>
+    <!--下拉-->
+    <div class="drop_but">
+        <img src="__IMG__/gud/drup_03.jpg" alt="" class="molink">
+    </div>
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+<script>
+
+    page=1;
+    var    url="{:U('Project/travelnews')}";
+
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+
+        }
+    })
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':'note'},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                collection.html(parseInt(num)+1);
+                collection.css("background-image","url('/Public/Home/img/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                collection.html(parseInt(num)-1);
+                collection.css("background-image","url('/Public/Home/img/gud/dtjg_05.jpg')");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+
+</script>
+</html>

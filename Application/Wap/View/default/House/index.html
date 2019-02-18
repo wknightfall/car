@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<div class="htl_selct">
+
+        <p>
+            <i>酒店预订</i>
+            <img src="__IMG__/icon/ata_1.png" alt="">
+        </p>
+    <div class="hiede_sel">
+
+        <ul>
+            <li>酒店星级</li>
+            <li>
+                <div class="htl_sele htl_click star" class=""><if condition="$star neq ''">{$star}<else />请选择星级</if></div>
+                <div class="htl_chd">
+                    <ul>
+                        <li value="3">三星级</li>
+                        <li value="4">四星级</li>
+                        <li value="5">五星级</li>
+
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li>酒店价格</li>
+            <li>
+                <div class="htl_sele htl_click price" class=""><if condition="$price neq ''">{$price}<else />请选择价格</if></div>
+                <div class="htl_chd">
+                    <ul>
+                        <li value="1">200元以下</li>
+                        <li value="2">200元-500元</li>
+                        <li value="3">500元-800元</li>
+                        <li value="4">800元以上</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li>酒店房型</li>
+            <li>
+                <div class="htl_sele htl_click housetype" class=""><if condition="$housetype neq ''">{$housetype}<else />请选择房型</if></div>
+                <div class="htl_chd">
+                    <ul>
+                        <li value="1">单人间</li>
+                        <li value="2">双人间</li>
+                        <li value="3">标准房</li>
+                        <li value="4">豪华套房</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li>配套设施</li>
+            <li>
+                <div class="htl_sele htl_click device" class=""><if condition="$device neq ''">{$device}<else />请选择配套</if></div>
+                <div class="htl_chd">
+                    <ul>
+                        <li value="1">浴场</li>
+                        <li value="2">台球房</li>
+                        <li value="3">保龄球房</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li>关键字</li>
+            <li>
+                <input type="text" class="gjz_cl" placeholder="请输入关键字" name="key" value="{$Think.get.key}">
+            </li>
+        </ul>
+        <div class="litj_btn" id="search">立即搜索</div>
+    </div>
+
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <if condition="$type eq 0">
+            <li class="inva_chk"><a href="{:U('House/index?type=0')}" style="text-decoration: none;color:#000">全部</a></li>
+            <else />
+            <li><a href="{:U('House/index?type=0')}" style="text-decoration: none;color:#000">全部</a></li>
+        </if>
+        <if condition="$type eq 1">
+            <li class="inva_chk"><a href="{:U('House/index?type=1')}" style="text-decoration: none;color:#000">星级酒店</a></li>
+            <else />
+            <li><a href="{:U('House/index?type=1')}" style="text-decoration: none;color:#000">星级酒店</a></li>
+        </if>
+        <if condition="$type eq 2">
+            <li  class="inva_chk"><a href="{:U('House/index?type=2')}" style="text-decoration: none;color:#000">经济宾馆</a></li>
+            <else />
+            <li><a href="{:U('House/index?type=2')}" style="text-decoration: none;color:#000">经济宾馆</a></li>
+        </if>
+        <if condition="$type eq 3">
+            <li  class="inva_chk"><a href="{:U('House/index?type=3')}" style="text-decoration: none;color:#000">特色民宿</a></li>
+            <else />
+            <li><a href="{:U('House/index?type=3')}" style="text-decoration: none;color:#000">特色民宿</a></li>
+        </if>
+
+    </ul>
+
+</div>
+<!--正文-->
+<div class="dis_list">
+
+    <ul id="food">
+        <volist name="food" id="vo">
+        <li>
+            <a href="{:U('wap/house/hoteldetail?id='.$vo['id'].'&type=1')}">
+                <img src="{$vo.icon|picture}" alt="">
+            </a>
+            <span>
+                <p>{$vo.name}</p>
+                <i>{$vo.content}</i>
+            </span>
+            <div>
+                <p><img src="__IMG__/icon/aaa_seee.png" alt="">{$vo.view}</p>
+                <p><img src="__IMG__/icon/aa_ssoo.png" alt="">{$vo.pl}</p>
+                <if condition="$vo.collection eq 1">
+                    <p><img src="__IMG__/icon/hert.png" alt=""><i>{$vo.collectionnum}</i></p>
+                    <else/>
+                    <p><img src="__IMG__/icon/aattt.png" alt=""><i>{$vo.collectionnum}</i></p>
+                </if>
+
+            </div>
+        </li>
+
+        </volist>
+    </ul>
+</div>
+<!--more-->
+<div class="see_more">
+
+    <a href="javascript:" class="molink">查看更多+</a>
+</div>
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+    $(document).on("click","#search",function () {
+        var star=$('.star').attr('value');
+        var price=$('.price').attr('value');
+        var housetype=$('.housetype').attr('value');
+        var device=$('.device').attr('value');
+        var key=$('input[name=key]').val();
+        //console.log(price,housetype,key);return;
+        /*   if(id==''){
+         layer.tips('请选择房型!', '#roomid', {
+         tips: [1, '#3595CC'],
+         time: 4000
+         });
+         }else if(date1==''){
+         layer.tips('请选择入驻日期!', '#date_demo1', {
+         tips: [1, '#3595CC'],
+         time: 4000
+         });
+         }else if(date2==''){
+         layer.tips('请选择退房日期!', '#date_demo2', {
+         tips: [1, '#3595CC'],
+         time: 4000
+         });
+         }*/
+
+        location.href='/Wap/house/index/key/'+key+'/star/'+star+'/price/'+price+'/housetype/'+housetype+'/device/'+device;
+    })
+
+    page=1;
+    var type="{$Think.get.type}"
+    var    url="{:U('House/index')}";
+
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page,'type':type},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+        }
+    })
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        var colnum=$(this).next('i');
+        $.post("/Home/Ajax/collection",{'id':id,'type':'usermember'},function(da){
+            var num = colnum.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                colnum.html(parseInt(num)+1);
+                collection.attr("src","/Public/wap/image/icon/hert.png");
+
+            }else if(obj.code==201){
+                colnum.html(parseInt(num)-1);
+                collection.attr("src","/Public/wap/image/icon/aattt.png");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+
+
+</script>
+</html>

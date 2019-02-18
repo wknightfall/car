@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--正文-->
+<div class="lv_article_list">
+
+    <ul id="food">
+        <volist name="food" id="vo">
+        <li>
+            <a href="{:U('project/travelgldetail?id='.$vo['id'])}">
+                <p>{$vo.name}</p>
+                <em>
+                    {$vo.description}
+                </em>
+                <i>{$vo.create_time|date='Y-m-d',###}</i>
+            </a>
+        </li>
+        </volist>
+    </ul>
+    <div class="see_more">
+
+        <a href="javascript:" class="molink">查看更多+</a>
+    </div>
+</div>
+<!--information-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+
+    page=1;
+    var    url="{:U('Project/travelgl')}";
+
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+
+        }
+    })
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':'note'},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                collection.html(parseInt(num)+1);
+                collection.css("background-image","url('/Public/Home/img/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                collection.html(parseInt(num)-1);
+                collection.css("background-image","url('/Public/Home/img/gud/dtjg_05.jpg')");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+
+</script>
+</html>

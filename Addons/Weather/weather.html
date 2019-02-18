@@ -1,0 +1,48 @@
+<style>
+.weather{width: 100%;float: left;}
+/* .weather a{color:#999;}
+.weather a:hover{color:#fff;} */
+ul.weather_list{overflow:hidden;}
+ul.weather_list li{float:left;list-style: none outside none;}
+ul.weather_list li p{width:140px;text-align:center;}
+.left span{width: 100%;float: left;}
+</style>
+<div class="weather">
+	<!-- <a href="javascript:void(0)">{$location}：{$lists.1.weather}&nbsp;&nbsp;{$lists.1.temperature}</a> -->
+	<div>
+		<ul class="weather_list" style="width:140px;margin-top: 8px;">
+			<volist name='lists' id="vo" key="i">
+			<li>
+				<div class="left" style="width: 90px;float: left;">
+					<span style="font-size: 24px;font-family: '微软雅黑';color: #333;">{$lists.$i.date|substr=0,6}</span>
+					<span style="font-family: 'Arial';font-size: 14px;color: #999;margin-top: 5px;">{:date('Y-m-d',time())}</span>
+				</div>
+				<div class="right" style="width: 50px;float: left;">
+					<div style="width: 100%;float: left;"><img src="{$lists.$i.pictureUrl}" style="width: 70%;margin-left: 15%;"></div>
+					<div style="width: 100%;height: 25px;line-height: 25px;text-align: center;float: left;margin-top: 7px;font-size: 18px;font-family: 'Arial';color: #4fbbff;">{$lists.$i.temperature|substr=0,2}℃</div>
+				</div>
+				<!-- <div class="left" style="width: 50%;float: left;">
+					<span style="width: 100%;display: block;float: left;text-align: center;height: 38px;line-height: 38px;font-size: 14px;overflow: hidden;cursor: pointer;" title="{$lists.$i.weather}">{$lists.$i.weather}</span>
+					<span style="width: 100%;display: block;float: left;text-align: center;font-size: 12px;">{$lists.$i.wind}</span>
+				</div>
+				<div class="right" style="width: 50%;float: left;">
+					<div style="width: 100%;float: left;"><img src="{$lists.$i.pictureUrl}" style="width: 70%;margin-left: 15%;"></div>
+					<div style="width: 100%;height: 25px;line-height: 25px;text-align: center;float: left;">{$lists.$i.temperature}</div>
+				</div> -->
+				<!-- <div style="width: 100%;float: left;height: 30px;line-height: 30px;font-size: 10px;text-align: center;">
+				{$lists.$i.date}
+				</div> -->
+			</li>
+			</volist>
+		</ul>
+	</div>
+</div>
+
+<script>
+	/* $('.weather').mouseover(function(){
+		$(this).find('.selected').show();
+	});
+	$('.weather').mouseout(function(){
+		$(this).find('.selected').hide();
+	}); */
+</script>

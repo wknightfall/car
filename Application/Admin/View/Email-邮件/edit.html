@@ -1,0 +1,113 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>修改（{$vo.configtype|getmailconfigtype}）配置</h2>
+    </div>
+    <ul class="tab-nav nav">
+
+        <li class="current"><a href="javascript:void(0)">基本信息</a></li>
+
+    </ul>
+    
+    <form action="{:U()}" method="post" class="form-horizontal">
+    <div class="tab-content">
+    
+        <div class="form-item">
+            <label class="item-label">配置类型<span class="check-tips">（必须选择）</span></label>
+            <div class="controls">
+				<select name="configtype" style="width:390px;">
+					<volist name="emialtypes" id="etype" key="k">
+						<option value="{$k}" {$k==$vo['configtype']?'selected':''}>{$etype}</option>
+					</volist>
+				</select>
+			</div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">编码方式<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="charset" value="{$vo.charset}">
+                <input type="hidden" class="text input-large" name="id" value="{$vo.id}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">支持输出格式<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="debugoutput" value="{$vo.debugoutput}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">邮件服务器名称<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="host" value="{$vo.host}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">端口号<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="port" value="{$vo.port}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">用户名<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="username" value="{$vo.username}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">密码<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="password" value="{$vo.password}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">发件人地址<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="mailfrom" value="{$vo.mailfrom}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">发件人名称<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="mailfromname" value="{$vo.mailfromname}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">发送标题<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="sendtitle" value="{$vo.sendtitle}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">发送内容</label>
+            <div class="controls">
+                <label class="textarea input-large">
+                    <textarea name="sendcontent">{$vo['sendcontent']}</textarea>
+                </label>
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('email/index')}');
+    </script>
+</block>

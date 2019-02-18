@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/mer.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <!--时间=插件-->
+    <script type="text/javascript" src="__JS__/timeDate/dateRange.js"></script>
+    <script type="text/javascript" src="__JS__/timeDate/monthPicker.js"></script>
+    <link type="text/css" href="__CSS__/timeDate/dateRange.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/timeDate/monthPicker.css" rel="stylesheet" />
+
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="psc_mb">
+
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('mer/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('mer/message')}"><li><span><p>我的留言</p></span></li></a>
+                    <a href="{:U('mer/goods?issale=2')}"><li><span><p>商品管理</p></span></li></a>
+                    <a href="{:U('mer/youhui')}"><li><span><p>优惠活动</p></span></li></a>
+                    <a href="{:U('mer/dingdan?isover=2')}"><li><span><p>订单管理</p></span></li></a>
+                    <a href="{:U('mer/caiwu')}"><li class="per_chd" ><span><p>财务</p></span></li></a>
+                    <a href="{:U('mer/shangjia')}"><li><span><p>商家信息</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="perrg_imsg">
+            <div class="rtt_top">
+                <div class="kyye_mon">
+                    <img src="__IMG__/psc/cer_03.jpg" alt="">
+                    <div>
+                        <i>可用余额</i>
+                        <span>
+                            <em>{$user.balance}.00</em>
+                            <p class="tx_btn" onclick="javascript:location.href='/home/mer/tixian'" style="cursor:pointer">提现</p>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="shouzi_mx">
+                <div class="per_ttmg">
+                    <p>收支明细</p>
+                    <!--<span class="time_sel">
+                        <p class="sta_ipu"></p>
+
+                        <i>-</i>
+                        <p class="end_ipu"></p>
+                        <p class="sel_btuu">查询</p>
+                    </span>-->
+                    <span class="time_sel">
+                        <p class="sta_ipu" id="date_demo1"></p>
+                          <script>laydate.render({elem: '#date_demo1'});</script>
+                        <i>-</i>
+                        <p class="end_ipu"  id="date_demo2" ></p>
+                        <script>laydate.render({elem: '#date_demo2'});</script>
+                        <p class="sel_btuu" id="chaxun" style="cursor:pointer">查询</p>
+                    </span>
+                    <div class="mx_lin">
+                        <span class="lin_00"></span>
+                        <span class="lin_11"></span>
+                    </div>
+                </div>
+                <div class="xiangxi_lis">
+                    <ul>
+                        <li>时间</li>
+                        <li>收入/支出</li>
+                        <li>状态</li>
+                        <li>详细说明</li>
+                    </ul>
+                    <notempty name="lists">
+                    <volist name="lists" id="vo">
+                        <ul>
+                            <li>{$vo.time|date='Y-m-d h:i',###}</li>
+                            <if condition="$vo.income eq 1"> <li class="cz_llw">+{$vo.money}</li><else /> <li class="xx_liw">-{$vo.money}</li></if>
+
+                            <li>{$vo.type}</li>
+                            <li>{$vo.payment}</li>
+                        </ul>
+                    </volist>
+<else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+                        </notempty>
+
+                </div>
+                <div class="page_ll">
+                    <if condition="$fanye eq 1">
+                        <ul>{$page}</ul>
+
+                        <span><p>到</p><input type="text"  id="pagenum" value="{$Think.get.p}"><p>页</p><i id="gotopage">确定</i></span>
+                    </if>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<include file="Public/footer" />
+
+</footer>
+</body>
+<script>
+    $(document).on("click","#chaxun",function () {
+        var date1=$('#date_demo1').html();
+        var date2=$('#date_demo2').html();
+        //console.log(date1,date2);return;
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Home/mer/caiwu/date1/'+date1+'/date2/'+date2;
+    })
+    $(document).on("click","#gotopage",function () {
+
+        var page = $('#pagenum').val();
+        if(/^\d+$/.test(page)){
+
+        }else{
+            layer.msg('页码必要是数字！');
+            return;
+        }
+        var url=location.href
+        if(url.indexOf('p/')>0){
+            var a=url.split('/')
+            a.pop()
+            var c=a.join('/');
+            var u=c+'/'+page+'.html'
+            location.href=u
+        }else{
+            var a=url.split('.')
+            location.href=a[0]+'/p/'+page+'.html';
+        }
+
+    })
+
+</script>
+</html>

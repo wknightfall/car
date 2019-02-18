@@ -1,0 +1,176 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>修改（{$vo.title}）车型</h2>
+    </div>
+    <ul class="tab-nav nav">
+
+        <li class="current"><a href="javascript:void(0)">基本信息</a></li>
+
+    </ul>
+
+    <form action="{:U()}" method="post" class="form-horizontal">
+
+        <input type="hidden" name="id" value="{$vo.id}">
+        <div class="tab-content">
+            <div class="form-item">
+                <label class="item-label">车型名称<span class="check-tips">（必须填写）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="title" value="{$vo.title}">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">英文名称<span class="check-tips">（必须填写）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="egname" value="{$vo.egname}">
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label class="item-label">品牌车型<span class="check-tips">（必须选择）</span></label>
+                <div class="controls">
+                    <select name="bid" style="width:200px;">
+                        <option value="">请选择品牌</option>
+                        <volist name="brand" id="brands">
+                            <option value="{$brands.id}" <if condition="$vo.bid eq $brands['id']">selected="selected"</if>>{$brands.title}</option>
+                        </volist>
+                    </select>
+                    <select name="cid" style="width:200px;">
+                        <option value="">请选择车型</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">车型级别<span class="check-tips">（必须选择）</span></label>
+                <div class="controls">
+                    <select name="jid" style="width:390px;">
+                        <option value="">请选择级别</option>
+                        <volist name="jibie" id="jibies">
+                            <option value="{$jibies.id}" <if condition="$vo.jid eq $jibies['id']">selected="selected"</if>>{$jibies.title}</option>
+                        </volist>
+                    </select>
+
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">车型年份<span class="check-tips">（必须选择）</span></label>
+                <div class="controls">
+                    <select name="year" style="width:390px;">
+                        <option value="">请选择年份</option>
+                        <volist name="year" id="years">
+                            <option value="{$years.id}" <if condition="$vo.year eq $years['id']">selected="selected"</if>>{$years.title}</option>
+                        </volist>
+                    </select>
+
+                </div>
+            </div>
+            <div class="form-item">
+                <div class="controls">
+                    <label class="item-label">车型缩略图</label>
+                    <input type="file" id="upload_picture">
+                    <input type="hidden" name="icon" id="icon" value="{$vo['icon']|default=''}"/>
+                    <div class="upload-img-box">
+                        <notempty name="vo['icon']">
+                            <div class="upload-pre-item"><img src="__ROOT__{$vo.icon|get_cover='path'}"/></div>
+                        </notempty>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    //上传图片
+                    /* 初始化上传插件 */
+                    $("#upload_picture").uploadify({
+                        "height"          : 30,
+                        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                        "fileObjName"     : "download",
+                        "buttonText"      : "上传图片",
+                        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                        "width"           : 120,
+                        'removeTimeout'	  : 1,
+                        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                        "onUploadSuccess" : uploadPicture,
+                        'onFallback' : function() {
+                            alert('未检测到兼容版本的Flash.');
+                        }
+                    });
+                    function uploadPicture(file, data){
+                        var data = $.parseJSON(data);
+                        var src = '';
+                        if(data.status){
+                            $("#icon").val(data.id);
+                            src = data.url || '__ROOT__' + data.path;
+                            $("#icon").parent().find('.upload-img-box').html(
+                                    '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                            );
+                        } else {
+                            updateAlert(data.info);
+                            setTimeout(function(){
+                                $('#top-alert').find('button').click();
+                                $(that).removeClass('disabled').prop('disabled',false);
+                            },1500);
+                        }
+                    }
+                </script>
+            </div>
+            <div class="form-item">
+                <label class="item-label">报告链接</label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="url" value="{$vo.url}">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">排序</label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="sort" value="{$vo.sort}">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">评分<span class="check-tips">（为空是未搭载）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" style="width: 100px;" name="point1" value="{$vo.point1}">
+                    <input type="text" class="text input-large" style="width: 100px;" name="point2" value="{$vo.point2}">
+                    <input type="text" class="text input-large" style="width: 100px;" name="point3" value="{$vo.point3}">
+                    <input type="text" class="text input-large" style="width: 100px;" name="point4" value="{$vo.point4}">
+                    <input type="text" class="text input-large" style="width: 100px;" name="point5" value="{$vo.point5}">
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-item">
+                <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+                <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U("Car/index")}');
+		
+		var val = $('select[name=bid]').val();
+		var sid = {$vo['cid']};
+		$.post('{:U("changelist")}',{'bid':val,'sid':sid},function(data){
+
+			$('select[name=cid]').html('<option value="">请选择车型</option>'+data);
+
+		});
+		
+        $('select[name=bid]').change(function(){
+
+            var val = $(this).val();
+            $.post('{:U("changelist")}',{'bid':val},function(data){
+
+                $('select[name=cid]').html('<option value="">请选择车型</option>'+data);
+
+            });
+
+        });
+    </script>
+</block>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/news.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <!--特效-->
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!---->
+<div class="travel_gbi" style="display: inline-block;" id="rippleria">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div>
+    <em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="javascript:">自驾游</a>
+</div>
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="news_1gro">
+
+        <div class="gro_deta">
+            <p><i>自驾游</i><em></em></p>
+                <div class="under00_lin">
+                    <span class="under00_ylin"></span>
+                    <span class="under00_hlin"></span>
+                </div>
+                <div class="text_lst">
+                    <ul>
+                        <volist name="lists" id="vo">
+                        <li>
+                            <a href="{:U('home/about/selfdetail?id='.$vo['id'])}"><img src="{$vo.icon|picture}" alt=""></a>
+                            <div class="text_ft">
+                                 <p><a href="{:U('home/about/selfdetail?id='.$vo['id'])}">{$vo.name}</a></p>
+                                <p><i>发布时间</i><em>{$vo.create_time|date='Y-m-d',###}</em></p>
+                                <p>{$vo.content}
+                                    <a href="{:U('home/about/selfdetail?id='.$vo['id'])}">【详情】</a></p>
+                            </div>
+                        </li>
+                            </volist>
+
+                    </ul>
+                </div>
+            <div class="page_tt">
+                <ul class="pagehome">
+                {$page}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+</html>

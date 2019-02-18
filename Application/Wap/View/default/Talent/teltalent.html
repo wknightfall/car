@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css"> 
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script>
+<script type="text/javascript" src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+<script type="text/javascript" src="__JS__/yingpin.js"></script>
+
+<!--选择时间插件-->
+<script src="__JS__/mobiscroll_date.js" charset="gb2312"></script>
+<script src="__JS__/mobiscroll.js"></script>
+<link href="__CSS__/mobiscroll_date.css" rel="stylesheet" />
+
+<!--图片上传-->
+<script type="text/javascript" src="__JS__/updown.js" ></script>
+
+<!--验证js-->
+<!--<script src="__STATIC__/validate/dist/jquery.validate.min.js"></script>-->
+
+
+
+
+</head>
+	
+	<body>
+		<include file="Public:header"/>
+		<!--中间部分-->
+
+		<div class="com_center com_bag">
+
+			
+			<form method="post" id="form2" action="{:U('ajax/pictureUploade')}" enctype="multipart/form-data" >
+			<div class="ren_zp">
+				<input type="hidden" name="zwid" value="{$vo[id]}"/>
+
+					<div class="ren_div1">
+						 <p class="ren_p1">应聘职位: <span>{$vo[id]|modelField="zptalent","title"}</span></p>
+						 <ul class="ren_ouls">
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>真实姓名：</span>   
+						 		<input class="ren_put1" name="username" type="text" required data-msg-required="*您的姓名不能为空"/>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>性别：</span>   
+						 		<label><input class="ren_sex" name="sex" type="radio" value="男" checked="checked" >男</label>
+						 		<label><input class="ren_sex" name="sex" type="radio" value="女" >女</label>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>照片：</span>   
+						 		<div class="pic">
+									<div class="are_mig_box upload-img-box">
+										<img src="__IMG__/moren.jpg" alt="" id="file-img1" class="file_img" style="width:2.6666666667rem; height: 3.3333333333rem">
+									</div>
+									<input type="file" name="icon" id="file-1" class="file_put" style="display: none;" autocomplete="off">
+									<input type="hidden" id="icon" value="{$info['icon']|default=''}"/>
+									<a href="javascript:;" class="area_file" id="file-btn1" >选择图片</a>
+									
+				    			</div>
+									<p class="are_p1">
+										(JPG或GIF文件，大小请限制在 200KB以内)
+									</p>
+						 	</li>
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>出生日期：</span>   
+						 		<input class="ren_put1" name="cstime" id="date" type="text" required data-msg-required="*出生日期不能为空"/>
+						 		<p class="are_p1">
+										(例:1980-1-17)
+									</p>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>身高(CM)：</span>   
+						 		<input class="ren_put1" name="heights" type="text" required data-msg-required="*身高不能为空"/>
+						 		
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>婚姻状况：</span>   
+						 		<label><input class="ren_sex" name="marriage" type="radio" value="未婚" checked="checked" >未婚</label>
+						 		<label><input class="ren_sex" name="marriage" type="radio" value="已婚" >已婚</label>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>籍贯：</span>   
+						 		<input class="ren_put1" name="native" type="text" required data-msg-required="*籍贯不能为空"/>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>户口所在地：</span>   
+						 		<input class="ren_put1" name="place" type="text" required data-msg-required="*户口所在地不能为空"/>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>通讯地址：</span>
+						 		<input class="ren_put1" name="address" type="text" />
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>邮政编号：</span>   
+						 		<input class="ren_put1" name="codes" type="text" />
+						 	</li>
+						 	<li>
+						 		<span class="ren_ospan"><i></i>证件类型：</span>
+						 		<select class="ren_osel" name="zjtype">
+									<option value="身分证">身分证</option>
+									<option value="学生证">学生证</option>
+									<option value="军人证">军人证</option>
+						 		</select>
+						 	</li>
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>证件号码：</span>
+						 		<input class="ren_put1" name="zjcode" type="text" required data-msg-required="*证件号码不能为空"/>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>最高学历：</span>   
+						 		<select class="ren_osel" name="education">
+									<option value="">请选择</option>
+									<option value="博士">博士</option>
+									<option value="硕士">硕士</option>
+									<option value="本科">本科</option>
+									<option value="专科">专科</option>
+									<option value="高中">高中</option>
+									<option value="中专">中专</option>
+						 			
+						 		</select>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>所学专业：</span>   
+						 		<input class="ren_put1" name="major" type="text" />
+						 	</li>
+						 	
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>毕业学校：</span>   
+						 		<input class="ren_put1" name="school" type="text" />
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>外语语种：</span>
+						 		<select class="ren_osel" name="language">
+									<option value="">请选择</option>
+									<option value="英语">英语</option>
+									<option value="日语">日语</option>
+									<option value="法语">法语</option>
+									<option value="德语">德语</option>
+									<option value="其他">其他</option>
+						 			
+						 		</select>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>外语水平：</span>   
+						 		<label><input class="ren_sex" name="wylevel" type="radio" value="一般" checked="checked" >一般</label>
+						 		<label><input class="ren_sex" name="wylevel" type="radio" value="熟练" >熟练</label>
+						 		<label><input class="ren_sex" name="wylevel" type="radio" value="精通" >精通</label>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>工作年限：</span>   
+						 		<select class="ren_osel" name="workyears">
+									<option value="">请选择</option>
+									<option value="应届毕业生">应届毕业生</option>
+									<option value="1年">1年</option>
+									<option value="2年">2年</option>
+									<option value="3年">3年</option>
+									<option value="4年">4年</option>
+									<option value="5年以上">5年以上</option>
+						 		</select>
+						 	</li>
+						 	<li>
+						 		<span class="ren_ospan"><i></i>期望月薪：</span>   
+						 		<select class="ren_osel" name="moneys">
+									<option value="">请选择</option>
+									<option value="800以上">800以上</option>
+									<option value="1500以上">1500以上</option>
+									<option value="2000以上">2000以上</option>
+									<option value="3000以上">3000以上</option>
+									<option value="3500以上">3500以上</option>
+									<option value="4500以上">4500以上</option>
+									<option value="5000以上">5000以上</option>
+						 		</select>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>个人简历：</span>   
+						 		<textarea class="text_rea" name="content" required data-msg-required="*个人简历不能为空"></textarea>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>联系人：</span>   
+						 		<input class="ren_put1" name="contact_person" type="text" required data-msg-required="*联系人不能为空"/>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>联系电话：</span>   
+						 		<input class="ren_put1" name="contact_tel" type="text" required data-msg-required="*联系电话不能为空"/>
+						 	</li>
+						 	
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>EMAIL：</span>
+						 		<input class="ren_put1" name="email" type="text" required data-msg-required="*邮箱不能为空"/>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i>*</i>手机号码：</span>
+						 		<input class="ren_put1" name="mobile" type="text" required data-msg-required="*手机号码不能为空" data-rule-checkMobile="true"/>
+						 	</li>
+						 	
+						 	<li>
+						 		<span class="ren_ospan"><i></i>附件：</span>
+						 		<a href="javascript:;" class="area_file2" id="file-btn2" >选择文件</a>
+						 		<input type="file" id="file-2" name="files" class="file_put2" autocomplete="off">
+								<input type="hidden"  id="file" value=""/>
+								<p class="upload-file"></p>
+						 		<p class="are_p1">
+										(附件大小请限制在 1048 KB以内)
+								</p>
+						 	</li>
+						 	
+						 </ul>
+						
+						<div class="ren_but">
+							<input type="button" class="ren_but1 ren_active" id="tijiao" value="提交">
+							<button class="ren_but2" type="reset">重置</button>
+						</div>
+					</div>
+					
+					
+					
+			</div>
+            </form>
+		</div>
+		
+	<include file="Public:footer"/>
+	</body>
+
+ 
+
+
+	<script>
+		var currYear = (new Date()).getFullYear();
+		var opt={};
+		opt.date = {preset : 'date'};
+		opt.datetime = {preset : 'datetime'};
+		opt.time = {preset : 'time'};
+		opt.default = {
+			theme: 'android-ics light', //皮肤样式
+			display: 'modal', //显示方式
+			mode: 'scroller', //日期选择模式
+			dateFormat: 'yyyy-mm-dd',
+			lang: 'zh',
+			showNow: true,
+			nowText: "今天",
+			startYear: currYear - 50, //开始年份
+			endYear: currYear + 10 //结束年份
+		};
+
+		$("#date").mobiscroll($.extend(opt['date'], opt['default']));
+
+	</script>
+	<script>
+		$("#file-1").uploadPreview({ Img: "file-img1", Width: 75, Height: 75, ImgType: ["gif", "jpeg", "jpg", "bmp", "png"], Callback: function () { }});
+		    $("#file-btn1").on("click", function(){
+		        $("#file-1").trigger("click");
+		     });
+		
+		$("#file-btn2").on("click", function(){
+		        $("#file-2").trigger("click");
+		     });
+		
+		
+	</script>
+
+</html>

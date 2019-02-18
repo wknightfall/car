@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>景区视频</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/news.css" rel="stylesheet" />
+    <link href="/Public/Home/plugin/video/css/video-js.min.css" rel="stylesheet">
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body><include file="Public/zx" />
+<include file="Public/header" />
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!---->
+<div class="travel_gbi" style="display: inline-block;" id="rippleria"><img src="{$icon|picture}" alt=""></div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div>
+    <em>您当前的位置：</em>
+    <a href="{:U('index/index')}">首页</a>
+    <em>-</em>
+    <a href="{:U('project/index?navid=15')}">文旅项目</a>
+    <em>-</em>
+    <a>景区视频</a>
+</div>
+<section>
+    <div class="play_vd">
+        <!--<video id="video" src="{$food.file|fileurl}" controls="controls" autoplay height="100%" width="100%">您的浏览器不支持。</video>-->
+        <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls="controls" preload="auto" width="900" height="" poster="{$food.icon|picture}" data-setup="{}">
+            <source src="{$food.file|fileurl}" type="video/mp4">
+            <source src="" type="video/webm">
+            <source src="" type="video/ogg">
+
+        </video>
+        <ul>
+            <li><a href="{:U('home/project/videodetail?id='.$prev)}" style="color:#fff">上一个</a></li>
+            <li><a href="{:U('home/project/videodetail?id='.$next)}" style="color:#fff">下一个</a></li>
+            <li>列表
+                <select id="videolist">
+                    <volist name="list" id="vo">
+                    <option value="{$vo.id}" <if condition="$vo.id eq $id">selected</if> >{$vo.title}</option>
+                        <!--<a href="{:U('home/project/videodetail?id='.$vo['id'])}" style="color:#fff">{$vo.title}</a>-->
+                    </volist>
+                </select>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+<script>
+    $('#videolist').change(function () {
+        location.href='/Home/Project/videodetail/id/'+$(this).val();
+    })
+
+</script>
+<script src="/Public/Home/plugin/video/js/video.min.js"></script>
+<script type="text/javascript">
+    var myPlayer = videojs('my-video');
+    videojs("my-video").ready(function(){
+        var myPlayer = this;
+        // myPlayer.play();
+    });
+
+
+
+</script>
+</html>

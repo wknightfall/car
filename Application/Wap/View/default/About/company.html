@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css">
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script> 
+<script type="text/javascript" src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+
+<!--动画-->
+<link rel="stylesheet" type="text/css" href="__CSS__/animate.min.css"> 
+<script type="text/javascript" src="__JS__/wow.min.js"></script>
+
+</head>
+<body>
+    
+    <!--头部-->
+    <include file="Public:header"/>
+    <!--banner-->
+
+     <include file="Public:nybanner"/>
+   
+    <!--主体-->
+
+    <div class="widthall main">
+    	<div class="width1200 about">
+              
+
+              <!--分公司-->
+
+			  
+			  
+              <div class="other_company">
+                  <div class="company_title">
+                      <div class="titles">分公司</div>
+                      <div class="lines"></div>
+                      <div class="egtitle">BRANCH OFFICE</div>
+                  </div>
+                  <div class="company_list">
+                      <ul>
+					  
+					    <volist name="lists" id="vos">
+                          <li>
+						      <a href="{:U('details',array('topid'=>$topid,'twoid'=>$vos[typeid],'id'=>$vos[id]))}">
+                              <div class="leftimg">
+							    <img src="{:picture($vos[icon])}"/>
+							  </div>
+							  <div class="touming">
+							   <img src="__IMG__/other.png"/>
+							  </div>
+							  
+                              <div class="cont">
+                                  <p class="p1" title="{$vos[title]}">{$vos[title]}</p>
+                                  <p class="p2">{$vos[descriptions]|msubstr=0,150}</p>
+                              </div>
+							  </a>
+                          </li>
+                        </volist>
+                        
+
+
+                      </ul>
+                  </div>
+
+              </div>
+
+
+           
+
+    	</div>
+    </div>
+     
+    <!--脚步-->
+   <include file="Public:footer"/>
+
+</body>
+</html>

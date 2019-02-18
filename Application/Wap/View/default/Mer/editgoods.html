@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+
+    <script type="text/javascript" src="__JS__/ajaxupload.3.5.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        编辑房型
+    </div>
+
+    <!--list-->
+
+    <div class="add_mer">
+
+        <ul>
+            <li style="display: none">
+                <i>商品类型</i>
+                <input type="text" placeholder="请选择商品类型" class="cee_ll">
+                <span>
+                    <ul>
+                        <li>000000000</li>
+                        <li>0000000000</li>
+                    </ul>
+                </span>
+            </li>
+            <li>
+                <i>房型名称</i>
+                <input type="text" placeholder="请输入房型名称"  name="name" id="name" value="{$vo.name}">
+            </li>
+            <li>
+                <i>房型简介</i>
+                <input type="text" placeholder="请输入房型介绍"  name="content" id="content" value="{$vo.content}">
+            </li>
+            <li>
+                <i>房间数量</i>
+                <input type="text" placeholder="请输入房间数量" class="cee_ll"  name="num" id="num" value="{$vo.roomnum}">
+               <!-- <span>
+                    <ul>
+                        <li>000000000</li>
+                        <li>0000000000</li>
+                    </ul>
+                </span>-->
+            </li>
+            <li>
+                <i>房间配套</i>
+                <input type="text" placeholder="请输入房间配套"  name="device"   id="device" value="{$vo.device}">
+            </li>
+            <li>
+                <i>房间价格</i>
+                <input type="text" placeholder="请输入房间价格"  name="price" id='price' value="{$vo.price}">
+            </li>
+            <li class="add_immg">
+                <i>房间主图</i>
+                <span>
+                    <img src="{$vo.icon|picture}" alt="" id="iconimg">
+                    <input type="hidden" name="iconid" value="{$vo.icon}">
+                </span>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="sabmit_aa">
+        <input type="button" value="确定修改"  id="submit">
+    </div>
+</div>
+
+</body>
+<script>
+
+
+    $(document).on("click","#submit",function () {
+        var name = $('input[name=name]').val()
+        var content = $('input[name=content]').val()
+        var price = $('input[name=price]').val()
+        //var detail = $('#detail').val()
+        var num = $('input[name=num]').val()
+        var device = $('input[name=device]').val()
+        var icon = $('input[name=iconid]').val()
+
+        var isnum = /^\d+$/;
+        if(name==""){
+            layer.tips('请输入内容', '#name', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(content==""){
+            layer.tips('请输入内容', '#content', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(price==""){
+            layer.tips('请输入内容', '#price', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        /*if(cheapprice==""){
+            layer.tips('请输入内容', '#cheapprice', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(detail==""){
+            layer.tips('请输入内容', '#detail', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }*/
+        if(num==""){
+            layer.tips('请输入内容', '#num', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(icon==""){
+            layer.tips('请选择房型图片', '#iconimg', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+
+        if(!isnum.test(price)){
+            layer.tips('价格必须是数字', '#price', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        /*if(!isnum.test(cheapprice)){
+         layer.tips('价格必须是数字', '#cheapprice', {
+         tips: [1, '#3595CC'],
+         time: 4000
+         });return false;
+         }*/
+        //console.log(name,content,price,num,device,icon);return;
+        var id='{$Think.get.id}'
+        $.post("/Wap/mer/editgoods",{'id':id,'name':name,'content':content,'price':price,'num':num,'device':device,'icon':icon},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('操作成功',function () {
+                    location.href='/wap/mer/goods?issale='+2;
+                })
+            }else if(obj.code==401){
+                layer.msg('')
+
+            }else{
+                layer.msg('操作失败')
+
+            }
+        });
+    })
+
+</script>
+<script>
+    $(document).ready(function(){
+        uploadsasa();
+    });
+    //上传头像
+    function uploadsasa(){
+        ajaxUploadicon(
+                'iconimg', //上传的按钮id名称
+                1000000000,  //允许上传的文件大小（单位：kb）
+                '/Home/Public/upload?form_name=userfile&file_size=10000', //提交服务器端地址
+                'userfile', //提交服务器文件表单名称
+                "$(\".img_div\").show();$(\"#img_path\").attr('src', obj.filename);$(\"#is_upload\").val('1');", //上传成功后执行的 js callback
+                'loadimg'  //loading 图片id
+        );
+    }
+
+    function ajaxUploadicon(id_name, filesize, url, filename, callback, loadingid) {
+        var index;
+        var button = $('#'+id_name), interval;
+        var fileType = "pic", fileNum = "one";
+        new AjaxUpload(button,{
+            action: url,
+            name: filename,
+            onSubmit : function(file, ext){
+                index = layer.load(1, {
+                    shade: [0.4,'#000000']
+                });
+                if(fileType == "pic") {
+                    if (ext && /^(jpg|png|gif|jpeg)$/.test(ext)){
+                        this.setData({
+                            'info': '上传类型为图片'
+                        });
+
+                    } else {
+                        alert('提示：您上传的是非图片类型！');
+                        layer.close(index);
+                        return false;
+                    }
+                }
+                $("#"+loadingid).show();
+                if(fileNum == 'one') this.disable();
+            },
+            onComplete: function(file, response){
+
+                layer.close(index);
+                var obj = jQuery.parseJSON(response);
+                if (obj['ok'] == 'ok') {
+                    $('#iconimg').attr('src',obj['filename']).show();
+                    $('input[name=iconid]').val(obj['id']);
+
+                    uploadsasa();
+                } else {
+                    switch (response) {
+                        case '1':
+                            alert('提示：上传失败，图片不能大于100M');
+
+                            break;
+                        case '3':
+                            alert('提示：图片只有部分文件被上传，请重新上传！');
+
+                            break;
+                        case '4':
+                            alert('提示：没有任何文件被上传！');
+
+                            break;
+                        case '5':
+                            alert('提示：非图片类型，请上传jpg|png|gif图片！');
+
+                            break;
+                        default:
+                            alert('提示：上传失败，错误未知，请您及时联系网站客服人员！');
+
+                            break;
+                    }
+                }
+                $("#"+loadingid).hide();
+                window.clearInterval(interval);
+                this.enable();
+            }
+        });
+    }
+</script>
+</html>
+<script>
+    
+    $(".cee_ll").click(function () {
+
+        if ($(this).next("span").hasClass("cee_ll_sw")){
+
+            $(this).next("span").removeClass("cee_ll_sw");
+            $(this).removeClass("thcell");
+        }else {
+            $(".add_mer > ul > li .cee_ll+span").removeClass("cee_ll_sw");
+            $(".add_mer > ul > li input.cee_ll").removeClass("thcell");
+            $(this).next("span").addClass("cee_ll_sw");
+            $(this).addClass("thcell");
+        }
+    })
+
+    $(".cee_ll+span > ul > li").click(function () {
+
+            $(this).parents("span").removeClass("cee_ll_sw");
+            $(this).parents("span").prev(".cee_ll").removeClass("thcell");
+            $(this).parents("span").prev(".cee_ll").val($(this).text());
+    })
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+    var off = true;
+    $(".off_on").click(function () {
+
+        if (off == true){
+
+            $(this).addClass("off_on_aa");
+            off = false;
+        }else {
+            $(this).removeClass("off_on_aa");
+            off = true;
+        }
+    })
+
+</script>

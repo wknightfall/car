@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+	
+	<include file="Public/top" />
+	
+	<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/default.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/members.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/page.css"/>
+
+	<script src="__JS__/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__JS__/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="__JS__/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <script type="text/javascript" src="__JS__/default.js"></script>
+    <script type="text/javascript" src="/Public/layer/layer.js"></script>
+	
+	
+	
+	
+</head>
+<body>
+	<!-- hade -->
+<include file="Public/header" />
+	<!-- kuai -->
+	<div class="kBox"></div>
+	
+	<section class="contentBox">
+		<!--  -->
+		<div class="opt_tabBox">
+			<div class="optionsBox">
+				<div class="width1200 optionsCon">
+					<div class="crumbsBox">
+						<a href=""><i class="glyphicon glyphicon-home"></i>Home</a>
+						<span class="icon-rightjt"></span>
+						<a>Contact Us</a>
+					</div>
+					<!-- xiao nav -->
+					<div class="s_nav">
+						<ul>                      
+							<li class="active">Contact Us</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<div class="opt_Box">
+				<div>
+					<div class="width1200 ContactUs">
+						<div class="cont_l_logo"><img src="{:picture($vo['icon'])}" alt=""></div>
+						<div class="ContactUsCon">
+							<!-- left -->
+							<div class="cont_left">
+								<div class="cont_l_addlss">
+									<p>Add：{$vo['egaddress']}</p>
+									<p>Tel：{$vo['zj_mobile']}</p>
+									<p>Fax：{$vo['fax_code']} </p>
+									<p>E-MAIL：{$vo['email']}</p>
+									<p>Url：{$vo['web_url']}</p>
+								</div>
+								<div class="cont_l_er">
+									<div><img src="{:picture($vo['icon2'])}" alt=""></div>
+									<p>The official qr code</p>
+								</div>
+							</div>
+							<!-- right -->
+							<div class="cont_right">
+								<form id="form2">
+									<div class="cont_r_item">
+										<div class="co_r_left">
+											<input type="text" name="name" placeholder="Name">
+										</div>
+										<div class="co_r_right">
+											<input type="text" name="tel" placeholder="Mobile">
+										</div>
+									</div>
+									<div class="cont_r_item">
+										<input type="text" name="email" placeholder="Email">
+									</div>
+									<div class="cont_r_item">
+										<textarea name="content" placeholder="Content"></textarea>
+									</div>
+									<input type="button" value="Submit" class="cont_r_sub btn_sure">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+	
+	<!-- footer -->
+<include file="Public/footer" />
+
+	<script>
+		$(".btn_sure").click(function () {
+			$.post("{:U('/Home/Contact/addmsg')}",$("#form2").serialize(),function (dd) {
+				if(dd.code==200){
+				    layer.msg(dd.msg,{time:1500});
+				    setTimeout(function () {
+						window.location.reload();
+                    },1500);
+				}else{
+                    layer.msg(dd.msg);
+				}
+            })
+        });
+	</script>
+
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".opt_tabBox .s_nav ul > li").mouseover(function(){
+			var _index = $(this).index();
+			$(".opt_Box > div").eq(_index).show().siblings().hide();
+			$(this).addClass("active").siblings().removeClass("active");
+			var act = $(this).text();
+			$('.crumbsTxt').html(act);
+		});
+		$(".a_news_left .a_nL_item").mouseover(function(){
+			$(this).addClass('nl_active').siblings().removeClass('nl_active');
+		});
+		
+		var tiemh =1000;
+		loadZf($('.ContactUsCon'),$('.cont_left'),$('.cont_right'));
+		function loadZf($hade,$y,$x){
+			var winH = $(window).height();
+			var scrollH = $(window).scrollTop();
+			var $con = $hade.offset().top ;
+			if($con < winH + scrollH){
+				$y.animate({
+					'left':'0',
+					'opacity':'1',
+					'filter': 'alpha(opacity ==100)',
+				},tiemh);
+				$x.animate({
+					'right':'0',
+					'opacity':'1',
+					'filter': 'alpha(opacity ==100)',
+				},tiemh);
+			}
+		}
+		
+		
+	});
+	</script>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>			
+
+</body>
+</html>

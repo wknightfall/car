@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="" class="goback">
+        优惠活动
+        <i class="tt_bianji" id="addyh">添加</i>
+    </div>
+
+
+    <!--list-->
+    <div class="youhui_hd">
+
+        <ul id="food">
+            <notempty name="lists">
+                <volist name="lists" id="vo">
+            <li>
+                <span>
+                    <i>￥<em>{$vo.price}</em></i>
+                    <p>满{$vo.topmoney}可用</p>
+                </span>
+                <span>
+                    <p>满减优惠</p>
+                    <i>适用于所有上架商品使用</i>
+                </span>
+                <p>有效期：{$vo.usestime|date='Y-m-d',###} 至 {$vo.useetime|date='Y-m-d',###}</p>
+
+            </li>
+
+                </volist>
+                <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+            </notempty>
+
+        </ul>
+    </div>
+
+
+    <include file="public/merfooter" />
+
+</div>
+
+</body>
+<script>
+    $('#addyh').click(function () {
+        location.href='/Wap/mer/addyh';
+    })
+
+    page=1;
+    var   url="{:U('mer/youhui')}";
+    $(window).scroll(
+            function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+
+                    $.post(url,{'page':page},function (da) {
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            $('#food').append(obj.msg);
+                            page++;
+                        }else{
+                            //$('.molink').addClass('nothing');
+
+                            layer.msg('没有更多了哦~');
+                        }
+                    })
+
+                }
+            });
+
+    $(document).on("click","#chaxun",function () {
+
+
+        var date1=$('#date_demo1').html();
+        var date2=$('#date_demo2').html();
+        console.log(date1,date2);
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Home/mer/dingdan/date1/'+date1+'/date2/'+date2;
+    })
+    $(document).on("click",".delorder",function () {
+        var id = $(this).attr('data-id')
+        layer.confirm('确定删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function(index) {
+            layer.close(index);
+
+
+            $.post("/Home/mer/dingdan",{'id':id,'type':'del'},function(da){
+
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg('删除成功',function () {
+                        location.reload();
+                    })
+
+
+                }else{
+                    layer.msg('删除失败')
+
+                }
+
+            });
+        });
+    })
+    $(document).on("click",".ovfuk",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/mer/dingdan",{'id':id,'type':'isover'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('确认成功',function () {
+                    location.reload();
+                })
+
+
+            }else{
+                layer.msg('确认失败')
+
+            }
+        });
+    })
+
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo2',
+        min: 'today',
+        showBottom: true,
+        type: 'datetime'
+    });
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo1',
+        min: 'today',
+        showBottom: true,
+        type: 'datetime'
+    });
+</script>

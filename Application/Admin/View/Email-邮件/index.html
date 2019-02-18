@@ -1,0 +1,74 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>配置列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="{:U('Email/add')}">新 增</a>
+            <button class="btn ajax-post" url="{:U('Email/changeStatus',array('method'=>'resumeUser'))}" target-form="ids">启 用</button>
+            <button class="btn ajax-post" url="{:U('Email/changeStatus',array('method'=>'forbidUser'))}" target-form="ids">禁 用</button>
+            <button class="btn ajax-post confirm" url="foreverdel(0,'/Admin/Email');" target-form="ids">删 除</button>
+        </div>
+
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="" >编号</th>
+		<th class="">配置类型</th>
+		<th class="">编码方式</th>
+		<th class="">邮件服务器名称</th>
+		<th class="">发件人地址</th>
+		<th class="">创建者</th>
+		<th class="">创建时间</th>
+		<th class="">状态</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="list">
+		<volist name="list" id="vo">
+		<tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+			<td>{$vo.id} </td>
+			<td>{:C('WEB_EMAIL_CONFIG_TYPE')[$vo['configtype']]}</td>
+			<td>{$vo.charset}</td>
+			<td>{$vo.host}</td>
+			<td>{$vo.mailfrom}</td>
+			<td>{$vo.authorid|get_username}</td>
+			<td>{$vo.addtime|time_format}</td>
+			<td>{$vo.status|get_status_title}</td>
+			<td><eq name="vo.status" value="1">
+				<a href="{:U('Email/changeStatus?method=forbidUser&id='.$vo['id'])}" class="ajax-get">禁用</a>
+				<else/>
+				<a href="{:U('Email/changeStatus?method=resumeUser&id='.$vo['id'])}" class="ajax-get">启用</a>
+				</eq>
+                <a href="{:U('Email/edit?id='.$vo['id'])}">编辑</a>
+				<a href="{:U('Email/foreverdelete?id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+	<script type="text/javascript">
+	    //导航高亮
+	    highlight_subnav('{:U('email/index')}');
+	</script>
+</block>

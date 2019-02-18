@@ -1,0 +1,105 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>联系方式</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+			
+			<a class="btn" href="{:U('Contact/add')}">新 增</a>
+			
+            <button class="btn ajax-post" url="{:U('Contact/changeStatus',array('method'=>'resumeUser'))}" target-form="ids">启 用</button>
+            <button class="btn ajax-post" url="{:U('Contact/changeStatus',array('method'=>'forbidUser'))}" target-form="ids">禁 用</button>
+            <button class="btn ajax-post confirm" url="{:U('Contact/foreverdelete',array('method'=>'deleteUser'))}" target-form="ids">删 除</button>
+
+        </div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<form action="/admin/Contact/index" id="form1" method="get">
+				<div class="sleft">
+				
+					<input type="text" name="title" class="search-input" value="{$get[title]}" placeholder="标题">
+					<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+				</div>
+			</form>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">编号</th>
+		<th class="">标题</th>
+		<th class="">显示位置</th>
+		<th class="">座机号码</th>
+		<th class="">排序</th>
+		<th class="">添加时间</th>
+		<th class="">状态</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="list">
+		<volist name="list" id="vo">
+		<tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+			<td>{$vo.id} </td>
+			<td>{$vo.title}</td>
+			<td>
+				<if condition="$vo['type'] eq 1">
+					合作企业页面
+					<else/>
+                    联系我们页面
+				</if>
+			</td>
+			<td>{$vo.zj_mobile}</td>
+			<td>{$vo.sort}</td>
+			<td>{$vo.create_time|time_format}</td>
+			<td>{$vo.status|get_status_title}</td>
+			<td><eq name="vo.status" value="1">
+				<a href="{:U('Contact/changeStatus?method=forbidUser&id='.$vo['id'])}" class="ajax-get">禁用</a>
+				<else/>
+				<a href="{:U('Contact/changeStatus?method=resumeUser&id='.$vo['id'])}" class="ajax-get">启用</a>
+				</eq>
+                <a href="{:U('Contact/edit?id='.$vo['id'].'&typeid='.$_GET['typeid'])}">编辑</a>
+				<a href="{:U('Contact/del?id='.$vo['id'].'&typeid='.$_GET['typeid'].'&fjid='.$_GET['fjid'])}" class="confirm ajax-get">删除</a>
+                </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="10" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+
+	$("#search").click(function(){
+		$("#form1").submit();
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+	
+    //导航高亮
+    highlight_subnav('{:U('Contact/index')}');
+	</script>
+</block>

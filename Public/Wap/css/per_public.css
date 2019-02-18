@@ -1,0 +1,58 @@
+*{margin: 0;padding: 0;box-sizing: border-box;outline: none;}
+a{text-decoration: none;}
+body{background: #f2f2f2;font-family: 微软雅黑;}
+ul li{list-style: none;}
+em,i{font-style: normal}
+
+/*登录头部*/
+
+.my_body{background: #f2f2f2}
+
+.tt_head{height: 0.8rem;background: #ffffff;line-height: 0.8rem;text-align: center;font-size: 0.26rem;padding: 0rem 0.3rem;}
+.tt_head img{height: 0.25rem;width: 0.15rem;float: left;margin-top: 0.275rem;}
+
+
+/*底部菜单*/
+.foot_box{width: 100%;height: 0.65rem;background: #ffffff;}
+.foot_dom {width: 100%;height: 0.65rem;position: fixed;bottom: 0rem;box-shadow: 0 -0.02rem 0.04rem rgba(51,51,51,0.6);z-index: 998;}
+.foot_dom ul {width: 100%;display: inline-block;display: flex;}
+.foot_dom ul li {float: left;background: #ffffff;padding: 0.2rem 0rem;}
+.foot_dom ul li:last-child {border: none;}
+.foot_dom ul li a {display: inline-block; align-items:center;width: 100%;border-right: 1px solid #e6e6e6;}
+.foot_dom ul li:last-child a{border: none;}
+.foot_dom ul li a i {display: inline-block;font-size: 0.22rem;color: #8c8c8c;line-height: 0.25rem;text-align: center;float: left;margin-left: 0.15rem;}
+.foot_dom ul li a span {display: inline-block;float: left;margin-left: 0.38rem;width: 0.25rem ; height: 0.25rem;}
+.foot_dom ul li:nth-child(1) a span {background: url("../image/person/icon/nv_1.png")no-repeat;background-size: 100%;}
+.foot_dom ul li:nth-child(2) a span {background: url("../image/person/icon/nv_2.png")no-repeat;background-size: 100%;}
+.foot_dom ul li:nth-child(3) a span {background: url("../image/person/icon/nv_3.png")no-repeat;background-size: 100%;}
+.foot_dom ul li:nth-child(4) a span {background: url("../image/person/icon/nv_4.png")no-repeat;background-size: 100%;}
+
+/*发帖*/
+.content_fa{width: 100%;background: #ffffff;overflow: hidden}
+.content_fa>ul:nth-child(1){display: inline-block;width: 100%;float: left;padding: 0.3rem 0.3rem;}
+.content_fa>ul>li{float: left;display: inline-block;}
+.content_fa>ul:nth-child(1)>li:nth-child(1){font-family: 微软雅黑;width: 15%;color: #858585;font-size: 0.14rem;height: 0.6rem;line-height: 0.6rem;}
+.content_fa>ul:nth-child(1)>li:nth-child(2){width: 85%;}
+.content_fa>ul:nth-child(1)>li:nth-child(2)>input{border: solid 1px #e6e6e6;height: 0.6rem;width: 100%;padding: 0rem 0.3rem;}
+.content_fa>ul:nth-child(1)>li:nth-child(2)>img{width: 0.42rem; height: 0.4rem;margin-top: 0.1rem}
+
+
+.content_fa{width: 100%;background: #ffffff;overflow: hidden}
+.content_fa>ul:nth-child(2){display: inline-block;width: 100%;float: left;padding: 0.3rem 0.3rem;}
+.content_fa>ul:nth-child(2)>li:nth-child(1){font-family: 微软雅黑;width: 15%;color: #858585;font-size: 0.14rem;height: 0.6rem;line-height: 0.6rem;}
+.content_fa>ul:nth-child(2)>li:nth-child(2){width: 85%;}
+.content_fa>ul:nth-child(2)>li:nth-child(2)>textarea{height: 3rem;width: 100%;text-align: left!important;border: solid 1px #e6e6e6;resize: none;line-height: 0.3rem;text-indent: 0.15rem;padding: 0.2rem 0.2rem;}
+
+/*发评论*/
+
+
+
+
+
+
+
+
+
+
+
+

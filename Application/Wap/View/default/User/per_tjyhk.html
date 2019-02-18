@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加银行卡</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="tt_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        添加银行卡
+    </div>
+
+    <div class="weixnam">
+        <span>
+            <i>账户名</i>
+            <input type="text" placeholder="请输入银行卡卡号">
+        </span>
+        <span>
+            <i>姓名</i>
+            <input type="text" placeholder="请输入您的真实姓名">
+        </span>
+    </div>
+
+    <p class="lijtt_btn">
+        <input type="button" value="立即提现">
+    </p>
+
+</div>
+
+</body>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+</script>

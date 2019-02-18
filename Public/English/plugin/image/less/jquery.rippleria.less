@@ -1,0 +1,23 @@
+@rippleria-default-color: rgba(255, 255, 255, 0.2);
+@rippleria-dark-color: rgba(0, 0, 0, 0.2);
+
+.rippleria-ink {
+  position: absolute;
+  background: @rippleria-default-color;
+  border-radius: 100%;
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  z-index: 10;
+}
+
+.rippleria-dark .rippleria-ink {
+  background: @rippleria-dark-color;
+}
+
+@keyframes rippleria {
+  100% {opacity: 0; transform: scale(2.5);}
+}
+
+@-webkit-keyframes rippleria {
+  100% {opacity: 0; -webkit-transform: scale(2.5);}
+}

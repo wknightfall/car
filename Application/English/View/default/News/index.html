@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+	
+	<include file="Public/top" />
+	
+	
+	<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/default.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/members.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/page.css"/>
+
+	<script src="__JS__/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__JS__/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="__JS__/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <script type="text/javascript" src="__JS__/default.js"></script>
+</head>
+<body>
+	
+<include file="Public/header" />
+	<!-- kuai -->
+	<div class="kBox"></div>
+	
+	<section class="contentBox">
+		<!--  -->
+		<div class="opt_tabBox">
+			<div class="optionsBox">
+				<div class="width1200 optionsCon">
+					<div class="crumbsBox">
+						<a href="{:U('Index/index')}"><i class="glyphicon glyphicon-home"></i>Home</a>
+						<span class="icon-rightjt"></span>
+						<a href="{:U('News/index')}">News Center</a>
+						<span class="icon-rightjt"></span>
+						<a class="crumbsTxt" >{$get['typeid']|modelField='category','name'}</a>
+					</div>
+					<!-- xiao nav -->
+					<div class="s_nav">
+						<ul>
+							<volist name="twonav" id="twnav" key="kk">
+							<li class="<?php if($get[typeid]==$twnav['id']){echo 'active';} ?>">{$twnav['name']}</li>
+							</volist>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<div class="opt_Box">
+				<div style="<?php if($get[typeid]==17){echo 'display:block';}else{echo 'display:none';} ?>">
+					<div class="width1200 newsCenter">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-8">
+									<div class="newjoblist">
+										<ul class="list-group">
+                                           <volist name="lists" id="vo">
+											<li>
+												<h2>{$vo['egname']}</h2>
+												<div class="jobtime">Release time:{$vo['create_time']|date='Y-m-d',###}</div>
+												<div class="jobimg"><img src="{:picture($vo['icon'])}"></div>
+												<p>{$vo['egdescriptions']}</p>
+												<a href="{:U('details',array('typeid'=>$vo['typeid'],'id'=>$vo['id']))}" class="joblink">Read more</a>
+											</li>
+										   </volist>
+
+										</ul>
+									</div>
+									<!-- page -->
+									<div class="ev_page">
+
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="newslie">
+										<div class="newslie-tit">Industry news</div>
+										<div class="row netlie">
+											<ul class="list-group">
+												<volist name="listb" id="vob">
+												<li>
+													<div class="col-md-5 newslie-l">
+														<a href="{:U('details',array('typeid'=>$vob['typeid'],'id'=>$vob['id']))}"><img src="{:picture($vob['icon'])}"></a>
+													</div>
+													<div class="col-md-7 newslie-r">
+														<a href="{:U('details',array('typeid'=>$vob['typeid'],'id'=>$vob['id']))}">{$vob['egname']}</a>
+														<p>Release time：{$vob['create_time']|date='Y-m-d',###}</p>
+													</div>
+												</li>
+												</volist>
+											</ul>
+										</div>
+										<!--<div class="newMore"><a href="#"> 更多&gt;&gt; </a> </div>-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--  行业新闻  -->
+				<div class="hidddes" style="<?php if($get[typeid]==18){echo 'display:block';}else{echo 'display:none';} ?>">
+					<div class="width1200 newsCenter">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-8">
+									<div class="newjoblist">
+										<ul class="list-group">
+											<volist name="listb" id="voc">
+												<li>
+													<h2>{$voc['egname']}</h2>
+													<div class="jobtime">Release time:{$voc['create_time']|date='Y-m-d',###}</div>
+													<div class="jobimg"><img src="{:picture($voc['icon'])}"></div>
+													<p>{$voc['egdescriptions']}</p>
+													<a href="{:U('details',array('typeid'=>$voc['typeid'],'id'=>$voc['id']))}" class="joblink">阅读更多</a>
+												</li>
+											</volist>
+
+										</ul>
+									</div>
+									<!-- page -->
+									<div class="ev_page">
+
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="newslie">
+										<div class="newslie-tit">C-IASI News</div>
+										<div class="row netlie">
+											<ul class="list-group">
+												<volist name="lists" id="vod">
+													<li>
+														<div class="col-md-5 newslie-l">
+															<a href="{:U('details',array('typeid'=>$vod['typeid'],'id'=>$vod['id']))}"><img src="{:picture($vod['icon'])}"></a>
+														</div>
+														<div class="col-md-7 newslie-r">
+															<a href="{:U('details',array('typeid'=>$vod['typeid'],'id'=>$vod['id']))}">{$vod['egname']}</a>
+															<p>Release time：{$vod['create_time']|date='Y-m-d',###}</p>
+														</div>
+													</li>
+												</volist>
+											</ul>
+										</div>
+										<!--<div class="newMore"><a href="#"> 更多&gt;&gt; </a> </div>-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+	</section>
+	
+	<!-- footer -->
+<include file="Public/footer" />
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".opt_tabBox .s_nav ul > li").mouseover(function(){
+			var _index = $(this).index();
+			$(".opt_Box > div").eq(_index).show().siblings().hide();
+			$(this).addClass("active").siblings().removeClass("active");
+			var act = $(this).text();
+			$('.crumbsTxt').html(act);
+		});
+		$(".a_news_left .a_nL_item").mouseover(function(){
+			$(this).addClass('nl_active').siblings().removeClass('nl_active');
+		});
+		var mySwiper = new Swiper('.a_nr_Con',{
+				loop:false,
+				slidesPerView:4,
+				slidesPerGroup :1,
+				mode:'vertical',
+				watchActiveIndex: true,
+		});
+		var mySwiper = new Swiper('.latestCon',{
+				loop:false,
+				slidesPerView:4,
+				slidesPerGroup :1,
+				watchActiveIndex: true,
+				onInit: function(swiper){
+				  swiper.swipeNext()
+				},
+		});
+			
+			var tiemh =700;
+			loadZf($('.newsCenter'),$('.newslie'));
+			function loadZf($hade,$x){
+				var winH = $(window).height();
+				var scrollH = $(window).scrollTop();
+				var $con = $hade.offset().top ;
+				if($con < winH + scrollH){
+					$x.animate({
+						'right':'0',
+						'opacity':'1',
+						'filter': 'alpha(opacity ==100)',
+					},tiemh);
+				}
+			}
+	});
+	</script>
+</body>
+</html>

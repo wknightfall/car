@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>register</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/register.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <!--特效-->
+
+</head>
+<body>
+<include file="Public/header" />
+<!--顶部菜单-->
+<div class="heda_nav">
+    <div class="navBox">
+        <!--nav-->
+        <div class="publicContent">
+            <div class="navCon">
+                <!--title-->
+                <div class="navTitleImg"><img src="__IMG__/titleNav.png" alt="贵州杉乡文化旅游发展集团有限公司" /></div>
+                <!--link-->
+                <div class="navLink">
+                    <ul>
+                        <li >
+                            <a href="{:U('Index/index')}">
+                                <p>网站首页</p><span>Home</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('About/index')}">
+                                <p>关于我们</p><span>About</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('news/index')}">
+                                <p>新闻动态</p><span>News</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('works/index')}">
+                                <p>党群工作</p><span>Work</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('project/index')}">
+                                <p>文旅项目</p><span>Project</span></a>
+                        </li>
+                        <li>
+                            <a href="{:U('culture/index')}">
+                                <p>文化锦屏</p><span>Culture</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--登录-->
+<div class="main_by">
+    <div class="bcg_img"><img src="__IMG__/centre/1zc_02.jpg" alt=""></div>
+    <div class="reg_view">
+        <div class="left_view">
+            <img src="__IMG__/centre/1zc_03.jpg" alt="">
+        </div>
+        <div class="spl_viw"></div>
+        <div class="right_view">
+            <span class="login_imsg1">
+                <img src="__IMG__/0_login_07.jpg" alt="">
+            </span>
+            <span class="login_imsg2">
+                    <div></div>
+                    <input class="user_name" type="text" placeholder="请输入手机号" id="phone" name="phone">
+                </span>
+            <span class="login_imsg3">
+                    <div></div>
+                    <input class="ver_pad" type="text"   placeholder="请输入验证码">
+                    <em class="get_um" id="regyzm">获取验证码</em>
+                </span>
+            <span class="login_imsg3s">
+                    <div></div>
+                    <input class="passwd" type="password" placeholder="请输入密码">
+                </span>
+
+            <span class="login_imsg6">
+                    <ul>
+                        <li class="chked_y"></li>
+                        <li>我已认真阅读《注册协议》</li>
+                    </ul>
+                </span>
+            <span class="login_imsg4">立即注册</span>
+            <span class="login_imsg7">
+                    <ul>
+                        <li>有账号？</li>
+                        <li><a href="{:U('public/login')}" style="color:rgb(230, 0, 19)">立即登录</a></li>
+                    </ul>
+                </span>
+        </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />
+</body>
+</html>
+
+<script>
+    /*注册获取验证码*/
+    $('#regyzm').click(function () {
+        if($(this).hasClass('regyzm')==false){
+
+            var phone=$('input[name=phone]').val();
+            var pattern = /^1(3|4|5|7|8)\d{9}$/;
+            if(phone==""){
+                layer.tips('请输入手机号!', '#phone', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+                return false;
+            }else if(pattern.test(phone)==false){
+                layer.tips('手机号不正确请重新输入!', '#phone', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+                return false;
+            }
+
+            $.post("{:U('Public/sms')}",{'phone':phone,'type':5},function (data) {
+                var obj=jQuery.parseJSON(data)
+                if(obj.code==200){
+                    $('#regyzm').addClass('regyzm');
+                    var num=60;
+                    timer=setInterval(function(){
+                        $('#regyzm').html(num+'秒');
+                        num--;
+                        if(num==0){
+                            clearInterval(timer);
+                            timer=null;
+                            $('#regyzm').html('重新获取');
+                            $('#regyzm').removeClass('regyzm');
+                        }
+                    },1000)
+                    layer.msg(obj.msg);
+                }else{
+                    layer.msg(obj.msg);
+                }
+            })
+        }
+    })
+    //注册
+    $('.regok').click(function () {
+        /*var registername=$('input[name=registername]').val();
+        if(registername==''){
+            layer.tips('请输入呢称!', '#registername', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(registername.length > 12){
+            layer.tips('呢称长度不能超过12位!', '#registername', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        var registeruname=$('input[name=registeruname]').val();
+        var pattern = /^1[34578]\d{9}$/;
+        if(registeruname==""){
+            layer.tips('请输入手机号!', '#registeruname', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(pattern.test(registeruname)==false){
+            layer.tips('手机号不正确请重新输入!', '#registeruname', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+        var registercode=$('input[name=registercode]').val();
+        if(registercode==''){
+            layer.tips('请输入验证码!', '#registercode', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        var registerpass=$('input[name=registerpass]').val();
+        var repass=$('input[name=repass]').val();
+        if(registerpass==''){
+            layer.tips('请输入密码!', '#registerpass', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(registerpass!=repass){
+            layer.tips('两次密码不一致!', '#repass', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+        var registertcode=$('input[name=registertcode]').val();
+        if(registertcode==''){
+            layer.tips('请输入图形验证码!', '#registertcode', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        if($("input[name='agreement']").is(':checked')==false){
+            layer.tips('请确认!', '#agreement', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }*/
+
+
+
+
+    })
+
+
+    /*点击注册*/
+    post_data();
+    function post_data(){
+        $(".login_imsg4").click(function () {
+            var phone = $(".user_name").val();
+            var verpa = $(".ver_pad").val();
+            var paswd = $(".passwd").val();
+
+            var ph = (/^1(3|4|5|7|8)\d{9}$/.test(phone));
+            var ve = (verpa==null||verpa==undefined||verpa=="");
+            var pw = (/^[A-Za-z0-9]{6,16}$/.test(paswd));
+            var vl = ($(".login_imsg6").children("ul").children("li:first").hasClass("ched_ok"));
+
+            if(!ph){
+                $(".login_imsg2").addClass("no_login");
+            }
+            if(ve){
+                $(".login_imsg3").addClass("no_login");
+            }
+            if(!pw){
+                $(".login_imsg3s").addClass("no_login");
+            }
+            if(ph&&!ve&&pw&&vl){
+            //if(1){
+
+                $.post("{:U('Public/register')}",{'phone':phone,'regphonecode':verpa,'password':paswd},function(data){
+                var obj=jQuery.parseJSON(data)
+                    if(obj.code==200){
+                        layer.msg(obj.msg,function (){
+                            location.href='/Home/index/index';
+                        });
+
+                    }
+                    if(obj.code==402){
+                        layer.tips(obj.msg, '.user_name', {
+                            tips: [1, '#3595CC'],
+                            time: 4000
+                        });
+                    }
+                    if(obj.code==403){
+                        layer.tips(obj.msg, '.ver_pad', {
+                            tips: [1, '#3595CC'],
+                            time: 4000
+                        });
+                    }
+                    if(obj.code==400){
+                        layer.msg(obj.msg);
+                    }
+                })
+
+            }
+        })
+    }
+
+
+    /*获得焦点取消提示*/
+    get_focu();
+    function get_focu(){
+        $(".login_imsg2 input").focus(function () {
+            $(".login_imsg2").removeClass("no_login");
+        })
+        $(".login_imsg3 input").focus(function () {
+            $(".login_imsg3").removeClass("no_login");
+        })
+        $(".login_imsg3s input").focus(function () {
+            $(".login_imsg3s").removeClass("no_login");
+        })
+    }
+
+
+    /*注册协议*/
+    yes_prot();
+    function yes_prot(){
+        $(".login_imsg6 ul li:first-child").click(function () {
+            if($(this).hasClass("ched_ok")){
+                $(this).removeClass("ched_ok");
+            }else {
+                $(this).addClass("ched_ok");
+            }
+        })
+    }
+
+
+    /*背景动画*/
+    //bg_dh();
+   function bg_dh() {
+
+        var wvle=1.1 * $(".bcg_img").width();
+        var hvle=1.1 * $(".bcg_img").height();
+
+        var y_wvle=wvle - $(".bcg_img").width();
+        var y_hvle=hvle - $(".bcg_img").height();
+        $(".bcg_img>img").animate({width: wvle, height: hvle, left:("-"+y_wvle/2), top:("-"+ y_hvle/2)}, 1500);
+        $(".bcg_img>img").animate({width: wvle, height: hvle, marginLeft:(y_wvle/2), marginTop:(y_hvle/2)}, 1500);
+        $(".bcg_img>img").animate({width: wvle, height: hvle, left:("-"+y_wvle), marginTop:(y_hvle/2)}, 1500);
+        $(".bcg_img>img").animate({width: wvle, height: hvle, marginLeft:(y_wvle/2), top:("-"+ y_hvle)}, 1500);
+        $(".bcg_img>img").animate({width: $(".bcg_img").width(), height: $(".bcg_img").height(),top:'0px' , left:'0px',marginTop:'0px',marginLeft:'0px'}, 1500);
+        setTimeout(function() {
+                bg_dh() }
+            ,200)
+    }
+
+</script>

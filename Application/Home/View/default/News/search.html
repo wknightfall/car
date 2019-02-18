@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+	
+	<include file="Public/top" />
+	
+	<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/default.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/members.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/page.css"/>
+
+	<script src="__JS__/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__JS__/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="__JS__/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <script type="text/javascript" src="__JS__/default.js"></script>
+</head>
+<body>
+	<!-- hade -->
+	<include file="Public/header" />
+	
+	<!-- kuai -->
+	<div class="kBox"></div>
+	
+	<section class="contentBox">
+		<!--  -->
+		<div class="opt_tabBox">
+			<div class="optionsBox">
+				<div class="width1200 optionsCon">
+					<div class="crumbsBox">
+						<a href="{:U('Index/index')}"><i class="glyphicon glyphicon-home"></i>首页</a>
+						<span class="icon-rightjt"></span>
+						<a>搜索</a>
+					</div>
+					<!-- xiao nav -->
+					<div class="s_nav">
+
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<div class="opt_Box">
+				<div>
+					<div class="width1200 FocusingBox">
+						<div class="FocusingCon">
+							<ul>
+								<volist name="list" id="vo">
+								<li class="focu_item">
+
+									<a href="{:U('details',array('typeid'=>$vo['typeid'],'id'=>$vo['id']))}">
+
+                                        <if condition="$vo['icon'] gt 0">
+										<div class="focu_Img"><div class="focu_ImgBox"><i></i></div>
+											<img src="{:picture($vo['icon'])}" alt="">
+										</div>
+										</if>
+										<div class="focu_con">
+											<div class="focu_c_text">
+												<div class="focu_c_lt">
+													<p>{$vo['title']}</p>
+													<span>{$vo['descriptions']}</span>
+												</div>
+												<div class="focu_c_time">
+													<p>{$vo['create_time']|date='m-d',###}</p>
+													<a href="{:U('details',array('typeid'=>$vo['typeid'],'id'=>$vo['id']))}">
+														<i class="icon-rightjt"></i>
+													</a>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								</volist>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+	
+	<!-- footer -->
+	<div class="footerBox">
+		<div class="width1200 footerCon">
+			<div class="fo_hd">
+				<!-- lk -->
+				<div class="fo_hd_lk">
+					<p class="fo_hdTit">友情链接</p>
+					<div class="fo_hdBa" id="fo_hdBa">
+						<div class="fo_weiper">
+							<ul class="swiper-wrapper">
+								<li class="swiper-slide"><a href="">中国银行保险监督管理委员会</a></li>
+								<li class="swiper-slide"><a href="">中国保险行业协会</a></li>
+								<li class="swiper-slide"><a href="">中国汽车工程研究院</a></li>
+								<li class="swiper-slide"><a href="">中保研汽车技术研究院</a></li>
+								<li class="swiper-slide"><a href="">IIHS</a></li>
+								<li class="swiper-slide"><a href="">Euro-NCAP</a></li>
+								<li class="swiper-slide"><a href="">RCAR</a></li>
+								<li class="swiper-slide"><a href="">Euro-NCAP</a></li>
+								<li class="swiper-slide"><a href="">RCAR</a></li>
+								<li class="swiper-slide"><a href="">Euro-NCAP</a></li>
+								<li class="swiper-slide"><a href="">RCAR</a></li>
+							</ul>
+						</div>
+						<div class="swiper-button-prev">&lt;</div>
+						<div class="swiper-button-next">&gt;</div>
+					</div>
+				</div>
+				<!-- er -->
+				<div class="fo_hd_er">
+					<img src="images/center/erweima.jpg" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- bottom -->
+	<div class="fo_battom">
+		<div class="width1200 fo_battomCon">
+			<p class="fo_b_footer">Copyright © 中国保险汽车安全指数  版权所有</p>
+			<div class="fo_b_pu">
+				<i class="glyphicon glyphicon-earphone"></i>
+				<span>023-68824060</span>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".opt_tabBox .s_nav ul > li").mouseover(function(){
+			var _index = $(this).index();
+			$(".opt_Box > div").eq(_index).show().siblings().hide();
+			$(this).addClass("active").siblings().removeClass("active");
+			var act = $(this).text();
+			$('.crumbsTxt').html(act);
+		});
+		$(".a_news_left .a_nL_item").mouseover(function(){
+			$(this).addClass('nl_active').siblings().removeClass('nl_active');
+		});
+		
+	});
+	</script>
+</body>
+</html>

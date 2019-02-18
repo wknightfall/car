@@ -1,0 +1,84 @@
+	<!-- hade -->
+	<div class="hadeBox">
+		<div class="width1200 hadeCon">
+			<a class="hd_logo" href="{:U('Index/index')}"><img src="__IMG__/center/logo.png" alt=""></a>
+			<div class="hade_right">
+				<div class="hade_nav hade_pou">                              
+					<ul>
+						<li>
+							<a href="{:U('Index/index')}">首页</a>
+						</li>
+						
+						<volist name="nav" id="nav">
+						<li>
+							<a href="{:U($nav.url)}">{$nav[title]}</a>
+							<notempty name="nav['nav_son']">
+								<div class="had_nav_lk">
+									<ul>
+										<volist name="nav['nav_son']" id="son">
+											<li><a href="{:U($nav.url)}">{$son.title}</a></li>
+										</volist>
+									</ul>
+								</div>
+							</notempty>
+						</li>
+						</volist>
+						
+					
+					</ul>
+				</div>
+				
+				<div class="hade_query">
+					<div class="query_Con">
+						<input type="text" placeholder="搜索关键字" class="query_Text">
+						<input type="submit" value=" " class="query_sub icon-fdj">
+					</div>
+					<div class="que_lk">
+						<a href=""><img src="__IMG__/icon/icon-weix.png" alt=""></a>
+						<span>|</span>
+						<a href=""><img src="__IMG__/icon/icon-eg.png" alt=""></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- nav -->
+		<div class="navBox hade_pc">
+			<div class="width1200 navBs">
+				<div class="navCon">                              
+					<ul>
+						<li>
+							<a href="{:U('Index/index')}">首页</a>
+						</li>
+						
+						<volist name="navs" id="navighter">
+						<li class="">
+							<a href="{:U($navighter[url])}">{$navighter['title']}</a>
+							<notempty name="navighter['nav_son']">
+							<div class="navCon_lk">
+								<ul>
+									<volist name="navighter['nav_son']" id="son">
+										<li><a href="{:U($son[url])}">{$son.title}</a></li>
+									</volist>
+								</ul>
+							</div>
+							</notempty>
+						</li>
+						</volist>
+						
+						
+					</ul>
+					<div class="nav_pu">
+						<i class="icon-dianh2"></i>
+						<span>023-68195688</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 手机 -->
+	<div class="navBtn">
+		<a href=""><img src="__IMG__/center/logo2.png" alt=""></a>
+		<div class="navsh"><img src="__IMG__/icon/nav.png"></div>
+	</div>

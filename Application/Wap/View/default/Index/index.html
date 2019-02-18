@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <link type="text/css" href="__CSS__/swiper.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+<!--横幅展示-->
+<div class="banner_index">
+    <div class="swiper-container index_tq">
+        <div class="swiper-wrapper">
+
+            <volist name="banner" id="vo">
+            <img src="{$vo.icon|picture}" alt="" class="swiper-slide">
+            </volist>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!---->
+    <div class="boot_tq">
+        <p class="tq_1">
+            <img src="__IMG__/icon/tqyb.png" alt="">
+            <i>多云转晴 20~26℃</i>
+        </p>
+        <p class="tq_2">
+            空气质量：优
+        </p>
+    </div>
+</div>
+<!--菜单导航-->
+<div class="nav_meun">
+    <ul>
+        <li>
+            <a href="{:U('food/index?navid=51')}">
+                <img src="__IMG__/icon/icc_06.jpg" alt=""><p>美食</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('house/index?type=0')}">
+                <img src="__IMG__/icon/icc_08.jpg" alt=""><p>住宿</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('transpot/index?navid=58')}">
+                <img src="__IMG__/icon/icc_03.jpg" alt=""><p>交通</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('scenic/index?navid=62')}">
+                <img src="__IMG__/icon/icc_11.jpg" alt=""><p>游玩</p>
+            </a>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <a href="{:U('shopping/index?navid=67')}">
+                <img src="__IMG__/icon/icc_18.jpg" alt=""><p>购物</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('funny/index?navid=71')}">
+                <img src="__IMG__/icon/icc_20.jpg" alt=""><p>娱乐</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('project/travelgl')}">
+                <img src="__IMG__/icon/icc_22.jpg" alt=""><p>攻略</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('discuz/index?type=1')}">
+                <img src="__IMG__/icon/icc_23.jpg" alt=""><p>论坛</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="nav_two">
+    <div class="nav_two_l">
+        <a href="{:U('project/note')}">
+
+            <img src="__IMG__/icon/youji.png" alt="">
+            <span class="nat_te">
+            <p>旅行游记</p>
+            <i>记录旅途的点点滴滴</i>
+        </span>
+        </a>
+    </div>
+    <div class="nav_two_r">
+
+        <a href="{:U('scenic/route?navid=63')}">
+            <img src="__IMG__/icon/icn01.png" alt="">
+            <span class="nat_te">
+            <p>交通指南</p>
+            <i>精准路线</i>
+        </span>
+        </a>
+
+    </div>
+</div>
+
+<!--景点景区-->
+<div class="jingdian">
+    <div class="title_opt">
+        <div class="title_nvp">
+            <div class="title_ltp">
+                <img src="__IMG__/body/ttb.jpg" alt="">
+                <i>景区景点</i>
+            </div>
+            <em>
+                <a href="{:U('scenic/index?navid=62')}"><img src="__IMG__/icon/left.png" alt=""></a>
+            </em>
+        </div>
+    </div>
+    <div class="carou_fram">
+
+        <div class="scroll_carou">
+            <ul>
+                <volist name="scenic" id="vo">
+                <li>
+                    <a href="{:U('Food/detail?id='.$vo['id'].'&model=scenic')}">
+                        <img src="{$vo.icon|picture}" alt="">
+                        <div class="recom_carou">
+                            <i>{$vo.name}</i>
+                            <p>{$vo.content}</p>
+                        </div>
+                    </a>
+                </li>
+                    </volist>
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!--景区视频-->
+<div class="jinqu_vido">
+    <!---->
+    <div class="title_opt">
+        <div class="title_nvp">
+            <div class="title_ltp">
+                <img src="__IMG__/body/ttb.jpg" alt="">
+                <i>景区视频</i>
+            </div>
+
+            <div class="video_list">
+                <div class="nav_vidos">
+                    <ul>
+                        <!--<li class="mingsu_video this_chk"><a href="{:U('project/videolist')}">民俗视频</a></li>
+                        <li class="huodong_video"><a href="{:U('project/videolist')}">活动视频</a></li>
+                        <li class="jieqing_video"><a href="{:U('project/videolist')}">节庆视频</a></li>-->
+
+                        <li class="mingsu_video this_chk"><a href="javascript:">民俗视频</a></li>
+                        <li class="huodong_video"><a href="javascript:">活动视频</a></li>
+                        <li class="jieqing_video"><a href="javascript:">节庆视频</a></li>
+
+                    </ul>
+
+                </div>
+            </div>
+
+            <em>
+                <a href="{:U('project/videolist')}"><img src="__IMG__/icon/left.png" alt=""></a>
+            </em>
+        </div>
+    </div>
+
+        <div class="video_fram">
+
+            <!--民俗视频-->
+            <div class="scroll_video mingsu_video">
+                <ul>
+                    <volist name="msvideo" id="vo" >
+                    <li>
+                        <a  href="{:U('project/videodetail?id='.$vo['id'])}">
+                            <img src="{$vo.icon|picture}" alt="">
+                            <div class="play_im">
+                                <img src="__IMG__/icon/play.png" alt="">
+                            </div>
+                            <div class="video_tt">
+                                <p>{$vo.title}</p>
+                            </div>
+                        </a>
+                    </li>
+                        </volist>
+
+                </ul>
+            </div>
+
+            <!--活动视频-->
+            <div class="scroll_video huodong_video">
+                <ul>
+                    <volist name="hdvideo" id="vo" >
+                    <li>
+                        <a  href="{:U('project/videodetail?id='.$vo['id'])}">
+                            <img src="{$vo.icon|picture}" alt="">
+                            <div class="play_im">
+                                <img src="__IMG__/icon/play.png" alt="">
+                            </div>
+                            <div class="video_tt">
+                                <p>{$vo.title}</p>
+                            </div>
+                        </a>
+                    </li>
+                        </volist>
+
+                </ul>
+            </div>
+
+            <!--节庆视频-->
+            <div class="scroll_video jieqing_video">
+                <ul>
+                    <volist name="jqvideo" id="vo" >
+                    <li>
+                        <a  href="{:U('project/videodetail?id='.$vo['id'])}">
+                            <img src="{$vo.icon|picture}" alt="">
+                            <div class="play_im">
+                                <img src="__IMG__/icon/play.png" alt="">
+                            </div>
+                            <div class="video_tt">
+                                <p>{$vo.title}</p>
+                            </div>
+                        </a>
+                    </li>
+                        </volist>
+
+                </ul>
+            </div>
+
+
+        </div>
+
+</div>
+
+<!--其他推荐-->
+<div class="other_tj">
+
+    <!---->
+    <div class="title_opt">
+        <div class="title_nvp">
+            <div class="title_ltp">
+                <img src="__IMG__/body/ttb.jpg" alt="">
+                <i>其他推荐</i>
+            </div>
+
+            <div class="video_list">
+                <div class="nav_vidoe">
+                    <ul>
+                       <!-- <li class="jiudian this_chk"><a href="{:U('house/index')}">酒店</a></li>
+                        <li class="canting" ><a href="{:U('food/res')}">餐厅</a></li>
+                        <li class="lvxing"><a href="{:U('scenic/travelcpy')}">旅行社</a></li>
+                        <li class="yuile"><a href="{:U('funnyaddr/index')}">娱乐场所</a></li>-->
+
+                        <li class="jiudian this_chk"><a href="javascript:">酒店</a></li>
+                        <li class="canting" ><a href="javascript:">餐厅</a></li>
+                        <li class="lvxing"><a href="javascript:">旅行社</a></li>
+                        <li class="yuile"><a href="javascript:">娱乐场所</a></li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <em>
+                <a href="{:U('house/index')}"><img src="__IMG__/icon/left.png" alt=""></a>
+            </em>
+        </div>
+    </div>
+    <div class="list_htt">
+
+        <!--酒店-->
+        <div class="jiudian htl_bb">
+
+            <a href="{:U('house/hoteldetail?id='.$coverhotel['id'].'&type=1&model=usermember')}">
+                <img src="{$coverhotel.icon|picture}" alt="">
+                <div class="htl_jian">
+                    <p>{$coverhotel.name}</p>
+                    <i>{$coverhotel.content}</i>
+                    <ul>
+                        <li><i>价格：</i><em>{$coverhotel.price}起</em></li>
+                        <li><i>地址：</i><i>{$coverhotel.addr}</i></li>
+                        <li><i>电话：</i><i>{$coverhotel.tel}</i></li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+
+        <!--餐厅-->
+        <div class="canting htl_bb">
+
+            <a href="{:U('Food/dingcan?id='.$coverres['id'].'&type=2&model=usermember')}">
+                <img src="{$coverres.icon|picture}" alt="">
+                <div class="htl_jian">
+                    <p>{$coverres.name}</p>
+                    <i>{$coverres.content}</i>
+                    <ul>
+                        <!--<li><i>价格：</i><em>299起</em></li>-->
+                        <li><i>地址：</i><i>{$coverres.addr}</i></li>
+                        <li><i>电话：</i><i>{$coverres.tel}</i></li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+
+        <!--旅行社-->
+        <div class="lvxing htl_bb">
+
+            <a href="{:U('Food/detail?id='.$coverlxs['id'].'&model=travelcpy')}">
+                <img src="{$coverlxs.icon|picture}" alt="">
+                <div class="htl_jian">
+                    <p>{$coverlxs.name}</p>
+                    <i>{$coverlxs.content}</i>
+                    <ul>
+                        <!--<li><i>价格：</i><em>299起</em></li>-->
+                        <li><i>地址：</i><i>{$coverlxs.addr}</i></li>
+                        <li><i>电话：</i><i>{$coverlxs.tel}</i></li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+
+        <!--娱乐场所-->
+        <div class="yuile htl_bb">
+
+            <a href="{:U('Food/detail?id='.$coverfun['id'].'&model=funaddr')}">
+                <img src="{$coverfun.icon|picture}" alt="">
+                <div class="htl_jian">
+                    <p>{$coverfun.name}</p>
+                    <i>{$coverfun.content}</i>
+                    <ul>
+                        <!--<li><i>价格：</i><em>299起</em></li>-->
+                        <li><i>地址：</i><i>{$coverfun.addr}</i></li>
+                        <li><i>电话：</i><i>{$coverfun.tel}</i></li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+        <div class="tuij_dd">
+            <volist name="hotel" id="vo">
+                <p>
+                    <a href="{:U('house/hoteldetail?id='.$vo['id'].'&type=1&model=usermember')}">{$vo.name} <img src="__IMG__/icon/fanh.png" alt=""></a>
+                </p>
+            </volist>
+
+        </div>
+
+
+</div>
+
+<!--旅游咨询-->
+<div class="advis_dom">
+
+    <div class="title_nvp">
+        <div class="title_ltp">
+            <img src="__IMG__/body/ttb.jpg" alt="">
+            <i>旅游资讯</i>
+        </div>
+        <em><a href="{:U('project/travelnews')}"><img src="__IMG__/icon/left.png" alt=""></a></em>
+
+    </div>
+
+    <div class="advis_list">
+        <ul>
+            <volist name="zx" id="vo">
+            <li>
+                <a href="{:U('project/travelnewsdetail?id='.$vo['id'])}">
+                    <img src="{$vo.icon|picture}" alt="">
+                    <span>
+                    <p>{$vo.name}</p>
+                    <em>{$vo.description}</em>
+                    <i>{$vo.create_time|date='Y-m-d',###}</i>
+                </span>
+                </a>
+
+            </li>
+           </volist>
+        </ul>
+    </div>
+</div>
+
+<!--自驾游-->
+<div class="zjy_dom">
+    <a href="{:U('project/travelself')}">
+        <img src="__IMG__/body/zjy_02.jpg" alt="">
+    </a>
+
+</div>
+<!--行业新闻公式公告-->
+<div class="news_annou">
+
+    <div class="news_list">
+        <ul>
+            <volist name="newstype" id="vo" key="k">
+                <if condition="$k eq 1"><li class="news_pp news_this">{$vo.title}</li>
+                    <else /> <li class="aoment">{$vo.title}</li></if>
+
+                    <!-- <li class="aoment">公示公告</li>-->
+                </volist>
+        </ul>
+    </div>
+
+
+    <div class="new_annoment">
+        <!--行业新闻-->
+        <div class="news_gsgg news_pp">
+            <ul>
+                <volist name="news" id="vo">
+                <li>
+                    <a href="{:U('news/newsdetail?id='.$vo['id'])}">
+                        <p><img src="__IMG__/icon/left_1.png" alt="">{$vo.title}</p>
+                        <i>{$vo.descriptions}</i>
+                    </a>
+                </li>
+                </volist>
+            </ul>
+        </div>
+        <!--公示公告-->
+        <div class="news_hyxw aoment">
+            <ul>
+                <volist name="notice" id="vo">
+                <li>
+                    <a href="{:U('news/newsdetail?id='.$vo['id'])}">
+                        <p><img src="__IMG__/icon/left_1.png" alt="">{$vo.title}</p>
+                        <i>{$vo.descriptions}</i>
+                    </a>
+                </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!--旅游小贴士-->
+<div class="lyxts_tb">
+
+    <div class="title_opt">
+        <div class="title_nvp">
+            <div class="title_ltp">
+                <img src="__IMG__/body/ttb.jpg" alt="">
+                <i>旅游小贴士</i>
+            </div>
+        </div>
+    </div>
+    <ul>
+        <li>
+            <a href="{:U('house/index')}">
+                <img src="__IMG__/icon/icc_35.jpg" alt="">
+                <p>酒店预订</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('index/index')}">
+                <img src="__IMG__/icon/icc_32.jpg" alt="">
+                <p>天气预报</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('help/index')}">
+                <img src="__IMG__/icon/icc_29.jpg" alt="">
+                <p>常见问题</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('help/cs')}">
+                <img src="__IMG__/icon/icc_41.jpg" alt="">
+                <p>出游常识</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('help/tel')}">
+                <img src="__IMG__/icon/icc_44.jpg" alt="">
+                <p>常用电话</p>
+            </a>
+        </li>
+        <li>
+            <a href="http://www.gzsqcp.com" target="_blank">
+                <img src="__IMG__/icon/icc_47.jpg" alt="">
+                <p>班车查询</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+
+
+</body>
+</html>
+<!--<script type="text/javascript" src="__JS__/swiper.min.js"></script>-->
+<script type="text/javascript">
+    /*swiper*/
+    var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        autoplay:3000,
+        pagination : '.swiper-pagination',
+    });
+
+</script>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        我的评论
+        <img src="__IMG__/person/icon/timl.png" alt="" class="ch_cel">
+
+        <div class="data_up">
+            <input type="text" id="date_demo1">
+            <i>-</i>
+            <input type="text" id="date_demo2">
+            <input type="button" value="查询" id="chaxun">
+        </div>
+
+    </div>
+
+    <div class="input_fou">
+        <input  type="button" value="全部" id="allcom" <if condition="$Think.get.pl eq 0">class="this_cels"</if> >
+        <input type="button" value="好评({$good})" id="goodcom" <if condition="$Think.get.pl eq 1">class="this_cels"</if>>
+        <input type="button" value="中评({$middle})" id="middlecom" <if condition="$Think.get.pl eq 2">class="this_cels"</if>>
+        <input type="button" value="差评({$bad})" id="badcom" <if condition="$Think.get.pl eq 3">class="this_cels"</if>>
+    </div>
+
+    <div class="pl_lists">
+        <ul id="food">
+            <notempty name="lists">
+                <volist name="lists" id="vo">
+            <li>
+                <img src="{$vo.usericon|picture}" style="border-radius: 50%">
+                <span class="pllis_pp">
+                    <p>
+                        <i>
+                            {$vo.uid|modelField='usermember','name'}
+                        </i>
+                        <em>
+                            <input type="button" value="编辑" class="editcomment" data-id="{$vo.id}">
+                            <input type="button" value="删除" class="delcomment" data-id="{$vo.id}">
+                        </em>
+                    </p>
+                    <p>
+                        <i>
+                            <if condition="$vo.star eq 1"><img src="__IMG__/star1.png" style='width:75px' alt="">
+                                <elseif condition="$vo.star eq 2"/><img src="__IMG__/star2.png" style='width:75px'alt="">
+                                <elseif condition="$vo.star eq 3"/><img src="__IMG__/star3.png" style='width:75px'alt="">
+                                <elseif condition="$vo.star eq 4"/><img src="__IMG__/star4.png" style='width:75px'alt="">
+                                <elseif condition="$vo.star eq 5"/><img src="__IMG__/star5.png" style='width:75px' alt="">
+                            </if>
+                             <span>{$vo.star}</span>
+                        </i>
+                        <em>{$vo.time|date='Y-m-d',###}</em>
+                    </p>
+                    <i>
+                       {$vo.content}
+                    </i>
+                </span>
+            </li>
+
+                </volist>
+                <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+            </notempty>
+        </ul>
+    </div>
+
+    <!--list-->
+
+
+
+</div>
+
+</body>
+<script>
+    $(document).on("click","#allcom",function () {
+        location.href='/Wap/user/pl?pl=0';
+    })
+    $(document).on("click","#goodcom",function () {
+        location.href='/Wap/user/pl?pl=1';
+    })
+    $(document).on("click","#middlecom",function () {
+        location.href='/Wap/user/pl?pl=2';
+    })
+    $(document).on("click","#badcom",function () {
+        location.href='/Wap/user/pl?pl=3';
+    })
+
+
+    $(document).on("click",".editcomment",function () {
+        var id = $(this).attr('data-id')
+        var plid = $(this).attr('data-id')
+        var model = $(this).attr('model')
+        location.href='/Wap/user/fapinlun?plid='+plid+'&edit=1';
+
+    })
+
+    $(document).on("click",".delcomment",function () {
+        var id = $(this).attr('data-id')
+        layer.confirm('确定删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function(index) {
+            layer.close(index);
+
+            $.post("/Wap/user/pl", {'id': id, 'type':'del'}, function (da) {
+
+                var obj = jQuery.parseJSON(da);
+                if (obj.code == 200) {
+                    layer.msg('删除成功', function () {
+                        location.reload();
+                    })
+                } else {
+                    layer.msg('删除失败')
+                }
+            });
+        })
+    })
+
+    page=1;
+    var   url="{:U('user/pl')}";
+    var pl='{$Think.get.pl}'
+    $(window).scroll(
+            function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+
+                    $.post(url,{'page':page,'pl':pl},function (da) {
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            $('#food').append(obj.msg);
+                            page++;
+                        }else{
+                            //$('.molink').addClass('nothing');
+
+                            layer.msg('没有更多了哦~');
+                        }
+                    })
+
+                }
+            });
+
+    $(document).on("click","#chaxun",function () {
+        var date1=$('#date_demo1').val();
+        var date2=$('#date_demo2').val();
+        //console.log(date1,date2);return;
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Wap/user/pl/date1/'+date1+'/date2/'+date2;
+    })
+
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+    var off = true;
+    $(".off_on").click(function () {
+
+        if (off == true){
+
+            $(this).addClass("off_on_aa");
+            off = false;
+        }else {
+            $(this).removeClass("off_on_aa");
+            off = true;
+        }
+    })
+
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo2',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo1',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>

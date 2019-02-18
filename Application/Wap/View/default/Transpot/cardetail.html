@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <li><a href="{:U('Transpot/index')}">班车查询</a></li>
+        <li><a href="{:U('Transpot/train')}">列车查询</a></li>
+        <li class="inva_chk"><a href="{:U('Transpot/car')}">专车预订</a></li>
+        <li><a href="{:U('Transpot/plane')}">航班查询</a></li>
+    </ul>
+
+</div>
+<!--正文-->
+<div class="car_details">
+
+    <div class="acr_diver">
+        <img src="{$car.icon|picture}" alt="">
+        <span>
+            <p>{$car.name}<i class="yi_renz">已认证</i></p>
+            <ul>
+                <li>车型：<i>{$car.type}</i></li>
+                <li>车牌号：<i>{$car.carno}</i></li>
+                <li>联系电话：<i>{$car.tel}</i></li>
+            </ul>
+        </span>
+    </div>
+
+    <div class="text_deta">
+
+        <p>车子介绍</p>
+        <span>
+            {$car.content}
+        </span>
+    </div>
+
+    <div class="car_indo">
+
+        <p>内部环境照片（2）</p>
+        <span>
+            <img src="{$vo.icon|picture}" alt="">
+            <img src="{$vo.icon|picture}" alt="">
+        </span>
+    </div>
+</div>
+
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>

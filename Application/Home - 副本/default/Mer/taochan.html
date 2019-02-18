@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>商品管理</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/mer.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <!--时间=插件-->
+    <script type="text/javascript" src="__JS__/timeDate/dateRange.js"></script>
+    <script type="text/javascript" src="__JS__/timeDate/monthPicker.js"></script>
+    <link type="text/css" href="__CSS__/timeDate/dateRange.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/timeDate/monthPicker.css" rel="stylesheet" />
+    <!--特效-->
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="tt_lisall">
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('mer/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('mer/message')}"><li><span><p>我的留言</p></span></li></a>
+                    <a href="{:U('mer/goods?issale=2')}"><li class="per_chd" ><span><p>商品管理</p></span></li></a>
+                    <a href="{:U('mer/youhui')}"><li><span><p>优惠活动</p></span></li></a>
+                    <a href="{:U('mer/dingdan?isover=2')}"><li><span><p>订单管理</p></span></li></a>
+                    <a href="{:U('mer/caiwu')}"><li><span><p>财务</p></span></li></a>
+                    <a href="{:U('mer/shangjia')}"><li><span><p>商家信息</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="perrg_imsg">
+            <div class="tac_guna">
+
+                <div class="per_ttmg">
+                    <div class="tt_gaunli">套餐管理</div>
+                </div>
+
+                <ul class="tt_list">
+                    <li>套餐名称</li>
+                    <li>总价</li>
+                    <li>优惠价</li>
+                    <li>操作</li>
+                </ul>
+
+                <ul class="list_ttl">
+                    <notempty name="tao">
+                    <volist name="tao" id="vo">
+                    <li>
+                        <p><input type="text"  name="listname" value="{$vo.name}"></p>
+                        <em><i>￥</i><input type="text"  name="listprice" value="{$vo.price}"></em>
+                        <em><i>￥</i><input type="text"  name="listcheapprice" value="{$vo.cheapprice}"></em>
+                        <em>
+                            <input type="button" value="保存"  class="actgoods" data-id="{$vo.id}" acttype="">
+                            <input type="button" value="删除"  class="actgoods" data-id="{$vo.id}" acttype="del">
+                        </em>
+                    </li>
+                        </volist>
+                    <else /><h1>暂无内容</h1>
+                    </notempty>
+                </ul>
+
+                <div class="tcad_imsg">
+                    <ul>
+                        <li>套餐名称：</li>
+                        <li><input type="text" name="name" id="name"></li>
+                    </ul>
+                    <ul>
+                        <li>总价：</li>
+                        <li><input type="text" name="price" id="price"></li>
+                    </ul>
+                    <ul>
+                        <li>优惠价：</li>
+                        <li><input type="text" name="cheapprice" id="cheapprice"></li>
+                        <li><input type="button" value="保存套餐" class="save"></li>
+                    </ul>
+                </div>
+                <div class="tianj_tc">
+                    <input type="button" value=" 添加套餐" class="submit">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<include file="Public/footer" />
+</body>
+<script>
+    $(document).on("click",".submit",function () {
+        var name = $('input[name=name]').val()
+        var price = $('input[name=price]').val()
+        var cheapprice = $('input[name=cheapprice]').val()
+        if(name==""){
+            layer.tips('请输入内容', '#name', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        if(price==""){
+            layer.tips('请输入内容', '#price', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        if(cheapprice==""){
+            layer.tips('请输入内容', '#cheapprice', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        $.post("/Home/mer/taochan",{'name':name,'cheapprice':cheapprice,'price':price,'type':'add'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('操作成功',function () {
+                    location.reload();
+                })
+            }else{
+                layer.msg('操作失败')
+
+            }
+        });
+    })
+    $(document).on("click",".save",function () {
+
+        var name = $('input[name=listname]').val()
+        var price = $('input[name=listprice]').val()
+        var cheapprice = $('input[name=listcheapprice]').val()
+        $.post("/Home/mer/taochan",{'name':name,'cheapprice':cheapprice,'price':price},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('操作成功',function () {
+                    location.href='/home/mer/goods?issale='+2;
+                })
+            }else{
+                layer.msg('操作失败')
+
+            }
+        });
+    })
+    $(document).on("click",".actgoods",function () {
+        var id = $(this).attr('data-id')
+        var type = $(this).attr('acttype')
+        if(type=='del'){
+            layer.confirm('确定删除吗？', {
+                btn : [ '确定', '取消' ]
+            }, function(index) {
+                layer.close(index);
+                $.post("/Home/mer/goods",{'id':id,'type':type},function(da){
+
+                    var obj = jQuery.parseJSON(da);
+                    if(obj.code==200){
+                        layer.msg('操作成功')
+                        location.reload();
+                    }else{
+                        layer.msg('操作失败')
+                    }
+                });
+
+            });
+        }
+    })
+
+</script>
+</html>

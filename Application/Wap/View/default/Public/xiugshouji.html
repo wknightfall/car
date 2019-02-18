@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改手机号码</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+<div style="background: #f2f2f2">
+
+    <div class="tt_headcz">
+        <img src="__IMG__/person/icon/iconfont.png" alt=""  onclick="history.go(-1)">
+        修改手机号码
+    </div>
+
+    <div class="xgmm_inf">
+        <ul>
+            <li><i>新手机号：</i><input type="text" placeholder="请输入手机号" name="phone" id="phone" ><input type="button" value="获取验证码" id="regyzm" class="get_numa" /></li>
+            <li><i>短信验证：</i><input type="text" placeholder="请输入验证码" name="code" id="code"></li>
+
+        </ul>
+    </div>
+
+    <div class="btn_dom" style="background: #ffffff">
+        <input type="button" value="确认修改" id="xgphone">
+    </div>
+
+</div>
+
+
+</body>
+<script>
+    var shoptype='{$shoptype}';
+    $('#regyzm').click(function () {
+        if($(this).hasClass('regyzm')==false){
+
+            var phone=$('input[name=phone]').val();
+            var pattern = /^1(3|4|5|7|8)\d{9}$/;
+            if(phone==""){
+                layer.tips('请输入手机号!', '#phone', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+                return false;
+            }else if(pattern.test(phone)==false){
+                layer.tips('手机号不正确请重新输入!', '#phone', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+                return false;
+            }
+
+            $.post("{:U('Public/sms')}",{'phone':phone,'type':5},function (data) {
+                var obj=jQuery.parseJSON(data)
+                if(obj.code==200){
+                    $('#regyzm').addClass('regyzm');
+                    var num=60;
+                    timer=setInterval(function(){
+                        $('#regyzm').val(num+'秒');
+                        num--;
+                        if(num==0){
+                            clearInterval(timer);
+                            timer=null;
+                            $('#regyzm').val('重新获取');
+                            $('#regyzm').removeClass('regyzm');
+                        }
+                    },1000)
+                    layer.msg(obj.msg);
+                }else{
+                    layer.msg(obj.msg);
+                }
+            })
+        }
+    })
+
+    $('#xgphone').click(function () {
+        var phone = $('input[name=phone]').val();
+
+        var code = $('input[name=code]').val();
+        if (phone == '') {
+            layer.tips('请输入手机号!', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        var pattern = /^1(3|4|5|7|8)\d{9}$/;
+        if (pattern.test(phone) == false) {
+            layer.tips('手机号不正确请重新输入!', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+       if (code == '') {
+            layer.tips('请输入验证码!', '#code', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+        $.post("/Wap/Public/xiugshouji", {'phone': phone, 'code': code}, function (data) {
+            var obj = jQuery.parseJSON(data);
+
+            if (obj.code == 402) {
+                layer.tips(obj.msg, '#code', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+            }else if (obj.code == 401) {
+                layer.tips(obj.msg, '#phone', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+            } else if (obj.code == 400) {
+                layer.msg(obj.msg);
+            } else if (obj.code == 200) {
+                layer.msg(obj.msg, function () {
+                    if(shoptype==0){
+                        location.href='/wap/user/geren'
+                    }else{
+                        location.href='/wap/mer/shangjia'
+                    }
+                });
+            }
+        })
+    })
+
+
+</script>
+</html>
+<script>
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+</script>

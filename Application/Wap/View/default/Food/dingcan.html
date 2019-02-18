@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+    <!--头部-->
+    <div class="head_tdom">
+        <img src="__IMG__/icon/return.png" onclick="history.go(-1)">
+        {$res.name}
+        <img src="__IMG__/icon/her_tt.png" alt="" class="sc_img icon2" data-id="{$Think.get.id}">
+    </div>
+    <div class="head_dd"></div>
+    <!---->
+    <!--横幅展示-->
+    <div class="banner_dom">
+        <img src="__IMG__/banner/mcg_bb_02.jpg" alt="">
+    </div>
+
+    <div class="dis_infs">
+        <p><i>￥</i><em>{$res.price}</em><i>起</i></p>
+        <p>菜馆地址：{$res.addr}</p>
+        <p> 联系电话：<i>{$res.tel}</i></p>
+    </div>
+
+    <div class="dis_sesl">
+        <ul>
+            <li>选择套餐：</li>
+            <li>
+               <volist name="tao" id="vo" key="k">
+                    <p class="pick_{$k}"  data-id="{$vo.id}" money="{$vo.price}">￥ {$vo.price} {$vo.name}</p>
+                    <div class="taoc_zo">
+                    <em></em>
+                    <div>
+
+                        <table>
+                            <tr>
+                                <td>套餐内容</td><td>&nbsp;</td><td>单价</td><td>数量</td><td>小计</td>
+                            </tr>
+                            <tr>
+                                <td>干锅3选1</td><td>黯然销魂鸭</td><td>¥88</td><td>1份</td><td>¥88</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td><td>黯然销魂鸭</td><td>¥88</td><td>1份</td><td>¥88</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td><td>黯然销魂鸭</td><td>¥88</td><td>1份</td><td>¥88</td>
+                            </tr>
+                            <tr>
+                                <td>其他</td><td>凉粉</td><td>¥5</td><td>1份</td><td>¥5</td>
+                            </tr>
+                        </table>
+                        <p>
+                    <span>
+                        <i>总计￥{$vo.price}</i>
+                       &lt;!&ndash; <em>优惠价 <i>￥88</i></em>&ndash;&gt;
+                    </span>
+                        </p>
+                    </div>
+
+                </div>
+               </volist>
+
+            </li>
+        </ul>
+        <ul>
+            <li>用餐日期：</li>
+            <li>
+                <input type="text" id="date_demo1">
+                <script>
+                    laydate.render({
+                        elem: '#date_demo1',
+                        min: 'today',
+                        showBottom: false
+                    });
+                </script>
+            </li>
+        </ul>
+        <ul>
+            <li>&nbsp;</li>
+            <li>
+                <input type="button" value="立即预订" id="taochanorder">
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="tj_dlist">
+        <div>
+            <p>推荐菜品</p>
+        </div>
+        <ul>
+            <volist name="dan" id="vo">
+            <li>
+                <img src="{$vo.icon|picture}"  data-id="{$vo.id}" class="danpin">
+                <span>
+                    <p>{$vo.name}</p>
+                    <p>{$vo.content}</p>
+                    <p>
+                        <em>￥<i>{$vo.price}</i></em>
+                        <img src="__IMG__/icon/add_d.png"  class="addtocart" data-id="{$vo.id}">
+                    </p>
+                </span>
+            </li>
+
+            </volist>
+        </ul>
+    </div>
+
+    <div class="comment">
+        <p class="com_tt">
+            <i>评价</i>
+            <em>（{$total}）</em>
+        </p>
+        <div class="com_list">
+            <ul>
+                <li <if condition="$Think.get.pl eq 5">class="current"</if> ><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=5')}" style="color:rgb(115, 115, 115)">全部评价（{$total}）</a></li>
+                <li <if condition="$Think.get.pl eq 0">class="current"</if> ><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=0')}" style="color:rgb(115, 115, 115)">晒图（{$pic}）</a></li>
+                <li <if condition="$Think.get.pl eq 1">class="current"</if> ><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=1')}" style="color:rgb(115, 115, 115)">好评（{$good}）</a></li>
+                <li <if condition="$Think.get.pl eq 2">class="current"</if> ><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=2')}" style="color:rgb(115, 115, 115)">中评（{$middle}）</a></li>
+                <li <if condition="$Think.get.pl eq 3">class="current"</if> ><a href="{:U('food/dingcan?id='.$id.'&type='.$type.'&pl=3')}" style="color:rgb(115, 115, 115)">差评（{$bad}）</a></li>
+            </ul>
+        </div>
+        <div class="ment_list">
+            <ul>
+                <volist name="comment" id="vo" key="k">
+                <li <if condition="$k gt 2">class='moreall'</if> >
+                    <div class="ment_left">
+                        <img src="{$vo.usericon|picture}" alt="">
+                    </div>
+                    <div class="ment_right">
+                        <ul>
+                            <li>
+                                <p class="name_str">
+                                    <i>{$vo.username}</i>
+                                    <em>
+                                        <if condition="$vo.star eq 1"><img src="__IMG__/star1.png" style='width:90px' alt="">
+                                            <elseif condition="$vo.star eq 2"/><img src="__IMG__/star2.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 3"/><img src="__IMG__/star3.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 4"/><img src="__IMG__/star4.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 5"/><img src="__IMG__/star5.png" style='width:90px' alt="">
+                                        </if>
+                                    </em>
+                                </p>
+                            </li>
+                            <li class="text_com">{$vo.content}</li>
+                            <li class="com_img">
+                                <if condition="$vo['icon'] neq 0">
+                                    <img src="{$vo.icon|picture}" alt="" style="width:40px;height:40px">
+                                    <else /><img src="" alt="" style="width:40px;height:40px"></if>
+
+                            </li>
+                            <li class="time_com">{$vo.time|date='Y-m-d h:i:s',###}</li>
+                        </ul>
+                    </div>
+                </li>
+                </volist>
+            </ul>
+
+            <p class="all_com">
+                <input type="button" value="查看全部评价" id="moreall">
+            </p>
+        </div>
+
+    </div>
+
+    <div class="buy_lsttl">
+
+        <p class="buy_tts">
+            <i>购物车</i>
+            <em  id="clearcart">清空购物车</em>
+        </p>
+
+        <ul id="cart">
+
+
+
+        </ul>
+    </div>
+
+    <div class="buy_btnto"></div>
+    <div class="buy_btna">
+
+        <p>共<i id="num">0</i>份，共计：<em id="total">￥0</em></p>
+        <input type="button" value="提交订单"  id="order">
+    </div>
+
+    </div>
+
+</body>
+<script>
+
+    $(function () {
+        var pl="{$Think.get.pl}"
+        if(pl!=''){
+            $(window).scrollTop(900)
+        }
+
+        $('.moreall').hide()
+    })
+    $(document).on("click",".danpin",function () {
+        var id=$(this).attr('data-id');
+        location.href='/Wap/food/danpin/id/'+id;
+    })
+    $(document).on("click","#moreall",function () {
+        $('.moreall').show()
+    })
+    $(document).on("click","#fapinlun",function () {
+        var shoptype="{$shoptype}"
+        var id="{$Think.get.id}"
+        var type="{$Think.get.type}"
+
+        if(shoptype==0){
+            location.href='/Home/user/fapinlun?id='+id+'&type='+type
+        }else{
+            location.href='/Home/mer/fapinlun?id='+id+'&type='+type
+        }
+
+    })
+
+    var hid="{$Think.get.id}";
+    /*//进来先加载购物车
+     $.post("/Home/Ajax/loadcart",{},function(da){
+     var obj = jQuery.parseJSON(da);
+     if(obj.code==200){
+     $('#cart').empty();
+     $('#cart').append(obj.msg);
+     $('#num').html(obj.num);
+     $('#total').html('￥'+obj.total);
+     }
+     });*/
+    $.post("/Home/Ajax/clearcart",{},function(da){
+        var obj = jQuery.parseJSON(da);
+        if(obj.code==200){
+            $('#cart').empty();
+            $('#num').html(0)
+            $('#total').html('￥'+0)
+        }else{
+            layer.msg(obj.msg);
+        }
+    })
+    $(document).on("click","#order",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录！请先登录！');return false;
+            layer.msg('您还未登录！请先登录！',function () {
+                location.href='/Home/public/login'
+            });return false;
+        }
+        /*var id = $('input[name=id]').val();
+         var num = $('input[name=num]').val();
+         var money = $('input[name=money]').val();*/
+        $.post("/Home/Ajax/order",{'actiontype':3,'hid':hid,'type':'food'},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('下单成功！去支付！',function () {
+                    location.href='/Wap/food/foodpay/orderno/'+obj.msg;
+                });
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(document).on("click","#taochanorder",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录！请先登录！');return false;
+            layer.msg('您还未登录！请先登录！',function () {
+                location.href='/Home/public/login'
+            });return false;
+        }
+        var id=$('.thisck').attr('data-id');
+
+        //var num = $('input[name=num]').val();
+        var money = $('.thisck').attr('money');
+        var date=   $("#date_demo1").val();
+        if($('.thisck').length==0){
+            layer.msg('请选择套餐');return;
+        }
+        if(date==''){
+            layer.msg('请选择用餐日期');return;
+        }
+        //console.log(hid,id,money,date);return;
+        $.post("/Home/Ajax/order",{'actiontype':3,'hid':hid, 'id':id ,'num':1,'money':money, 'date':date},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('下单成功！去支付！',function () {
+                    location.href='/Wap/food/foodpay/id/'+id+'/orderno/'+obj.msg;
+                });
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(document).on("click","#buy",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录！请先登录！');return false;
+            layer.msg('您还未登录！请先登录！',function () {
+                location.href='/Home/public/login'
+            });return false;
+        }
+        var id=$(this).attr('data-id');
+        var num=$('input[name=foodnum]').val();
+        var money= $('#foodprice').html();
+        //console.log(hid,id,num,money);return;
+        $.post("/Home/Ajax/order",{'actiontype':3,'hid':hid, 'id':id ,'num':num,'money':money,'actiontype':3},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('下单成功！去支付！',function () {
+                    location.href='/Wap/food/foodpay/id/'+id+'/orderno/'+obj.msg;
+                });
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(document).on("click","#foodjia",function () {
+        var price=$('input[name=foodprice]').val();
+        var num=$('input[name=foodnum]').val();
+        //console.log(price,num);return
+        $('#foodprice').html(price*num);
+    })
+    $(document).on("click","#foodjian",function () {
+        var price=$('input[name=foodprice]').val();
+        var num=$('input[name=foodnum]').val();
+        //console.log(price,num);return
+        $('#foodprice').html(price*num);
+    })
+    $(document).on("click","#clearcart",function () {
+        $.post("/Home/Ajax/clearcart",{},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                $('#cart').empty();
+                $('#num').html(0)
+                $('#total').html('￥'+0)
+            }else{
+                layer.msg(obj.msg);
+            }
+        })
+    })
+
+    $(document).on("click",".addtocart",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/Ajax/addtocart",{'id':id,'type':'usermember'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+
+                $('#cart').empty();
+                $('#cart').append(obj.msg);
+                $('#num').html(obj.num);
+                $('#total').html('￥'+obj.total);
+
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+    $(document).on("click",".jia",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/Ajax/addtocart",{'id':id,'type':'jia'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+
+                $('#cart').empty();
+                $('#cart').append(obj.msg);
+                $('#num').html(obj.num);
+                $('#total').html('￥'+obj.total);
+
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+    $(document).on("click",".jian",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/Ajax/addtocart",{'id':id,'type':'jian'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+
+                $('#cart').empty();
+                $('#cart').append(obj.msg);
+                $('#num').html(obj.num);
+                $('#total').html('￥'+obj.total);
+
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':2},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                collection.attr("src","/Public/Wap/image/icon/hert.png");
+                //collection.css("background-image","url('/Public/Home/__IMG__/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                collection.attr("src","/Public/Wap/image/icon/aattt.png");
+                //collection.css("width",'17px');collection.css("height",'17px');
+            }else{
+               layer.msg(obj.msg);
+            }
+        });
+    })
+
+</script>
+</html>
+<script>
+
+    $(function () {
+
+        $(".dis_sesl ul:first-child li:last-child p").click(function () {
+
+            if ($(this).hasClass("thisck")){
+
+
+                if ($(this).next("div").css("display")=="block"){
+
+                    $(this).next("div").css("display","none");
+                }else {
+                    $(".dis_sesl ul:first-child li:last-child .taoc_zo").css("display","none");
+                    $(this).next("div").css("display","block");
+                }
+
+            }else {
+
+                $(".dis_sesl ul:first-child li:last-child .taoc_zo").css("display","none");
+                $(this).siblings("p").removeClass("thisck");
+                $(this).addClass("thisck");
+            }
+        })
+
+
+    })
+
+</script>

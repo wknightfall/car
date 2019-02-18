@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>门票订单</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/hotel.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+
+    <script src="/Public/Home/plugin/laydate_z/laydate.js"></script>
+
+</head>
+<!--<form>-->
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div>
+    <em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="{:U('index/index')}">旅游指南</a><em>-</em><a>酒店</a>
+</div>
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="jp_tesecai">
+
+        <div class="menp_dind">
+            <div class="menp_dt">
+                <p class="tt_btxx">{$room.name}门票</p>
+                <ul>
+                    <li>*出游日期：</li>
+                    <li>
+                        <input type="text" id="test1">
+                    </li>
+                </ul>
+                <ul>
+                    <li>*出游人数：</li>
+                    <li>
+                        <div class="addlis-dis">
+                            <p class="piaonum">-</p>
+                            <input type="text" value="1" id="piaonum">
+                            <p class="piaonum">+</p>
+                        </div>
+                        <p>最多可预订99张</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>配送信息：</li>
+                    <li><img src="__IMG__/dish/csli_031.jpg" alt="">（门票自取） 地址：锦屏县三江镇赤溪坪社区（锦屏文书特藏馆）</li>
+                </ul>
+            </div>
+
+            <div class="qpr_ims">
+                <p class="qpr_ppims">取票人/出游人信息</p>
+                <ul>
+                    <li><em><i>*</i>姓名：</em><input type="text" name='name' id="name" placeholder="请填写姓名" required="required"></li>
+                    <li><em><i>*</i>身份证号码：</em><input type="text"  name='iccard' id="iccard" placeholder="请填写证件号" required="required"></li>
+                    <li><em><i>*</i>手机号码：</em><input type="text" name='phone' id="phone" placeholder="用于接受出票信息" required="required"></li>
+                    <li><em>邮箱：</em><input type="text"  name='email' placeholder="请填写信息"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="zhigs_ss">
+
+            <div class="pay_imsg1">
+                <span>请选择支付方式</span>
+                <div class="bodr_pay1">
+                    <ul>
+                        <li class="pay_red">
+                            <div>
+                                <img src="__IMG__/htl/22htl_16.jpg" alt="">
+                                <span>
+                                <p>余额</p>
+                                <p>￥{$user.balance}</p>
+                            </span>
+                            </div>
+                        </li>
+                        <li class="zfb_bt"><img src="__IMG__/htl/22htl_10.jpg" alt=""></li>
+                        <li class="weixin"><img src="__IMG__/htl/22htl_13.jpg" alt=""></li>
+                    </ul>
+                </div>
+                <div class="time_pay1">
+                    <i>提交订单后将为您保留15分钟，请及时支付</i>
+                    <span><em>总支付</em><i id="money">￥{$price}</i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-------底部--------->
+<footer class="btn_fot">
+    <div class="foot_tet">
+        <span><i></i><em>我已阅读并同意</em><p>旅游合同，保险条款，保险经纪委托合同及客户告知书，特别预定提示，安全提示。</p></span>
+        <input type="submit" value="提交订单" id="submitpiao">
+    </div>
+</footer>
+<!--</form>-->
+<input type="hidden" name="hid" value="{$hid}">
+<input type="hidden" name="id" value="{$id}">
+<input type="hidden" name="price" value="{$price}">
+<input type="hidden" name="money" value="{$price}">
+<input type="hidden" name="num" value="1">
+</body>
+<script>
+    var type=1;//支付方式
+
+    var price=$('input[name=price]').val();
+    var num=0;
+    var money=0;
+    $(document).on("click",".piaonum",function () {
+        num=$('#piaonum').val();
+        money=num*price;
+        $('#money').html('￥'+money);
+        $('input[name=money]').val(money);
+        $('input[name=num]').val(num);
+    })
+
+
+
+    $(document).on("click","#submitpiao",function () {
+        var hid=$('input[name=hid]').val();
+        var id=$('input[name=id]').val();
+
+        var paymoney=$('input[name=money]').val();
+        var paynum=$('input[name=num]').val();
+
+        var date=  $("#test1").val();
+
+        var name=$('input[name=name]').val();
+        var iccard=$('input[name=iccard]').val();
+        var phone=$('input[name=phone]').val();
+        var email=$('input[name=email]').val();
+        if(date==""){
+            layer.tips('请选择出游日期!', '#test1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(name==""){
+            layer.tips('请填写姓名!', '#name', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(iccard==""){
+            layer.tips('请填写身份证号码!', '#iccard', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(phone==""){
+            layer.tips('请填写手机号!', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }else if(/^1[34578]\d{9}$/.test(phone)==false){
+            layer.tips('手机号不正确请重新填写!', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        //console.log(id,paynum,paymoney,name,date);return;
+        $.post("/Home/Ajax/order",{'actiontype':3, 'piao':'piao', 'hid':hid, 'id':id, 'money':paymoney, 'num':paynum, 'date':date, 'name':name, 'iccard':iccard, 'phone':phone, 'email':email},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                    var orderno = obj.msg;
+                    //console.log(orderno);return;
+                    //余额支付
+                    if(type == 1){
+                        $.post("/Home/Pay/pay",{'orderno':orderno},function(da){
+                            var payobj = jQuery.parseJSON(da);
+                            if(payobj.code==200){
+                                layer.msg(payobj.msg,function () {
+                                    //location.href='/Home/Ajax/pay/id/'+id+'/orderno/'+obj.msg;
+                                });
+                            }else{
+                                layer.msg(payobj.msg);
+                            }
+                        });
+                    }else if(type == 2){
+                        location.href='/Home/Pay/testpay/orderno/'+orderno;
+                    }else if(type == 3){
+                        location.href='/Home/Wxpay/testpay/orderno/'+orderno;
+                    }
+
+
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(".bodr_pay1 ul li").click(function () {
+        type=$(this).index()+1;
+        $(".bodr_pay1 ul li").removeClass("pay_red");
+        if ($(this).hasClass("pay_red")){
+            $(this).removeClass("pay_red");
+        } else {
+            $(this).addClass("pay_red");
+        }
+    })
+</script>
+</html>
+<script>
+
+    $(".addlis-dis>p:nth-child(1)").click(function () {
+
+        var max = 1;
+        var num = $(".addlis-dis input").val();
+        var tot = parseInt(num);
+        if (max == num) {
+            $(".addlis-dis input").val(max);
+        } else {
+            $(".addlis-dis input").val(tot - 1);
+        }
+    })
+
+    $(".addlis-dis>p:nth-child(3)").click(function () {
+        var max = 100;
+        var num = $(".addlis-dis input").val();
+        var tot = parseInt(num);
+        if (max == num) {
+            $(".addlis-dis input").val(max);
+        } else {
+            $(".addlis-dis input").val(tot + 1);
+        }
+    })
+
+    //自定义重要日
+    laydate.render({
+        elem: '#test1'
+        ,mark: {
+            '2018-7-1': '<p id="data_num">1</p><em id="data_dao">￥88</em>',
+            '2018-7-2': '<p id="data_num">2</p><em id="data_dao">￥88</em>',
+            '2018-7-3': '<p id="data_num">3</p><em id="data_dao">￥88</em>'
+            // ,'0-12-31': '跨年' //每年的日期
+            // ,'0-0-10': '工资' //每月某天
+            // ,'0-0-15': '月中'
+            // '2018-7-15': '' //如果为空字符，则默认显示数字+徽章
+        }
+        ,done: function(value, date){
+            if(date.year === 2018 && date.month === 7 && date.date === 25){ //点击2017年8月15日，弹出提示语
+               /* alert('');*/
+            }
+        }
+    });
+    /*配送信息图标*/
+    $(".menp_dt>ul:nth-child(4)>li>img").click(function () {
+
+        if ($(this).attr("src")=="/Public/Home/img/dish/csli_031.jpg"){
+
+            $(this).attr("src","/Public/Home/img/dish/csli_03.jpg")
+        }else {
+            $(this).attr("src","/Public/Home/img/dish/csli_031.jpg")
+        }
+    })
+
+
+
+    $(".weix_or ul li").click(function () {
+
+        $(".weix_or ul li").removeClass("zfb_or_weix");
+        if ($(this).hasClass("zfb_or_weix")) {
+            $(this).removeClass("zfb_or_weix");
+        } else {
+            $(this).addClass("zfb_or_weix");
+        }
+    })
+
+    $(".pars_text>ul>li>input").focus(function () {
+        $(this).parent("li").prev("li").children("span").children("i").text("");
+    })
+    $(".pars_text>ul>li>input").blur(function () {
+
+        if($(this).text()==null||$(this).text()==undefined||$(this).text()==""){
+            $(this).parent("li").prev("li").children("span").children("i").text("*");
+        }else {
+            $(this).parent("li").prev("li").children("span").children("i").text("");
+
+        }
+    })
+    $(".yes_xy>li:nth-child(1)").click(function () {
+
+        if ($(this).hasClass("yes_xyadd")){
+            $(this).removeClass("yes_xyadd");
+        } else {
+            $(this).addClass("yes_xyadd");
+        }
+    })
+    $(".foot_tet>span>i").click(function () {
+
+        if ($(this).hasClass("yes_xyadd")){
+            $(this).removeClass("yes_xyadd");
+        } else {
+            $(this).addClass("yes_xyadd");
+        }
+    })
+
+</script>

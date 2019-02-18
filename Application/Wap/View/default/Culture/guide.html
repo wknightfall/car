@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+
+<!--正文-->
+<div class="jingp_list">
+
+    <div class="lis_dom lishi">
+
+        <p class="jinp_tt p36"><i>购物指南</i></p>
+        <span>
+            {$vo.content}
+        </span>
+
+    </div>
+
+</div>
+<!--information-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>
+<script>
+    /**/
+    $(".nav_dom ul li").click(function () {
+
+        $("html, body").animate({
+            scrollTop: $('.'+$(this).attr("id")).offset().top - $(".head_dom").height() - $(".jinp_tt i").height()}, {duration: 500,easing: "swing"});
+        return false;
+    })
+
+
+</script>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+
+<!--正文标题-->
+
+
+
+<div class="pinglu_hf">
+    <ul id="food">
+        <volist name="message" id="vo" key="k">
+        <li>
+            <ul>
+                <li class="oeher_aa">
+                    <img src="{$vo.usericon|picture}" alt="">
+                    <span>
+
+                        <if condition="$vo.uid eq 999999999"><p><i>系统管理员</i></p>
+
+                            <elseif condition="$vo.uid eq 0" /><p><i>游客</i></p>
+                            <else /><p><i>{$vo.uid|modelField='usermember','name'}</i></p></if>
+
+
+                        <p>发表于{$vo.create_time|date='Y-m-d H:i',###}</p>
+                    </span>
+                </li>
+                <li>{$vo.content}</li>
+
+
+
+            </ul>
+        </li>
+
+        </volist>
+    </ul>
+</div>
+
+
+<div class="tex_ares">
+
+    <textarea name="" placeholder=""  id="content" cols="30" rows="10">{$plcontent}</textarea>
+    
+    <div>
+        <if condition="$Think.get.edit eq 1">
+            <input value="编辑评论" type="button" id="editcomment">
+            <else />
+            <input value="发表回复" type="button" id="pubcomment">
+        </if>
+
+    </div>
+</div>
+
+<!--information-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+    var isreply=0;
+    var ppid=0;
+
+    $('.reply').click(function () {
+        isreply=1;
+        ppid=$(this).attr('data-id');
+        $(document).scrollTop($(document).height());
+    })
+    $('#pub').click(function () {
+        $(document).scrollTop($(document).height());
+        //$('#pubcomment').click();
+    })
+
+    $('#pubcomment').click(function(){
+        var aid ="{$Think.get.id}";
+
+        var content = $('#content').val();
+        if(content == ''){
+            layer.msg('请填写评论内容！');
+            return false;
+        }
+        if(isreply){
+            var pid=$(this).attr('id');
+            var uid=$(this).attr('uid');
+            //var content=$('.'+pid).val().trim();
+            var u={$uid};
+             if(uid == u){
+             layer.msg('不能回复自己！');
+             return false;
+             }
+             /*if(content==""){
+             layer.tips('请填写评论内容 ！', '.'+pid, {
+             tips: [1, '#3595CC'],
+             time: 4000
+             });
+             return false;
+             }*/
+            //console.log(ppid,aid);return;
+            $.post("{:U('/Home/Ajax/reply')}",{'id':aid,'content':content,'ppid':ppid},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg(obj.msg)
+                    location.reload();
+
+                }else{
+                    layer.msg(obj.msg);
+
+                }
+            })
+
+        }else{
+            //var content = $('#textarea').text().trim();
+            //var content = $('[name=content]').val().trim();
+            $.post("/Home/Message/index",{'content':content},function(da){
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg(obj.msg,function () {
+                        location.reload();
+                    });
+                }else{
+                    layer.msg(obj.msg);
+
+                }
+            });
+        }
+
+
+    })
+
+
+    page=1;
+    var   url="{:U('message/index')}";
+    $(window).scroll(
+            function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+
+                    $.post(url,{'page':page,'type':'load'},function (da) {
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            $('#food').append(obj.msg);
+                            page++;
+                        }else{
+                            //$('.molink').addClass('nothing');
+
+                            layer.msg('没有更多了哦~');
+                        }
+                    })
+
+                }
+            });
+
+
+    $(document).on("click",".icon2",function () {
+        var type="{$Think.get.model}";
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':'discuz'},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                //collection.html(parseInt(num)+1);
+                collection.css("background-image","url('/Public/Home/img/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                //collection.html(parseInt(num)-1);
+                collection.css("background-image","url('/Public/Home/img/gud/dtjg_05.jpg')");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+
+    function expan(id){
+        $('#li_'+id+' .more').toggleClass('hide');
+    }
+</script>
+</html>

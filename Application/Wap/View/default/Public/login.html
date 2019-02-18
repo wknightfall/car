@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+
+</head>
+<body>
+
+    <div class="my_body">
+        <!--head-->
+        <div class="tt_head">
+            <img src="__IMG__/person/icon/iconfont-6.png" alt="">
+            个人登录
+        </div>
+        <div class="logo_dom">
+            <div class="logo_dom_1">
+                <img src="__IMG__/person/icon/logo.png" alt="">
+            </div>
+            <div class="logo_dom_2">
+                <img src="__IMG__/person/icon/parson.jpg" alt="">
+            </div>
+
+        </div>
+
+        <div class="user_log">
+            <ul>
+                <li><i>账号</i><input type="text" placeholder="请输入您的手机号"name="phone" id="phone"></li>
+                <li><i>密码</i><input type="password" placeholder="请输入密码" name="pwd" id="pwd"></li>
+                <li><input type="button" value="登录" id="login"></li>
+            </ul>
+        </div>
+        <div class="logg_aa">
+            <a href="{:U('forget')}">忘记密码</a>
+            <i>
+                <em>没有账号,</em>
+                <a href="{:U('public/register')}" >立即注册</a>
+                <!--<a href="javascript:">商家登录</a>-->
+            </i>
+        </div>
+        <div class="dsf_login">
+            <div class="tt_dsf">
+                <i>第三方账号登录</i>
+            </div>
+            <span>
+            <a href="javascript:">
+                <img src="__IMG__/person/icon/qq.png" onclick="location.href='/home/public/qq_login'">
+            </a>
+            <a href="javascript:" style="display: none">
+                <img src="__IMG__/person/icon/wx.png" onclick="location.href='/home/public/wx_login'">
+            </a>
+        </span>
+        </div>
+
+    </div>
+
+</body>
+</html>
+<script>
+    $('#login').click(function () {
+
+        var phone=$('input[name=phone]').val();
+        var pattern = /^1[34578]\d{9}$/;
+        if(phone==""){
+            layer.tips('请输入手机号!', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }/*else if(pattern.test(phone)==false){
+            layer.tips('手机号不正确请重新输入!', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }*/
+
+
+        var pwd=$('input[name=pwd]').val();
+        if(pwd==''){
+            layer.tips('请输入密码!', '#pwd', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+        $.post("{:U('/Home/Public/checklogin')}",{'username':phone, 'password':pwd},function(data){
+            var obj=jQuery.parseJSON(data)
+            if(obj.code==200){
+                layer.msg(obj.msg,function (){
+                    location.href='/Wap/index/index';
+                });
+
+            }else{
+                layer.msg(obj.msg);
+            }
+
+        })
+    })
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height()<$(document).height()){
+
+            $("body").height($(document).height());
+            $("body").css("background","#ffffff");
+        }
+
+    }
+
+</script>

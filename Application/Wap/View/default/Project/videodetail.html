@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+
+    <link href="/Public/Wap/plugin/video/css/video-js.min.css" rel="stylesheet">
+
+    <style>
+        .vjs-paused .vjs-big-play-button,
+        .vjs-paused.vjs-has-started .vjs-big-play-button {
+            display: block;
+        }
+
+        /*.video-js.vjs-playing .vjs-tech {
+            pointer-events: auto;
+        }*/
+    </style>
+
+</head>
+<body>
+<!--头部-->
+<div class="head_dom">
+    <div class="head_left">
+        <img src="__IMG__/head/log.png" alt="">
+        <img src="__IMG__/head/name.jpg" alt="">
+    </div>
+    <div class="head_right">
+        <img src="__IMG__/head/user_p.png" alt="">
+        <img src="__IMG__/head/list_p.png" alt="">
+    </div>
+</div>
+
+
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <li><a href="{:U('project/index')}">主要景区</a></li>
+        <li><a href="{:U('scenic/route?navid=63')}">旅游路线</a></li>
+        <li class="inva_chk"><a href="{:U('project/videolist')}">景区视频</a></li>
+        <li><a href="{:U('project/note')}">旅行游记</a></li>
+    </ul>
+
+</div>
+<!--正文-->
+<div class="vide_ply">
+
+    <!--vjs-fluid自适应宽高-->
+    <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls="controls" preload="auto" width="" height="" poster="{$food.icon|picture}" data-setup="{}">
+        <source src="{$food.file|fileurl}" type="video/mp4">
+        <source src="{$food.file|fileurl}" type="video/webm">
+        <source src="{$food.file|fileurl}" type="video/ogg">
+        <p class="vjs-no-js">
+
+            <a href="http://videojs.com/html5-video-support/" target="_blank"></a>
+        </p>
+    </video>
+
+</div>
+
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>
+<script src="/Public/Wap/plugin/video/js/video.min.js"></script>
+<script type="text/javascript">
+    var myPlayer = videojs('my-video');
+    videojs("my-video").ready(function(){
+        var myPlayer = this;
+        // myPlayer.play();
+    });
+
+
+
+</script>

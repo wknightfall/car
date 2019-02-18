@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>名菜馆订单</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/hotel.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div>
+    <em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="{:U('index/index')}">旅游指南</a><em>-</em><a>酒店</a>
+</div>
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="jp_tesecai">
+
+        <div class="jin_tec">
+            <span class="tt_jincai">
+                <img src="{$room.icon|picture}" alt="">
+                <ul>
+                    <li>{$room.name}</li>
+                    <li>{$room.content}</li>
+                    <li><p>地址：{$room.addr} </p><p> 联系电话：<em>{$room.tel}</em></p></li>
+                </ul>
+            </span>
+            <ul>
+                <li><em>菜品名称</em><em>单价</em><em>数量</em><em>总价</em></li>
+                <volist name="food" id="vo">
+                <li><em>{$vo.goodsid|modelField='room','name'}</em><em>￥{$vo.goodsid|modelField='room','price'}</em><em>{$vo.goodsnum}</em><em>￥{$vo.money}</em></li>
+                </volist>
+            </ul>
+        </div>
+
+        <div class="zhigs_ss">
+
+            <div class="pay_imsg1">
+                <span>请选择支付方式</span>
+                <div class="bodr_pay1">
+                    <ul>
+                        <li class="pay_red">
+                            <div>
+                                <img src="__IMG__/htl/22htl_16.jpg" alt="">
+                                <span>
+                                <p>余额</p>
+                                <p>￥{$user.balance}</p>
+                            </span>
+                            </div>
+                        </li>
+                        <li class="zfb_bt"><img src="__IMG__/htl/22htl_10.jpg" alt=""></li>
+                        <li class="weixin"><img src="__IMG__/htl/22htl_13.jpg" alt=""></li>
+                    </ul>
+                </div>
+                <div class="time_pay1">
+                    <i>提交订单后将为您保留15分钟，请及时支付</i>
+                    <span><em>总支付</em><i>￥{$money}</i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-------底部--------->
+<footer class="btn_fot">
+    <div class="foot_tet">
+        <span><i></i><em>我已阅读并同意</em><p>旅游合同，保险条款，保险经纪委托合同及客户告知书，特别预定提示，安全提示。</p></span>
+        <input type="button" value="提交订单" id="pay">
+    </div>
+</footer>
+</body>
+</html>
+<script>
+    var type=1;//支付方式
+
+    $(document).on("click","#pay",function () {
+        var orderno = "{$Think.get.orderno}";
+
+        $.post("/Home/Ajax/checkorder",{'orderno':orderno},function(da){
+            var checkobj = jQuery.parseJSON(da);
+            if(checkobj.code==200){
+               layer.msg('此订单已支付完成');
+            }else if(checkobj.code==400){
+                layer.msg('非法操作');
+            }else{
+               //console.log(orderno,type);return;
+               //余额支付
+               if(type == 1){
+                   $.post("/Home/Pay/pay",{'orderno':orderno},function(da){
+                       var obj = jQuery.parseJSON(da);
+                       if(obj.code==200){
+                           layer.msg(obj.msg,function () {
+                               //location.href='/Home/Pay/pay/id/'+id+'/orderno/'+obj.msg;
+                           });
+                       }else{
+                           layer.msg(obj.msg);
+                       }
+                   });
+               }else if(type == 2){
+                   location.href='/Home/Pay/testpay/orderno/'+orderno;return;
+               }else if(type == 3){
+                   location.href='/Home/Wxpay/testpay/orderno/'+orderno;
+               }
+
+            }
+        });
+
+
+
+    })
+
+    $(".bodr_pay1 ul li").click(function () {
+        type=$(this).index()+1;
+        $(".bodr_pay1 ul li").removeClass("pay_red");
+        if ($(this).hasClass("pay_red")){
+            $(this).removeClass("pay_red");
+        } else {
+            $(this).addClass("pay_red");
+        }
+    })
+
+    $(".weix_or ul li").click(function () {
+
+        $(".weix_or ul li").removeClass("zfb_or_weix");
+        if ($(this).hasClass("zfb_or_weix")) {
+            $(this).removeClass("zfb_or_weix");
+        } else {
+            $(this).addClass("zfb_or_weix");
+        }
+    })
+
+    $(".pars_text>ul>li>input").focus(function () {
+        $(this).parent("li").prev("li").children("span").children("i").text("");
+    })
+    $(".pars_text>ul>li>input").blur(function () {
+
+        if($(this).text()==null||$(this).text()==undefined||$(this).text()==""){
+            $(this).parent("li").prev("li").children("span").children("i").text("*");
+        }else {
+            $(this).parent("li").prev("li").children("span").children("i").text("");
+
+        }
+    })
+    $(".yes_xy>li:nth-child(1)").click(function () {
+
+        if ($(this).hasClass("yes_xyadd")){
+            $(this).removeClass("yes_xyadd");
+        } else {
+            $(this).addClass("yes_xyadd");
+        }
+    })
+    $(".foot_tet>span>i").click(function () {
+
+        if ($(this).hasClass("yes_xyadd")){
+            $(this).removeClass("yes_xyadd");
+        } else {
+            $(this).addClass("yes_xyadd");
+        }
+    })
+
+    $(".foot_tet>input").click(function () {
+
+
+    })
+</script>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <include file="Public/top" />
+	<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/default.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/members.css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/page.css"/>
+
+	<script src="__JS__/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__JS__/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="__JS__/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <script type="text/javascript" src="__JS__/default.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			if($(window).width() >= 320 && $(window).width() <= 1023){
+				var mySwiper = new Swiper('.courseCon',{
+						loop:false,
+						slidesPerView :1,
+						slidesPerGroup :1,
+						observer:true,
+						observeParents:true,
+					});
+			}
+			if($(window).width() >= 1024){
+				$('.lea_item:nth-child(2n-1)').addClass('lebes');
+				$('.lea_item:nth-child(2n)').css({
+					'paddingLeft':'50px'
+				})
+			var mySwiper = new Swiper('.courseCon',{
+					loop:false,
+					slidesPerView :4,
+					slidesPerGroup :1,
+					observer:true,
+					observeParents:true,
+				});
+			}
+			setTimeout(function(){
+			},10)
+		})
+	</script>
+</head>
+<body>
+
+<include file="Public/header" />
+	<!-- kuai -->
+	<div class="kBox"></div>
+	
+	<section class="contentBox">
+		<!--  -->
+		<div class="opt_tabBox">
+			<div class="optionsBox">
+				<div class="width1200 optionsCon">
+					<div class="crumbsBox">
+						<a href="{:U('Index/index')}"><i class="glyphicon glyphicon-home"></i>Home</a>
+						<span class="icon-rightjt"></span>
+						<a>Enter C-IASI</a>
+						<span class="icon-rightjt"></span>
+						<a class="crumbsTxt">{$get['typeid']|modelField='category','name'}</a>
+					</div>
+					<!-- xiao nav -->
+					<div class="s_nav">
+						<ul>
+							<volist name="twonav" id="twnav" key="kk">
+								<li class="<?php if($get[typeid]==$twnav['id']){echo 'active';} ?>">{$twnav['name']}</li>
+							</volist>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<div class="opt_Box">
+				<div class="hidddes" style="<?php if($get[typeid]==10){echo 'display:block';}else{echo 'display:none';} ?>">
+					<div class="width1200 introduce">
+						<!--  -->
+						<div class="expTit">
+							<p class="exp_tit">中国保险汽车安全指数</p>
+							<span class="exp_sapn">CHINA INSURANCE AUTOMOTIVE SAFETY INDEX</span>
+							<em class="exp_em"></em>
+							<p class="exp_text">{:modelField(10,'category','egcontent')}</p>
+						</div>
+						<!--  -->
+						<div class="Int_newsText">
+							<div class="Int_newsCon">
+								<div class="Int_n_img"><img src="{:picture(modelField(10,'category','icon'))}" alt=""></div>
+								<div class="Int_n_Text">
+									<volist name="zhishu_list" id="zhishu">
+									<div>
+										<span>{$zhishu['egname']}</span>
+										<p>{$zhishu['egcontent']}</p>
+									</div>
+									</volist>
+								</div>
+							</div>
+							<!--  -->
+							<div class="Int_ensure">
+								<div class="Int_e_item">
+									<div class="en_img"><img src="__IMG__/center/shuju.png" alt=""></div>
+									<p class="en_text">为消费者购车养车提供参考 </p>
+								</div>
+								<div class="Int_e_item">
+									<div class="en_img"><img src="__IMG__/center/baoxian.png" alt=""></div>
+									<p class="en_text">为保险公司承保理赔提供技术支撑  </p>
+								</div>
+								<div class="Int_e_item">
+									<div class="en_img"><img src="__IMG__/center/qiche.png" alt=""></div>
+									<p class="en_text">为整车企业优化产品设计提供输入  </p>
+								</div>
+								<div class="Int_e_item">
+									<div class="en_img"><img src="__IMG__/center/kaohe.png" alt=""></div>
+									<p class="en_text">为政府部门监督管理提供信息 </p>
+								</div>
+							</div>
+						</div>
+						<!-- 框架内容 -->
+						<div class="frameCon">
+							<div class="frame_titCon">
+								<p class="fra_tit">框架内容</p>
+								<span class="fra_text">&nbsp;&nbsp;&nbsp;&nbsp;中国保险汽车安全指数体系包含：耐撞性与维修经济性指数、车内乘员安全指数、车外行人安全指数和车辆辅助安全指数四个维度，分别从汽车保有环节的财产风险、人身风险等方面，以指数为呈现形式，将汽车产品隐性特征显性化和定量化，从汽车使用者和保险的角度客观评价车辆的安全特征及使用经济性。</span>
+							</div>
+							<div class="frame_Content">
+								<div class="far_c_item">
+									<div class="far_c_img"><img src="__IMG__/center/weixiu.png" alt=""></div>
+									<p class="far_c_tit">耐撞性与维修经济性指数</p>
+									<span class="far_c_text">汽车在车速较低的情况下发生碰撞或刮擦事故是日常生活中广大车主都会遇到的高频问题。而在低速事故中发生的车辆损坏，不同的车辆会呈现出不同的特性，不同的特性都直接关系到车主在车辆保有环节的综合成本，而这些特性在购车环节中又是隐性的。耐撞性与维修经济性指数针对该隐性特性，参照国外保险行业汽车技术研究机构通行采用的试验方式和评价规程，开展实车碰撞研究，对车辆的耐损性和维修经济性等进行信息公示，提供消费者更全面的购车和养车信息。</span>
+								</div>
+								<div class="far_c_item">
+									<div class="far_c_img"><img src="__IMG__/center/anquan.png" alt=""></div>
+									<p class="far_c_tit">车内成员安全指数</p>
+									<span class="far_c_text">汽车在中高速行驶中发生碰撞事故对车内乘员是非常危险的，也直接影响到消费者的财产和人身安全。尤其是高速碰撞事故，其造成的损失和影响更大。通过结合国内保险赔付情况和国外保险行业汽车技术研究机构的研究，针对保险赔付案例中人伤程度最严重，赔付风险最突出的情况：易发生乘员空间侵入的正面25%小偏置碰撞、侧面碰撞和侧翻翻滚，以及极易形成挥鞭伤，即颈椎过度屈伸性损伤的座椅鞭打情形等，通过实车碰撞研究，对车辆的车内乘员安全性能进行试验评价，并面向消费者进行科学的安全信息提示，引导消费者理性地选车购车，通过引导需求侧促进汽车产品和服务的供给侧改革。</span>
+								</div>
+								<div class="far_c_item">
+									<div class="far_c_img"><img src="__IMG__/center/xinren.png" alt=""></div>
+									<p class="far_c_tit">车外行人安全指数</p>
+									<span class="far_c_text">中国道路交通中人车混行十分常见，路况条件较为复杂，加之人们的道路交通法规意识不强，导致涉及行人的交通事故高发。行人是弱势道路使用者，在行人保护方面需要全社会的共同关注和努力，尽可能地减少事故发生，减轻人身伤害风险。结合中国道路安全发展现状实际，参考国际上对车辆行人保护安全性能的测试评价规范，对事故中主要的人体小腿伤害、大腿伤害和头部伤害等，对车辆的车外行人安全性能进行指数化衡量，提升全社会对道路行人的保护意识，培养行人对事故危害的认识，促进人、车、路和谐发展，是“指数”工作社会性、普惠性的重要体现。</span>
+								</div>
+								<div class="far_c_item">
+									<div class="far_c_img"><img src="__IMG__/center/fuzhu.png" alt=""></div>
+									<p class="far_c_tit">车辆辅助安全指数</p>
+									<span class="far_c_text">随着汽车电子技术向着智能和网联发展，新的车辆辅助安全技术不断出现，可以在危机发生之前，对驾驶者进行预警，甚至可以在预警无效时，无需驾驶者介入即可实现车道保持、减速或者停车等避险措施，极大地提升了车辆的主动安全性。这对汽车保险承保理赔的服务水平提出了新的要求。国外的保险行业汽车技术研究机构已经积极开展相关工作。为顺应汽车安全技术发展的大趋势，在现有的国际研究基础之上形成了车辆辅助安全指数。该指数对安全辅助装置的事故防止有效性和损伤减轻有效性等功能及效果进行试验和评价，并通过具体的行业关联应用和消费者信息提示，促进汽车安全技术的进步，最终通过行车风险的预防和降低，实现对车辆和道路使用者的安全保障和保险标的风险的降低。</span>
+								</div>
+							</div>
+						</div>
+						<!-- 工作历程 -->
+						<div class="courseBox">
+							<p class="fra_tit">工作历程</p>
+							<div class="courseCon">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide cou_item">
+										<div class="cou_i_Con">
+											<div class="cou_i_it col-2">
+												<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+												<p class="cou_i_ittxt">联合工作组</p>
+											</div>
+											<div class="cou_i_it col-2">
+												<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+												<p class="cou_i_ittxt">联合工作组</p>
+											</div>
+										</div>
+										<div class="cou_i_time">2014</div>
+									</div>
+									<div class="swiper-slide cou_item">
+										<div class="cou_i_Con">
+											<div class="cou_i_it col-2">
+												<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+												<p class="cou_i_ittxt">调研走访</p>
+											</div>
+											<div class="cou_i_it col-2">
+												<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+												<p class="cou_i_ittxt">顶层设计</p>
+											</div>
+										</div>
+										<div class="cou_i_time">2015</div>
+									</div>
+									<div class="swiper-slide cou_item">
+										<div class="cou_i_Con">
+											<div class="cou_i_it col-2">
+												<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+												<p class="cou_i_ittxt">体系验证</p>
+											</div>
+											<div class="cou_i_it col-2">
+												<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+												<p class="cou_i_ittxt">框架发布</p>
+											</div>
+										</div>
+										<div class="cou_i_time">2016</div>
+									</div>
+									<div class="swiper-slide cou_item">
+										<div class="cou_i_Con">
+											<div class="cou_i_it col-2">
+												<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+												<p class="cou_i_ittxt">测评规程发布</p>
+											</div>
+											<div class="cou_i_it col-2">
+												<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+												<p class="cou_i_ittxt">2016年度研究结果发布</p>
+											</div>
+										</div>
+										<div class="cou_i_time">2017</div>
+									</div>
+									<div class="swiper-slide cou_item">
+											<div class="cou_i_Con">
+												<div class="cou_i_it col-2">
+													<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+													<p class="cou_i_ittxt">2017年度研究结果发布</p>
+												</div>
+												<div class="cou_i_it col-2">
+													<div class="cou_i_itImg"><img src="__IMG__/icon/cilun.png" alt=""></div>
+													<p class="cou_i_ittxt">2018年度第一批车型测评结果发布</p>
+												</div>
+											</div>
+											<div class="cou_i_time">2018</div>
+										</div>
+								</div>
+							</div>
+						</div>
+						<!-- 精彩视频 -->
+						<div class="greatVideo">
+							<p class="fra_tit">精彩视频</p>
+							<div class="great_con">
+                                <volist name="video" id="mv">
+								<div class="great_c_v">
+                                    <notempty name="mv['file']">
+										<video src="{$mv['file_url']}" poster="{$mv.icon|picture}" controls="controls" width="100%">
+											您的浏览器不支持。
+										</video>
+                                    </notempty>
+								</div>
+                                </volist>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="<?php if($get[typeid]==11){echo 'display:block';}else{echo 'display:none';} ?>">
+					<div class="width1200 management">
+						<!-- img -->
+						<div class="man_img">
+							<img src="__IMG__/center/yuanl.jpg" alt="">
+							<div class="man_tab">
+								<div class="man_ge man_one">  </div>
+								<div class="man_ge man_two">  </div>
+								<div class="man_ge man_three"> </div>
+								<div class="man_ge man_four"> </div>
+								<div class="man_ge man_five"> </div>
+								<div class="man_ge man_six"> </div>
+							</div>
+						</div>
+						
+						<!--  -->
+						<div class="man_tBox">
+							<div>
+								<div class="StagingArea">
+									<p class="sat_tit">管理中心办公室</p>
+									<div class="sat_Con">
+										<div class="sat_c_img"><img src="__IMG__/center/DJI_0032.jpg" alt=""></div>
+										<div class="sat_c_text">
+											<p>1. 负责管理中心相关管理制度的制修订、各类资料的整理、归档等工作；</p>
+											<p>2. 负责管理中心发展规划、年度计划制定工作的组织协调，以及中心各项重点工作进展情况的了解和落实督办；</p>
+											<p>3. 负责“安全指数”管理办法修订完善工作的组织协调，负责“指数”网站、公众号等的建立及维护工作；</p>
+											<p>4. 负责“安全指数”测评车型方案的制定、测评结果公开发布的组织协调；</p>
+											<p>5. 负责决策委员会、专家委员会、管理中心等相关会议的会务工作；</p>
+											<p>6. 负责相关活动、会议等的策划及组织实施等工作；</p>
+											<p>7. 管理中心领导赋予的其他工作职能。</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="hide"><div>222222222222</div></div>
+							<div class="hide"><div>3333333333333</div></div>
+							<div class="hide"><div>4444444444444</div></div>
+							<div class="hide"><div>555555555555555</div></div>
+							<div class="hide"><div>6666666666666</div></div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="hidddes" style="<?php if($get[typeid]==12){echo 'display:block';}else{echo 'display:none';} ?>">
+					<div class="width1200 league">
+						<!-- 合作单位 -->
+						<div class="leagueCon">
+							<volist name="hezuo_lise" id="hezuo" offset="0" length="2">
+								<div class="lea_item">
+									<div class="lea_i_img"><img src="{:picture($hezuo['icon'])}" alt=""></div>
+									<div class="lea_i_con">
+										<div class="lea_er"><img src="{:picture($hezuo['icon2'])}" alt=""></div>
+										<div class="lea_addlss">
+											<p>Add：{$hezuo['egaddress']}</p>
+											<p>Tel：{$hezuo['zj_mobile']}</p>
+											<p>Fax：{$hezuo['fax_code']} </p>
+											<p>E-MAIL：{$hezuo['email']}</p>
+											<p>Url：{$hezuo['web_url']}</p>
+										</div>
+									</div>
+								</div>
+							</volist>
+							<div class="lea_item">
+							</div>
+							<volist name="hezuo_lise" id="hezuo" offset="2" length="1">
+								<div class="lea_item">
+									<div class="lea_i_img"><img src="{:picture($hezuo['icon'])}" alt=""></div>
+									<div class="lea_i_con">
+										<div class="lea_er"><img src="{:picture($hezuo['icon2'])}" alt=""></div>
+										<div class="lea_addlss">
+											<p>Add：{$hezuo['egaddress']}</p>
+											<p>Tel：{$hezuo['zj_mobile']}</p>
+											<p>Fax：{$hezuo['fax_code']} </p>
+											<p>E-MAIL：{$hezuo['email']}</p>
+											<p>Url：{$hezuo['web_url']}</p>
+										</div>
+									</div>
+								</div>
+							</volist>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+	
+	<!-- footer -->
+<include file="Public/footer" />
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".opt_tabBox .s_nav ul > li").mouseover(function(){
+			var _index = $(this).index();
+			$(".opt_Box > div").eq(_index).show().siblings().hide();
+			$(this).addClass("active").siblings().removeClass("active");
+			var act = $(this).text();
+			$('.crumbsTxt').html(act);
+		});
+		
+		
+		$(".management .man_img .man_tab > div").click(function(){
+			var _index = $(this).index();
+			$(".man_tBox > div").eq(_index).show().removeClass("hide").siblings().hide().addClass("hide");
+		});
+		
+		var tiemh =1000, tTwo =700,ts = 500;
+		var winH = $(window).height();
+		$(window).on("scroll", function(){
+			loadZf($('.Int_newsCon'),$('.Int_n_img'),$('.Int_n_Text'));
+			loadInt($('.Int_ensure'));
+			loadGr($('.greatVideo'));
+		});
+		function loadZf($hade,$y,$x){
+		var scrollH = $(window).scrollTop();
+			var $con = $hade.offset().top ;
+			if($con < winH + scrollH){
+				$y.animate({
+					'left':'0',
+					'opacity':'1',
+					'filter': 'alpha(opacity ==100)',
+				},tiemh);
+				$x.animate({
+					'right':'0',
+					'opacity':'1',
+					'filter': 'alpha(opacity ==100)',
+				},tiemh);
+			}
+		}
+		function loadInt($hade){
+		var scrollH = $(window).scrollTop();
+			var $con = $hade.offset().top ;
+			if($con < winH + scrollH){
+				$(".Int_ensure .Int_e_item:nth-child(1)").animate({
+					'top':'0px',
+					'opacity': '1',
+					'filter': 'alpha(opacity ==100)',
+				},tTwo,function(){
+					$(".Int_ensure .Int_e_item:nth-child(2)").animate({
+						'top':'0px',
+						'opacity': '1',
+						'filter': 'alpha(opacity ==100)',
+					},tTwo,function(){
+						$(".Int_ensure .Int_e_item:nth-child(3)").animate({
+							'top':'0px',
+							'opacity': '1',
+							'filter': 'alpha(opacity ==100)',
+						},tTwo,function(){
+							$(".Int_ensure .Int_e_item:nth-child(4)").animate({
+								'top':'0px',
+								'opacity': '1',
+								'filter': 'alpha(opacity ==100)',
+							},tTwo,function(){
+								
+							})
+						})
+					})
+				})
+			}
+		}
+		function loadGr($hade){
+		var scrollH = $(window).scrollTop();
+			var $con = $hade.offset().top ;
+			if($con < winH + scrollH){
+				$('.greatVideo .great_c_v:nth-child(1)').animate({
+					'right':'0',
+					'opacity':'1',
+					'filter': 'alpha(opacity ==100)',
+				},tiemh,function(){
+					$('.greatVideo .great_c_v:nth-child(2)').animate({
+						'right':'0',
+						'opacity':'1',
+						'filter': 'alpha(opacity ==100)',
+					},tTwo,function(){
+						$('.greatVideo .great_c_v:nth-child(3)').animate({
+							'right':'0',
+							'opacity':'1',
+							'filter': 'alpha(opacity ==100)',
+						},ts,function(){
+							
+						})
+					})
+				})
+			}
+		}
+	});
+	</script>
+</body>
+</html>

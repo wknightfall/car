@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="__IMG__/banner/tr_xts_02.jpg" alt="">
+</div>
+<!--title-->
+<div class="problem_nv">
+    <ul>
+        <li><a href="{:U('help/index')}">常见问题</a></li>
+        <li><a href="{:U('help/cs')}">出游常识</a></li>
+        <li class="this_problem"><a href="{:U('help/tel')}">常用电话</a></li>
+    </ul>
+</div>
+<!--正文-->
+<div class="xts_phone_list">
+    <ul id="food">
+        <volist name="list" id="vo">
+            <li>
+                <p>{$vo.name}</p>
+                <div>
+                    <p>公司地址：{$vo.addr}</p>
+                    <p>电话：{$vo.tel}</p>
+                    <p>邮箱：{$vo.email}</p>
+                </div>
+            </li>
+        </volist>
+    </ul>
+</div>
+<div class="see_more">
+
+    <a href="javascript:" class="molink">查看更多+</a>
+</div>
+<!--information-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+
+    page=1;
+    var    url="{:U('help/tel')}";
+
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+        }
+    })
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        var colnum=$(this).next('i');
+        $.post("/Home/Ajax/collection",{'id':id,'type':'food'},function(da){
+            var num = colnum.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                colnum.html(parseInt(num)+1);
+                collection.attr("src","/Public/wap/image/icon/hert.png");
+
+            }else if(obj.code==201){
+                colnum.html(parseInt(num)-1);
+                collection.attr("src","/Public/wap/image/icon/aattt.png");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+
+
+</script>
+</html>

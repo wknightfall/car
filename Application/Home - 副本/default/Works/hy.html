@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/news.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <!--特效-->
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <!--nav-->
+    <include file="Public/nav" />
+
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!---->
+<div class="travel_gbi" style="display: inline-block;" id="rippleria">
+    <img src="__IMG__/news/0news_02.jpg" alt="">
+</div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div>
+    <em>您当前的位置：</em><a>首页</a><em>-</em><a>新闻动态</a><em>-</em><a>集团新闻</a>
+</div>
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="news_1gro">
+        <div class="gro_lis">
+            <ul>
+                <li ><a href="{:U('news/index')}" style="text-decoration: none;color:#000">集团新闻</a></li>
+                <li class="ckd_new"><a href="{:U('news/hy')}" style="text-decoration: none;color:#000">行业新闻</a></li>
+                <li><a href="{:U('news/gs')}" style="text-decoration: none;color:#000">公示公告</a></li>
+
+            </ul>
+        </div>
+        <div class="gro_deta">
+            <p><i>行业新闻</i><em>Industry</em></p>
+            <div class="under00_lin">
+                <span class="under00_ylin"></span>
+                <span class="under00_hlin"></span>
+            </div>
+            <div class="text_lst">
+                <ul>
+                    <volist name="lists" id="vo">
+                        <li>
+                            <img src="{$vo.icon|picture}" alt="">
+                            <div class="text_ft">
+                                <p>{$vo.title}</p>
+                                <p><i>发布时间</i><em>{$vo.create_time|date='Y-m-d',###}</em></p>
+                                <p>{$vo.descriptions}
+                                    <a href="{:U('home/news/newsdetail?id='.$vo['id'])}">【详情】</a></p>
+                            </div>
+                        </li>
+                    </volist>
+
+                </ul>
+            </div>
+            <div class="page_tt">
+                <ul>
+                    {$page}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-------底部--------->
+<footer>
+    <div class="foote">
+        <div class="foot_nav">
+            <span>友情链接：</span>
+            <ul>
+                <li>锦屏官网</li>
+                <li>旅游网站</li>
+                <li>旅游网站</li>
+                <li>锦屏官网</li>
+                <li>锦屏官网</li>
+                <li>旅游网站</li>
+            </ul>
+            <div class="foot_to_top"><p>返回</p><p>顶部</p></div>
+        </div>
+        <div class="foot_bot">
+            <div class="foot_text1"><span>关于我们：</span>
+                <ul>
+                    <li>联系方式</li>
+                    <li>法律申明</li>
+                    <li>合作伙伴</li>
+                </ul>
+            </div>
+            <div class="foot_text2"><span>公司地址：</span>
+                <ul>
+                    <li>锦屏县三江镇赤溪坪社区（锦屏文书特藏馆）</li>
+                    <li>电话：0855——3900890</li>
+                    <li>邮编：55000</li>
+                    <li>gzsxwhlyfzjt@sina.com</li>
+                </ul>
+            </div>
+            <div class="foot_text3"><span>版权所有：</span><ul><li>贵州杉乡文化旅游发展集团有限公司</li></ul></div>
+        </div>
+        <div class="foot_code">
+            <ul><li><img src="__IMG__/centre/img_10.jpg" alt=""></li><li>关注企业微博</li></ul>
+            <ul><li><img src="__IMG__/centre/img_10.jpg" alt=""></li><li>关注公众号</li></ul>
+        </div>
+    </div>
+</footer>
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+</html>

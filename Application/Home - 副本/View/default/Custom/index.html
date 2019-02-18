@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta name="Keywords" content="{:C('WEB_SITE_KEYWORD')}">
+    <meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/default.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/style.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/tabs.js"></script>
+</head>
+<body>
+
+<!--page header-->
+<include file="Public/header" />
+<!--header end-->
+
+<div class="container">
+    <div class="insert-tit">
+        <p>用户满意度调查是中国消费者汽车驾乘指数的消费者评价部分，主要从汽车的舒适性、驾驶性、操控安全性及质量可靠性等方面进行调查统计，每个问题满 意度最高 10 分，最低 6 分。</p>
+        <p>调查结果以加权平均的评分方式计入消费者评价指标中。用户满意度调查问题如下：</p>
+    </div>
+    <div class="insertSlect fix">
+        <span>您经常驾乘（参与调研）的汽车的具体品牌和型号是：</span>
+
+        <select id='brand' onchange="cartype($(this).val())" >
+            <option value="0" >请选择你驾乘的汽车品牌</option>
+            <volist name="brand" id="vo">
+            <option value="{$vo.id}" >{$vo.name}</option>
+            </volist>
+        </select>
+        <select id="cartype" onchange="" ></select>
+
+    </div>
+    <div class="carlist">
+        <ul id="cars">
+
+        </ul>
+    </div>
+    <div class="row radlist">
+        <ul class="list-group">
+        <form action="" METHOD="post" id="form">
+            <volist name="que" id="vo">
+                <li class="col-md-6">
+                    <p>{$key+1}. {$vo.name}</p>
+                    <div class="realie">
+                        <label class="realie-on">10<input type="radio" checked="checked" name="{$vo.id}"  value="10"></label>
+                        <label>9<input type="radio" name="{$vo.id}" value="9"></label>
+                        <label>8<input type="radio" name="{$vo.id}" value="8"></label>
+                        <label>7<input type="radio" name="{$vo.id}" value="7"></label>
+                        <label>6<input type="radio" name="{$vo.id}" value="6"></label>
+                    </div>
+                </li>
+            </volist>
+        </form>
+        </ul>
+    </div>
+    <div class="inserBtn"><input type="button" value="提交满意度调查问卷" id="submit"></div>
+</div>
+
+<include file="Public/footer" />
+
+</body>
+<script>
+    $('#submit').click(function () {
+
+        var brand=$('#brand').val();
+        var cartype=$('#cartype').val();
+        if(brand==0){
+            layer.msg('请选择汽车品牌！');return;
+        }
+        if(cartype==0){
+            layer.msg('请选择车型！');return;
+        }
+
+        $.post("/Home/Ajax/answer",{brandid:brand,cartypeid:cartype,'data':$('#form').serialize()},function (da) {
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg(obj.msg);
+
+            }else{
+                layer.msg(obj.msg);
+            }
+        })
+    })
+    $(function () {
+        cartype($('#brand').val());
+    })
+    function cartype(id) {
+
+        $.post("/Home/Ajax/cartype",{'id':id},function (da) {
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                $('#cartype').empty();
+                $('#cartype').append(obj.msg);
+
+
+                $.post("/Home/Ajax/carpic",{'id':id},function (da) {
+                    var obj = jQuery.parseJSON(da);
+                    if(obj.code==200){
+                        $('#cars').empty();
+                        $('#cars').append(obj.msg);
+
+
+
+                    }else{
+                        layer.msg(obj.msg);
+                    }
+                })
+            }else{
+
+
+                layer.msg(obj.msg);
+            }
+        })
+    }
+    function carpic(id) {
+
+    }
+
+</script>
+</html>

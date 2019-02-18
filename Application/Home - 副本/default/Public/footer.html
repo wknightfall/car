@@ -1,0 +1,50 @@
+<footer>
+	<div class="foote">
+		<div class="foot_nav">
+			<span>友情链接：</span>
+			<ul>
+				<volist name="friend" id="vo">
+				<li><a href="{$vo.url}" target="_blank">{$vo.name}</a></li>
+				</volist>
+			</ul>
+			<div class="foot_to_top"><p>返回</p>
+				<p>顶部</p></div>
+		</div>
+		<div class="foot_bot">
+			<div class="foot_text1"><span>关于我们：</span>
+				<ul>
+					<li><a href="{:U('about/tel?navid=93')}" style="color:#616161">联系方式</a></li>
+					<li><a href="{:U('about/legal?navid=94')}" style="color:#616161">法律申明</a></li>
+					<li><a href="{:U('about/coop?navid=95')}" style="color:#616161">合作伙伴</a></li>
+				</ul>
+			</div>
+			<div class="foot_text2"><span>公司地址：</span>
+				<ul>
+					<li>{:C('WEB_COM_ADDRESS')}</li>
+					<li>电话：{:C('WEB_SITE_MOBILE')}</li>
+					<li>邮编：{:C('WEB_YOUBIAN')}</li>
+					<li>gzsxwhlyfzjt@sina.com</li>
+				</ul>
+			</div>
+			<div class="foot_text3"><span>版权所有：</span>
+				<ul>
+					<li>贵州杉乡文化旅游发展集团有限公司</li>
+				</ul>
+			</div>
+		</div>
+		<div class="foot_code">
+			<ul>
+				<li><img src="{$weibo|picture}" style="width:82px;height: 82px;"></li>
+				<li>关注企业微博</li>
+			</ul>
+			<ul>
+				<li><img src="{$fuwu|picture}" style="width:82px;height: 82px;"></li>
+				<li>关注公众号</li>
+			</ul>
+			<ul>
+				<li><img src="{$dingyue|picture}" style="width:82px;height: 82px;"></li>
+				<li>关注订阅号</li>
+			</ul>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,217 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>添加视频</h2>
+    </div>
+    <ul class="tab-nav nav">
+        <li class="current"><a href="javascript:void(0)">基本信息</a></li>
+    </ul>
+    
+    <form action="{:U()}" method="post" class="form-horizontal">
+        <div class="tab-content">
+            <div class="form-item">
+                <label class="item-label">标题<span class="check-tips">（标题必须填写）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="title" value="">
+                    <input type="hidden" name="mid" value="{$mid}" />
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">英文标题<span class="check-tips">（英文标题必须填写）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="egtitle" value="">
+                    <input type="hidden" name="id" value="{$vo.id}" />
+                </div>
+            </div>
+            <div>
+                <label class="item-label">描述</label>
+                <div class="controls">
+                    <textarea name="describle"  value="" style="width: 400px;height: 100px;"></textarea>
+                </div>
+            </div>
+            <div>
+                <label class="item-label">英文描述</label>
+                <div class="controls">
+                    <textarea name="egdescrible" value="" style="width: 400px;height: 100px;"></textarea>
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="item-label">排序</label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="sort" value="">
+                </div>
+            </div>
+           <!-- <div class="form-item">
+                <label class="item-label">英文标题<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="egname" value="">
+                </div>
+            </div>-->
+
+
+            <div class="form-item">
+                <label class="item-label">视频类别<span class="check-tips">（类别必须选择）</span></label>
+                <div class="controls">
+                    <select name="typeid" style="width:150px;">
+                        <option value="" >请选择类别</option>
+                        <volist name="category" id="category">
+                            <option value="{$category.id}" <?php if($_GET['typeid']==$category[id]){echo 'selected';} ?>>{$category.html}{$category.title}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="controls">
+                    <label class="item-label">缩略图<span class="check-tips">（缩略图必须选择）</span></label>
+                    <input type="file" id="upload_picture">
+                    <input type="hidden" name="icon" id="icon" value="{$vo['icon']|default=''}"/>
+                    <div class="upload-img-box">
+                        <notempty name="info['icon']">
+                            <div class="upload-pre-item"><img src="__ROOT__{$vo.icon|get_cover='path'}"/></div>
+                        </notempty>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    //上传图片
+                    /* 初始化上传插件 */
+                    $("#upload_picture").uploadify({
+                        "height"          : 30,
+                        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                        "fileObjName"     : "download",
+                        "buttonText"      : "上传图片",
+                        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                        "width"           : 120,
+                        'removeTimeout'	  : 1,
+                        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                        "onUploadSuccess" : uploadPicture,
+                        'onFallback' : function() {
+                            alert('未检测到兼容版本的Flash.');
+                        }
+
+                    });
+                    function uploadPicture(file, data){
+                        var data = $.parseJSON(data);
+                        var src = '';
+                        if(data.status){
+                            $("#icon").val(data.id);
+                            src = data.url || '__ROOT__' + data.path;
+                            $("#icon").parent().find('.upload-img-box').html(
+                                '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                            );
+                        } else {
+                            updateAlert(data.info);
+                            setTimeout(function(){
+                                $('#top-alert').find('button').click();
+                                $(that).removeClass('disabled').prop('disabled',false);
+                            },1500);
+                        }
+                    }
+                </script>
+            </div>
+
+
+            <div class="form-item">
+                <div class="controls">
+                    <label class="item-label">视频文件<span>(请上传视频编码为H.264的MP4格式)</span></label>
+                    <input type="file" id="upload_picture2">
+                    <input type="hidden" name="file" id="file" value="{$vo['file']|default=''}"/>
+                    <div class="upload-img-box">
+                        <notempty name="vo['file']">
+                            <div class="upload-pre-item">文件名</div>
+                        </notempty>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    //上传图片
+                    /* 初始化上传插件 */
+                    $("#upload_picture2").uploadify({
+                        "height"          : 30,
+                        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                        "fileObjName"     : "download",
+                        "buttonText"      : "上传文件",
+                        "uploader"        : "{:U('File/upload',array('session_id'=>session_id()))}",
+                        "width"           : 120,
+                        'removeTimeout'	  : 1,
+                        'fileTypeExts'	  : '*.mp4;*.wmv;*.mpg;',
+                        "onUploadSuccess" : uploadPicture,
+                        'onFallback' : function() {
+                            alert('未检测到兼容版本的Flash.');
+                        }
+
+                    });
+                    function uploadPicture(file, data){
+
+                        var data = $.parseJSON(data);
+                        var src = '';
+                        if(data.status){
+                            $("#file").val(data.id);
+                            src = data.url || '__ROOT__' + data.info;
+
+                            $("#file").parent().find('.upload-img-box').html(
+                                    '<div class="upload-pre-item">'+src+'</div>'
+                            );
+                        } else {
+                            updateAlert(data.info);
+                            setTimeout(function(){
+                                $('#top-alert').find('button').click();
+                                $(that).removeClass('disabled').prop('disabled',false);
+                            },1500);
+                        }
+                    }
+                </script>
+            </div>
+            <div class="form-item">
+                <label class="item-label">浏览量</label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="view" value="">
+                </div>
+            </div>
+            <!--<div class="form-item">-->
+                <!--<label class="item-label">内容</label>-->
+                <!--<div class="controls">-->
+                    <!--<label class="textarea">-->
+                        <!--<textarea name="content">{$vo.content}</textarea>-->
+                        <!--{:hook('adminArticleEdit', array('name'=>content,'value'=>$vo['content']))}-->
+                    <!--</label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="form-item">
+                <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+                <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+<include file="Public:datetime" />
+    <script type="text/javascript">
+	
+		$('.tab-nav li').click(function(){
+			$(this).attr('class','current')
+						.siblings().attr('class','');
+			var n_index=$('.tab-nav li').index(this);
+				$('.tab-content').eq(n_index).show()
+							 .siblings().hide();
+		});
+	
+        //导航高亮
+        highlight_subnav("{:U('Video/index')}");
+		
+		$('#deadline').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+		$('#deadline2').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    </script>
+</block>

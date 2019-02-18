@@ -1,0 +1,86 @@
+	<div class="hadeBox">
+		<div class="width1200 hadeCon">
+			<a class="hd_logo" href="{:U('Index/index')}"><img src="__IMG__/center/logo.png" alt=""></a>
+			<div class="hade_right">
+				<div class="hade_nav hade_pou">                              
+					<ul>
+						<li>
+							<a href="{:U('Index/index')}">首页</a>
+						</li>
+						<volist name="navs" id="navighter">
+						<li>
+							<a href="{:U($navighter.url)}">{$navighter[title]}</a>
+							<notempty name="navighter['nav_son']">
+								<div class="had_nav_lk">
+									<ul>
+										<volist name="navighter['nav_son']" id="son">
+											<li><a href="{:U($son.url,array('typeid'=>$son['id']))}">{$son.title}</a></li>
+										</volist>
+									</ul>
+								</div>
+							</notempty>
+						</li>
+						</volist>
+					</ul>
+				</div>
+				
+				<div class="hade_query">
+					<div class="query_Con">
+						<input type="text" name="keywords" placeholder="搜索关键字" class="query_Text">
+						<input type="submit" value=" " class="query_sub icon-fdj btn_search">
+					</div>
+					<div class="bdsharebuttonbox que_lk">
+						<a href="#" class="bds_weixin" data-cmd="weixin"></a>
+						<span>|</span>
+						<a href="" class="bds_eg"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- nav -->
+		<div class="navBox hade_pc">
+			<div class="width1200 navBs">
+				<div class="navCon">                              
+					<ul>
+						<li>
+							<a href="{:U('Index/index')}">首页</a>
+						</li>
+						<volist name="navs" id="navighter">
+						<li class="">
+							<a href="{:U($navighter[url])}">{$navighter['title']}</a>
+							<notempty name="navighter['nav_son']">
+							<div class="navCon_lk">
+								<ul>
+									<volist name="navighter['nav_son']" id="son">
+										<li><a href="{:U($son[url],array('typeid'=>$son['id']))}">{$son.title}</a></li>
+									</volist>
+								</ul>
+							</div>
+							</notempty>
+						</li>
+						</volist>
+					</ul>
+					<div class="nav_pu">
+						<i class="icon-dianh2"></i>
+						<span>023-68195688</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 手机 -->
+	<div class="navBtn">
+		<a href=""><img src="__IMG__/center/logo2.png" alt=""></a>
+		<div class="navsh"><img src="__IMG__/icon/nav.png"></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	

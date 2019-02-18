@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+	<meta name="Keywords" content="Keywords">
+	<meta name="description" content="description">
+	<title>{:C('WEB_SITE_TITLE')}</title>
+	<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/default.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css"/>
+	<link rel="stylesheet" type="text/css" href="__CSS__/page.css"/>
+
+	<script src="__JS__/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__JS__/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <script type="text/javascript" src="__JS__/default.js"></script>
+</head>
+<body>
+<div class="hadeBox">
+	<div class="hadeCon">
+		<a class="hd_logo" href="{:U('Index/index')}"><img src="__IMG__/center/logo.png" alt=""></a>
+		<div class="hade_right">
+			<div class="hade_nav">
+				<ul>
+					<li>
+						<a href="{:U('Index/index')}">首页</a>
+					</li>
+					<volist name="navs" id="navt">
+						<li>
+							<a href="{:U($navt[url])}">{$navt.title}</a>
+							<notempty name="navt['nav_son']">
+								<div class="had_nav_lk">
+									<ul>
+										<volist name="navt['nav_son']" id="son">
+											<li><a href="{:U($son[url])}">{$son.title}</a></li>
+										</volist>
+									</ul>
+								</div>
+							</notempty>
+						</li>
+					</volist>
+				</ul>
+			</div>
+
+			<div class="hade_query">
+				<div class="query_Con">
+					<input type="text" placeholder="搜索关键字" class="query_Text">
+					<input type="submit" value=" " class="query_sub icon-fdj">
+				</div>
+				<div class="bdsharebuttonbox que_lk">
+					<a href="#" class="bds_weixin" data-cmd="weixin"></a>
+					<span>|</span>
+					<a href="" class="bds_eg"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 手机 -->
+<div class="navBtn">
+	<a href=""><img src="__IMG__/center/logo2.png" alt=""></a>
+	<div class="navsh"><img src="__IMG__/icon/nav.png"></div>
+</div>
+	<!-- kuai -->
+	<div class="kBox"></div>
+	<!-- banner -->
+	<div class="bannerBox">
+		<div class="bannerCon">
+			<img src="__IMG__/banner/banner.jpg" alt="">
+			<div class="banner_text">
+				<h3>中国保险汽车安全指数</h3>
+				<em></em>
+				<p> China Insurance Automotive Safety Index (C-IASI)</p>
+			</div>
+		</div>
+	</div>
+	
+	<section class="contentBox">
+		<!-- 测评动态 -->
+		<div class="performance">
+			<div class="width1200 perforCon">
+				<!-- 评价 -->
+				<div class="evaluation">
+					<p class="eval_tit">评价结果</p>
+					<form action="/home/safety/index" class="eval_form">
+						<div class="eval_Item">
+							<div class="eval_Left">                                
+								<select name="bid">
+									<option style="display: none;" value="">品牌</option>
+									<volist name="brand" id="brands">
+									<option value="{$brands.id}">{$brands.title}</option>
+									</volist>
+								</select>
+								<i class="glyphicon glyphicon-play"></i>
+							</div>
+							<div class="eval_right">
+								<select name="cid">
+									<option style="display: none;" value="">车型</option>
+								</select>
+								<i class="glyphicon glyphicon-play"></i>
+							</div>
+						</div>
+						<div class="eval_Item">
+							<select name="jid">
+								<option style="display: none;" value="">级别</option>
+								<volist name="jibie" id="jibies">
+								<option value="{$jibies.id}">{$jibies.title}</option>
+								</volist>
+							</select>
+							<i class="glyphicon glyphicon-play"></i>
+						</div>
+						<input type="hidden" name="sid" value="15" />
+						<input type="submit" value="参看搜索结果" class="eval_btn">
+					</form>
+				</div>
+				<!-- 动态 -->
+				<div class="dynamic">
+					<p class="dynamic_tit"><a href=""><img src="__IMG__/icon/icon-chep.png" alt=""></a>测评动态</p>
+					<div id="myCarousel">
+						<ul class="swiper-wrapper">
+							<volist name="cpdt" id="cpdts">
+							<li class="swiper-slide">
+								<h3 class="dy_tit">{$cpdts.title}</h3>
+								<p class="dy_titD">{$cpdts.short_title}</p>
+								<p class="dy_text">{$cpdts.descriptions}</p>
+								<span class="dy_time">2018-09-10~14</span>
+							</li>
+							</volist>
+						</ul>
+						<div class="pagination"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 视频展示 -->
+		<div class="performance VideoBox">
+			<div class="width1200 VideoCon">
+				<div class="v_tit">
+					<p>{$video.title}</p>
+				</div>
+				<p class="v_Text">{$video.describle}</p>
+				<div class="v_box">
+					 <div class="v_video">
+						 <video  poster="{$video.icon|picture}"  controls="controls">
+							 <source src="__PUBLIC__/Home/video/video.mp4">
+							 your browser does not support the video tag
+						 </video>
+					 </div> 
+				</div>
+			</div>
+		</div>
+		
+		<!-- 新闻中心 -->
+		<div class="performance newsBox">
+			<div class="width1200 newsCon">
+				<div class="newsTit">
+					<div class="n_tit">
+						<p>新闻中心</p>
+						<span>News Center</span>
+					</div>
+					<a class="n_lk" href="{:U('News/index')}">更多资讯<i class="icon-rightjt"></i></a>
+				</div>
+				<div class="newsContent">
+					<!-- left -->
+					<div class="news_left">
+						<!-- banner -->
+						<div id="myCar" class="myCar">
+							<ul class="swiper-wrapper">
+								<volist name="img_news" id="imgn">
+										<li class="swiper-slide">
+											<a href="{:U('News/details',array('typeid'=>$imgn['typeid'],'id'=>$imgn['id']))}">
+											<img src="{:picture($imgn['icon'])}" alt="">
+											<em></em>
+											<p>{$imgn['title']}</p>
+											</a>
+										</li>
+
+								</volist>
+							</ul>
+							<div class="myCarpage"></div>
+						</div>
+						<!-- text -->
+						<div class="news_left_text">
+							<volist name="two_news" id="twon">
+							<div class="news_l_item">
+								<a href="{:U('News/details',array('typeid'=>$twon['typeid'],'id'=>$twon['id']))}">
+									<p>{$twon['title']}</p>
+									<span>{$twon['create_time']|date='Y-m-d',###}</span>
+								</a>
+							</div>
+							</volist>
+						</div>
+					</div>
+					<!-- right -->
+					<div class="news_right">
+						<volist name="thr_news" id="thrn">
+						    <div class="news_r_item">
+							<div class="n_r_time">
+								<p>{$thrn['create_time']|date='Y',###}</p>
+								<span>{$thrn['create_time']|date='m-d',###}</span>
+							</div>
+							<div class="n_r_text">
+								<p><a href="{:U('News/details',array('typeid'=>$thrn['typeid'],'id'=>$thrn['id']))}">{$thrn['title']}</a></p>
+								<span>{$thrn['descriptions']}</span>
+							</div>
+						</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<include file="Public:footer"/>
+	<script type="text/javascript">
+	$(function(){
+		var mySwiper = new Swiper('#myCarousel',{
+				loop:false,
+				autoplay : 3000,
+				observer:true,
+				observeParents:true,
+				pagination : '.pagination',
+				paginationClickable :true,
+				autoplayDisableOnInteraction : false,
+			});
+		var mySwiper = new Swiper('#myCar',{
+				loop:false,
+				autoplay : 3000,
+				observer:true,
+				observeParents:true,
+				pagination : '.myCarpage',
+				paginationClickable :true,
+				autoplayDisableOnInteraction : false,
+			});
+			if($(window).width() >= 1024){
+				$(window).on("scroll", function(){
+					var scrollH = $(window).scrollTop();
+					loadZ($('.perforCon'),$('.evaluation'),$('.dynamic'));
+					loadZ($('.newsContent'),$('.news_left'),$('.news_right'));
+					if($('.v_box').offset().top < winH + scrollH){
+						$('.v_box').animate({
+							'marginTop':'110px',
+							'opacity':'1',
+						},700,function(){
+							$('.v_video').animate({
+								'left':'-60px',
+								'bottom':'20px',
+								'opacity':'1',
+							},300);
+						});
+					}
+				});
+				var tiemh =1000;
+				var winH = $(window).height();
+				function loadZ($hade,$y,$x){
+					var scrollH = $(window).scrollTop();
+					var $con = $hade.offset().top;
+					if( $con < winH + scrollH){
+						$y.animate({
+							'marginLeft':'0',
+							'opacity':'1',
+							'filter': 'alpha(opacity ==100)',
+						},tiemh);
+						$x.animate({
+							'marginRight':'0',
+							'opacity':'1',
+							'filter': 'alpha(opacity ==100)',
+						},tiemh);
+					}
+				}
+			}
+	});
+	</script>
+
+<script>
+	$('select[name=bid]').change(function(){
+
+		var val = $(this).val();
+		$.post('{:U("changelist")}',{'bid':val},function(data){
+
+			$('select[name=cid]').html('<option style="display: none;" value="">车型</option>'+data);
+
+		});
+
+	});
+</script>
+</body>
+</html>

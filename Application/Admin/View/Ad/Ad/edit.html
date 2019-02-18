@@ -1,0 +1,163 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/ColorPicker/jquery.js"></script>
+	<script type="text/javascript" src="__STATIC__/ColorPicker/jquery.colorpicker.js"></script>
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>修改（{$vo.name}）广告</h2>
+    </div>
+    <ul class="tab-nav nav">
+
+        <li class="current"><a href="javascript:void(0)">基本信息</a></li>
+
+    </ul>
+    
+    <form action="{:U()}" method="post" class="form-horizontal">
+    <div class="tab-content">
+        <div class="form-item">
+            <label class="item-label">广告名称<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="name" value="{$vo.name}">
+                <input type="hidden" class="text input-large" name="id" value="{$vo.id}">
+            </div>
+        </div>
+        
+       <!-- <div class="form-item">
+            <label class="item-label">广告背景色</label>
+            <div class="controls">
+                <input type="text" class="text input-large" readonly="readonly" name="adbg" value="{$vo.adbg}">
+            </div>
+        </div>-->
+        
+      <!--  <div class="form-item">
+            <label class="item-label">打开方式</label>
+            <div class="controls">
+                <select name="target" style="width:390px;">
+					<option value="_parent">请选择打开方式</option>
+					<option value="_blank" {$vo['target']=='_blank'?'selected':''}>新窗口</option>
+					<option value="_parent" {$vo['target']=='_parent'?'selected':''}>父窗口</option>
+				</select>
+            </div>
+         </div>-->
+        
+       <div class="form-item">
+            <label class="item-label">广告类别<span class="check-tips">（必须选择）</span></label>
+            <div class="controls">
+				<select name="typeid" style="width:390px;">
+					<option value="">请选择类别</option>
+
+                    <option value="11" <if condition="$vo.typeid eq 11">selected</if> >首页Banner</option>
+                    <option value="12" <if condition="$vo.typeid eq 12">selected</if> >首页左上轮播</option>
+					<option value="14" <if condition="$vo.typeid eq 14">selected</if> >首页底部二维码</option>
+                    <option value="13" <if condition="$vo.typeid eq 13">selected</if> >游记底部图片</option>
+					<volist name="typelist" id="typelist">
+						<option value="{$typelist.id}" {$typelist['id']==$vo['typeid']?'selected':''}>{$typelist.title}</option>
+					</volist>
+                    <volist name="guidelist" id="typelist">
+                        <option value="{$typelist.id}" {$typelist['id']==$vo['typeid']?'selected':''}>{$typelist.title}</option>
+                    </volist>
+				</select>
+			</div>
+        </div>
+        
+        <!--<div class="form-item">
+            <label class="item-label">广告位置<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="position" value="{$vo['position']}">
+            </div>
+        </div>-->
+        
+        <div class="form-item">
+            <label class="item-label">排序</label>
+            <div class="controls">
+                 <input type="text" class="text input-large" name="sort" value="{$vo['sort']}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">链接</label>
+            <div class="controls">
+                 <input type="text" class="text input-large" name="url" value="{$vo['url']}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">备注</label>
+            <div class="controls">
+                <label class="textarea input-large">
+                    <textarea name="remark">{$vo['remark']}</textarea>
+                </label>
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <div class="controls">
+                <label class="item-label">广告缩略图</label>
+                <input type="file" id="upload_picture">
+                <input type="hidden" name="icon" id="icon" value="{$vo['icon']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="vo['icon']">
+                    <div class="upload-pre-item"><img src="__ROOT__{$vo.icon|get_cover='path'}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'	  : 1,
+                'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#icon").val(data.id);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#icon").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+            </script>
+        </div>
+
+        
+        
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('ad/index')}');
+        $("input[name=adbg]").colorpicker({
+            fillcolor:true,
+            success:function(o,color){
+                $(o).css("color",color);
+            }
+        });
+    </script>
+</block>

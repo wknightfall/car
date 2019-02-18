@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0e9eef46-dd43-4a16-bb81-a65b4390b01f" name="默认的" comment="" />
+    <ignored path="qiche.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="qiche" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>index</find>
+      <find>.header .logo</find>
+      <find>heade</find>
+      <find>form</find>
+      <find>update_time</find>
+      <find>search-input</find>
+      <find>search</find>
+      <find>title</find>
+      <find>add</find>
+      <find>typelist</find>
+      <find>submit</find>
+      <find>typeid</find>
+      <find>上传</find>
+      <find>del</find>
+      <find>function del</find>
+      <find>foreverdelete</find>
+      <find>ajax-post</find>
+      <find>deleteUser</find>
+      <find>confirm</find>
+      <find>sort</find>
+      <find>getPk</find>
+      <find>changeStatus</find>
+      <find>$nav</find>
+      <find>id</find>
+      <find>hi</find>
+      <find>精彩</find>
+      <find>s_nav</find>
+      <find>opt_Box</find>
+      <find>a_nL_item</find>
+      <find>动态</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Application/Home/View/default/Contact/index.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Links/index.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/Controller/LinksController.class.php" />
+        <option value="$PROJECT_DIR$/Application/Home/Controller/HomeController.class.php" />
+        <option value="$PROJECT_DIR$/Public/Home/js/default.js" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/Down/index.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/Media/index.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/Public/footer.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/News/index.html" />
+        <option value="$PROJECT_DIR$/Application/Home/Controller/NewsController.class.php" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/News/search.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/Public/header.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Public/header.html" />
+        <option value="$PROJECT_DIR$/Application/English/Controller/SafetyController.class.php" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Car/add.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Car/edit.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Safety/index.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/News/index.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/News/add.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/News/edit.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Media/index.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Media/details.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Down/index.html" />
+        <option value="$PROJECT_DIR$/Application/English/Controller/ContactController.class.php" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Contact/index.html" />
+        <option value="$PROJECT_DIR$/Application/English/Controller/NewsController.class.php" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/News/search.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Public/footer.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Video/add.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Video/edit.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Enclosure/add.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Enclosure/edit.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Links/add.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Links/edit.html" />
+        <option value="$PROJECT_DIR$/Application/Admin/Controller/PublicController.class.php" />
+        <option value="$PROJECT_DIR$/Application/Admin/Controller/IndexController.class.php" />
+        <option value="$PROJECT_DIR$/Public/Admin/css/style.css" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Public/login.html" />
+        <option value="$PROJECT_DIR$/Public/Admin/css/login.css" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Public/base.html" />
+        <option value="$PROJECT_DIR$/Application/Common/Common/function.php" />
+        <option value="$PROJECT_DIR$/Application/Admin/View/Category/edit.html" />
+        <option value="$PROJECT_DIR$/Application/Home/Controller/CiasiController.class.php" />
+        <option value="$PROJECT_DIR$/Application/English/Controller/CiasiController.class.php" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Ciasi/index.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/Ciasi/index.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/News/details.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/Public/top.html" />
+        <option value="$PROJECT_DIR$/Application/Home/View/default/Index/index.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Index/index.html" />
+        <option value="$PROJECT_DIR$/Application/English/View/default/Public/top.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>false</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>false</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/Public/static/validate/package.json" />
+      <path value="$PROJECT_DIR$/Public/umeditor/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Conf" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="Car" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="Category" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="Enclosure" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="Links" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="News" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="Video" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="Ciasi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="Index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="Media" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="News" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="English" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="Ciasi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="Index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="News" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Application" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Public" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qiche" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qy_bxzs" type="462c0819:PsiDirectoryNode" />
+              <item name="Runtime" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;null&#9;null" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hai_pai" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\wamp\www\qiyan\Application\Home\View\default\Zhishu" />
+      <recent name="D:\wamp\www\qiyan\Application\Home\View\default\Custom" />
+      <recent name="D:\wamp\www\qiyan\Application\Home\View\default\Tixi" />
+      <recent name="D:\wamp\www\qiyan\Application\Home\View\default\Download" />
+      <recent name="D:\wamp\www\qiyan\Application\Home\View\default\About" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\wamp\www\qiyan\Application\Admin\Model" />
+      <recent name="D:\wamp\www\qiyan\Application\Admin\View" />
+      <recent name="D:\wamp\www\qiyan\Application\Admin\Controller" />
+      <recent name="D:\wamp\www\qiyan\Application\Admin\View\Media" />
+      <recent name="D:\wamp\www\qiyan\Public\Admin\images" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0e9eef46-dd43-4a16-bb81-a65b4390b01f" name="默认的" comment="" />
+      <created>1480471515410</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1480471515410</updated>
+      <workItem from="1530239469909" duration="26114000" />
+      <workItem from="1530322396963" duration="38738000" />
+      <workItem from="1530494963656" duration="1029000" />
+      <workItem from="1530495994733" duration="6813000" />
+      <workItem from="1530507886858" duration="1342000" />
+      <workItem from="1530524889514" duration="8633000" />
+      <workItem from="1530580314305" duration="1211000" />
+      <workItem from="1531017115584" duration="8867000" />
+      <workItem from="1531040640123" duration="1696000" />
+      <workItem from="1531097798232" duration="492000" />
+      <workItem from="1531098439739" duration="185000" />
+      <workItem from="1531204184023" duration="230000" />
+      <workItem from="1531210414311" duration="623000" />
+      <workItem from="1531363155183" duration="203000" />
+      <workItem from="1531374795559" duration="18275000" />
+      <workItem from="1531444129420" duration="19482000" />
+      <workItem from="1531702852939" duration="19558000" />
+      <workItem from="1531788996949" duration="32000000" />
+      <workItem from="1531870251358" duration="43695000" />
+      <workItem from="1531957204791" duration="46253000" />
+      <workItem from="1532044050388" duration="6054000" />
+      <workItem from="1532050159736" duration="36605000" />
+      <workItem from="1532131700311" duration="20737000" />
+      <workItem from="1532156113915" duration="18972000" />
+      <workItem from="1532222302539" duration="33278000" />
+      <workItem from="1532306291867" duration="40839000" />
+      <workItem from="1532392285249" duration="20585000" />
+      <workItem from="1532417755864" duration="1084000" />
+      <workItem from="1532419571905" duration="18241000" />
+      <workItem from="1532479940776" duration="40748000" />
+      <workItem from="1532524260692" duration="35000" />
+      <workItem from="1532565453727" duration="7941000" />
+      <workItem from="1532574457747" duration="31020000" />
+      <workItem from="1532649131716" duration="46000000" />
+      <workItem from="1532737171400" duration="8054000" />
+      <workItem from="1532746580537" duration="18343000" />
+      <workItem from="1532853400503" duration="12432000" />
+      <workItem from="1532910582282" duration="56190000" />
+      <workItem from="1532999338304" duration="36374000" />
+      <workItem from="1533082403417" duration="2000" />
+      <workItem from="1533082561553" duration="36583000" />
+      <workItem from="1533171388261" duration="30912000" />
+      <workItem from="1533256853459" duration="34508000" />
+      <workItem from="1533349254242" duration="22811000" />
+      <workItem from="1533516510484" duration="886000" />
+      <workItem from="1533517415157" duration="22624000" />
+      <workItem from="1533603495062" duration="34101000" />
+      <workItem from="1533689465828" duration="24690000" />
+      <workItem from="1533721115860" duration="11206000" />
+      <workItem from="1533775350370" duration="6875000" />
+      <workItem from="1533786052941" duration="21754000" />
+      <workItem from="1533862516396" duration="29262000" />
+      <workItem from="1533947588482" duration="34804000" />
+      <workItem from="1534035383527" duration="20974000" />
+      <workItem from="1534121961671" duration="42132000" />
+      <workItem from="1534208368939" duration="35632000" />
+      <workItem from="1534295379504" duration="36191000" />
+      <workItem from="1534375804824" duration="22333000" />
+      <workItem from="1534399695400" duration="23677000" />
+      <workItem from="1534462957303" duration="27569000" />
+      <workItem from="1534551652265" duration="18894000" />
+      <workItem from="1534643292116" duration="5831000" />
+      <workItem from="1534726817893" duration="30278000" />
+      <workItem from="1534813267896" duration="37586000" />
+      <workItem from="1534899138091" duration="33999000" />
+      <workItem from="1534985779433" duration="34568000" />
+      <workItem from="1535071891651" duration="22468000" />
+      <workItem from="1535159924770" duration="21217000" />
+      <workItem from="1535247376405" duration="31227000" />
+      <workItem from="1535331839065" duration="33626000" />
+      <workItem from="1535417700215" duration="32057000" />
+      <workItem from="1535504324585" duration="3657000" />
+      <workItem from="1535508057095" duration="21821000" />
+      <workItem from="1535590383645" duration="24935000" />
+      <workItem from="1535676701506" duration="22869000" />
+      <workItem from="1535764906226" duration="15857000" />
+      <workItem from="1535868019057" duration="6708000" />
+      <workItem from="1535876070906" duration="17321000" />
+      <workItem from="1535936076191" duration="29363000" />
+      <workItem from="1536022924669" duration="28553000" />
+      <workItem from="1536108867396" duration="35833000" />
+      <workItem from="1536195427069" duration="10618000" />
+      <workItem from="1536221315602" duration="1910000" />
+      <workItem from="1536224137930" duration="10778000" />
+      <workItem from="1536282791174" duration="1420000" />
+      <workItem from="1536287556714" duration="1887000" />
+      <workItem from="1536305301020" duration="3077000" />
+      <workItem from="1536318268662" duration="603000" />
+      <workItem from="1536370326019" duration="4410000" />
+      <workItem from="1536396852474" duration="5016000" />
+      <workItem from="1536541078709" duration="7240000" />
+      <workItem from="1536554531942" duration="2566000" />
+      <workItem from="1536565113264" duration="1137000" />
+      <workItem from="1536571218385" duration="7257000" />
+      <workItem from="1536626584268" duration="11848000" />
+      <workItem from="1536655548020" duration="611000" />
+      <workItem from="1536715258745" duration="13721000" />
+      <workItem from="1536742429252" duration="7611000" />
+      <workItem from="1536800390665" duration="8594000" />
+      <workItem from="1536817713074" duration="4435000" />
+      <workItem from="1536824746836" duration="11959000" />
+      <workItem from="1536886576320" duration="21618000" />
+      <workItem from="1536912364545" duration="8574000" />
+      <workItem from="1536990399765" duration="9937000" />
+      <workItem from="1537145823433" duration="24004000" />
+      <workItem from="1537232523737" duration="15827000" />
+      <workItem from="1537265905290" duration="3527000" />
+      <workItem from="1537318896771" duration="16870000" />
+      <workItem from="1537405506930" duration="3375000" />
+      <workItem from="1538202029135" duration="21846000" />
+      <workItem from="1538269190943" duration="16214000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="2015655000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49479166" visible="true" weight="0.22857143" />
+      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32992035" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="16" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info id="Favorites" order="2" sideWeight="0.5052083" side_tool="true" weight="0.46805555" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="找到" order="13" weight="0.32662192" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="运行" order="15" />
+      <window_info anchor="bottom" id="Application Servers" order="10" />
+      <window_info anchor="bottom" id="版本控制" order="12" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="调试" order="14" />
+      <window_info anchor="bottom" id="Find" order="2" visible="true" weight="0.0021881838" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Application/Admin/View/Regular/add.html</url>
+          <line>95</line>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="105" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/default/Contact/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="21" column="73" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/default/News/details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2966">
+          <caret line="34" column="52" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/MediaController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2130">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/default/Public/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="36" column="22" lean-forward="true" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/default/News/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/NewsController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Public/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="994">
+          <caret line="40" column="20" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Car/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Safety/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="200" column="97" selection-start-line="200" selection-start-column="97" selection-end-line="200" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/News/add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="950">
+          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/News/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="70" column="23" lean-forward="true" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/News/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-106">
+          <caret line="82" column="104" selection-start-line="82" selection-start-column="104" selection-end-line="82" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Down/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="88" column="62" selection-start-line="88" selection-start-column="62" selection-end-line="88" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Media/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="43" column="113" selection-start-line="43" selection-start-column="113" selection-end-line="43" selection-end-column="113" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/Controller/MediaController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/Controller/ContactController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Contact/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/Controller/NewsController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="87" column="44" selection-start-line="87" selection-start-column="44" selection-end-line="87" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/News/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="71" column="56" selection-start-line="71" selection-start-column="56" selection-end-line="71" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Public/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="774">
+          <caret line="43" column="63" selection-start-line="43" selection-start-column="63" selection-end-line="43" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Enclosure/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="126" column="40" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Car/add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5852">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Links/add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="53" column="36" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/IndexController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/Admin/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/PublicController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-792">
+          <caret line="63" column="48" selection-start-line="63" selection-start-column="48" selection-end-line="63" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Links/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="49" column="21" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Enclosure/add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="125" column="40" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Video/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="215" column="36" selection-start-line="215" selection-start-column="36" selection-end-line="215" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Video/add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="201" column="36" selection-start-line="201" selection-start-column="36" selection-end-line="201" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/Admin/css/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Public/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Public/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="112" column="14" lean-forward="true" selection-start-line="112" selection-start-column="14" selection-end-line="112" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/Controller/SafetyController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="62" column="9" lean-forward="true" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="1401" column="17" selection-start-line="1401" selection-start-column="9" selection-end-line="1401" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/Controller/DownController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="40" column="100" lean-forward="true" selection-start-line="40" selection-start-column="45" selection-end-line="40" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/default/News/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="105" column="123" selection-start-line="105" selection-start-column="37" selection-end-line="105" selection-end-column="123" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Category/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="184" column="57" selection-start-line="184" selection-start-column="57" selection-end-line="184" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/AjaxController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="30" column="32" lean-forward="true" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#a#0;n#td#7;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#span#0;n#td#7;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#8;n#tr#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/CiasiController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="35" column="50" lean-forward="true" selection-start-line="33" selection-start-column="8" selection-end-line="35" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Public/top.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="n#style#0;n#option#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/default/Public/top.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="2" column="37" lean-forward="true" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Media/details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/default/Index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="n#style#0;n#option#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/News/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="115" column="85" selection-start-line="115" selection-start-column="73" selection-end-line="115" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/Ciasi/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="97" column="45" lean-forward="true" selection-start-line="92" selection-start-column="36" selection-end-line="97" selection-end-column="45" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/Controller/CiasiController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="33" column="34" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/English/View/default/News/details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="89" column="53" lean-forward="true" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/View/default/Ciasi/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="97" column="46" lean-forward="true" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

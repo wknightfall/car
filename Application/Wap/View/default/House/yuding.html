@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/hotel.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div>
+    <em>您当前的位置：</em><a>首页</a><em>-</em><a>旅游指南</a><em>-</em><a>酒店</a>
+</div>
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="mon_hotel">
+        <div class="mon_imsg">
+            <div class="yud_imsg">预定信息</div>
+            <div  class="rltime">
+                <ul>
+                    <li>入离时间：</li>
+                    <li><span>{$date1}</span><em>至</em><span>{$date2}</span><em>共{$day}晚</em></li>
+                </ul>
+                <ul>
+                    <li>预定间数：</li>
+                    <li><span>{$Think.get.num}</span><em>剩余<i>{$rest}</i>间</em><p>￥{$money}</p></li>
+                </ul>
+            </div>
+            <div class="pars_imsg">个人信息</div>
+            <div class="pars_text">
+                <ul>
+                    <li><span><i>*</i><em>住客姓名：</em></span></li>
+                    <li><input type="text" value=""></li>
+                </ul>
+                <ul>
+                    <li><span><i>*</i><em>手机号码：</em></span></li>
+                    <li><input class="tel_tt" type="text" value=""><input class="tel_nmb" type="text" value=""></li>
+                </ul>
+                <ul>
+                    <li><span><em>电子邮箱：</em></span></li>
+                    <li><input class="eml_pt" type="text" value="" placeholder="接受确认邮件，获得出行资讯"></li>
+                </ul>
+                <ul class="yes_xy">
+                    <li></li>
+                    <li><span></span><em>我已阅读并接受《<a href="">用户协议</a>》</em></li>
+                </ul>
+                <div class="parson_lin"></div>
+                <div class="invoice_yn">
+                    <i></i>
+                    <span>需要发票</span>
+                </div>
+            </div>
+            <div class="ydgz_imsg">预定规则</div>
+
+            <div class="desc_tet">
+                <p><em>不可取消</em>订单提交需要支付全部房费，如订单不确认将全额退款至您的账户。订单确认后不可取消修改，如未入住或取消修改及提前离店，我们将收取您￥{$money}支付酒店</p>
+            </div>
+
+        </div>
+        <div class="deta_imsg">
+            <p>{$room.hid|modelField='usermember','name'}</p>
+            <span>地址：{$room.hid|modelField='usermember','addr'}</span>
+            <em class="spli_ne"></em>
+            <div>
+                <span>{$room.name}</span>
+                <p class="fast_pp"><i>床型：</i><em>{$room.bed}</em></p>
+                <p><i>楼层：</i><em>{$room.floor}</em></p>
+                <p><i>面积：</i><em>{$room.area}</em></p>
+                <p><i>最多入住人数：</i><em>{$room.contain}</em></p>
+                <p><i>宽带：</i><em>{$room.kuandai}</em></p>
+                <p><i>窗户：</i><em>{$room.window}</em></p>
+                <p><i>支付：</i><em>途牛将预收全部费用</em></p>
+                <p><i>加床：</i><em>请提前咨询酒店前台</em></p>
+
+            </div>
+            <span class="ydfj_yy"><em>预定房间：</em><i>{$Think.get.num}</i><p>￥{$money}</p></span>
+            <span class="totlo_nm"><em>合计：</em><p>￥{$money}</p></span>
+        </div>
+    </div>
+    <input  type='hidden' name="id" value="{$room.id}">
+    <input  type='hidden' name="num" value="{$num}">
+    <input  type='hidden' name="money" value="{$money}">
+</section>
+
+<!-------底部--------->
+<footer class="btn_fot">
+    <div class="foot_tet">
+        <span><i></i><em>我已阅读并同意</em><p>旅游合同，保险条款，保险经纪委托合同及客户告知书，特别预定提示，安全提示。</p></span>
+        <input type="button" value="提交订单" id="order">
+    </div>
+</footer>
+</body>
+</html>
+<script>
+
+
+    $(document).on("click","#order",function () {
+
+        var id = $('input[name=id]').val();
+        var num = $('input[name=num]').val();
+        var money = $('input[name=money]').val();
+        var hid="{$hid}"
+        //console.log(id,num,money,hid);return;
+        $.post("/Home/Ajax/order",{'id':id,'num':num,'money':money,'hid':hid,'actiontype':3},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('提交成功！去支付！',function () {
+                    location.href='/Home/house/pay/id/'+id+'/orderno/'+obj.msg;
+                });
+
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+</script>
+<script>
+
+        $(".pars_text>ul>li>input").focus(function () {
+            $(this).parent("li").prev("li").children("span").children("i").text("");
+        })
+        $(".pars_text>ul>li>input").blur(function () {
+
+            if($(this).text()==null||$(this).text()==undefined||$(this).text()==""){
+                $(this).parent("li").prev("li").children("span").children("i").text("*");
+            }else {
+                $(this).parent("li").prev("li").children("span").children("i").text("");
+
+            }
+        })
+    $(".yes_xy>li:nth-child(1)").click(function () {
+
+        if ($(this).hasClass("yes_xyadd")){
+            $(this).removeClass("yes_xyadd");
+        } else {
+            $(this).addClass("yes_xyadd");
+        }
+    })
+    $(".foot_tet>span>i").click(function () {
+
+        if ($(this).hasClass("yes_xyadd")){
+            $(this).removeClass("yes_xyadd");
+        } else {
+            $(this).addClass("yes_xyadd");
+        }
+    })
+
+    $(".foot_tet>input").click(function () {
+
+
+    })
+</script>

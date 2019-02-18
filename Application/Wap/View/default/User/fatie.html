@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+
+    <script type="text/javascript" src="__JS__/ajaxupload.3.5.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        发帖
+    </div>
+
+    <!--list-->
+
+    <div class="content_fa">
+        <ul>
+            <li>标题:</li>
+            <li>
+                <input type="text" name="name" id="name">
+            </li>
+        </ul>
+        <ul>
+            <li>内容:</li>
+            <li>
+                <textarea  placeholder=""  id="detail" cols="30" rows="10"></textarea>
+            </li>
+        </ul>
+    </div>
+
+    <div class="btn_dom">
+        <input type="button" value="发布" id="fabu">
+    </div>
+
+
+</div>
+
+</body>
+<script>
+
+    $('#xgpassword').click(function () {
+        location.href='/wap/public/xiugai'
+    })
+    $('#xiugshouji').click(function () {
+        location.href='/wap/public/xiugshouji'
+    })
+
+    $('#logo').click(function () {
+        /*$('#fomr1').submit();*/
+        var username=$('input[name=username]').val();
+        var password=$('input[name=password]').val();
+        var remember=$('input[name=remember]').prop('checked');
+        if(remember){
+            remember=1;
+        }else{
+            remember=0;
+        }
+        $.post("{:U('Ajax/login')}",{'username':username,'password':password,'remember':remember},function (data) {
+            if(data.status==1){
+                layer.msg(data.msg);
+                $('.login').hide();
+                location.href='Home/Index/index';
+            }else{
+
+                layer.msg(data.msg);
+            }
+        })
+    })
+</script>
+<script>
+    $(document).on("click","#fabu",function () {
+        var name = $('#name').val();
+        var detail = $('#detail').val();
+        if(name==""){
+            layer.tips('请输入内容', '#name', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        if(detail==""){
+            layer.tips('请输入内容', '#detail', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        $.post("/Home/Ajax/fatie",{'name':name,'detail':detail},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200) {
+                layer.msg('发布成功，等待审核中',function () {
+                    location.href='/Wap/user/luntan'
+                })
+
+
+            }else{
+                layer.msg('发布失败')
+
+            }
+        });
+    })
+    $(document).on("click","#submit",function () {
+        var oldicon = $('input[name=oldicon]').val();
+        var icon = $('input[name=iconid]').val();
+        var oldname = $('input[name=oldname]').val();
+        var name = $('input[name=name]').val();
+        if(icon==0){
+            layer.msg('请选择头像');return false;
+        }else if(name==''){
+            layer.msg('请输入昵称');return false;
+        }else if(name.length>12){
+            layer.msg('昵称不能超过12个字符');return false;
+        }else if(oldicon == icon && oldname == name){
+            layer.msg('请修改头像或昵称');return false;
+        }
+        $.post("/Home//geren",{'icon':icon,'name':name},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200) {
+                layer.msg('编辑成功',function () {
+                    location.reload()
+                })
+
+            }else{
+                layer.msg('编辑失败')
+
+            }
+        });
+
+    })
+
+</script>
+
+
+</html>

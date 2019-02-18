@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+
+    <script type="text/javascript" src="__JS__/ajaxupload.3.5.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="__IMG__/banner/tr_xts_02.jpg" alt="">
+</div>
+<!--title-->
+<!--<div class="problem_nv">
+    <ul>
+        <li><a href="javascript:">常见问题</a></li>
+        <li><a href="javascript:">出游常识</a></li>
+        <li class="this_problem"><a href="javascript:">常用电话</a></li>
+    </ul>
+</div>-->
+<!--正文-->
+<div class="tousu_jianyi">
+
+    <div class="ts_jjj">
+        <img src="__IMG__/icon/tousu_03.jpg" alt="">
+        <em>投诉建议</em>
+    </div>
+    <div class="tousu_tt">
+        <ul>
+            <li>投诉人</li>
+            <li><input type="text" placeholder="请输入您的姓名" name="advicer" id="advicer"></li>
+        </ul>
+        <ul>
+            <li>电话</li>
+            <li><input type="text" placeholder="请输入手机号" name="tel" id="tel"></li>
+        </ul>
+        <ul>
+            <li>邮箱</li>
+            <li><input type="text" placeholder="请输入邮箱" name="email" id="email"></li>
+        </ul>
+        <ul>
+            <li>投诉标题<span></span></li>
+            <li><input type="text" placeholder="请输入标题" name="name" id="name"></li>
+        </ul>
+        <ul>
+            <li>投诉对象</li>
+            <li>
+                <div class="tous_sele"  value="" id="hotelid">请选择投诉对象</div>
+                <div class="tous_chd">
+                    <ul>
+                        <volist name="hotel" id="vo">
+                            <li value="{$vo.id}">{$vo.name}</li>
+                        </volist>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li>详细内容</li>
+            <li>
+                <textarea class="content" placeholder="请输入您的投诉建议"  id="" cols="30" rows="10"></textarea>
+                <img src="__IMG__/icon/sctu_03.jpg"  id="icon1"  style="max-width:108px;max-height:93px">
+                <input type="hidden"  name="iconid">
+            </li>
+        </ul>
+        <ul>
+            <li></li>
+            <li>
+                <input type="button" value="确认提交" class="tj_btn"  id="tijiao">
+            </li>
+        </ul>
+    </div>
+</div>
+<!--information-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>
+<script>
+    $(".tous_sele").click(function () {
+
+        $(this).addClass("blk_fon_ts");
+        if ($(this).next(".tous_chd").hasClass("dow_sele")) {
+
+            $(this).next(".tous_chd").removeClass("dow_sele");
+        } else {
+
+            $(".tous_sele").next(".tous_chd").removeClass("dow_sele");
+            $(this).next(".tous_chd").addClass("dow_sele");
+        }
+        ;
+    })
+
+    $(".tous_chd ul li").click(function () {
+
+        $(".tous_chd ul li").removeClass("down_ts");
+        $(this).addClass("down_ts");
+        $(".tous_chd").removeClass("dow_sele");
+        $(this).parent().parent().prev(".tous_sele").text($(this).text());
+        $(this).parent().parent().prev(".tous_sele").attr('value',$(this).attr('value'));
+    })
+</script>
+<script>
+    $(document).ready(function(){
+        uploadsasa();
+    });
+    //上传头像
+    function uploadsasa(){
+        ajaxUploadicon(
+                'icon1', //上传的按钮id名称
+                1000000000,  //允许上传的文件大小（单位：kb）
+                '/Home/Public/upload?form_name=userfile&file_size=10000', //提交服务器端地址
+                'userfile', //提交服务器文件表单名称
+                "$(\".img_div\").show();$(\"#img_path\").attr('src', obj.filename);$(\"#is_upload\").val('1');", //上传成功后执行的 js callback
+                'loadimg'  //loading 图片id
+        );
+    }
+
+    function ajaxUploadicon(id_name, filesize, url, filename, callback, loadingid) {
+        var index;
+        var button = $('#'+id_name), interval;
+        var fileType = "pic", fileNum = "one";
+        new AjaxUpload(button,{
+            action: url,
+            name: filename,
+            onSubmit : function(file, ext){
+                index = layer.load(1, {
+                    shade: [0.4,'#000000']
+                });
+                if(fileType == "pic") {
+                    if (ext && /^(jpg|png|gif|jpeg)$/.test(ext)){
+                        this.setData({
+                            'info': '上传类型为图片'
+                        });
+
+                    } else {
+                        alert('提示：您上传的是非图片类型！');
+                        layer.close(index);
+                        return false;
+                    }
+                }
+                $("#"+loadingid).show();
+                if(fileNum == 'one') this.disable();
+            },
+            onComplete: function(file, response){
+
+                layer.close(index);
+                var obj = jQuery.parseJSON(response);
+                if (obj['ok'] == 'ok') {
+                    $('#icon1').attr('src',obj['filename']);
+                    $('input[name=iconid]').val(obj['id']);
+
+                    uploadsasa();
+                } else {
+                    switch (response) {
+                        case '1':
+                            alert('提示：上传失败，图片不能大于100M');
+
+                            break;
+                        case '3':
+                            alert('提示：图片只有部分文件被上传，请重新上传！');
+
+                            break;
+                        case '4':
+                            alert('提示：没有任何文件被上传！');
+
+                            break;
+                        case '5':
+                            alert('提示：非图片类型，请上传jpg|png|gif图片！');
+
+                            break;
+                        default:
+                            alert('提示：上传失败，错误未知，请您及时联系网站客服人员！');
+
+                            break;
+                    }
+                }
+                $("#"+loadingid).hide();
+                window.clearInterval(interval);
+                this.enable();
+            }
+        });
+    }
+</script>
+<script>
+
+    $('#tijiao').click(function(){
+        var islogin='{$islogin}'
+        if(islogin==0){
+            layer.msg('请登录');return;
+        }
+        var id=$('#hotelid').attr('value');
+        var advicer=$('input[name=advicer]').val();
+        var tel=$('input[name=tel]').val();
+        var email=$('input[name=email]').val();
+        var name=$('input[name=name]').val();
+        var content=$('.content').val()
+        if(advicer==''){
+            layer.tips('请填写内容!', '#advicer', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(tel==''){
+            layer.tips('请填写内容!', '#tel', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        /*if(email==''){
+            layer.tips('请填写内容!', '#email', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }*/
+        if(name==''){
+            layer.tips('请填写内容!', '#name', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(id==''){
+            layer.tips('请选择投诉对象!', '#hotelid', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return false;
+        }
+        if(content == ''){
+            layer.tips('请填写内容!', '.content', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+        var icon = $('input[name=iconid]').val();
+        $.post("/Home/Ajax/advice",{'id':id, 'advicer':advicer, 'tel':tel,'email':email, 'name':name,  'content':content,  'icon':icon},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg(obj.msg,function () {
+                    location.href='/Wap/index/index'
+                });
+            }else{
+                layer.msg(obj.msg);
+
+            }
+        });
+    })
+</script>

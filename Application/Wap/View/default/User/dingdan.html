@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        我的订单
+        <img src="__IMG__/person/icon/timl.png" alt="" class="ch_cel">
+
+        <div class="data_up">
+            <input type="text" id="date_demo1">
+            <i>-</i>
+            <input type="text" id="date_demo2">
+            <input type="button" value="查询" id="chaxun">
+        </div>
+
+    </div>
+
+    <div class="celec_na">
+
+        <ul>
+            <if condition="$state eq 0 || $state eq 1">
+                <li><a href="{:U('user/dingdan?state=2')}">全部</a></li>
+                <else />
+                <li class="this_pag"><a href="{:U('user/dingdan?state=2')}">全部</a></li>
+            </if>
+            <if condition="$state eq 0">
+                <li class="this_pag"><a href="{:U('user/dingdan?state=0')}">待付款</a></li>
+                <else />
+                <li><a href="{:U('user/dingdan?state=0')}">待付款</a></li>
+            </if>
+            <if condition="$state eq 1">
+                <li class="this_pag"><a href="{:U('user/dingdan?state=1')}">已付款</a></li>
+                <else />
+                <li><a href="{:U('user/dingdan?state=1')}">已付款</a></li>
+            </if>
+
+        </ul>
+    </div>
+
+    <!--list-->
+    <div class="dind_list">
+        <ul id="food">
+            <notempty name="lists">
+                <volist name="lists" id="vo">
+            <li>
+                <p class="list_tt">
+                    <i>订单号:{$vo.orderno}</i>
+                    <eq name="vo.state" value="1"><em>已付款</em><else  /><em class="daifu">待付款</em></eq>
+
+                </p>
+                <span class="list_ma">
+                    <img src="{$vo.icon|picture}" alt="">
+                    <span>
+                        <p>{$vo.name}</p>
+                        <p>{$vo.content}</p>
+                        <em>
+                            <!--<i>人数：5人</i>
+                            <i>单价：¥500</i>-->
+                            <i>数量：{$vo.num}</i>
+                        </em>
+                    </span>
+                </span>
+
+                <p class="list_ft">
+                    <i>订单金额：<em>￥{$vo.money}</em></i>
+                    <eq name="vo.state" value="1">
+                        <span>
+                            <input type="button" value="去评价" class="gopinlun" data-id="{$vo.shopid}" shoptype="{$vo.shoptype}">
+                        </span>
+                    <else />
+                        <span>
+                            <input type="button" value="取消订单" data-id="{$vo.id}" class="delorder" >
+                            <input type="button" value="付款" class="ovfuk payorder" orderno="{$vo.orderno}" shoptype="{$vo.shoptype}" scenicid="{$vo.shopid}" >
+                        </span>
+
+                    </eq>
+                </p>
+
+            </li>
+
+            </volist>
+                <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+                </notempty>
+        </ul>
+    </div>
+
+
+
+
+</div>
+
+</body>
+<script>
+
+    page=1;
+
+    var   url="{:U('user/dingdan')}";
+    var state='{$Think.get.state}'
+    $(window).scroll(
+            function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+
+                    $.post(url,{'page':page,'state':state},function (da) {
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            $('#food').append(obj.msg);
+                            page++;
+                        }else{
+                            //$('.molink').addClass('nothing');
+
+                            layer.msg('没有更多了哦~');
+                        }
+                    })
+
+                }
+            });
+
+
+
+    $(document).on("click",".gopinlun",function (){
+
+        var id = $(this).attr('data-id');
+        var shoptype = $(this).attr('shoptype');
+        location.href="/Wap/user/fapinlun/id/"+id+'/type/'+shoptype;
+
+    })
+    //支付订单
+    $(document).on("click",".payorder",function (){
+
+        var orderno = $(this).attr('orderno');
+        var type = $(this).attr('shoptype');
+        if(type==1){
+            $.post("/Home/Ajax/hotelinfo",{'orderno':orderno},function(da){
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    var id = obj.id;
+                    var num = obj.num;
+                    var date1 = obj.date1;
+                    var date2 = obj.date2;
+                    //console.log(id,num,date1,date2);return;
+
+                    location.href="/Wap/house/pay/id/"+id+'/num/'+num+'/date1/'+date1+'/date2/'+date2;
+                }else{
+                    layer.msg('查询订单信息失败');
+                }
+            });
+
+        }else if(type==2){
+            location.href="/Wap/food/foodpay/orderno/"+orderno+'/type/'+type;
+        }else{
+            var id=$(this).attr('scenicid');
+            location.href="/Wap/project/menpiaopay/id/"+id+'/type/'+type;
+        }
+
+    })
+    //删除订单
+    $(document).on("click",".delorder",function () {
+        var id = $(this).attr('data-id');
+
+        layer.confirm('确定取消吗？', {
+            btn : [ '确定', '取消' ]
+        }, function(index) {
+            layer.close(index);
+                $.post("/Home/user/dingdan", {'id': id}, function (da) {
+                var obj = jQuery.parseJSON(da);
+                if (obj.code == 200) {
+                    layer.msg('取消成功',function () {
+                        location.reload();
+                    })
+                } else {
+                    layer.msg('取消失败')
+                }
+            });
+        })
+    })
+    $(document).on("click","#chaxun",function () {
+        var date1=$('#date_demo1').val();
+        var date2=$('#date_demo2').val();
+        //console.log(date1,date2);return;
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Wap/user/dingdan/date1/'+date1+'/date2/'+date2;
+    })
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo2',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo1',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>

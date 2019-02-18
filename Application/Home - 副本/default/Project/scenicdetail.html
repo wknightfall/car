@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>隆里古城门票</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/hotel.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+
+    <!--时间=插件-->
+    <script type="text/javascript" src="__JS__/timeDate/dateRange.js"></script>
+    <script type="text/javascript" src="__JS__/timeDate/monthPicker.js"></script>
+    <link type="text/css" href="__CSS__/timeDate/dateRange.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/timeDate/monthPicker.css" rel="stylesheet" />
+
+    <style type="text/css">
+        #allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        .anchorBL{display:none;}
+        html, body {position: relative;height: 100%;}
+        body {background: #eee;font-family: Helvetica Neue, Helvetica, Arial, sans-serif;font-size: 14px;color:#000;margin: 0;padding: 0;}
+        .swiper-container {width: 100%;height: 100%;margin-left: auto;margin-right: auto;}
+        .swiper-slide {text-align: center;font-size: 18px;background: #fff; /* Center slide text vertically */display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;}
+    </style>
+
+</head>
+<body><include file="Public/zx" />
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div>
+    <em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="{:U('index/index')}">旅游指南</a><em>-</em><a>旅游景区</a>
+</div>
+
+<section>
+    <div class="shan_hotel">
+
+        <div class="wheel_sw">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <img src="{$room.icon|picture}" alt="" class="swiper-slide">
+
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"></div>
+            </div>
+        </div>
+        <div class="hotel_ims">
+            <span class="htl_tt"><p>{$room.name}</p></span>
+            <span class="htl_jj">简介：{$room.content}</span>
+            <div class="mach_htl">
+                <p><i>￥</i>{$room.price}<i>起</i></p>
+                <if condition="$huodong eq 1"> <p>优惠活动</p><p>满{$hd.topmoney}减{$hd.price}</p></if>
+                <div class="now_ck01">
+                    <p><img src="__IMG__/htl/htl_07.jpg" data-id="{$room.id}" class="icon2"><i>收藏</i></p>
+                </div>
+            </div>
+            <div class="jian_text">
+                <ul>
+                    <li>具体地址：</li>
+                    <li>{$room.addr} <em class="jtzn">查看地图</em></li>
+                </ul>
+                <ul>
+                    <li>开放时间：</li>
+                    <li>冬季（12月1日-3月1日）8:00-17:30；其它季节（3月2日-11月30日）8:00-18:00</li>
+                </ul>
+                <ul>
+                    <li>满意度：</li>
+                    <li>97% &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;来自 <em>{$total}</em>名游客点评</li>
+                </ul>
+            </div>
+            <div class="dd_psv">
+               {$room.description}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mpo_list">
+        <div class="tt_mpyd">
+            <p>门票预订</p>
+            <p></p>
+        </div>
+        <ul class="lis_tt">
+            <li><em>名称</em><em>市场价</em><em>优惠价</em><em>预订</em></li>
+        </ul>
+
+        <ul class="lis_lsi">
+            <li><em>{$room.name}成人票</em><em>￥ {$room.oldprice}</em><em><i>￥</i>{$room.price}</em><em><input value="预订" type="button" class="yuding" piaotype="1"  price="{$room.price}"></em></li>
+            <li><em>{$room.name}儿童票</em><em>￥{$room.oldchildprice}</em><em><i>￥</i>{$room.childprice}</em><em><input value="预订" type="button" class="yuding" piaotype="2"  price={$room.price}></em></li>
+
+        </ul>
+    </div>
+
+
+    <!--介绍模块-->
+    <div class="htl_intr">
+        <div class="top_title">
+            <ul>
+                <li class="chke_tt jdjs">景区介绍</li>
+                <li class="jdhj">预订须知</li>
+                <li class="jtzn">交通指南</li>
+                <li class="jddp">景点评价<em>({$total}+)</em></li>
+            </ul>
+        </div>
+        <ul>
+            <li id="jdjs">
+                {$room.detail}
+            </li>
+            <li class="htl_pat1" id="jdhj">
+                <span>预订须知</span>
+                {$room.needknow}
+            </li>
+            <li class="htl_lin" id="jtzn">
+                <span>交通指南</span>
+                <div class="map_plg">
+                    <div id="container"></div>
+                    <div class="route_prom">
+                        <p> 距离海口美兰国际机场23公里，乘坐出租车约40分钟</p>
+                        <p>距离海口火车站27.2公里，乘坐出租车约50分钟；</p>
+                    </div>
+                </div>
+            </li>
+            <li class="htl_rev"  id="jddp">
+                <span>景点评价</span>
+                <div class="rev_tex">
+                    <ul>
+                        <li class="rev_ched"><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=5')}">全部评价({$total}+)</a></li>
+                        <li><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=0')}" style="color:rgb(115, 115, 115)">嗮图({$pic}+)</a></li>
+                        <li><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=1')}" style="color:rgb(115, 115, 115)">好评({$good}+)</a></li>
+                        <li><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=2')}" style="color:rgb(115, 115, 115)">中评({$middle}+)</a></li>
+                        <li><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=3')}" style="color:rgb(115, 115, 115)">差评({$bad}+)</a></li>
+                    </ul>
+                </div>
+                <div class="comt_are">
+                    <ul>
+                        <volist name="comment" id="vo">
+                            <li>
+                                <span class="avat_comt"><img src="{$vo.usericon|picture}" style="border-radius: 50%"></span>
+                                <span class="tet_comt">
+                                    <p><em>{$vo.username}</em><i>
+                                        <if condition="$vo.star eq 1"><img src="__IMG__/star1.png" style='width:90px' alt="">
+                                            <elseif condition="$vo.star eq 2"/><img src="__IMG__/star2.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 3"/><img src="__IMG__/star3.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 4"/><img src="__IMG__/star4.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 5"/><img src="__IMG__/star5.png" style='width:90px' alt="">
+                                        </if>
+                                    </i></p>
+                                    <p>{$vo.content}</p>
+                                    <if condition="$vo['icon'] neq 0">
+                                        <p><img src="{$vo.icon|picture}" alt="" style="width:40px;height:40px"></p>
+                                        <else /><p style="visibility: hidden"><img src="" alt="" style="width:40px;height:40px"></p></if>
+                                    <p>{$vo.time|date='Y-m-d h:i:s',###}</p>
+                                    <p class="spl_pp"></p>
+                                </span>
+                            </li>
+                        </volist>
+
+                    </ul>
+                    <div class="page_tt">
+                        <ul>
+                            {$page}
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="htl_recm" id="htl_path">
+        <div class="tt_tt">
+            <span>为您推荐</span>
+        </div>
+        <div class="tij_fy">
+            <ul>
+                <volist name="tj" id="vo">
+                <li>
+                    <p>
+                        <a href="{:U('Project/scenicdetail?id='.$vo['id'].'&type=3'.'&model=room')}" style="text-decoration: none;color:#fff"><img src="{$vo.icon|picture}" alt=""></a>
+                    </p>
+                    <div>
+                        <em>{$vo.name}</em>
+                        <p>{$vo.content}</p>
+                    </div>
+                    <span>
+                    <p class="jdll">{$vo.view}</p>
+                    <p class="jdpl">{$vo.pl}</p>
+                    <p class="jddz">{$vo.collectionnum}</p>
+                </span>
+                </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+<script type="text/javascript" src="__JS__/jquey-bigic.js"></script>
+<script>
+    $(function(){
+        $(".swiper-wrapper img").bigic();
+    });
+    $(function () {
+        var pl="{$Think.get.pl}"
+        var p="{$Think.get.p}"
+        if(pl!='' || p!=''){
+            $(window).scrollTop($('#jddp').offset().top)
+        }
+    })
+    var id="{$Think.get.id}";
+    $(document).on("click","#fapinlun",function () {
+        var shoptype="{$shoptype}"
+        var id="{$Think.get.id}"
+        var type="{$Think.get.type}"
+
+        if(shoptype==0){
+            location.href='/Home/user/fapinlun?id='+id+'&type='+type
+        }else{
+            location.href='/Home/mer/fapinlun?id='+id+'&type='+type
+        }
+
+    })
+
+
+    $(document).on("click",".yuding",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录,请先登录');return false;
+        }
+        location.href='/home/project/menpiaopay/id/'+id+'/type/'+$(this).attr('piaotype');
+
+    })
+
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':'room'},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                collection.attr("src",'/Public/Home/img/gud/ligcjj_03.jpg');
+                //collection.css("background-image","url('/Public/Home/__IMG__/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                collection.attr("src",'/Public/Home/img/gud/dtjg_05.jpg');
+                collection.css("width",'17px');collection.css("height",'17px');
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+</script>
+</html>
+<!--时间=插件-->
+<script type="text/javascript" src="__JS__/timeDate/dateRange.js"></script>
+<script type="text/javascript" src="__JS__/timeDate/monthPicker.js"></script>
+<link type="text/css" href="__CSS__/timeDate/dateRange.css" rel="stylesheet" />
+<link type="text/css" href="__CSS__/timeDate/monthPicker.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="/Public/Home/plugin/swiper/dist/css/swiper.min.css">
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=iD9NXuhXwdXoWMRfO6brtQcL"></script>
+
+<script src="/Public/Home/plugin/swiper/dist/js/swiper.min.js"></script>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point, 15);
+    var marker = new BMap.Marker(point);  // 创建标注
+    map.addOverlay(marker);
+
+
+    /*sweiper*/
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+
+    /**/
+    $(".top_title ul li").click(function () {
+
+        $("html, body").animate({
+            scrollTop: $('#'+$(this).attr("class")).offset().top }, {duration: 500,easing: "swing"});
+        return false;
+    })
+    /**/
+    $(".jtzn").click(function () {
+
+        $("html, body").animate({
+            scrollTop: $("#jtzn").offset().top }, {duration: 500,easing: "swing"});
+        return false;
+    })
+
+</script>
+

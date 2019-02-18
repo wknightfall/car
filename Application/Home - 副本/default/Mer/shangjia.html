@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/mer.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+
+    <script type="text/javascript" src="__JS__/ajaxupload.3.5.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <!--特效-->
+
+
+
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="psc_mb">
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('mer/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('mer/message')}"><li><span><p>我的留言</p></span></li></a>
+                    <a href="{:U('mer/goods?issale=2')}"><li><span><p>商品管理</p></span></li></a>
+                    <a href="{:U('mer/youhui')}"><li><span><p>优惠活动</p></span></li></a>
+                    <a href="{:U('mer/dingdan?isover=2')}"><li><span><p>订单管理</p></span></li></a>
+                    <a href="{:U('mer/caiwu')}"><li><span><p>财务</p></span></li></a>
+                    <a href="{:U('mer/shangjia')}"><li class="per_chd" ><span><p>商家信息</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="sjia_xx">
+            <!--商品管理-->
+            <div class="gg_youh">
+                <p>商家信息</p>
+            </div>
+            <!---->
+            <div class="shangjia_xx">
+                <ul>
+                    <li>昵称：</li>
+                    <li><input type="text" name='name' value="{$vo.name}" disabled="disabled"></li>
+                </ul>
+
+                <ul>
+                    <li>密码设置：</li>
+                    <li><input type="text" name='password'  value="{$vo.password}" disabled="disabled"></li>
+                </ul>
+
+                <ul>
+                    <li>店铺logo：</li>
+                    <if condition="$vo['icon'] eq 0">
+                        <li><img src="__IMG__/psc/shan_03.jpg" alt="" id="icon" ></li>
+                        <else />
+                    <li><img src="{$vo.icon|picture}" alt="" id="icon" ></li></if>
+                </ul>
+               <!-- <ul>
+                    <li>商家环境图片（4张）：</li>
+                    <if condition="$vo['icon1'] eq 0">
+                        <li><img src="__IMG__/psc/shan_03.jpg" alt="" id="icon3" ></li>
+                        <else />
+                        <li><img src="{$vo.icon1|picture}" alt="" id="icon3" ></li></if>
+
+
+                    <form action="{:U('public/test')}" method="post" enctype="multipart/form-data" id="form" style="display:none">
+                        <input type="file" multiple="multiple" onchange="chuan(this)" name="file[]" id="pic">
+                    </form>
+
+                </ul>-->
+                <ul>
+                    <li>营业执照：</li>
+                    <if condition="$vo['zzicon'] eq 0">
+                        <li><img src="__IMG__/psc/shan_03.jpg" alt="" id="icon1" ></li>
+                        <else />
+                        <li><img src="{$vo.zzicon|picture}" alt="" id="icon1" ></li></if>
+                </ul>
+                <ul>
+                    <li>执照企业名：</li>
+                    <li><input type="text"  name='zzname' value="{$vo.zzname}" disabled="disabled"></li>
+                </ul>
+                <ul>
+                    <li>执照注册号：</li>
+                    <li><input type="text"  name='zzno' value="{$vo.zzno}" disabled="disabled"></li>
+                </ul>
+
+                <ul>
+                    <li>执照地址：</li>
+                    <li><input type="text"  name='zzaddr' value="{$vo.zzaddr}" disabled="disabled" ></li>
+                </ul>
+                <ul>
+                    <li>商家地址：</li>
+                    <li>
+                        <input type="text"  name='addr' id="addr" value="{$vo.addr}" disabled="disabled" style="float: left" >
+                        <a href="javascript:void(0)" class="send_latlog" style="width: 100px; height: 40px; line-height: 40px; float: right; background: #f00b0d; color: #fff; text-align: center; float: left; margin-left: 10px; display: none;">生成经纬度</a>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li>地址经纬度：</li>
+                    <li><input type="text"  name='log' id="log" value="{$vo.log}" disabled="disabled" style="width: 130px;">
+                        - <input type="text"  name='lat' id="lat" value="{$vo.lat}" disabled="disabled" style="width: 130px;"></li>
+                </ul>
+                <ul>
+                    <li>证件到期日：</li>
+                    <li><input type="text"  name='overdue' value="{$vo.overdue}" disabled="disabled"></li>
+                </ul>
+                <ul>
+                    <li>执法人：</li>
+                    <li><input type="text"  name='faren' value="{$vo.faren}" disabled="disabled"></li>
+                </ul>
+
+                <ul>
+                    <li></li>
+                    <li>
+                        <input type="button" value="编辑信息" class="bj_img" id="tijiao">
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<input type="hidden" name="iconid" value="{$user.icon}">
+<input type="hidden" name="iconid1" value="{$user.zzicon}">
+<!-------底部--------->
+<include file="Public/footer" />
+</body>
+<script>
+    $('#icon2').click(function () {
+       $('#pic').click()
+    })
+    $(document).ready(function(){
+        uploadsasa();
+        uploadsasa1();
+    });
+    //上传头像
+    function uploadsasa(){
+        ajaxUploadicon(
+                'icon', //上传的按钮id名称
+                1000000000,  //允许上传的文件大小（单位：kb）
+                '/Home/Public/upload?form_name=userfile&file_size=10000', //提交服务器端地址
+                'userfile', //提交服务器文件表单名称
+                "$(\".img_div\").show();$(\"#img_path\").attr('src', obj.filename);$(\"#is_upload\").val('1');", //上传成功后执行的 js callback
+                'loadimg'  //loading 图片id
+        );
+    }
+    function uploadsasa1(){
+        ajaxUploadicon1(
+                'icon1', //上传的按钮id名称
+                1000000000,  //允许上传的文件大小（单位：kb）
+                '/Home/Public/upload?form_name=userfile&file_size=10000', //提交服务器端地址
+                'userfile', //提交服务器文件表单名称
+                "$(\".img_div\").show();$(\"#img_path\").attr('src', obj.filename);$(\"#is_upload\").val('1');", //上传成功后执行的 js callback
+                'loadimg'  //loading 图片id
+        );
+    }
+
+    function ajaxUploadicon(id_name, filesize, url, filename, callback, loadingid) {
+        var index;
+        var button = $('#'+id_name), interval;
+        var fileType = "pic", fileNum = "one";
+        new AjaxUpload(button,{
+            action: url,
+            name: filename,
+            onSubmit : function(file, ext){
+                index = layer.load(1, {
+                    shade: [0.4,'#000000']
+                });
+                if(fileType == "pic") {
+                    if (ext && /^(jpg|png|gif|jpeg)$/.test(ext)){
+                        this.setData({
+                            'info': '上传类型为图片'
+                        });
+
+                    } else {
+                        alert('提示：您上传的是非图片类型！');
+                        layer.close(index);
+                        return false;
+                    }
+                }
+                $("#"+loadingid).show();
+                if(fileNum == 'one') this.disable();
+            },
+            onComplete: function(file, response){
+
+                layer.close(index);
+                var obj = jQuery.parseJSON(response);
+                if (obj['ok'] == 'ok') {
+                    $('#icon').attr('src',obj['filename']);
+                    $('input[name=iconid]').val(obj['id']);
+
+                    uploadsasa();
+                } else {
+                    switch (response) {
+                        case '1':
+                            alert('提示：上传失败，图片不能大于100M');
+
+                            break;
+                        case '3':
+                            alert('提示：图片只有部分文件被上传，请重新上传！');
+
+                            break;
+                        case '4':
+                            alert('提示：没有任何文件被上传！');
+
+                            break;
+                        case '5':
+                            alert('提示：非图片类型，请上传jpg|png|gif图片！');
+
+                            break;
+                        default:
+                            alert('提示：上传失败，错误未知，请您及时联系网站客服人员！');
+
+                            break;
+                    }
+                }
+                $("#"+loadingid).hide();
+                window.clearInterval(interval);
+                this.enable();
+            }
+        });
+    }
+    function ajaxUploadicon1(id_name, filesize, url, filename, callback, loadingid) {
+        var index;
+        var button = $('#'+id_name), interval;
+        var fileType = "pic", fileNum = "one";
+        new AjaxUpload(button,{
+            action: url,
+            name: filename,
+            onSubmit : function(file, ext){
+                index = layer.load(1, {
+                    shade: [0.4,'#000000']
+                });
+                if(fileType == "pic") {
+                    if (ext && /^(jpg|png|gif|jpeg)$/.test(ext)){
+                        this.setData({
+                            'info': '上传类型为图片'
+                        });
+
+                    } else {
+                        alert('提示：您上传的是非图片类型！');
+                        layer.close(index);
+                        return false;
+                    }
+                }
+                $("#"+loadingid).show();
+                if(fileNum == 'one') this.disable();
+            },
+            onComplete: function(file, response){
+
+                layer.close(index);
+                var obj = jQuery.parseJSON(response);
+                if (obj['ok'] == 'ok') {
+                    $('#icon1').attr('src',obj['filename']);
+                    $('input[name=iconid1]').val(obj['id']);
+
+                    uploadsasa1();
+                } else {
+                    switch (response) {
+                        case '1':
+                            alert('提示：上传失败，图片不能大于100M');
+
+                            break;
+                        case '3':
+                            alert('提示：图片只有部分文件被上传，请重新上传！');
+
+                            break;
+                        case '4':
+                            alert('提示：没有任何文件被上传！');
+
+                            break;
+                        case '5':
+                            alert('提示：非图片类型，请上传jpg|png|gif图片！');
+
+                            break;
+                        default:
+                            alert('提示：上传失败，错误未知，请您及时联系网站客服人员！');
+
+                            break;
+                    }
+                }
+                $("#"+loadingid).hide();
+                window.clearInterval(interval);
+                this.enable();
+            }
+        });
+    }
+</script>
+<script>
+    function chuan(obj) {
+       $('#tu').attr('src',window.URL.createObjectURL(obj.files[0]));
+        $('#form').submit();
+    }
+    $('#tijiao').click(function(){
+        var cando=$('input[name=faren]').attr('disabled');
+        if(cando=='disabled'){$('.send_latlog').show();return false;}
+
+        var name=$('input[name=name]').val();
+        var password=$('input[name=password]').val();
+        var zzname=$('input[name=zzname]').val();
+        var zzno=$('input[name=zzno]').val();
+        var zzaddr=$('input[name=zzaddr]').val();
+
+        var addr=$('input[name=addr]').val();
+        var log=$('input[name=log]').val();
+        var lat=$('input[name=lat]').val();
+
+        var overdue=$('input[name=overdue]').val();
+        var faren=$('input[name=faren]').val();
+
+        if(addr == ''){
+            layer.tips('请填写地址!', '#addr', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        if(log == '' || lat == ''){
+            layer.tips('请生成经纬度!', '#log', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+        var icon = $('input[name=iconid]').val();
+        var zzicon = $('input[name=iconid1]').val();
+
+        $.post("/Home/mer/shangjia",{'name':name, 'password':password, 'zzname':zzname,  'zzno':zzno,'zzaddr':zzaddr,'overdue':overdue,'faren':faren,  'icon':icon, 'zzicon':zzicon, 'addr':addr, 'log':log, 'lat':lat},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('编辑成功',function () {
+                    location.reload()
+                });
+
+            }else{
+                layer.msg('编辑失败');
+
+            }
+        });
+    })
+    $('.send_latlog').click(function () {
+
+        var address = $('input[name=addr]').val();
+
+        if(address == ''){
+
+            layer.msg('请输入详细地址！');
+            return false;
+
+        }
+
+        $.post('/Home/Ajax/sendLatLog',{address:address}, function (data) {
+            var res = jQuery.parseJSON(data);
+
+            if(res['code'] == 500){
+                layer.msg(res['content']);
+                return false;
+            }
+            if(res['code'] == 200){
+                $('input[name=log]').val(res['log']);
+                $('input[name=lat]').val(res['lat']);
+            }
+        });
+
+    });
+</script>
+</html>

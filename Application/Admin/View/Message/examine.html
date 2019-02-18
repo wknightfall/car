@@ -1,0 +1,108 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>文章审核</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="{:U('Articlee/examine?state=1')}" <if condition="$_GET['state'] eq 1 || $_GET['state'] eq ''">style="background: #FF1A1E;"</if> >待审核({$d})</a>
+			<a class="btn" href="{:U('Articlee/examine?state=2')}" <if condition="$_GET['state'] eq 2">style="background: #FF1A1E;"</if>  >审核成功({$c})</a>
+			<a class="btn" href="{:U('Articlee/examine?state=3')}" <if condition="$_GET['state'] eq 3">style="background: #FF1A1E;"</if>  >审核失败({$s})</a>
+        </div>
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="nickname" class="search-input" value="{:I('nickname')}" placeholder="请输入段落名称或者章节名称">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="">ID</th>
+		<th class="">文章名称</th>
+		<th class="">段落名称</th>
+		<th class="">章节名称</th>
+		<th class="">章节</th>
+		<th class="">上级章节</th>
+		<th class="">作者</th>
+			<th class="">详情</th>
+		<th class="">状态</th>
+		<th class="">申请时间</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="_list">
+		<volist name="_list" id="vo">
+		<tr>
+			<td>{$vo.id}</td>
+			<td>{$vo.article|article='name'}</td>
+			<td>{$vo.title}</td>
+			<td>{$vo.label}</td>
+			<td>{$vo.pid}章</td>
+			<td>
+				<if condition="$vo.ppid eq 0">
+					<a style="color:#FF1A1E">无</a>
+					<else/>
+					<a style="color: #00aaaa">{$vo.ppid|article_subgrade='label'}</a>
+				</if>
+			</td>
+			<td>{$vo.uid|system_users='uname'}</td>
+			<td><a href="{:U('articledetail?id='.$vo['id'])}" class="">章节详情</a></td>
+			<td>
+				<if condition="$vo.state eq 1">
+					<a href="{:U('state?state=2&id='.$vo['id'])}" class="ajax-get">审核成功</a>
+					<a href="{:U('state?state=3&id='.$vo['id'])}" class="ajax-get">审核失败</a>
+					<elseif condition="$vo.state eq 2"/>
+					<a href="javascript:;" style="color: #FF1A1E;">审核成功</a>
+					<elseif condition="$vo.state eq 3"/>
+					<a href="javascript:;" style="color: #FF1A1E;">审核失败</a>
+				</if>
+			</td>
+			<td>{$vo.time|date='Y-m-d H:i:s',###}</td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="11" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('examine')}');
+	</script>
+</block>

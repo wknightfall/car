@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+
+<!--正文标题-->
+<div class="jingp_titl">
+    <p>{$news.title}</p>
+    <ul>
+        <li><a href="javascript:">{$news.create_time|date='Y-m-d',###}</a></li>
+    </ul>
+</div>
+<!--正文-->
+<div class="article_luxian">
+
+    {$news.content}
+    <if condition="$news.file neq 0">
+    <div style="margin-top: 20px">
+        <a href=" {$news.file|fileurl}" download="{$news.file|filename}" style="">
+            下载附件
+        </a>
+    </div>
+        </if>
+</div>
+
+<div class="next_las">
+    <if condition="$prev neq 0">
+    <p><i>上一篇：</i><a href="{:U('wap/news/newsdetail?id='.$prev['id'])}">{$prev.title}</a></p></if>
+    <if condition="$next neq 0">
+    <p><i>下一篇：</i><a href="{:U('wap/news/newsdetail?id='.$next['id'])}">{$next.title}</a></p></if>
+</div>
+<!--information-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>

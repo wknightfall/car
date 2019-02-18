@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>travel_agc</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/travel_guide.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body><include file="Public/zx" />
+<include file="Public/header" />
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!---->
+<div class="travel_gbi" style="display: inline-block;" id="rippleria">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div><em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="{:U('index/index')}">旅游指南</a><em>-</em><a>景区</a>
+</div>
+<section>
+    <div class="nav_tt">
+        <div class="left_nav">
+            <ul>
+                <a href="{:U('Food/index')}" style="text-decoration: none;color:#fff"><li class="lenav_ok" style="background: #ef5f02;"><div></div>美食</li></a>
+
+                <a href="{:U('House/index')}" style="text-decoration: none;color:#fff"><li style="background: #f29a00;"><div></div>住宿</li></a>
+                <a href="{:U('Transpot/index')}" style="text-decoration: none;color:#fff"><li style="background: #00b065;"><div></div>交通</li></a>
+                <a href="{:U('Scenic/index')}" style="text-decoration: none;color:#fff"><li style="background: #29a5f3;"><div></div>景区</li></a>
+                <a href="{:U('Shopping/index')}" style="text-decoration: none;color:#fff"><li  style="background: #2970a5;"><div></div>购物</li></a>
+                <a href="{:U('Funny/index')}" style="text-decoration: none;color:#fff"><li style="background: #e00404;"><div></div>娱乐</li></a>
+            </ul>
+        </div>
+        <ul>
+            <li><a href="{:U('Scenic/index')}" style="text-decoration: none;color:#000">旅游景点</a></li>
+            <li><a href="{:U('Scenic/route')}" style="text-decoration: none;color:#000">精品路线</a></li>
+            <li><a href="{:U('Scenic/rural')}" style="text-decoration: none;color:#000">乡村旅游</a></li>
+            <li><a href="{:U('Scenic/tourist')}" style="text-decoration: none;color:#000">导游</a></li>
+            <li class="tkd_li"><a href="{:U('Scenic/cpy')}" style="text-decoration: none;color:#000">旅行社</a></li>
+        </ul>
+    </div>
+    <div class="agec_dis">
+        <ul id="food">
+            <volist name="food" id="vo">
+            <li>
+                <span><a href="{:U('Food/detail?id='.$vo['id'].'&model=travelcpy')}"><img src="{$vo.icon|picture}" alt="" style="width:100%"></a></span>
+                <p class="ho_imesg">
+                    {$vo.content}
+                </p>
+                <div>
+                    <p><a href="{:U('Food/detail?id='.$vo['id'].'&model=travelcpy')}">{$vo.name}</a></p>
+                    <ul>
+                        <li><span><img src="__IMG__/gud/lxs_11.jpg" alt=""></span><em>办公地址：</em>{$vo.addr}</li>
+                        <li><span><img src="__IMG__/gud/lxs_14.jpg" alt=""></span><em>联系电话：</em>{$vo.tel}</li>
+                        <li><span><img src="__IMG__/gud/lxs_16.jpg" alt=""></span><em>活动：</em>{$vo.activity}</li>
+                    </ul>
+                </div>
+            </li>
+          </volist>
+        </ul>
+    </div>
+
+    <div class="drop_but">
+        <img src="__IMG__/gud/drup_03.jpg" alt="" class="molink">
+    </div>
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+</html>
+<script>
+
+    page=1;
+    var    url="{:U('Scenic/cpy')}";
+
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+
+        }
+    })
+
+</script>
+<script>
+    /*背景动画*/
+    bg_dh();
+
+    /*回到顶部*/
+     goto_top();
+
+
+    /*禁止所有图片被拖动*/
+    $("img").attr("ondragstart","return false");
+
+        /*回到顶部*/
+    function goto_top() {
+
+        $(".foot_to_top").click(function () {
+            $("html, body").animate({scrollTop:0 },500);
+            // document.body.scrollTop = document.documentElement.scrollTop = 0;
+        })
+        $(".topt_to").click(function () {
+            $("html, body").animate({scrollTop:0 },500);
+        })
+    }
+    function bg_dh() {
+
+        $(document).on("mouseenter",".agec_dis>ul>li",function () {
+            $(".agec_dis>ul>li").children(".ho_imesg").stop(true,true).slideUp();
+            $(this).children(".ho_imesg").slideDown();
+            $(this).children(".ho_imesg").slideDown();
+            $(this).children("span").children("img").stop(true, true).animate({width: '591px', height: '261px', left:'-15px', top:'-15px'}, 300,);
+            $(this).children("div").children("ul").children("li").children("span").children("img").stop(true, true).animate({width: '20px', height: '23px', left:'-3px', top:'0'}, 300,);
+            $(this).children("div").children("ul").children("li").children("span").children("img").stop(true, true).animate({width: '17px', height: '20px', left:'3px', top:'0'}, 300,);
+
+        })
+
+        $(document).on("mouseleave",".agec_dis>ul>li",function () {
+
+            $(this).children(".ho_imesg").slideUp();
+            $(this).children("span").children("img").stop(true, true).animate({width: '561px', height: '231px', left:'15px', top:'15px'}, 300,);
+        })
+        $(document).on("mouseenter",".agec_dis>ul>li>div>ul>li",function () {
+            $(this).children("span").children("img").stop(true, true).animate({width: '20px', height: '23px', left:'-3px', top:'3'}, 300,);
+        })
+        $(document).on("mouseleave",".agec_dis>ul>li>div>ul>li",function () {
+            $(this).children("span").children("img").stop(true, true).animate({width: '17px', height: '20px', left:'3px', top:'0'}, 300,);
+        })
+
+    }
+</script>

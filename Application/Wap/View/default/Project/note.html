@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+
+
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <li><a href="{:U('project/index')}">主要景区</a></li>
+        <li><a href="{:U('scenic/route?navid=63')}">旅游路线</a></li>
+        <li><a href="{:U('project/videolist')}">景区视频</a></li>
+        <li class="inva_chk"><a href="{:U('project/note')}">旅行游记</a></li>
+    </ul>
+
+</div>
+<!--正文-->
+<div class="lvxin_youji">
+
+    <ul id="food">
+        <volist name="food" id="vo">
+        <li>
+            <a href="{:U('wap/project/notedetail?id='.$vo['id'])}">
+                <img src="{$vo.icon|picture}" alt="">
+            </a>
+            <span>
+                <p><a href="{:U('wap/project/notedetail?id='.$vo['id'])}">{$vo.name|mb_substr=###,0,45}</a></p>
+                <i>{$vo.description}..</i>
+                <em>
+                    <p><img src="__IMG__/icon/aaa_seee.png" alt="">{$vo.view}</p>
+                    <if condition="$vo.collection eq 1">
+                        <p><img src="__IMG__/icon/hert.png"  data-id="{$vo.id}" >{$vo.collectionnum}</p>
+                        <else/>
+                        <p><img src="__IMG__/icon/aattt.png"  data-id="{$vo.id}" >{$vo.collectionnum}</p>
+                    </if>
+
+                    <p>{$vo.create_time|date='Y-m-d',###}</p>
+                </em>
+            </span>
+        </li>
+
+        </volist>
+
+    </ul>
+</div>
+<!--more-->
+<div class="see_more">
+
+    <a href="javascript:" class="molink">查看更多+</a>
+</div>
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>
+<script>
+
+    page=1;
+    var    url="{:U('Project/note')}";
+
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+        }
+    })
+    /*$(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        var colnum=$(this).next('i');
+        $.post("/Home/Ajax/collection",{'id':id,'type':'travelnote'},function(da){
+            var num = colnum.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                colnum.html(parseInt(num)+1);
+                collection.attr("src","/Public/wap/image/icon/hert.png");
+
+            }else if(obj.code==201){
+                colnum.html(parseInt(num)-1);
+                collection.attr("src","/Public/wap/image/icon/aattt.png");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+*/
+
+</script>

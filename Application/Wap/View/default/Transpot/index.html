@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <volist name="nav" id="v">
+            <li <if condition="$v.id eq $navid">class="inva_chk"</if>  ><a href="{$v.href}">{$v.title}</a></li>
+        </volist>
+    </ul>
+
+</div>
+<!--正文-->
+<div class="car_banche">
+    <div>
+        锦屏因青山似锦、秀丽如屏而得名，位于贵州省东南部，黔东
+        南州东部，总面积1597 平方公里，辖15 个乡镇和1 个省级经济开
+        发区，总人口23 万，是一个集少数民族文化、木商文化、红色文化
+        领袖、龙华二十四烈士之一龙大道和红军十八师师长龙云的故乡。
+        锦屏区位优越，是黔东南通往湘、粤、桂的重要门户，三黎高速公
+        路穿境而过，距黎平机场60 公里，距贵广高铁从江站110公里，距
+        沪昆高铁三穗站80 公里，境内山清水秀，林木、青石、水能等资
+        源丰富，素有“杉木之乡”、“青石之乡”、“水电之乡”美誉。
+    </div>
+    <img src="__IMG__/body/jiaot_03.jpg" alt="">
+    <span>
+         <a href="http://www.gzsqcp.com" target="_blank">
+         </a>
+
+    </span>
+</div>
+<!--more-->
+
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+    $('#banche').click(function () {
+        window.open("http://www.gzsqcp.com");
+    })
+</script>
+</html>

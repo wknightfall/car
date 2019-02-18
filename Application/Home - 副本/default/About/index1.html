@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css">
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script> 
+<script type="text/javascript" src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+
+<!--动画-->
+<link rel="stylesheet" type="text/css" href="__CSS__/animate.min.css"> 
+<script type="text/javascript" src="__JS__/wow.min.js"></script>
+
+</head>
+<body><include file="Public/zx" />
+    
+    <!--头部-->
+    <include file="Public:header"/>
+    <!--banner-->
+
+     <include file="Public:nybanner"/>
+   
+    <!--主体-->
+
+    <div class="widthall main">
+    	<div class="width1200 about">
+              <div class="about_nav">
+                  <span class="span1">集团公司介绍</span>
+                  <span class="span2">Company Profile</span>
+              </div>
+              <div class="lines"></div>
+              <div class="ztcont">
+			  
+			    <notempty name="vo[content]">
+					{$vo[content]}
+				<else/>
+					暂无内容
+				</notempty>
+                  
+			  </div>
+
+              <!--分公司-->
+
+			  
+			  
+             
+
+           
+
+    	</div>
+    </div>
+     
+    <!--脚步-->
+   <include file="Public:footer"/>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css"> 
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script>
+<script type="text/javascript" src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+
+<!--验证js-->
+<script src="__STATIC__/validate/dist/jquery.validate.min.js"></script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+
+<style>
+
+label.error{color:#f00; font-size: 12px;}
+input:focus{ border-color:#ff6c00;}
+textarea:focus{border-color:#f00;}
+textarea.error{color:#f00; border:1px solid #f00;}
+ .BMapLabel{left:15px !important;}
+</style>
+</head>
+<body><include file="Public/zx" />
+    
+    <!--头部-->
+   <include file="Public:header"/>
+    <!--banner-->
+    <include file="Public:nybanner"/>
+	
+    
+   
+    <!--主体-->
+
+    <div class="widthall main">
+    	<div class="width1200">
+    	    <!--面包屑-->
+    		<div class="mianbao">
+    			<div class="mianbao_img"><img src="__IMG__/sy.png"/></div>
+    			<div class="mianbao_text"><p>
+    			     <a href="/">首页</a>
+    			     <a> > </a>
+    			     <a href="{:U($topvo[url],array('topid'=>$topid))}">联系我们</a>
+    			</p></div>
+				
+    			<div class="mianbao_prve"><a href="javascript:history.back(-1)">返回上一页</a></div>
+				
+    		</div>
+
+            <div class="contact">
+                <div class="width1140">
+                    <div class="contacttop">
+                        <div class="lefta">
+                            <div class="lx_a">
+                                <p><span class="span1">{$topvo[title]}</span><span class="span2">{$topvo[name]}</span></p>
+                            </div>
+                            <div class="lx_b"><span></span></div>
+                            <div class="lx_c">
+                                <p>公司：{:C('WEB_SITE_TITLE')}</p>
+                                <p>电话：{:C('WEB_SITE_MOBILE')}</p>
+                                <p>邮编：{:C('WEB_YOUBIAN')}</p>
+                                <p>网址：{:C('WEB_SITE_URL')}</p>
+                                <p>地址：{:C('WEB_COM_ADDRESS')}</p>
+                            </div>
+                        </div>
+                        <div class="leftb">
+						 <form action="{:U('')}" method="post" id="form2"> 
+                            <div class="forma inputone">
+							   
+                                <div class="contact_inputa">
+                                  <input type="text" id="username" name="name" value="" required data-msg-required="*您的姓名不能为空" placeholder="您的姓名" />
+                                </div>
+								
+                                <div class="contact_inputb">
+                                <input type="text" id="mobile" name="mobile" value="" required data-rule-checkMobile="true" data-msg-required="*您的电话不能为空" placeholder="您的联系方式"/>
+                                </div>
+								 
+                            </div>
+                            <div class="forma">
+                                <textarea name="content" required data-msg-required="*留言内容不能为空" placeholder="留言内容..."></textarea>
+                            </div>
+                            <div class="forma pc_btns">
+                                <span class="btns" style="cursor:pointer;">提交</span>
+                            </div>
+                            
+                            <div class="forma tel_btns">
+                                <p class="btns" style="cursor:pointer;">提交</p>
+                            </div> 
+
+
+						 </form>	
+                        </div>
+                    </div>
+
+                    <!--地图-->
+                    <div class="contacttop maps" id="dituContent">
+                        
+                    </div>
+
+                </div>
+               
+                
+            </div>
+    	</div>
+    </div>
+    
+    <!--脚步-->
+   <include file="Public:footer"/>
+<script type="text/javascript">
+
+	$('input,textarea').focus(function(){
+	    
+		$(this).css('border-color','#f00');
+
+	});
+
+
+	$('input,textarea').blur(function(){
+	     
+		$(this).css('border-color','#bfbfbf');
+
+	});
+
+
+
+
+
+
+//手机验证规则
+jQuery.validator.addMethod("checkMobile", function (value, element) {
+	
+		var mobile = /^1[3|4|5|7|8]\d{9}$/;
+
+		return this.optional(element) || (mobile.test(value));
+
+
+	}, "手机格式不对");
+
+
+
+//提交
+    
+    $(".btns").click(function(){
+
+	    $("#form2").submit();
+
+	});
+
+
+	$("#form2").validate({
+	        submitHandler: function() {
+
+			    $.post('{:U('Contact/addinfo')}',$('#form2').serialize(),function(d){
+				     if(d.status==1){
+					       layer.alert(d.msg,function(){
+						   
+						      window.location.reload();
+						   
+						   }); 
+						  
+						
+					 }else if(d.status==2){
+					    layer.alert('提交失败！');
+					 }
+				});
+	           
+	        }
+	})
+
+	
+
+
+</script>
+   
+<script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+        createMap();//创建地图
+        setMapEvent();//设置地图事件
+        addMapControl();//向地图添加控件
+        addMarker();//向地图中添加marker
+    }
+    
+    //创建地图函数：
+    function createMap(){
+        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+        var point = new BMap.Point(105.9943,29.981406);//定义一个中心点坐标
+        map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
+        window.map = map;//将map变量存储在全局
+    }
+    
+    //地图事件设置函数：
+    function setMapEvent(){
+        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard();//启用键盘上下左右键移动地图
+    }
+    
+    //地图控件添加函数：
+    function addMapControl(){
+                        //向地图中添加比例尺控件
+    var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+    map.addControl(ctrl_sca);
+    }
+    
+    //标注点数组
+    var markerArr = [{title:"重庆创柯伦股份有限公司",content:"公司：重庆创柯伦科技股份有限公司<br/>电话：400-000-9023<br/>地址：重庆市铜梁区少云镇经济开发区",point:"105.990491|29.993418",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+         ];
+    //创建marker
+    function addMarker(){
+        for(var i=0;i<markerArr.length;i++){
+            var json = markerArr[i];
+            var p0 = json.point.split("|")[0];
+            var p1 = json.point.split("|")[1];
+            var point = new BMap.Point(p0,p1);
+            var iconImg = createIcon(json.icon);
+            var marker = new BMap.Marker(point,{icon:iconImg});
+            var iw = createInfoWindow(i);
+            var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+            marker.setLabel(label);
+            map.addOverlay(marker);
+            label.setStyle({
+                        borderColor:"#808080",
+                        color:"#333",
+                        cursor:"pointer"
+            });
+            
+            (function(){
+                var index = i;
+                var _iw = createInfoWindow(i);
+                var _marker = marker;
+                _marker.addEventListener("click",function(){
+                    this.openInfoWindow(_iw);
+                });
+                _iw.addEventListener("open",function(){
+                    _marker.getLabel().hide();
+                })
+                _iw.addEventListener("close",function(){
+                    _marker.getLabel().show();
+                })
+                label.addEventListener("click",function(){
+                    _marker.openInfoWindow(_iw);
+                })
+                if(!!json.isOpen){
+                    label.hide();
+                    _marker.openInfoWindow(_iw);
+                }
+            })()
+        }
+    }
+    //创建InfoWindow
+    function createInfoWindow(i){
+        var json = markerArr[i];
+        var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+        return iw;
+    }
+    //创建一个Icon
+    function createIcon(json){
+        var icon = new BMap.Icon("/Public/Home/images/map.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        return icon;
+    }
+    
+    initMap();//创建和初始化地图
+</script>
+   
+   
+   
+
+</body>
+</html>

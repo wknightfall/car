@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+
+<!--正文标题-->
+<!--<div class="user_tt">
+    <img src="{$tiezi.usericon|picture}" alt="">
+    <div>
+        <p>{$tiezi.uid|modelField='usermember','name'}</p>
+        <div>
+            <p>主题</p>
+            <i>{$zhutinum}</i>
+        </div>
+        <div>
+            <p>帖子</p>
+            <i>{$tiezinum}</i>
+        </div>
+    </div>
+</div>-->
+<div class="tie_titl">
+    <p>{$ele.name}</p>
+    <div>
+        <p><img src="__IMG__/icon/aaa_seee.png" alt="">{$ele.view}</p>
+        <p><img src="__IMG__/icon/aa_ssoo.png" alt="">{$ele.pl}</p>
+        <p><img src="__IMG__/icon/aattt.png" alt="">{$ele.collectionnum}</p>
+    </div>
+
+    <i>发布时间：{$ele.create_time|date='Y-m-d h:i',###}</i>
+</div>
+<!--正文-->
+<div class="article_luxian">
+    {$ele.detail}
+</div>
+<div class="tiezi_ck">
+    <span>
+        <!--<p><img src="__IMG__/icon/pinlun.png" alt="" class="pl"> 评论</p>-->
+        <p><img src="__IMG__/icon/ht.png" alt="" class="icon2" data-id="{$Think.get.id}">收藏</p>
+    </span>
+   <!-- <p><a href="javascript:"  onclick="jubao({$vo.id})" >举报</a></p>-->
+</div>
+
+<div class="pinglu_hf">
+    <ul>
+        <volist name="comment" id="vo" key="k">
+        <li>
+            <ul>
+                <li class="oeher_aa">
+                    <img src="{$vo.usericon|picture}" alt="">
+                    <span>
+                        <p><i>{$vo.uid|modelField='usermember','name'}</i><em>{$vo.floor}楼</em></p>
+                        <p>发表于{$vo.time|date='Y-m-d H:i',###}</p>
+                    </span>
+                </li>
+                <li>{$vo.content}</li>
+
+                <div class="tiezi_ck_1">
+                    <span>
+                        <p><img src="__IMG__/icon/pinlun.png" alt="" class="reply" uid="{$vo.uid}" data-id="{$vo.id}"> 评论</p>
+                        <p><img src="__IMG__/icon/ht.png"  class="">收藏</p>
+                    </span>
+                    <p><a href="javascript:"  onclick="jubao({$vo.id})" >举报</a></p>
+                </div>
+
+            </ul>
+        </li>
+
+        </volist>
+    </ul>
+</div>
+
+
+
+<div class="tex_ares" <if condition="$Think.get.model eq 'leader' || $Think.get.model eq 'beautypic'">style='display:none;'</if> >
+
+    <textarea name="" placeholder=""  id="content" cols="30" rows="10">{$plcontent}</textarea>
+    
+    <div>
+        <if condition="$Think.get.edit eq 1">
+            <input value="编辑评论" type="button" id="editcomment">
+            <else />
+            <input value="发表回复" type="button" id="pubcomment">
+        </if>
+
+    </div>
+</div>
+
+<!--information-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+    var isreply=0;
+    var ppid=0;
+
+    $('.reply').click(function () {
+        isreply=1;
+        ppid=$(this).attr('data-id');
+        $(document).scrollTop($(document).height());
+    })
+    $('#pub').click(function () {
+        $('#pubcomment').click();
+    })
+    $('#pubcomment').click(function(){
+        var aid ="{$Think.get.id}";
+        var type="{$Think.get.model}";
+        var content = $('#content').val();
+
+        if(content == ''){
+            layer.msg('请填写评论内容！');
+            return false;
+        }
+        if(isreply){
+            var pid=$(this).attr('id');
+            var uid=$(this).attr('uid');
+            //var content=$('.'+pid).val().trim();
+            var u={$uid};
+             if(uid == u){
+             layer.msg('不能回复自己！');
+             return false;
+             }
+             /*if(content==""){
+             layer.tips('请填写评论内容 ！', '#content', {
+             tips: [1, '#3595CC'],
+             time: 4000
+             });
+             return false;
+             }*/
+            //console.log(ppid,aid);return;
+            $.post("{:U('/Home/Ajax/reply')}",{'id':aid,'content':content,'type':type,'ppid':ppid},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg(obj.msg,function () {
+                        location.reload();
+                    });
+
+                }else{
+                    layer.msg(obj.msg);
+
+                }
+            })
+
+        }else{
+            //var content = $('#textarea').text().trim();
+            var content = $('#content').val().trim();
+            $.post("/Home/Ajax/pubcomment",{'id':aid,'content':content,'type':type,'ppid':ppid},function(da){
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg(obj.msg,function () {
+                        location.reload();
+                    });
+                }else{
+                    layer.msg(obj.msg);
+
+                }
+            });
+        }
+
+
+    })
+
+    function jubao(id){
+
+        $.post("{:U('/Home/Ajax/jubao')}",{'id':id},function (da) {
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg(obj.msg)
+            }else if(obj.code==201){
+                layer.msg(obj.msg);
+
+            }else{
+                layer.msg(obj.msg);
+            }
+        })
+    }
+
+
+    $(document).on("click",".icon2",function () {
+        var type="{$Think.get.model}";
+        var id = $(this).attr('data-id');
+        var collection = $(this);
+
+        $.post("{:U('/Home/Ajax/collection')}",{'id':id,'type':type},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+
+                collection.attr("src","/Public/Wap/image/icon/hert.png");
+            }else if(obj.code==201){
+
+                collection.attr("src","/Public/Wap/image/icon/aattt.png");
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+
+    function expan(id){
+        $('#li_'+id+' .more').toggleClass('hide');
+    }
+</script>
+</html>

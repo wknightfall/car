@@ -1,0 +1,58 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<script type="text/javascript" src="__JS__/admin.js"></script>
+    <div class="main-title">
+        <h2>修改</h2>
+    </div>
+    <ul class="tab-nav nav">
+
+        <li class="current"><a href="javascript:void(0)">基本信息</a></li>
+
+    </ul>
+    
+    <form action="{:U()}" method="post" class="form-horizontal">
+	
+	
+	 <input type="hidden"  name="id" value="{$vo.id}">
+    <div class="tab-content">
+        <div class="form-item">
+            <label class="item-label">链接名称<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="title" value="{$vo.title}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">英文名称<span class="check-tips">（必须填写）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="egname" value="{$vo.egname}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">链接地址<span class="check-tips">（必须填写,例：http://www.caeri.com.cn/）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="url" value="{$vo['url']}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">排序<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="sort" value="{$vo['sort']}">
+            </div>
+        </div>
+
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('Links/index')}');
+    </script>
+</block>

@@ -1,0 +1,195 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>编辑</h2>
+    </div>
+    <ul class="tab-nav nav">
+        <li class="current"><a href="javascript:void(0)">基本信息</a></li>
+    </ul>
+    
+    <form action="{:U()}" method="post" class="form-horizontal">
+        <input type="hidden" name="id" value="{$vo['id']}">
+    <div class="tab-content">
+
+        <div class="form-item">
+            <label class="item-label">位置分类<span class="check-tips">（位置类别必须选择）</span></label>
+            <div class="controls">
+                <select name="type" style="width:200px;">
+                    <option value="" >请选择类别</option>
+                    <option value="1" <?php if($vo['type']==1){echo 'selected';} ?>>合作单位</option>
+                    <option value="2" <?php if($vo['type']==2){echo 'selected';} ?>>联系我们</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">公司名称<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="title" value="{$vo['title']}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">英文名称<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="egname" value="{$vo['egname']}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">地址<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="address" value="{$vo['address']}">
+            </div>
+        </div>
+
+        <div class="form-item">
+            <label class="item-label">英文地址<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="egaddress" value="{$vo['egaddress']}">
+            </div>
+        </div>
+
+
+        
+        <div class="form-item">
+            <label class="item-label">电话<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="zj_mobile" value="{$vo['zj_mobile']}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">传真<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="fax_code" value="{$vo['fax_code']}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">邮箱<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="email" value="{$vo['email']}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">网址<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="web_url" value="{$vo['web_url']}">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">排序<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="sort" value="{$vo['sort']}">
+            </div>
+        </div>
+		
+		<div class="form-item">
+            <div class="controls">
+                <label class="item-label">缩略图</label>
+                <input type="file" id="upload_picture">
+                <input type="hidden" name="icon" id="icon" value="{$vo['icon']|default=''}"/>
+                <div class="upload-img-box">
+                <notempty name="vo['icon']">
+                    <div class="upload-pre-item"><img src="__ROOT__{$vo.icon|get_cover='path'}"/></div>
+                </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //上传图片
+            /* 初始化上传插件 */
+            $("#upload_picture").uploadify({
+                "height"          : 30,
+                "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'	  : 1,
+                'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#icon").val(data.id);
+                    src = data.url || '__ROOT__' + data.path;
+                    $("#icon").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                    );
+                }
+            }
+            </script>
+        </div>
+
+        <div class="form-item">
+            <div class="controls">
+                <label class="item-label">二维码</label>
+                <input type="file" id="upload_picture2">
+                <input type="hidden" name="icon2" id="icon2" value="{$vo['icon2']|default=''}"/>
+                <div class="upload-img-box">
+                    <notempty name="vo['icon2']">
+                        <div class="upload-pre-item"><img src="__ROOT__{$vo.icon2|get_cover='path'}"/></div>
+                    </notempty>
+                </div>
+            </div>
+            <script type="text/javascript">
+                //上传图片
+                /* 初始化上传插件 */
+                $("#upload_picture2").uploadify({
+                    "height"          : 30,
+                    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                    "fileObjName"     : "download",
+                    "buttonText"      : "上传图片",
+                    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                    "width"           : 120,
+                    'removeTimeout'	  : 1,
+                    'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                    "onUploadSuccess" : uploadPicture,
+                    'onFallback' : function() {
+                        alert('未检测到兼容版本的Flash.');
+                    }
+                });
+                function uploadPicture(file, data){
+                    var data = $.parseJSON(data);
+                    var src = '';
+                    if(data.status){
+                        $("#icon2").val(data.id);
+                        src = data.url || '__ROOT__' + data.path;
+                        $("#icon2").parent().find('.upload-img-box').html(
+                            '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                        );
+                    }
+                }
+            </script>
+        </div>
+		
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </div>
+    
+   </form>
+</block>
+
+<block name="script">
+<include file="Public:datetime" />
+    <script type="text/javascript">
+	
+		$('.tab-nav li').click(function(){
+			$(this).attr('class','current')
+						.siblings().attr('class','');
+			var n_index=$('.tab-nav li').index(this);
+				$('.tab-content').eq(n_index).show()
+							 .siblings().hide();
+		});
+	
+        //导航高亮
+        highlight_subnav('{:U('Contact/index')}');
+		
+
+    </script>
+</block>

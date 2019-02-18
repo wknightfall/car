@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <style>
+        .phone_list{width: 100%;margin-left: 0;padding: 0.3rem 0.3rem;background: #ffffff;font-size: 0rem;font-family: 微软雅黑;}
+        .phone_list>ul>li{padding: 0.2rem 0rem;}
+        .phone_list>ul>li>i{padding-top: 0rem!important;font-style: normal;font-size: 0.36rem;color: #333333;display: inline-block;height: 0.5rem;width: 100%;border-bottom: 1px #e6e6e6 solid;margin-bottom: 0.1rem;}
+        .phone_list>ul>li>p{font-size: 0.28rem;color: #7b7b7b}
+        .qyarticle_main p{text-indent: 0rem!important;padding-bottom: 0rem!important;}
+    </style>
+    <link>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+
+
+        <volist name="nav" id="v">
+            <li <if condition="$v.id eq $navid">class="inva_chk"</if>  ><a href="{$v.href}">{$v.title}</a></li>
+        </volist>
+    </ul>
+
+</div>
+<!--正文-->
+<div class="qymain_dom">
+    <div class="qymain_tt">
+        <p>{$ele.title}</p>
+        <p>{$ele.name}</p>
+    </div>
+    <div class="qyarticle_main">
+        <div class="phone_list">
+            <ul>
+
+                <volist name="tel" id="vo">
+                    <li>
+                        <i>{$vo.name}</i>
+                        <p>公司地址：{$vo.addr}</p>
+                        <p>电话：<a href="wtai://wp/mc;{$vo.tel}" mce_href="wtai://wp/mc;{$vo.tel}">{$vo.tel}</a> </p>
+                        <p>邮箱：{$vo.email}</p>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <!--文章底部信息-->
+    <div class="info_dom">
+        <p>地址：锦屏县三江镇赤溪坪社区（锦屏文书特藏馆）</p>
+        <p>电话：<i>{:C('WEB_SITE_MOBILE')}</i></p>
+        <p>版权所有：贵州杉乡文化旅游发展集团有限公司</p>
+    </div>
+</div>
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>

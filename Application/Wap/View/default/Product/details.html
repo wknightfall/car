@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css">
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+<script type="text/javascript" src="__JS__/layer.js"></script>
+
+</head>
+<body>
+    
+    <!--头部-->
+    <include file="Public:header"/>
+    <!--banner-->
+
+     <include file="Public:nybanner"/>
+   
+    <!--主体-->
+
+    <div class="widthall main">
+    	<div class="width1200">
+    	    <!--面包屑-->
+    		<div class="mianbao">
+    			<div class="mianbao_img"><img src="__IMG__/sy.png"/></div>
+    			<div class="mianbao_text"><p>
+    			     <a href="/">首页</a>
+    			     <a> > </a>
+    			     <a href="{:U($topvo[url],array('topid'=>$topid))}">产品展示</a>
+    			</p></div>
+    			<div class="mianbao_prve"><a href="javascript:history.back(-1)">返回上一页</a></div>
+    		</div>
+
+    		<!--内容-->
+            <div class="product comms">
+               
+			   <include file="Public:leftnav"/>
+
+			  <div class="right comm_list">
+                    <div class="xqtop">
+                         <div class="titles"><p>产品详情-{$twoid|modelField="category","title"}</p></div>
+                    </div>
+                    <div class="cpjs_a">
+                        <div class="cpjs_img"><img src="{:picture($vo[icon])}"/></div>
+                        <div class="cpjs_right">
+                            <p class="p1">{$twoid|modelField="category","title"}</p>
+                            <p class="p2">{$vo[title]}</p>
+                            <p class="p3"><span></span></p>
+                            <div class="miasu">
+                                <p>
+                                {$vo[descriptions]}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+					
+					<div class="product_content">
+					
+					     {$vo[content]}
+					
+					
+					</div>
+					
+                </div>
+
+
+            </div>
+            
+    	</div>
+    </div>
+    
+    <!--脚步-->
+    <include file="Public:footer"/>
+
+
+</body>
+</html>

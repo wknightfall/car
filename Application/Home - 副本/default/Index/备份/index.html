@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css">
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script>
+<script type="text/javascript" src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+
+<!--插件-->
+<script type="text/javascript" src="__JS__/jquery.SuperSlide.2.1.1.js"></script>
+<!--动画-->
+<link rel="stylesheet" type="text/css" href="__CSS__/animate.min.css"> 
+<script type="text/javascript" src="__JS__/wow.min.js"></script>
+
+
+</head>
+<body><include file="Public/zx" />
+    
+    <!--头部-->
+    <include file="Public:header"/>
+    <!--banner-->
+   <div id="slideBox" class="slideBox banner" >
+        <div class="hd">
+          <ul>
+
+		          <volist name="banner" id="ban" key='k'> 
+                 <li class="<if condition='$k eq 1'>on</if>"></li>
+			        </volist>  
+             
+         </ul>
+        </div>
+        <div class="bd">
+          <ul>
+		  
+            <volist name="banner" id="ban" key='kk'> 
+            <li style="<if condition='$kk eq 1'>display: list-item; opacity: 0.992604;</if>">
+              <a href="javascript:;">
+                <div><img src="{:picture($ban[icon])}"></div>
+              </a>
+              
+              <div class="link_title">
+                  <div class="hh" onclick="window.location.href='{:U("product/index",array('topid'=>2,'twoid'=>25))}'">
+                      <img class="hh_img hh_img1" src="__IMG__/index/tu1.png"/>
+                      <span>垂直升降类停车库</span>
+                  </div>
+                  <div class="hh hh_mid" onclick="window.location.href='{:U("product/index",array('topid'=>1,'twoid'=>26))}'">
+                      <img class="hh_img hh_img2" src="__IMG__/index/tu2.png"/>
+                      <span>简易升降式车库</span>
+                  </div>
+                  <div class="hh" onclick="window.location.href='{:U("product/index",array('topid'=>1,'twoid'=>27))}'">
+                      <img class="hh_img hh_img3" src="__IMG__/index/tu3.png"/>
+                      <span>升降横移类停车库</span>
+                  </div>
+              </div>
+
+            </li>
+			 </volist>
+          </ul>
+        </div>
+
+    </div>
+
+    <!--公告pc-->
+    <div class="widthall index_gg index_gg_pc">
+        <div class="width1200 top_list">
+             <div class="gg_img"><img src="__IMG__/index/gg.png"/></div>
+        			 <volist name="gglist" id="ggvo" key="nn">
+                     <div class="gg_list list_one wow lightSpeedIn" data-wow-delay="{$nn/5}s">
+                        <a href="{:U('News/details',array('topid'=>4,'twoid'=>$ggvo[typeid],'id'=>$ggvo[id]))}" title="{$ggvo[title]}"><p>
+                        <span>{$ggvo[title]|cutstr=0,33}</span> 
+                        <span class="span2">{$ggvo[create_time]|date='Y年m月d日',###}</span>
+                        </p></a>
+                     </div>
+        			 </volist>
+             
+        </div>
+    </div>
+
+     <!--公告手机-->
+    <div class="widthall index_gg index_gg_tel">
+        <div class="width1200 top_list">
+             <div class="gg_img"><img src="__IMG__/index/gg.png"/></div>
+               <volist name="gglist" id="ggvo" key="nn" offset="0" length="1">
+                     <div class="gg_list list_one wow lightSpeedIn" data-wow-delay="{$nn/5}s">
+                        <a href="{:U('News/details',array('topid'=>4,'twoid'=>$ggvo[typeid],'id'=>$ggvo[id]))}" title="{$ggvo[title]}"><p>
+                        <span>{$ggvo[title]|cutstr=0,33}</span> 
+                        <span class="span2">{$ggvo[create_time]|date='Y-m-d',###}</span>
+                        </p></a>
+                     </div>
+               </volist>
+             
+        </div>
+    </div>
+
+
+    
+
+
+    <!--产品-->
+    <div class="widthall index_tel">
+         <div class="width1200">
+             <div class="index_title title_color wow fadeInUpBig" data-wow-delay="0.1s">
+                  <div class="titlea"><p class="p1">PRODUCT DESCRIPTION</p></div>
+                  <div class="titlea p2">
+                     <div class="title_mid">
+                       <span class="span1"></span>
+                       <span class="span2">产品介绍</span>
+                       <span class="span3"></span>
+                     </div>
+                  </div>
+             </div>
+
+             <div class="product_list">
+                <ul>
+				
+				 <volist name="cplist" id="cpvo" key="mm">
+                   <li class="wow rollIn" data-wow-delay="{:round($mm/6,2)}s">
+                      <a href="{:U('Product/details',array('topid'=>2,'twoid'=>$cpvo[typeid],'id'=>$cpvo[id]))}">
+					     
+                          <div class="list_img"><img src="{:picture($cpvo[icon])}"/></div>
+						  
+                          <div class="list_title"><p title="{$cpvo[title]}">{$cpvo[title]|cutstr=0,10}</p></div>
+                      </a>
+                   </li>
+                 </volist>
+                   
+                </ul>
+             </div>
+         </div>
+    </div>
+
+    <!--关于我们-->
+
+    <div class="widthall index_about">
+         <div class="width1200">
+             <div class="index_title title_color wow fadeInUpBig" data-wow-delay="0.2s">
+                  <div class="titlea"><p class="p1">ABOUT US</p></div>
+                  <div class="titlea p2">
+                     <div class="title_mid">
+                       <span class="span1"></span>
+                       <span class="span2">关于我们</span>
+                       <span class="span3"></span>
+                     </div>
+                  </div>
+             </div>
+
+             <div class="about_cont wow fadeInUpBig" data-wow-delay="0.5s">
+                  {$abo[content]|cutstr=0,300}
+
+                  <p class="p3"><a href="{:U('About/index',array('topid'=>1))}"><span>查看更多</span></a></p>
+
+             </div>
+          </div>   
+    </div>
+    </div>
+    <!--新闻动态-->
+
+    <div class="widthall index_news">
+         <div class="width1200">
+             <div class="index_title title_color wow fadeInUpBig" data-wow-delay="0.2s">
+                  <div class="titlea"><p class="p1" style="color:#222222;">NEWS INFORMATION</p></div>
+                  <div class="titlea p2">
+                     <div class="title_mid">
+                       <span class="span1"></span>
+                       <span class="span2" style="color:#686868;">新闻动态</span>
+                       <span class="span3"></span>
+                     </div>
+                  </div>
+             </div>
+
+
+              <!--pc端-->
+             <div class="news_list news_list_pc">
+                  <ul>
+                    
+                    <volist name="newslist" id="newvo" key="jj" offset="0" length="3">
+                     <li class="wow bounceInLeft" data-wow-delay="{:round($jj/5,2)}s">
+                        <a href="{:U('News/details',array('topid'=>4,'twoid'=>$newvo[typeid],'id'=>$newvo[id]))}">
+                         <div class="news_img"><img src="{:picture($newvo[icon])}"/></div>
+                         <div class="news_text">
+
+                             <!--pc标题-->
+                             <p class="p1 pc_p1" title="{$newvo[title]}">{$newvo[title]|cutstr=0,21}</p>
+
+                             <p class="p2">{$newvo[descriptions]|cutstr=0,45}</p>
+                         </div>
+                         <div class="news_more"><div><span>MORE</span><span> → </span></div></div>
+
+                         </a>
+                     </li>
+                    </volist>
+                     
+                  </ul>
+             </div>
+
+            <!--手机端-->
+             <div class="news_list news_list_tel">
+                  <ul>
+                    
+                    <volist name="newslist" id="newvo" key="jj" offset="0" length="4">
+                     <li class="wow bounceInLeft" data-wow-delay="{:round($jj/5,2)}s">
+                        <a href="{:U('News/details',array('topid'=>4,'twoid'=>$newvo[typeid],'id'=>$newvo[id]))}">
+                         <div class="news_img"><img src="{:picture($newvo[icon])}"/></div>
+                         <div class="news_text">
+
+                             <p class="p1 pc_p1" title="{$newvo[title]}">{$newvo[title]|cutstr=0,21}</p>
+                             
+                         </div>
+                        
+
+                         </a>
+                     </li>
+                    </volist>
+                     
+                  </ul>
+             </div>
+
+
+
+
+             
+          </div>   
+    </div>
+
+    <!--分公司-->
+     <div class="widthall index_company">
+         <div class="width1200">
+             <div class="index_title title_color wow fadeInUpBig" data-wow-delay="0.1s">
+                  <div class="titlea"><p class="p1" style="color:#222222;">BRANCH OFFICE</p></div>
+                  <div class="titlea p2">
+                     <div class="title_mid">
+                       <span class="span1"></span>
+                       <span class="span2" style="color:#686868;">分公司</span>
+                       <span class="span3"></span>
+                     </div>
+                  </div>
+             </div>
+
+             <div class="company_list">
+                  <ul>
+				               <volist name="fgslist" id="fgsvo" key="yy">
+                        <li class="wow lightSpeedIn" data-wow-delay="{:round($yy/7,2)}s">
+                            <a href="{:U('About/details',array('topid'=>1,'twoid'=>$fgsvo[typeid],'id'=>$fgsvo[id]))}">
+                                <div class="lefts"><img src="{:picture($fgsvo[icon])}"/></div>
+                                <div class="newstitle">
+                                       <p class="p1" title="{$fgsvo[title]}">{$fgsvo[title]}</p>
+                                       <p class="p2">
+									     {$fgsvo[descriptions]}
+                                       </p>
+                                       <div class="news_more company_more"><div><span>MORE</span><span> → </span></div></div>
+                                </div>
+                            </a>
+                        </li>
+                        </volist>
+                    </ul>
+
+                    <div class="widthall" style="text-align: center;">
+                        <span class="new_more" onclick="window.location.href='{:U("About/company",array('topid'=>1,'twoid'=>10))}'">更 多 >></span>
+                    </div>
+
+
+
+
+             </div>
+
+             
+
+
+          </div>
+      </div>       
+    
+
+   
+     
+    <!--脚步-->
+    <include file="Public:footer"/>
+
+
+<script type="text/javascript">
+  //banenr切换图
+ // jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
+
+</script>
+
+<script type="text/javascript">
+  //动画
+  
+if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+	new WOW().init();
+};
+
+</script>
+
+</body>
+</html>

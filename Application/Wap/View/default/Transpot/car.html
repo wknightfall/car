@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+
+    <!--时间插件-->
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <volist name="nav" id="v">
+            <li <if condition="$v.id eq $navid">class="inva_chk"</if>  ><a href="{$v.href}">{$v.title}</a></li>
+        </volist>
+    </ul>
+
+</div>
+<!--正文-->
+
+<div class="select_ccar">
+    <ul>
+        <li>
+            <i>出行人数</i>
+            <input type="text">
+        </li>
+        <li>
+            <i>选择日期</i>
+            <div>
+                <input type="text" id="data1">
+                <script>
+                    //日期时间范围
+                    laydate.render({
+                        elem: '#data1'
+                        // ,type: 'datetime'
+                        ,range: false
+                    });
+                </script>
+                <em></em>
+                <input type="text" id="data2">
+                <script>
+                    //日期时间范围
+                    laydate.render({
+                        elem: '#data2'
+                        // ,type: 'datetime'
+                        ,range: false
+                    });
+                </script>
+            </div>
+        </li>
+        <li>
+            <input type="button" value="立即选车">
+        </li>
+    </ul>
+</div>
+
+<div class="zhcar_date">
+
+    <ul>
+        <notempty name="car">
+        <volist name="car" id="vo">
+        <li>
+            <img src="{$vo.icon|picture}" alt="">
+            <span>
+                <p>{$vo.name}<i class="yi_renz">已认证</i></p>
+                <ul>
+                    <li>车型：<i>{$vo.type}</i></li>
+                    <li>车牌号：<i>{$vo.carno}</i></li>
+                    <li>联系电话：<i>{$vo.tel}</i></li>
+                </ul>
+            </span>
+        </li>
+
+        </volist>
+            <else /><p style="text-align:center;">暂时还没有符合条件的记录哦~~ ！</p>
+        </notempty>
+    </ul>
+</div>
+
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>

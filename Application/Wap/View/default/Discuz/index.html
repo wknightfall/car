@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+<!--title-->
+<div class="release_dom">
+    <p>今日：<i>{$nownum}</i> | 主题：<em>{$zhutinum}</em> | 帖子：<i>{$tiezinum}</i> </p>
+    <input type="button" value="发表新帖" id="fatie">
+</div>
+<div class="problem_nv">
+    <ul>
+        <li <if condition="$Think.get.type eq 1">class="this_problem"</if> ><a href="{:U('discuz/index?type=1')}">最近问答</a></li>
+        <li <if condition="$Think.get.type eq 2">class="this_problem"</if> ><a href="{:U('discuz/index?type=2')}">热门问题</a></li>
+        <li <if condition="$Think.get.type eq 3">class="this_problem"</if> ><a href="{:U('discuz/index?type=3')}">已解决问题</a></li>
+    </ul>
+</div>
+<!--正文-->
+<div class="lv_luntan_list">
+
+    <ul id="food">
+        <volist name="now" id="vo">
+        <li>
+            <a href="{:U('discuz/detail?id='.$vo['id'].'&model=discuz')}">
+                <p>{$vo.name}</p>
+                <em>
+                    {$vo.content}
+                </em>
+            </a>
+            <span>
+                    <i>{$vo.uid|modelField='usermember','name'}</i>
+                    <p>
+                        <i>{$vo.view}</i>
+                        <i><img src="__IMG__/icon/ht.png" alt="" class="collection_bt">{$vo.collectionnum}</i>
+                        <i>{$vo.day} {$vo.miao}</i>
+                    </p>
+                </span>
+        </li>
+        </volist>
+    </ul>
+    <div class="see_more">
+
+        <a href="javascript:" class="molink">查看更多+</a>
+    </div>
+</div>
+<!--information-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+<script>
+
+    page=1;
+    var  url="{:U('Discuz/index')}";
+    var type='{$Think.get.type}'
+
+    $('.molink').click(function () {
+        if($(this).hasClass('nothing')==false){
+            $.post(url,{'page':page,'type':type},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    $('#food').append(obj.msg);
+                    page++;
+                }else{
+                    //$('.molink').addClass('nothing');
+
+                    layer.msg('没有更多了哦~');
+                }
+            })
+
+        }
+    })
+    $("#fatie").click(function () {
+        var shoptype="{$shoptype}"
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录，请先登录',function () {
+                location.href='/wap/index/index'
+            }); return false;
+        }
+        if (shoptype==0){
+            location.href='/wap/user/fatie'
+        }else {
+            location.href='/wap/mer/fatie'
+        }
+    })
+</script>
+</html>

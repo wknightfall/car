@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/shop.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body><include file="Public/zx" />
+<include file="Public/header" />
+<!--顶部菜单-->
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!---->
+<div class="travel_gbi" style="display: inline-block;" id="rippleria">
+    <img src="__IMG__/gud/whjp_02.jpg" alt="">
+</div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div><em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a>旅游概括</a>
+</div>
+<section>
+    <div class="rute_rr">
+        <div class="left_nav">
+            <ul>
+                <a href="{:U('Food/index')}" style="text-decoration: none;color:#fff"><li class="lenav_ok" style="background: #ef5f02;"><div></div>美食</li></a>
+
+                <a href="{:U('House/index')}" style="text-decoration: none;color:#fff"><li style="background: #f29a00;"><div></div>住宿</li></a>
+                <a href="{:U('Transpot/index')}" style="text-decoration: none;color:#fff"><li style="background: #00b065;"><div></div>交通</li></a>
+                <a href="{:U('Scenic/index')}" style="text-decoration: none;color:#fff"><li style="background: #29a5f3;"><div></div>景区</li></a>
+                <a href="{:U('Shopping/index')}" style="text-decoration: none;color:#fff"><li  style="background: #2970a5;"><div></div>购物</li></a>
+                <a href="{:U('Funny/index')}" style="text-decoration: none;color:#fff"><li style="background: #e00404;"><div></div>娱乐</li></a>
+            </ul>
+        </div>
+        <div class="wenhua_jjp">
+            <!--文章-->
+            <div class="jp_hist">
+                <i class="jp_hist_i1">旅游概括</i>
+{$vo.content}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+</html>
+<script>
+
+</script>

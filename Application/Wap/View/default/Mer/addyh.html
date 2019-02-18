@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        新增活动
+    </div>
+
+    <!--list-->
+
+    <div class="add_mer">
+
+        <ul>
+            <li style="display:none">
+                <i>优惠券类型</i>
+                <input type="text" placeholder="请选择商品类型" class="cee_ll">
+                <span>
+                    <ul>
+                        <li>000000000</li>
+                        <li>0000000000</li>
+                    </ul>
+                </span>
+            </li>
+            <li>
+                <i>优惠券名称</i>
+                <input type="text" placeholder="请输入优惠券名称" name="name" id="name">
+            </li>
+            <li>
+                <i>领取开始时间</i>
+                <input type="text" placeholder="请选择领取优惠券时间" id="date_demo1" class="date_demo"  name="getstime" id="getstime">
+                <script>
+                    laydate.render({
+                        elem: '#date_demo1',
+                        min: 'today',
+                        showBottom: true,
+                        type: 'datetime'
+                    });
+                </script>
+            </li>
+            <li>
+                <i>领取结束时间</i>
+                <input type="text" placeholder="请选择优惠券结束时间" id="date_demo2" class="date_demo" name="getetime" id="getetime">
+                <script>
+                    laydate.render({
+                        elem: '#date_demo2',
+                        min: 'today',
+                        showBottom: true,
+                        type: 'datetime'
+                    });
+                </script>
+            </li>
+            <li>
+                <i>使用开始时间</i>
+                <input type="text" placeholder="请选择开始使用优惠券时间" id="date_demo3" class="date_demo" name="usestime" id="usestime">
+                <script>
+                    laydate.render({
+                        elem: '#date_demo3',
+                        min: 'today',
+                        showBottom: true,
+                        type: 'datetime'
+                    });
+                </script>
+            </li>
+            <li>
+                <i>使用结束时间</i>
+                <input type="text" placeholder="请选择优惠券结束使用时间" id="date_demo4" class="date_demo"  name="useetime" id="useetime">
+                <script>
+                    laydate.render({
+                        elem: '#date_demo4',
+                        min: 'today',
+                        showBottom: true,
+                        type: 'datetime'
+                    });
+                </script>
+            </li>
+            <li>
+                <i>优惠券使用最低限制</i>
+                <input type="text" placeholder="请输入优惠券最低限制" name="topmoney"  id="topmoney">
+            </li>
+            <li>
+                <i>优惠券面值</i>
+                <input type="text" placeholder="请输入优惠券优惠金额"  name="price" id="price">
+            </li>
+            <li>
+                <i>优惠券数量</i>
+                <input type="text" placeholder="请输入发布优惠券数量"  name="num" id="num">
+            </li>
+            <li style="display:none">
+                <i>选择参加活动商品分类</i>
+                <input type="text" placeholder="请选择参加优惠的商品类别" class="cee_ll">
+                <span>
+                    <ul>
+                        <li>000000000</li>
+                        <li>0000000000</li>
+                    </ul>
+                </span>
+            </li>
+            <li style="display:none">
+                <i>选择活动商品</i>
+                <input type="text" placeholder="请选择参加优惠的商品" class="cee_ll">
+                <span>
+                    <ul>
+                        <li>000000000</li>
+                        <li>0000000000</li>
+                    </ul>
+                </span>
+            </li>
+            <li class="add_immg">
+                <i>备注</i>
+                <span>
+                    <textarea name="" placeholder="请输入详细描述"  id="content" cols="30" rows="10"></textarea>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sabmit_aa">
+        <input type="button" value="确定发布" id="submit">
+    </div>
+</div>
+
+</body>
+<script>
+    $(document).on("click","#submit",function () {
+        var name = $('input[name=name]').val()
+        var getstime = $('input[name=getstime]').val()
+        var getetime = $('input[name=getetime]').val()
+        var usestime = $('input[name=usestime]').val()
+        var useetime = $('input[name=useetime]').val()
+        var price = $('input[name=price]').val()
+        var topmoney = $('input[name=topmoney]').val()
+        var num = $('input[name=num]').val()
+        var content = $('#content').val()
+        var pattern=/^\d+$/
+        if(name==""){
+            layer.tips('请填写内容', '#name', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(getstime==""){
+            layer.tips('请填写内容', '#getstime', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(getetime==""){
+            layer.tips('请填写内容', '#getetime', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(usestime==""){
+            layer.tips('请填写内容', '#usestime', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(useetime==""){
+            layer.tips('请填写内容', '#useetime', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(price==""){
+            layer.tips('请填写内容', '#price', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(topmoney==""){
+            layer.tips('请填写内容', '#topmoney', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(num==""){
+            layer.tips('请填写内容', '#num', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(content==""){
+            layer.tips('请填写内容', '#content', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(!pattern.test(price)){
+            layer.tips('该项必须是数字', '#price', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(!pattern.test(topmoney)){
+            layer.tips('该项必须是数字', '#topmoney', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(!pattern.test(num)){
+            layer.tips('该项必须是数字', '#num', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+
+        //alert(getetime)
+        $.post("/Home/mer/addyh",{'name':name,'price':price,'topmoney':topmoney,'num':num,'getstime':getstime,'getetime':getetime,'usestime':usestime,'useetime':useetime,'content':content},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('操作成功',function () {
+                    location.href='/Wap/mer/youhui?issale='+2;
+                })
+            }else{
+                layer.msg('操作失败')
+
+            }
+        });
+    })
+</script>
+</html>
+<script>
+
+    $(".cee_ll").click(function () {
+
+        if ($(this).next("span").hasClass("cee_ll_sw")){
+
+            $(this).next("span").removeClass("cee_ll_sw");
+            $(this).removeClass("thcell");
+        }else {
+            $(".add_mer > ul > li input.cee_ll+span").removeClass("cee_ll_sw");
+            $(".add_mer > ul > li input.cee_ll").removeClass("thcell");
+            $(this).next("span").addClass("cee_ll_sw");
+            $(this).addClass("thcell");
+        }
+    })
+
+    $(".cee_ll+span > ul > li").click(function () {
+
+        $(this).parents("span").removeClass("cee_ll_sw");
+        $(this).parents("span").prev(".cee_ll").removeClass("thcell");
+        $(this).parents("span").prev(".cee_ll").val($(this).text());
+    })
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+    var off = true;
+    $(".off_on").click(function () {
+
+        if (off == true){
+
+            $(this).addClass("off_on_aa");
+            off = false;
+        }else {
+            $(this).removeClass("off_on_aa");
+            off = true;
+        }
+    })
+
+</script>

@@ -1,0 +1,8 @@
+<div class="left_nav">
+	<ul>
+		<volist name="leftnav" id="n" key="k">
+		<a href="{$n.url}" style="text-decoration: none;color:#fff"><li <if condition="$k eq 1">class="lenav_ok"</if> style="background: #ef5f02;"><div></div>{$n.title}</li></a>
+
+		</volist>
+	</ul>
+</div>

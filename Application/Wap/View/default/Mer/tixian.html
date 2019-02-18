@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        提现
+    </div>
+
+    <div class="txmon">
+        <p>提现金额</p>
+        <p><input type="text" value="{$user.balance}" name="money" id="money"/><i>元</i></p>
+        <p>当前可提现金额{$user.balance}元，<i id="all">全部提现</i></p>
+    </div>
+
+<!--    <p class="txfs_pp">提现方式</p>
+    <div class="zhif_list">
+        <ul>
+            <li><img src="__IMG__/person/icon/zfbz.png" alt=""><em>支付宝</em> <i><img src="__IMG__/person/icon/chaa.png" alt=""></i></li>
+            <li><img src="__IMG__/person/icon/wiz.png" alt=""><em>微信</em> <i><img src="__IMG__/person/icon/ckcc.png" alt=""></i></li>
+            <li><img src="__IMG__/person/icon/yhk.png" alt=""><em>银行卡</em> <i><img src="__IMG__/person/icon/chaa.png" alt=""></i></li>
+        </ul>
+    </div>-->
+
+    <p class="txfs_pp">提现账号</p>
+    <div class="sel_zhan">
+        <em>银行卡号</em>
+        <!--<i>283569852@qq.com<img src="__IMG__/person/icon/qzh.png" alt=""></i>-->
+        <i><input type="text" name="cardno" id="cardno" style="height: 0.5rem;border: 1px solid #e6e6e6;padding-left: 0.2rem"></i>
+    </div>
+
+    <div class="tix_btn">
+        <input type="button" value="确认提现"  id="pay">
+    </div>
+
+</div>
+
+</body>
+<script>
+    $(document).on("click","#all",function () {
+        var all='{$user.balance}'
+        $('input[name=money]').val(all)
+    })
+    $(document).on("click","#pay",function () {
+        var money=$('input[name=money]').val();
+        var cardno=$('input[name=cardno]').val();
+        var isnum=/^\d+$/
+        if(!isnum.test(money)){
+            layer.tips('金额必须是数字', '#money', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            }); return false;
+        }else if(money<10){
+            layer.tips('提现金额不能小于10元', '#money', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            }); return false;
+        }
+        if(cardno==''){
+            layer.tips('请输入卡号', '#cardno', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            }); return false;
+        }
+
+        //console.log(id,money,name);return;
+        $.post("/Home/Ajax/order",{'cardno':cardno,'money':money, 'actiontype':2},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('申请成功，等待处理中',function () {
+                    location.href='/Wap/mer/index';return;
+                });
+                var orderno = obj.msg;
+                //console.log(orderno);return;
+
+                if(type == 1){
+                    //location.href='/Home/Pay/testpay/orderno/'+orderno;return;
+                }else if(type == 2){
+
+                }else if(type == 3){
+
+                }
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+</script>

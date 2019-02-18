@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css">
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script>
+<script type="text/javascript" src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+
+<!--动画-->
+<link rel="stylesheet" type="text/css" href="__CSS__/animate.min.css"> 
+<script type="text/javascript" src="__JS__/wow.min.js"></script>
+
+</head>
+<body>
+    
+    <!--头部-->
+   <include file="Public:header"/>
+    <!--banner-->
+
+    <include file="Public:nybanner"/>
+   
+    <!--主体-->
+
+    <div class="widthall main">
+    	<div class="width1200">
+    	    <!--面包屑-->
+    		<div class="mianbao">
+    			<div class="mianbao_img"><img src="__IMG__/sy.png"/></div>
+    			<div class="mianbao_text"><p>
+    			     <a href="/">首页</a>
+    			     <a> > </a>
+    			     <a href="{:U($topvo[url],array('topid'=>$topid))}">新闻动态</a>
+                     <a> > </a>
+                     <a href="javascript:;">行业新闻</a>
+    			</p></div>
+    			<div class="mianbao_prve"><a href="javascript:history.back(-1)">返回上一页</a></div>
+    		</div>
+
+    		<!--内容-->
+            <div class="product comms">
+                
+				 <include file="Public:leftnav"/>
+				
+				
+			   <div class="right news_list">
+                    <ul id="newslist">
+					
+					<volist name="lists" id="vo">
+                        <li>
+                            <a href="{:U('details',array('topid'=>$topid,'twoid'=>$twoid,'id'=>$vo[id]))}">
+                                <div class="lefts"><img src="{:picture($vo[icon])}"/></div>
+                                <div class="newstitle">
+
+
+                                        <p class="p1 news_view_pc">
+                                        {$vo[title]|cutstr=0,30}  
+                                        </p>
+
+                                        <p class="p1 news_view_tel">
+                                        <span class="news_tel"> > <span>{$vo[title]|cutstr=0,15}  
+                                        <span class="tel_times">{$vo[create_time]|date='Y-m-d',###}</span>
+                                        </p>
+
+
+
+
+                                       <p class="p2">{$vo[descriptions]}</p>
+                                       <div class="p3">
+                                           <div class="newsves newstb"><img src="__IMG__/news/tb1.png"/></div>
+                                           <div class="newsves">{$vo[create_time]|date='Y-m-d H:i',###}</div>
+                                           <div class="newsves newstbb"><img src="__IMG__/news/tb2.png"/></div>
+                                           <div class="newsves">{$vo[view]}</div>
+                                       </div>
+                                </div>
+                            </a>
+                        </li>
+                        </volist>
+                       
+                    </ul>
+					<!--分页-->
+                    <if condition="ismobile() neq true">
+					<div class="fy">
+						 <div class="fy_tu" id="fy_tu">
+							 <ul>
+								 {$page}							
+							 </ul>
+						 </div>
+					</div>
+                    <else/>
+                      
+                        <if condition="$listsCount gt 6">
+                              <div class="btnaddmore pull_up">点击加载更多内容</div>
+                        <else/>
+                             <div class="btnaddmore pull_up">没有更多内容了...</div>
+                        </if>
+
+					</if>
+
+
+					
+                </div>
+
+            </div>
+            
+    	</div>
+    </div>
+    
+   <input type="hidden" id="topid" value="{$topid}">
+   <input type="hidden" id="twoid" value="{$twoid}">
+
+    <!--脚步-->
+    <include file="Public:footer"/>
+<script>
+ var num = 0;  
+   $(".btnaddmore").click(function(){
+        var topid = $("#topid").val();
+        var twoid = $("#twoid").val();
+        num +=1;
+        
+        if(twoid!=''){
+            $.post('{:U("telnewslist")}',{num:num,topid:topid,twoid:twoid},function(data){
+               var res = jQuery.parseJSON(data);
+               
+               if(res['code'] == 500){
+                   $(".pull_up").html('没有更多内容了...');
+               }else if(res['code'] == 200){
+                   $("#newslist").append(res['content']);
+               }
+            
+            });  
+        }
+   
+   });    
+</script>
+
+</body>
+</html>

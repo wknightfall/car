@@ -1,0 +1,68 @@
+<script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script src="__JS__/index.js"></script>
+<script type="text/javascript" src="__JS__/plugin.js"></script>
+<script src="/Public/Home/plugin/laydate/laydate.js"></script>
+<link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+<link type="text/css" href="__CSS__/index.css" rel="stylesheet" />
+<link type="text/css" href="__CSS__/qq.css" rel="stylesheet" />
+
+
+
+<div class="headBox">
+    <div class="publicContent">
+        <div class="hadeCon">
+
+            <div class="headTitle"><if condition="$islogin eq 0">游客<else />{$user.name}</if>您好，欢迎访问贵州杉乡文化旅游发展集团有限公司！</div>
+
+            <div class="head_link">
+                <ul>
+                    <if condition="$islogin eq 0">
+                        <li>
+                            <a href="{:U('public/login')}">登录</a>
+                            <span>|</span>
+                            <a href="{:U('public/register')}">注册</a>
+                        </li></if>
+                    <if condition="$islogin eq 1">
+                        <if condition="$shoptype eq 0">
+                            <li style="width: 150px">
+                                <a href="{:U('user/luntan')}">
+                                    <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 5px;border-radius:50%;float: left;">
+                                    <span style="display:inline-block;width:80px;height:35px;text-align: left;text-indent: 5px;line-height:35px;vertical-align: middle;white-space: normal;float: left;text-overflow: ellipsis;overflow: hidden;color: #808080;font-family: 微软雅黑;font-size:13px;">{$user.name}</span>
+                                </a>
+                                <a href="{:U('Public/logout')}" style="width: 30px;display: inline-block;color: #808080;font-family: 微软雅黑;cursor: pointer;float: left;text-align: left;">退出</a>
+                            </li>
+                            <elseif condition="$shoptype eq 1" />
+                            <li style="width: 150px">
+                                <a href="{:U('mer/luntan')}">
+                                    <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 5px;border-radius:50%;float: left;">
+                                    <span style="display:inline-block;width:80px;height:35px;text-align: left;text-indent: 5px;line-height:35px;vertical-align: middle;white-space: normal;float: left;text-overflow: ellipsis;overflow: hidden;color: #808080;font-family: 微软雅黑;font-size:13px;">{$user.name}</span></a>
+                                <a href="{:U('Public/logout')}" style="width: 30px;display: inline-block;color: #808080;font-family: 微软雅黑;cursor: pointer;float: left;text-align: left;">退出</a></li>
+                            <elseif condition="$shoptype eq 2" />
+                            <li style="width: 150px">
+                                <a href="{:U('mer/luntan')}">
+                                    <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 5px;border-radius:50%;float: left;">
+                                    <span style="display:inline-block;width:80px;height:35px;text-align: left;text-indent: 5px;line-height:35px;vertical-align: middle;white-space: normal;float: left;text-overflow: ellipsis;overflow: hidden;color: #808080;font-family: 微软雅黑;font-size:13px;">{$user.name}</span></a>
+                                <a href="{:U('Public/logout')}" style="width: 30px;display: inline-block;color: #808080;font-family: 微软雅黑;cursor: pointer;float: left;text-align: left;">退出</a></li>
+                            <elseif condition="$shoptype eq 3" />
+                            <li style="width: 150px">
+                                <a href="{:U('mer/luntan')}">
+                                    <img src="{$user.icon|picture}" style="width:25px;height:25px;margin-top: 5px;border-radius:50%;float: left;">
+                                    <span style="display:inline-block;width:80px;height:35px;text-align: left;text-indent: 5px;line-height:35px;vertical-align: middle;white-space: normal;float: left;text-overflow: ellipsis;overflow: hidden;color: #808080;font-family: 微软雅黑;font-size:13px;">{$user.name}</span></a>
+                                <a href="{:U('Public/logout')}" style="width: 30px;display: inline-block;color: #808080;font-family: 微软雅黑;cursor: pointer;float: left;text-align: left;">退出</a></li>
+                        </if>
+                    </if>
+
+                    <li>
+                        <a href="">加入收藏</a>
+                    </li>
+                    <li>
+                        <a href="">设为首页</a>
+                    </li>
+                    <li>
+                        <a href="">分享</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

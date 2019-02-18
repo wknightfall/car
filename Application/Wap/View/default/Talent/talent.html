@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css">
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script>
+<script type="text/javascript" src="__JS__/layer.js"></script>
+
+<!--验证js-->
+<script src="__STATIC__/validate/dist/jquery.validate.min.js"></script>
+
+<style>
+
+span.error{color:#f00;  position: absolute;  font-size: 12px;}
+input:focus{ border-color:#ff6c00;}
+
+
+</style>
+
+
+</head>
+<body>
+    
+    <!--头部-->
+   <include file="Public:header"/>
+    <!--banner-->
+
+    <include file="Public:nybanner"/>
+   
+    <!--主体-->
+
+    <div class="widthall main">
+    	<div class="width1200">
+    	    <!--面包屑-->
+    		<div class="mianbao">
+    			<div class="mianbao_img"><img src="__IMG__/sy.png"/></div>
+    			<div class="mianbao_text"><p>
+    			     <a href="/">首页</a>
+    			     <a> > </a>
+    			     <a href="{:U($topvo[url],array('topid'=>$topid))}">人才招聘</a>
+    			</p></div>
+    			<div class="mianbao_prve"><a href="javascript:history.back(-1)">返回上一页</a></div>
+    		</div>
+
+    		<!--列表-->
+			<form action="{:U('')}" id="form2" method="post">
+
+          <input type="hidden" name="zwid" value="{$vo[id]}"/>
+
+            <div class="commmain">
+                
+                 <div class="talent">
+                  <div class="talent_title">应聘岗位: {$vo[title]}</div>
+                  <div class="talent_cons">
+                    <div class="talent_cons_left">
+                      <div class="p"><span class="name"><span>*</span> 真实姓名：</span><span class="content">
+                        <input type="text" name="username" value="" required data-msg-required="*您的姓名不能为空" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 性别：</span><span class="content">
+                        <label>
+                          <input type="radio" name="sex" value="男" checked>
+                          男</label>
+                        <label>
+                          <input type="radio" name="sex" value="女">
+                          女</label>
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 照片：</span><span class="content">
+                        <p>
+                         
+                          <span class="file_fujian">
+                         <input type="file" id="upload_picture">
+                          </span>
+                          <input type="hidden" name="icon" id="icon" value="{$info['icon']|default=''}"/>
+                        </p>
+                         <div class="upload-img-box"></div>
+                        <p>(JPG或GIF文件，大小请限制在 200KB以内)</p>
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 出生日期：</span><span class="content">
+                        <input type="text" name="cstime" id="deadline2" value="" required data-msg-required="*出生日期不能为空" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 身高(CM)：</span><span class="content">
+                        <input type="text" name="heights" value="" required data-msg-required="*身高不能为空" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 婚姻状况：</span><span class="content">
+                        <label>
+                          <input type="radio" name="marriage" value="未婚" checked/>
+                          未婚 </label>
+                        <label>
+                          <input type="radio" name="marriage" value="已婚"/>
+                          已婚</label>
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 籍贯：</span><span class="content">
+                        <input type="text" name="native" value="" required data-msg-required="*籍贯不能为空" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 户口所在地：</span><span class="content">
+                        <input type="text" name="place" value="" required data-msg-required="*户口所在地不能为空" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 通讯地址：</span><span class="content">
+                        <input type="text" name="address" value="" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span></span> 邮政编码：</span><span class="content">
+                        <input type="text" name="codes" value="" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 证件类型：</span><span class="content">
+                        <select name="zjtype" class="zj">
+                          <option value="身分证">身分证</option>
+                          <option value="学生证">学生证</option>
+                          <option value="军人证">军人证</option>
+                        </select>
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 证件号码：</span><span class="content">
+                        <input type="text" name="zjcode"  value="" required data-msg-required="*证件号码不能为空" class="text">
+                        </span></div>
+                    </div>
+                    <div class="talent_cons_right">
+                      <div class="p"><span class="name"><span>*</span> 最高学历：</span><span class="content">
+                        <select name="education" class="zj">
+                          <option value="">请选择</option>
+                          <option value="博士">博士</option>
+                          <option value="硕士">硕士</option>
+                          <option value="本科">本科</option>
+                          <option value="专科">专科</option>
+                          <option value="高中">高中</option>
+                          <option value="中专">中专</option>
+                        </select>
+                        </span></div>
+                      <div class="p"><span class="name"><span></span> 所学专业：</span><span class="content">
+                        <input type="text" name="major" value="" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span></span> 毕业学校：</span><span class="content">
+                        <input type="text" name="school" value="" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span></span> 外语语种：</span><span class="content">
+                        <select name="language" class="zj">
+                          <option value="">请选择</option>
+                          <option value="英语">英语</option>
+                          <option value="日语">日语</option>
+                          <option value="法语">法语</option>
+                          <option value="德语">德语</option>
+                          <option value="其他">其他</option>
+                        </select>
+                        </span></div>
+                      <div class="p"><span class="name"><span></span> 外语水平：</span><span class="content">
+                        <label>
+                          <input type="radio" name="wylevel" checked value="一般">
+                          一般</label>
+                        <label>
+                          <input type="radio" name="wylevel" value="熟练">
+                          熟练 </label>
+                        <label>
+                          <input type="radio" name="wylevel" value="精通">
+                          精通 </label>
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 工作年限：</span><span class="content">
+                        <select name="workyears" class="zj">
+                          <option value="">请选择</option>
+                          <option value="应届毕业生">应届毕业生</option>
+                          <option value="1年">1年</option>
+                          <option value="2年">2年</option>
+                          <option value="3年">3年</option>
+                          <option value="4年">4年</option>
+                          <option value="5年以上">5年以上</option>
+                        </select>
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 期望月薪：</span><span class="content">
+                        <select name="moneys" class="zj">
+                          <option value="">请选择</option>
+                          <option value="800以上">800以上</option>
+                          <option value="1500以上">1500以上</option>
+                          <option value="2000以上">2000以上</option>
+                          <option value="3000以上">3000以上</option>
+                          <option value="3500以上">3500以上</option>
+                          <option value="4500以上">4500以上</option>
+                          <option value="5000以上">5000以上</option>
+                        </select>
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 个人简历：</span><span class="content">
+                        <textarea name="content" style=" min-height:77px; max-height:77px; min-width:336px;" required data-msg-required="*个人简历不能为空"></textarea>
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 联系人：</span><span class="content">
+                        <input type="text" name="contact_person" value="" required data-msg-required="*联系人不能为空" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 联系电话：</span><span class="content">
+                        <input type="text" name="contact_tel" value="" required data-msg-required="*联系电话不能为空" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> Email：</span><span class="content">
+                        <input type="text" name="email" value="" required data-msg-required="*邮箱不能为空" class="text">
+                        </span></div>
+                      <div class="p"><span class="name"><span>*</span> 手机号码：</span><span class="content">
+                        <input type="text" name="mobile" value="" required data-msg-required="*手机号码不能为空" data-rule-checkMobile="true" class="text">
+                        </span></div>
+                    </div>
+                  </div>
+                  <div class="talent_cons_left" style=" margin-top:20px; border-right:0px; width:100%;">
+                    <div class="p"><span class="name"><span>*</span> 附件：</span><span class="content">
+                      <p>
+                        <span class="file_fujian">
+                         <input type="file" id="uploads" value="">
+                        </span>
+                        <span style="float:left;">(附件大小请限制在1048KB以内)</span>
+                        <input type="hidden" name="files" id="file" value=""/>
+                      </p>
+                      <div class="upload-file"></div>
+                     
+                      </span></div>
+                  </div>
+                  <div class="submitbtns">
+                      <input type="button" class="tj" id="tijiao" value="提交"/>
+                      <input type="reset" class="tj cz" value="重置"/>
+                  </div>
+                </div>
+    
+               
+
+            </div>
+            </form>   
+    	</div>
+    </div>
+    
+    <!--脚步-->
+    <include file="Public:footer"/>
+	
+<include file="Public:datetime" />	
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+
+	$('input').focus(function(){
+	    
+		$(this).css('border-color','#f00');
+
+	});
+
+	$('input').blur(function(){
+	     
+		$(this).css('border-color','#bfbfbf');
+
+	});
+
+
+//配置错误提示的节点，默认为label，这里配置成 span （errorElement:'span'）
+	$.validator.setDefaults({
+		errorElement:'span'
+	});
+
+
+
+//手机验证规则
+jQuery.validator.addMethod("checkMobile", function (value, element) {
+	
+		var mobile = /^1[3|4|5|7|8]\d{9}$/;
+
+		return this.optional(element) || (mobile.test(value));
+
+
+	}, "*手机格式不对");
+
+
+
+//提交
+    
+    $("#tijiao").click(function(){
+
+	    $("#form2").submit();
+
+	});
+
+
+	$("#form2").validate({
+	        submitHandler: function() {
+
+			    $.post("{:U('talent/addtalent')}",$('#form2').serialize(),function(d){
+				     if(d.status==1){
+					       layer.alert('提交成功！',function(){
+						   
+						      window.location.href='/Home/talent/index?topid=5';
+						   
+						   }); 
+						  
+						
+					 }else if(d.status==2){
+					    layer.alert('提交失败！');
+					 }
+				});
+	           
+	        }
+	})
+
+	
+
+
+</script>
+<script type="text/javascript">
+  //上传图片
+  /* 初始化上传插件 */
+  $("#upload_picture").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传照片",
+    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+    "width"           : 100,
+    'removeTimeout'	  : 1,
+    'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+    "onUploadSuccess" : uploadPicture,
+    'onFallback' : function() {
+      alert('未检测到兼容版本的Flash.');
+    }
+
+  });
+  function uploadPicture(file, data){
+    var data = $.parseJSON(data);
+    var src = '';
+    if(data.status){
+      $("#icon").val(data.id);
+      src = data.url || '__ROOT__' + data.path;
+
+      $('.upload-img-box').html(
+              '<div class="upload-pre-item"><img src="' + src + '" style="width;50px; height: 50px; width:50px;"/></div>'
+      );
+    } else {
+      updateAlert(data.info);
+      setTimeout(function(){
+        $('#top-alert').find('button').click();
+        $(that).removeClass('disabled').prop('disabled',false);
+      },1500);
+    }
+  }
+</script>	
+	
+<!-- 上传附件 -->
+<script type="text/javascript">
+ 
+  /* 初始化上传插件 */
+  $("#uploads").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传附件",
+    "uploader"        : "{:U('File/upload',array('session_id'=>session_id()))}",
+    "width"           : 100,
+    'removeTimeout'	  : 1,
+    'fileTypeExts'	  : '*.jpg; *.png; *.doc; *.zip; *.xlsx; *.rar;',
+    "onUploadSuccess" : uploadPictures,
+    'onFallback' : function() {
+      alert('未检测到兼容版本的Flash.');
+    }
+
+  });
+  function uploadPictures(file, data){
+    var data = $.parseJSON(data);
+	alert(data.id);
+    var src = '';
+    if(data.status){
+      $("#file").val(data.id);
+      src = data.name;
+
+      $('.upload-file').html(
+              '<div class="upload-pre-item">'+ src +'</div>'
+      );
+    } else {
+      updateAlert(data.info);
+      setTimeout(function(){
+        $('#top-alert').find('button').click();
+        $(that).removeClass('disabled').prop('disabled',false);
+      },1500);
+    }
+  }
+</script>	
+
+<script>
+  $('#deadline2').datetimepicker({
+    format: 'yyyy-mm-dd',
+    language:"zh-CN",
+    minView:2,
+    autoclose:true
+  });
+</script>	
+	
+</body>
+</html>

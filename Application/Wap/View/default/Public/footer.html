@@ -1,0 +1,28 @@
+<div class="foot_box"></div>
+<div class="foot_dom">
+	<ul>
+		<li><a href="{:U('index/index')}"><span></span><i>返回首页</i></a></li>
+		<li>
+			<a href="javascript:"><span></span><i>在线咨询</i></a>
+			<div class="qq_lis">
+
+				<ul>
+					<volist name="imqq" id="qq">
+					<li>
+						<a href="tencent://message/?uin={$qq.qq}&Site=Service&Menu=yes">
+							<img src="__IMG__/qqss.png" alt="">
+							<i>{$qq.name}</i>
+						</a>
+					</li>
+					</volist>
+				</ul>
+
+				<div class="qqls_aa"></div>
+			</div>
+		</li>
+		<li><a href="{:U('index/tousu')}"><span></span><i>投诉建议</i></a></li>
+		<li><a href="javascript:"><span></span><i>返回顶部</i></a></li>
+
+	</ul>
+
+</div>

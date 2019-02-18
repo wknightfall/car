@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>修改手机号</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/psc.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="per_zhil">
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('user/rest')}"><li><span><p>余额</p></span></li></a>
+                    <a href="{:U('user/dingdan?state=2')}"><li><span><p>订单</p></span></li></a>
+                    <a href="{:U('user/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('user/pl')}"><li><span><p>我的评论</p></span></li></a>
+                    <a href="{:U('user/geren')}"><li class="per_chd" ><span><p>个人资料</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="perrg_imsg">
+            <div class="geren_ppp">
+                <div class="lun_ttle">
+                    <ul>
+                        <li class="fatie_genb" >个人资料</li>
+                    </ul>
+                    <div class="bianji_btn">编辑</div>
+                </div>
+                <div class="geren_phone">
+                    <ul>
+                        <li>头像：</li>
+                        <li><img src="{$user.icon|picture}" alt="" style="max-width:108px;max-height:93px"></li>
+                    </ul>
+                    <ul>
+                        <li>昵称：</li>
+                        <li>{$user.phone}</li>
+                    </ul>
+                    <ul>
+                        <li>电话：</li>
+                        <li>
+                            <ul>
+                                <li><div><input type="text" placeholder="请输入验证码"  name="code" id="code"></div><em class="get_num" id="regyzm">获取验证码</em></li>
+                                <li><input type="text" placeholder="请输入手机号" name="phone" id="phone"></li>
+                                <li><input type="button" value="保存" id="xgphone"><input type="button" value="取消"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>密码：</li>
+                        <li>****************</li>
+                    </ul>
+                    <ul>
+                        <li>快捷登录：</li>
+                        <li><img src="__IMG__/psc/cer21_07.jpg" alt=""><img src="__IMG__/psc/cer21_09.jpg" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<include file="Public/footer" />
+
+</footer>
+</body>
+<script>
+    $('#regyzm').click(function () {
+        if($(this).hasClass('regyzm')==false){
+
+            var phone=$('input[name=phone]').val();
+            var pattern = /^1(3|4|5|7|8)\d{9}$/;
+            if(phone==""){
+                layer.tips('请输入手机号!', '#phone', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+                return false;
+            }else if(pattern.test(phone)==false){
+                layer.tips('手机号不正确请重新输入!', '#phone', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+                return false;
+            }
+
+            $.post("{:U('Public/sms')}",{'phone':phone,'type':5},function (data) {
+                var obj=jQuery.parseJSON(data)
+                if(obj.code==200){
+                    $('#regyzm').addClass('regyzm');
+                    var num=60;
+                    timer=setInterval(function(){
+                        $('#regyzm').html(num+'秒');
+                        num--;
+                        if(num==0){
+                            clearInterval(timer);
+                            timer=null;
+                            $('#regyzm').html('重新获取');
+                            $('#regyzm').removeClass('regyzm');
+                        }
+                    },1000)
+                    layer.msg(obj.msg);
+                }else{
+                    layer.msg(obj.msg);
+                }
+            })
+        }
+    })
+
+    $('#xgphone').click(function () {
+        var phone = $('input[name=phone]').val();
+
+        var code = $('input[name=code]').val();
+        if (phone == '') {
+            layer.tips('请输入手机号!', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        var pattern = /^1(3|4|5|7|8)\d{9}$/;
+        if (pattern.test(phone) == false) {
+            layer.tips('手机号不正确请重新输入!', '#phone', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+        if (code == '') {
+            layer.tips('请输入验证码!', '#code', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+
+        $.post("/Home/user/xiugshouji", {'phone': phone, 'code': code}, function (data) {
+            var obj = jQuery.parseJSON(data);
+
+            if (obj.code == 402) {
+                layer.tips(obj.msg, '#code', {
+                    tips: [1, '#3595CC'],
+                    time: 4000
+                });
+            } else if (obj.code == 400) {
+                layer.msg(obj.msg);
+            } else if (obj.code == 200) {
+                layer.msg(obj.msg, function () {
+                    location.href = '/home/user/geren'
+                });
+            }
+        })
+    })
+
+
+</script>
+
+</html>

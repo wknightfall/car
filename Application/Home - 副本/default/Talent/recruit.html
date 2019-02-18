@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css"> 
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script>
+<script type="text/javascript" src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+
+</head>
+	
+	<body><include file="Public/zx" />
+		<include file="Public:header"/>
+		<!--中间部分-->
+		<div class="com_center com_bag">
+
+			
+			<div class="res_com">
+				<volist name="lists" id="vo">
+				<div class="per_zp">
+					<ul>
+						<li>
+							<p class="zp_hd">{$vo[title]}</p>
+							<!--<p class="zp_en">{$zml[egname]}</p>-->
+						</li>
+						<li class="zp_olis">
+							 <p>岗位职责：</p>
+                             <p>
+                                    {$vo[zhize]}
+                             <p>任职资格：</p>
+                             <p>
+                                    {$vo[leavel]}
+                              </p>
+							
+						</li>
+						<li class="zp_a1">
+							<a href="{:U('teltalent',array('id'=>$vo['id']))}">应聘此职位</a>
+						</li>
+					</ul>
+				</div>
+				</volist>
+
+				
+			</div>
+
+		</div>
+		
+		<include file="Public:footer"/>
+		
+		
+		
+	</body>
+	
+
+</html>

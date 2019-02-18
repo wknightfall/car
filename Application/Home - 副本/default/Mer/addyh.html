@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/mer.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+   <!-- <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>-->
+   <!-- <script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>-->
+
+
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="psc_mb">
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('mer/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('mer/message')}"><li><span><p>我的留言</p></span></li></a>
+                        <a href="{:U('mer/goods?issale=2')}"><li><span><p>商品管理</p></span></li></a>
+                            <a href="{:U('mer/youhui')}"><li class="per_chd" ><span><p>优惠活动</p></span></li></a>
+                                <a href="{:U('mer/dingdan?isover=2')}"><li><span><p>订单管理</p></span></li></a>
+                                    <a href="{:U('mer/caiwu')}"><li><span><p>财务</p></span></li></a>
+                                        <a href="{:U('mer/shangjia')}"><li><span><p>商家信息</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="xinzzz_z">
+            <!--商品管理-->
+            <div class="gg_youh">
+                <p>新增活动</p>
+            </div>
+            <!---->
+            <div class="xinzheng_juan">
+                <!--<ul>
+                    <li>优惠券类型</li>
+                    <li>
+                        <div class="sele_ll sele_ee">酒店预订</div>
+                        <div class="sele_chd">
+                            <ul>
+                                <li>酒店预订1</li>
+                                <li>酒店预订2</li>
+                                <li>酒店预订3</li>
+                                <li>酒店预订4</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>-->
+                <ul>
+                    <li>优惠券名称</li>
+                    <li><input type="text" name="name" id="name" style="width: 390px"></li>
+                </ul>
+                <ul>
+                    <li>领取开始时间</li>
+                    <li><input type="text" name="getstime" id="getstime"></li>
+                    <script>laydate.render({elem: '#getstime'});</script>
+                </ul>
+                <ul>
+                    <li>领取结束时间</li>
+                    <li><input type="text" name="getetime" id="getetime"></li>
+                    <script>laydate.render({elem: '#getetime'});</script>
+                </ul>
+                <ul>
+                    <li>使用开始时间</li>
+                    <li><input type="text" name="usestime" id="usestime"></li>
+                    <script>laydate.render({elem: '#usestime'});</script>
+                </ul>
+                <ul>
+                    <li>使用结束时间</li>
+                    <li><input type="text" name="useetime" id="useetime"></li>
+                    <script>laydate.render({elem: '#useetime'});</script>
+                </ul>
+                <ul>
+                    <li>优惠券使用最低限制</li>
+                    <li><input type="text" name="topmoney"  id="topmoney"></li>
+                </ul>
+                <ul>
+                    <li>优惠券面值</li>
+                    <li><input type="text"  name="price" id="price"></li>
+                </ul>
+                <ul>
+                    <li>优惠券数量</li>
+                    <li><input type="text"  name="num" id="num"></li>
+                </ul>
+                <!--<ul>
+                    <li>选择参加商品分类</li>
+                    <li><input type="text"></li>
+                </ul>-->
+
+                <ul>
+                    <li>备注</li>
+                    <li>
+                        <textarea name="content"  id='content' placeholder=""  cols="30" rows="10"></textarea>
+                    </li>
+                </ul>
+                <!---->
+                <ul>
+                    <li></li>
+                    <li>
+                        <input type="button" value="保存" id="submit">
+                    </li>
+                </ul>
+                <!---->
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<include file="Public/footer" />
+
+</footer>
+</body>
+<script>
+    $(document).on("click","#submit",function () {
+        var name = $('input[name=name]').val()
+        var getstime = $('input[name=getstime]').val()
+        var getetime = $('input[name=getetime]').val()
+        var usestime = $('input[name=usestime]').val()
+        var useetime = $('input[name=useetime]').val()
+        var price = $('input[name=price]').val()
+        var topmoney = $('input[name=topmoney]').val()
+        var num = $('input[name=num]').val()
+        var content = $('#content').val()
+        var pattern=/^\d+$/
+        if(name==""){
+            layer.tips('请填写内容', '#name', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+         }
+        if(getstime==""){
+            layer.tips('请填写内容', '#getstime', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(getetime==""){
+            layer.tips('请填写内容', '#getetime', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(usestime==""){
+            layer.tips('请填写内容', '#usestime', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(useetime==""){
+            layer.tips('请填写内容', '#useetime', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(price==""){
+            layer.tips('请填写内容', '#price', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(topmoney==""){
+            layer.tips('请填写内容', '#topmoney', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(num==""){
+            layer.tips('请填写内容', '#num', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(content==""){
+            layer.tips('请填写内容', '#content', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(!pattern.test(price)){
+            layer.tips('该项必须是数字', '#price', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(!pattern.test(topmoney)){
+            layer.tips('该项必须是数字', '#topmoney', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+        if(!pattern.test(num)){
+            layer.tips('该项必须是数字', '#num', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });  return false;
+        }
+
+        //alert(getetime)
+        $.post("/Home/mer/addyh",{'name':name,'price':price,'topmoney':topmoney,'num':num,'getstime':getstime,'getetime':getetime,'usestime':usestime,'useetime':useetime,'content':content},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('操作成功',function () {
+                    location.href='/home/mer/youhui?issale='+2;
+                })
+            }else{
+                layer.msg('操作失败')
+
+            }
+        });
+    })
+</script>
+</html>

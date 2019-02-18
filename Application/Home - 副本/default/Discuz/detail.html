@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/shop.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <!--<script type="text/javascript" src="__JS__/plugin.js"></script>-->
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <!--富文本编辑器-->
+    <link rel="stylesheet" href="__PUBLIC__/Home/kindeditor/themes/default/default.css" />
+    <script charset="utf-8" src="__PUBLIC__/Home/kindeditor/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/Home/kindeditor/lang/zh-CN.js"></script>
+</head>
+<body><include file="Public/zx" />
+<include file="Public/header" />
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!---->
+<div class="travel_gbi"  style="display: inline-block;" id="rippleria">
+    <img src="__IMG__/gud/gud2_02.jpg" alt="">
+</div>
+<!--当前位置-->
+<div class="postin_wy">
+    <div></div><em>您当前的位置：</em><a href="{:U('index/index')}">首页</a><em>-</em><a href="{:U('index/index')}">旅游指南</a><em>-</em><a>论坛</a>
+</div>
+<section>
+    <div class="tie_xq">
+        <div class="left_nav">
+            <ul>
+                <a href="{:U('Food/index')}" style="text-decoration: none;color:#fff"><li class="lenav_ok" style="background: #ef5f02;"><div></div>美食</li></a>
+
+                <a href="{:U('House/index')}" style="text-decoration: none;color:#fff"><li style="background: #f29a00;"><div></div>住宿</li></a>
+                <a href="{:U('Transpot/index')}" style="text-decoration: none;color:#fff"><li style="background: #00b065;"><div></div>交通</li></a>
+                <a href="{:U('Scenic/index')}" style="text-decoration: none;color:#fff"><li style="background: #29a5f3;"><div></div>景区</li></a>
+                <a href="{:U('Shopping/index')}" style="text-decoration: none;color:#fff"><li  style="background: #2970a5;"><div></div>购物</li></a>
+                <a href="{:U('Funny/index')}" style="text-decoration: none;color:#fff"><li style="background: #e00404;"><div></div>娱乐</li></a>
+            </ul>
+        </div>
+        <div class="tie_text">
+            <span class="tie_wenb">
+                <p>{$tiezi.name}</p>
+                <ul>
+                    <li>发布时间：<i>{$tiezi.create_time|date='Y-m-d',###}</i></li>
+
+                    <li>阅读：{$tiezi.view}</li>
+                </ul>
+                <span class="lll_lis">
+                    <p class="jdll">{$tiezi.view}</p>
+                    <p class="jdpl">{$tiezi.pl}</p>
+                    <p class="jddz">{$tiezi.collectionnum}</p>
+                </span>
+            </span>
+            <p>
+                {$tiezi.detail}
+            </p>
+            <span class="tt_ald">
+                <p id="pl">评论</p>
+                <i data-id="{$tiezi.id}" class="icon2">收藏</i>
+            </span>
+            <div class="pinlun">
+                <ul>
+                    <volist name="comment" id="vo" key="k">
+                    <li>
+                        <ul>
+                            <li><img src="{$vo.usericon|picture}" alt=""></li>
+                            <if condition="$vo.uid eq 999999999"><li>系统管理员</li>
+                            <else /><li>{$vo.uid|modelField='usermember','name'}</li></if>
+
+                            <li>发表于{$vo.time|date='Y-m-d H:i',###}</li>
+                            <li> {$vo.floor} 楼</li>
+                        </ul>
+                        <ul>
+                            <li>{$vo.content}</li>
+                        </ul>
+                        <ul>
+                            <li><span class="tt_ald"><p class="reply" uid="{$vo.uid}" data-id="{$vo.id}"><a href="javascript:;" style="color:#b2b2b2">回复</a></p>
+                                <i data-id="{$vo.id}" class="icon2"><a href="javascript:;" style="color:#b2b2b2">收藏</a></i></span></li>
+                            <li onclick="jubao({$vo.id})" ><a href="javascript:;" style="color:#b2b2b2">举报</a></li>
+                        </ul>
+                    </li>
+                    </volist>
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="name_dd">
+            <div class="name_toux">
+                <img src="{$tiezi.usericon|picture}" alt="">
+                <p>{$tiezi.uid|modelField='usermember','name'}</p>
+            </div>
+            <div class="totlo_tt">
+                <ul>
+                    <li>主题</li>
+                    <li>{$zhutinum}</li>
+                </ul>
+                <ul>
+                    <li>帖子</li>
+                    <li>{$tiezinum}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="page_tt">
+            <ul >
+                {$page}
+
+            </ul>
+        </div>
+
+
+       <!-- <div class="fab_bun">
+            <input type="button" value="发表帖子">
+            <input type="button" value="回复">
+        </div>-->
+
+        <div class="text_bjqq">
+
+            <textarea id="" name="content" style="width:700px;height:200px;visibility:hidden;display: block;" id="content">{$plcontent}</textarea>
+
+            <if condition="$Think.get.edit eq 1">
+                <input value="编辑评论" type="button" id="editcomment">
+                <else />
+                <input value="发表回复" type="button" id="pubcomment">
+            </if>
+        </div>
+    </div>
+</section>
+
+<!-------底部--------->
+<include file="Public/footer" />
+<!--隐藏板-->
+<div class="all_no"></div>
+</body>
+<script>
+    var isreply=0;
+    var ppid=0;
+    $('#pl').click(function () {
+        ppid=0;
+        $(document).scrollTop($(document).height());
+    })
+    $('.reply').click(function () {
+        isreply=1;
+        ppid=$(this).attr('data-id');
+        $(document).scrollTop($(document).height());
+    })
+    $('#pubcomment').click(function(){
+        var aid ="{$Think.get.id}";
+        var type="{$Think.get.model}";
+        var content = $('#content').val();
+        if(content == ''){
+            layer.msg('请填写评论内容！');
+            return false;
+        }
+        if(isreply){
+          //var pid=$(this).attr('id');
+            //var uid=$(this).attr('uid');
+            //var content=$('.'+pid).val().trim();
+            /*var u={$uid};
+             if(uid == u){
+             layer.msg('不能回复自己！');
+             return false;
+             }
+             if(content==""){
+             layer.tips('请填写评论内容 ！', '.'+pid, {
+             tips: [1, '#3595CC'],
+             time: 4000
+             });
+             return false;
+             }*/
+            //console.log(ppid,aid);return;
+            $.post("{:U('Ajax/reply')}",{'id':aid,'content':content,'type':type,'ppid':ppid},function (da) {
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg(obj.msg)
+                    location.reload();
+
+                }else{
+                    layer.msg(obj.msg);
+
+                }
+            })
+
+        }else{
+           //var content = $('#textarea').text().trim();
+            var content = $('[name=content]').val().trim();
+            $.post("/Home/Ajax/pubcomment",{'id':aid,'content':content,'type':'discuz','ppid':ppid},function(da){
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg(obj.msg,function () {
+                        location.reload();
+                    });
+                }else{
+                    layer.msg(obj.msg);
+
+                }
+            });
+        }
+
+
+    })
+    $('#editcomment').click(function(){
+        var aid ="{$Think.get.plid}";
+
+        if(content == ''){
+            alert('请填写评论内容！');
+            return false;
+        }
+
+        var content = $('#content').val();
+        console.log(aid,content);
+
+            $.post("/Home/Ajax/editcomment",{'id':aid,'content':123123},function(da){
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg(obj.msg,function () {
+                        location.reload();
+                    });
+                }else{
+                    layer.msg(obj.msg);
+
+                }
+            });
+     })
+    function jubao(id){
+
+        $.post("{:U('Ajax/jubao')}",{'id':id},function (da) {
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg(obj.msg)
+            }else if(obj.code==201){
+                layer.msg(obj.msg);
+
+            }else{
+                layer.msg(obj.msg);
+            }
+        })
+    }
+
+
+    $(document).on("click",".icon2",function () {
+        var type="{$Think.get.model}";
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':'discuz'},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                //collection.html(parseInt(num)+1);
+                collection.css("background-image","url('/Public/Home/img/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                //collection.html(parseInt(num)-1);
+                collection.css("background-image","url('/Public/Home/img/gud/dtjg_05.jpg')");
+            }else{
+                alert(obj.msg);
+            }
+        });
+    })
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="content"]', {
+            allowImageUpload:false,
+            resizeType:1,
+            width:"100%",
+            height:"450px",
+            afterBlur: function(){this.sync();}//失去焦点，同步信息数据
+        });
+    });
+    function expan(id){
+        $('#li_'+id+' .more').toggleClass('hide');
+    }
+</script>
+</html>

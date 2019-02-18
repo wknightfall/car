@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+</head>
+<body>
+
+<!--head-->
+<div class="bg_titlt_aa">
+    <div class="ger_head">
+        <img src="__IMG__/person/icon/iconfont.png" alt="" onclick="history.go(-1)">
+        商家中心
+        <img src="__IMG__/person/icon/sett.png">
+    </div>
+
+    <div class="toux_dom">
+        <img class="ouximg" src="{$user.icon|picture}" alt="">
+        <img class="camimg" src="__IMG__/person/icon/camera.png" alt="">
+    </div>
+
+    <div class="name_u">
+        <p>{$user.name}</p>
+        <i>{$user.phone}</i>
+    </div>
+</div>
+
+<div class="mer_cct">
+    <p><img src="__IMG__/person/icon/yang.png" alt=""><em>{$user.balance}.00</em><i>余额</i> <input type="button" value="提现" id="tixian"/></p>
+</div>
+<p style="height: 0.2rem;background: #f2f2f2"></p>
+
+<div class="mynv_list">
+    <ul>
+        <li><a href="{:U('luntan')}">
+            <img src="__IMG__/person/icon/list_3.png" alt="">
+            我的论坛
+            <img src="__IMG__/person/icon/list_c.png" alt="">
+        </a></li>
+        <li><a href="{:U('goods?issale=2')}">
+            <img src="__IMG__/person/icon/list_4.png" alt="">
+            <if condition="$shoptype eq 1">房型管理
+                <elseif condition="$shoptype eq 2" />菜品管理
+                <elseif condition="$shoptype eq 3" />景区管理 </if>
+            <img src="__IMG__/person/icon/list_c.png" alt="">
+        </a></li>
+
+        <if condition="$shoptype eq 2">
+        <li><a href="{:U('taochan?issale=2')}">
+            <img src="__IMG__/person/icon/list_2.png" alt="">
+            套餐管理
+            <img src="__IMG__/person/icon/list_c.png" alt="">
+        </a></li></if>
+
+        <li><a href="{:U('youhui')}">
+            <img src="__IMG__/person/icon/list_4.png" alt="">
+            优惠活动
+            <img src="__IMG__/person/icon/list_c.png" alt="">
+        </a></li>
+        <li><a href="{:U('dingdan?state=2')}">
+            <img src="__IMG__/person/icon/list_2.png" alt="">
+            订单管理
+            <img src="__IMG__/person/icon/list_c.png" alt="">
+        </a></li>
+        <li><a href="{:U('caiwu')}">
+            <img src="__IMG__/person/icon/list_1.png" alt="">
+            财务
+            <img src="__IMG__/person/icon/list_c.png" alt="">
+        </a></li>
+        <li><a href="{:U('shangjia')}">
+            <img src="__IMG__/person/icon/list_5.png" alt="">
+            商家信息
+            <img src="__IMG__/person/icon/list_c.png" alt="">
+        </a></li>
+    </ul>
+</div>
+
+<include file="public/merfooter" />
+
+</body>
+</html>
+<script>
+    $('#tixian').click(function () {
+        location.href='/wap/mer/tixian';
+    })
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+</script>

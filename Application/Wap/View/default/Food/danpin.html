@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+    <!---->
+    <div class="dish_updom">
+        <img src="{$room.icon|picture}" alt="" >
+        <ul>
+            <li>
+                <p>
+                    <i>{$room.name}</i>
+                    <em>好评率：
+                        <i>96%</i>
+                    </em>
+                </p>
+            </li>
+            <li>仅售788元！价值1508元的10人活羊点杀价值1508元的10人活羊点杀价值1508元的10人活羊点杀价值1508元的10人活羊点杀，可免费使用包间，提供免费WiFi</li>
+            <li>
+                <p><i>￥</i>{$room.price}</p>
+                <input type="button" value="立即预订" id="buy">
+            </li>
+        </ul>
+    </div>
+    <div class="dish_undom">
+        <p class="unde_tt">菜品介绍</p>
+        <span>嫩羊在宰杀前的过程就不必说了。都是清内脏去毛统一的一个流程。
+            我们买的羊，一只嫩羊在当地250.260RMB左右。卖羊人会将羊处理好，
+            除皮留给卖羊人外，内脏。羊血等都可以自留。做做羊杂汤，羊血羹很是不错。
+        </span>
+        <img src="__IMG__/body/mcg2.png" alt="">
+        <span>烤制时间(小羊大概在三个小时左右，大羊在5个小时左右。本次做的烤全羊为小羊。调料为小羊的份，大羊要适
+            量添加料，大羊和小羊的比重，问当地的卖羊人他们会回答就是两种，大的和小的，小的有一个价格，大的有一个价
+            格，没有具体的公斤数，可以看我的图片，图中是小羊的大小，这只小羊，我们八个人吃足够)。皮脆翻起时即可食
+            用。不要烤过了，不然很懈口
+        </span>
+        <img src="__IMG__/body/mcg3.png" alt="">
+    </div>
+    <input type="hidden" name="hid" value="{$room.hid}">
+    <input type="hidden" name="money" value="{$room.price}">
+</body>
+<script>
+    $(document).on("click","#buy",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录！请先登录！');return false;
+            layer.msg('您还未登录！请先登录！',function () {
+                location.href='/Home/public/login'
+            });return false;
+        }
+        var hid= $('input[name=hid]').val();
+        var id='{$Think.get.id}';
+        //var num=$('input[name=foodnum]').val();
+        var money= $('input[name=money]').val();
+
+        //console.log(hid,id,num,money);return;
+        $.post("/Home/Ajax/order",{'actiontype':3,'hid':hid, 'id':id ,'num':1 ,'money':money,},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('下单成功！去支付！',function () {
+                    location.href='/Wap/food/foodpay/id/'+id+'/orderno/'+obj.msg;
+                });
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+
+</script>
+</html>

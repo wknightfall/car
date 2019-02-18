@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>发布评论</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/psc.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <!--特效-->
+
+    <script type="text/javascript" src="__JS__/ajaxupload.3.5.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+ <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="psc_mb">
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('user/rest')}"><li><span><p>余额</p></span></li></a>
+                    <a href="{:U('user/dingdan?state=2')}"><li class="per_chd"><span><p>订单</p></span></li></a>
+                    <a href="{:U('user/luntan')}"><li ><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('user/message')}"><li><span><p>我的留言</p></span></li></a>
+                    <a href="{:U('user/pl')}"><li><span><p>我的评论</p></span></li></a>
+                    <a href="{:U('user/geren')}"><li><span><p>个人资料</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="perrg_imsg">
+            <div class="cont_pl">
+                <div class="lun_ttle">
+                    <ul>
+                        <li class="fatie_genb" >发布评论</li>
+                    </ul>
+                </div>
+                <!---->
+                <div class="content_fapl">
+                    <ul>
+                        <li>综合评分：</li>
+                        <li>
+                            <img src="__IMG__/psc/fpll_05.jpg" alt="">
+                            <img src="__IMG__/psc/fpll_05.jpg" alt="">
+                            <img src="__IMG__/psc/fpll_05.jpg" alt="">
+                            <img src="__IMG__/psc/fpll_05.jpg" alt="">
+                            <img src="__IMG__/psc/fpll_05.jpg" alt="">
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>内容：</li>
+                        <li>
+                            <textarea name="content" placeholder=""  id="content" cols="30" rows="10" id="content">{$comment.content}</textarea>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>添加图片：</li>
+                        <if condition="$Think.get.edit eq 1"><li><img src="{$comment.icon|picture}" id="icon" style=""></li><else />
+                        <li><img src="__IMG__/psc/jiat_03.jpg" alt="" id="icon"></li></if>
+                    </ul>
+                </div>
+                <!---->
+                <div class="fabu_bpl">
+                <if condition="$Think.get.edit eq 1"><input type="button" value="编辑" id="editcomment">
+                    <else /><input type="button" value="发布" id="pubcomment"></if>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="iconid" value="{$comment.icon}">
+</section>
+
+
+<!-------底部--------->
+
+
+<include file="Public/footer" />
+</body>
+</html>
+<script>
+    var star=5;
+    $('#pubcomment').click(function(){
+        var id ="{$Think.get.id}";
+        var type="{$Think.get.type}";
+        var content= $('#content').val()
+        if(content == ''){
+            alert('请填写评论内容！');
+            return false;
+        }
+        var icon=$('input[name=iconid]').val()
+
+            //console.log(icon,content);return;
+
+            $.post("/Home/Ajax/pubcomment",{'id':id,'content':content,'type':type,'icon':icon,'star':star},function(da){
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg(obj.msg,function () {
+                        if(type == 1){
+                            location.href="/Home/house/hoteldetail/id/"+id;
+                        }else if(type == 2){
+                            location.href="/Home/food/dingcan/id/"+id;
+                        }else if(type == 3){
+                            location.href="/Home/project/scenicdetail/id/"+id;
+                        }
+
+                    });
+                }else{
+                    layer.msg(obj.msg);
+
+                }
+            });
+    })
+    $('#editcomment').click(function(){
+        var aid ="{$Think.get.plid}";
+        var icon=$('input[name=iconid]').val()
+        var content= $('#content').val()
+        if(content == ''){
+            alert('请填写评论内容！');
+            return false;
+        }
+//console.log(icon,content);return;
+$.post("/Home/Ajax/editcomment",{'id':aid,'content':content,'icon':icon,'star':star},function(da){
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg(obj.msg,function () {
+                    location.href=document.referrer
+                });
+            }else{
+                layer.msg(obj.msg);
+
+            }
+        });
+})
+
+    $(".content_fapl ul:first-child li:nth-child(2) img").click(function () {
+        star=$(this).index()+1
+
+        $(".content_fapl ul:first-child li:nth-child(2) img").attr("src","/Public/Home/img/psc/fpll_05.jpg");
+        $(this).attr("src","/Public/Home/img/psc/fpll_03.jpg");
+        $(this).prevAll().attr("src","/Public/Home/img/psc/fpll_03.jpg");
+    })
+</script>
+<script>
+    $(document).ready(function(){
+        uploadsasa();
+
+    });
+    //上传头像
+    function uploadsasa(){
+        ajaxUploadicon(
+                'icon', //上传的按钮id名称
+                1000000000,  //允许上传的文件大小（单位：kb）
+                '/Home/Public/upload?form_name=userfile&file_size=10000', //提交服务器端地址
+                'userfile', //提交服务器文件表单名称
+                "$(\".img_div\").show();$(\"#img_path\").attr('src', obj.filename);$(\"#is_upload\").val('1');", //上传成功后执行的 js callback
+                'loadimg'  //loading 图片id
+        );
+    }
+
+
+    function ajaxUploadicon(id_name, filesize, url, filename, callback, loadingid) {
+        var index;
+        var button = $('#'+id_name), interval;
+        var fileType = "pic", fileNum = "one";
+        new AjaxUpload(button,{
+            action: url,
+            name: filename,
+            onSubmit : function(file, ext){
+                index = layer.load(1, {
+                    shade: [0.4,'#000000']
+                });
+                if(fileType == "pic") {
+                    if (ext && /^(jpg|png|gif|jpeg)$/.test(ext)){
+                        this.setData({
+                            'info': '上传类型为图片'
+                        });
+
+                    } else {
+                        alert('提示：您上传的是非图片类型！');
+                        layer.close(index);
+                        return false;
+                    }
+                }
+                $("#"+loadingid).show();
+                if(fileNum == 'one') this.disable();
+            },
+            onComplete: function(file, response){
+
+                layer.close(index);
+                var obj = jQuery.parseJSON(response);
+                if (obj['ok'] == 'ok') {
+                    $('#icon').attr('src',obj['filename']);
+                    $('input[name=iconid]').val(obj['id']);
+
+                    uploadsasa();
+                } else {
+                    switch (response) {
+                        case '1':
+                            alert('提示：上传失败，图片不能大于100M');
+
+                            break;
+                        case '3':
+                            alert('提示：图片只有部分文件被上传，请重新上传！');
+
+                            break;
+                        case '4':
+                            alert('提示：没有任何文件被上传！');
+
+                            break;
+                        case '5':
+                            alert('提示：非图片类型，请上传jpg|png|gif图片！');
+
+                            break;
+                        default:
+                            alert('提示：上传失败，错误未知，请您及时联系网站客服人员！');
+
+                            break;
+                    }
+                }
+                $("#"+loadingid).hide();
+                window.clearInterval(interval);
+                this.enable();
+            }
+        });
+    }
+
+</script>

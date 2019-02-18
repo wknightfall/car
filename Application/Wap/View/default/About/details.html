@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="wap-font-scale" content="no">
+
+<title>{:C('WEB_SITE_TITLE')}</title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<!--fonts-->
+<link rel="stylesheet" type="text/css" href="__FONTS__/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comm.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css"> 
+<link rel="stylesheet" type="text/css" href="__CSS__/mobile.css">
+
+<!--js-->
+<script type="text/javascript" src="__JS__/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="__JS__/mobile.js"></script> 
+<script type="text/javascript" src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/style.js"></script>
+
+</head>
+<body>
+    
+    <!--头部-->
+    <include file="Public:header"/>
+    <!--banner-->
+
+     <include file="Public:nybanner"/>
+   
+    <!--主体-->
+
+    <div class="widthall main">
+    	<div class="width1200">
+    	    <!--面包屑-->
+    		<div class="mianbao">
+    			<div class="mianbao_img"><img src="__IMG__/sy.png"/></div>
+    			<div class="mianbao_text"><p>
+    			     <a href="/">首页</a>
+    			     <a> > </a>
+    			     <a href="{:U($topvo[url],array('topid'=>$topid))}">关于我们</a>
+                     <a> > </a>
+                     <a href="javascript:;">分公司</a>
+    			</p></div>
+    			<div class="mianbao_prve"><a href="javascript:history.back(-1)">返回上一页</a></div>
+    		</div>
+
+    		<!--内容-->
+            <div class="product comms">
+
+                <include file="Public:leftnav"/>
+
+                <div class="right news_details">
+                    <div class="top_title">
+                         <div class="titles"><p>{$vo[title]}</p></div>
+
+                       <!--  <div class="times"><p>
+                           <span class="span1">{$vo[create_time]|date='Y-m-d H:i',###}</span>  
+                           <span>来源：
+						   <if condition="$vo[source] neq ''">
+						   {$vo[source]}
+						   <else/>
+						    重庆创柯伦科技股份有限公司
+						   </if>
+						   </span>
+                         </p></div>-->
+                    </div>
+                    <div class="content">
+					
+					    <notempty name="vo[content]">
+							<div class="cont">
+							  <p>{$vo[content]}</p>
+							</div>
+						<else/>
+							<div class="cont">
+							  <p>暂无内容！</p>
+							</div>
+						</notempty>
+						
+
+                  <!--上一篇 下一篇-->
+                  <div class="nextprev">
+				     <notempty name="prepage[title]">
+                      <div class="prevs"><a href="{:U('details',array('topid'=>$topid,'twoid'=>$twoid,'id'=>$prepage[id]))}" title="{$prepage[title]}"><p>
+                        <span class="span1">上一篇：</span>
+                        <span class="span2">{$prepage[title]|cutstr=0,21}</span>
+                      </p></a></div>
+					  <else />
+						<div class="prevs"><a href="javascript:;"><p>
+                        <span class="span1">上一篇：</span>
+                        <span class="span2">没有了...</span>
+                        </p></a></div>
+					  </notempty>
+					  
+					  
+                      <notempty name="nextpage[title]">
+                      <div class="next"><a href="{:U('details',array('topid'=>$topid,'twoid'=>$twoid,'id'=>$nextpage[id]))}"  title="{$nextpage[title]}"><p>
+                        <span class="span1">下一篇：</span>
+                        <span class="span2">{$nextpage[title]|cutstr=0,21}</span>
+                      </p></a></div>
+					  <else />
+						<div class="next"><a href="javascript:;"><p>
+                        <span class="span1">下一篇：</span>
+                        <span class="span2">没有了...</span>
+                        </p></a></div>
+					  </notempty>
+
+                  </div>
+
+
+                    </div>
+                     
+
+                </div>
+
+
+            </div>
+            
+    	</div>
+    </div>
+    
+    <!--脚步-->
+   <include file="Public:footer"/>
+
+</body>
+</html>

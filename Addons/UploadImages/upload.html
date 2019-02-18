@@ -1,0 +1,83 @@
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__ADDONROOT__/script/UploadImages.js"></script>
+
+<style>
+
+.upload-img-box .upload-pre-item{
+    position: relative;
+    margin-top: 8px;
+    overflow: visible;
+    float: left;
+    margin-right: 8px;
+	width:200px; height:180px;
+}
+
+</style>
+<link rel="stylesheet" href="__ADDONROOT__/style/UploadImages.css">
+    <input type="file" id="upload_picture_{$name}">
+    <input type="hidden" name="{$name}" value="{$valStr}" class="icon {$name}" />
+    <div class="upload-img-box">
+        <notempty name="picture">
+             <volist name="picture" id="v">
+                <div class="upload-pre-item">
+                    <img src="__ROOT__{$v['path']}" data-id="{$v['id']}"/>
+                    <span class='btn-close btn-close-{$name}' title='删除图片{$name}'></span>
+                </div>
+             </volist>
+        </notempty>
+    </div>
+<script type="text/javascript">
+    //上传图片
+    $(function(){
+        /* 初始化上传插件*/
+        $("#upload_picture_{$name}").uploadify({
+            "height"          : 30,
+            "swf"             : "__STATIC__/uploadify/uploadify.swf",
+            "fileObjName"     : "download",
+            "buttonText"      : "上传图集",
+            "uploader"        : "{:U('/Admin/file/uploadPicture',array('session_id'=>session_id()))}",
+            "width"           : 120,
+            'removeTimeout'   : 1,
+            'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+            "onUploadSuccess" : uploadPicture{$name},
+            'onFallback' : function() {
+                alert('未检测到兼容版本的Flash.');
+            }
+        });
+        $('.btn-close').click(function(event) {
+
+            event.preventDefault();
+            $(this).parent().remove();
+            picsbox = $("#upload_picture_{$name}").siblings('.upload-img-box');
+            picArr = [];
+            for (var i = 0; i < picsbox.children().length ; i++) {
+                picArr.push(picsbox.children('.upload-pre-item:eq('+i+')').find('img').attr('data-id'));
+            };
+            picStr = picArr.join(',');
+            $('.icon.{$name}').val(picStr);
+        });
+    })
+    function uploadPicture{$name}(file, data){
+
+        var data = $.parseJSON(data);
+        var src = '';
+        if(data.status){
+            src = data.url || '__ROOT__' + data.path;
+            upload_img = "<div class='upload-pre-item'><img src=" + src +" title='点击显示大图' data-id="+data.id+"> <span class='btn-close btn-close-{$name}' title='删除图片'></span></div>";
+            picsbox = $("#upload_picture_{$name}").siblings('.upload-img-box');
+            picsbox.append(upload_img)
+            picArr = [];
+            for (var i = 0; i < picsbox.children().length ; i++) {
+                picArr.push(picsbox.children('.upload-pre-item:eq('+i+')').find('img').attr('data-id'));
+            };
+            picStr = picArr.join(',');
+            $('.icon.{$name}').val(picStr);
+        } else {
+            updateAlert(data.info);
+            setTimeout(function(){
+                $('#top-alert').find('button').click();
+                $(that).removeClass('disabled').prop('disabled',false);
+            },1500);
+        }
+    }
+</script>

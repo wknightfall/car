@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+<!--横幅展示-->
+<div class="banner_dom">
+    <img src="{$icon|picture}" alt="">
+</div>
+<!--菜单导航-->
+<div class="nav_dom">
+    <ul>
+        <volist name="nav" id="v">
+            <li <if condition="$v.id eq $navid">class="inva_chk"</if>  ><a href="{$v.href}">{$v.title}</a></li>
+        </volist>
+
+    </ul>
+
+</div>
+<!--正文-->
+<div class="car_list">
+    <p>贵州航班查询表</p>
+
+    <ul>
+        <li>
+            <div>
+                <div>
+                    <p>7:00</p>
+                    <p>历时2个小时</p>
+                    <p>9:00</p>
+                </div>
+                <div>
+                    <p>贵州</p>
+                    <p>东航MU9268</p>
+                    <p>重庆</p>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div>
+                <div>
+                    <p>7:00</p>
+                    <p>历时2个小时</p>
+                    <p>9:00</p>
+                </div>
+                <div>
+                    <p>贵州</p>
+                    <p>东航MU9268</p>
+                    <p>重庆</p>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div>
+                <div>
+                    <p>7:00</p>
+                    <p>历时2个小时</p>
+                    <p>9:00</p>
+                </div>
+                <div>
+                    <p>贵州</p>
+                    <p>东航MU9268</p>
+                    <p>重庆</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!--more-->
+
+<!--文章底部信息-->
+<include file="Public/bottom" />
+<!--底部菜单-->
+<include file="Public/footer" />
+</body>
+</html>

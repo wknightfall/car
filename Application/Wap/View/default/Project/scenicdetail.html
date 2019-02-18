@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+    <!--头部-->
+    <div class="head_tdom">
+        <img src="__IMG__/icon/return.png"  onclick="history.go(-1)">
+        {$room.name}
+        <img src="__IMG__/icon/her_tt.png" alt="" class="sc_img icon2" data-id="{$Think.get.id}">
+    </div>
+    <div class="head_dd"></div>
+    <!---->
+    <!--横幅展示-->
+    <div class="banner_dom">
+        <img src="{$room.icon|picture}" alt="">
+    </div>
+
+    <div class="xiangq">
+        <span class="hesd_abc">
+            <p class="dao_lf"><i class="ttlire">￥<em>{$room.price}</em>起</i>
+
+                <if condition="$huodong eq 1"><i class="huodong">优惠活动</i><em class="manj">满{$hd.topmoney}减{$hd.price}</em></if>
+            </p>
+            <p class="manyidu">满意度 <i>97%</i></p>
+        </span>
+
+        <ul>
+            <li>景点地址：</li><li>{$room.addr}</li>
+        </ul>
+        <ul>
+            <li>联系电话：</li><li>{$room.tel}</li>
+        </ul>
+        <ul>
+            <li>开放时间：</li><li>冬季（12月1日-3月1日）8:00-17:30；其它季节（3月2日-11月30日）8:00-18:00</li>
+        </ul>
+    </div>
+
+    <div class="sel_menp">
+        <ul>
+            <li>选择门票：</li>
+            <li>
+                <p class="this_pic" data-id="1" price="{$room.price}">{$room.name}成人票</p>
+
+                <p data-id="2" price="{$room.childprice}">{$room.name}儿童票</p>
+
+            </li>
+        </ul>
+        <ul>
+            <li>优惠价格：</li>
+            <li>
+                <p id="price">￥</p>
+              <!--  <i>￥100</i>-->
+            </li>
+        </ul>
+        <ul>
+            <li>购买数量：</li>
+            <li>
+                <div class="buy_blus">
+                    <div class="shop_num">
+                        <p></p>
+                        <input type="text" value="1" id="num">
+                        <p></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li>&nbsp;</li>
+            <li>
+                <input type="button" value="立即预定" id="yuding">
+            </li>
+        </ul>
+    </div>
+
+    <div class="tuwen_dom">
+        <p class="unde_tt">景区介绍</p>
+        <span>
+            {$room.detail}
+        </span>
+        <img src="__IMG__/body/mpy.jpg" alt="">
+    </div>
+    <div class="jies_dom">
+        <p class="unde_tt">预定须知</p>
+        <em>优待政策</em>
+        <span>
+            免票政策：65周岁以上（含65周岁）老人凭有效身份证件免费入园，须有至少一名具有安全监护能力的购票成人陪同入园。1.2米（不含1.2米）
+            以下儿童免费入园，须有至少一名具有安全监护能力的购票成人陪同入园。
+            优待政策：身高1.2米（含）至1.5米（不含）的儿童购买儿童票，60周岁(不含)至64周岁(含)的长者购买长者票（凭有效身份证件验票入园）。
+            以上信息仅供参考，具体信息请以景区当天披露为准。
+        </span>
+        <em>预订限制</em>
+        <span>
+            景区统一限购，同一手机号和身份证在所有网站每天预订的总和请根据具体票种限制按规定购买，多人预订请使用不同的身份证和手机号码
+            （请勿重复购买，超出张数将预订失败）。
+        </span>
+        <em>温馨提示</em>
+        <span>
+            该景区可能有存在高风险的游玩项目，携程建议您购买相关保险。出行前，建议您仔细阅读旅游安全的相关内容。抵达景区后，也请您不要忽略
+            景区内的游玩提示或安全提示类信息。
+            为使您的旅程圆满完成，并普及旅游安全知识及旅游文明公约，特制定《携程旅游告游客注意事项》，出行前，提醒您仔细阅读相关内容。
+            同时，携程从出行常识、旅游活动和特殊人群三方面为您提供旅游安全指南。
+        </span>
+        <em>安全指南</em>
+        <span>
+            旅游安全是旅游的生命线，为保障游客“住得安心、吃得放心、玩的舒心”，携程从出行常识、旅游活动和特殊人群三
+        </span>
+    </div>
+
+    <div class="jiaot_dom">
+        <p class="unde_tt">交通指南</p>
+        <div class="jiao_mapd">
+            <div id="container"></div>
+        </div>
+        <span class="map_img">
+            <p>距离海口美兰国际机场23公里，乘坐出租车约40分钟</p>
+            <p>距离海口火车站27.2公里，乘坐出租车约50分钟</p>
+        </span>
+    </div>
+    <div class="comment">
+        <p class="com_tt">
+            <i>评价</i>
+            <em>（{$total}）</em>
+        </p>
+        <div class="com_list">
+            <ul>
+                <li <if condition="$Think.get.pl eq 5">class="current"</if> ><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=5')}" style="color:rgb(115, 115, 115)">全部评价（{$total}）</a></li>
+                <li <if condition="$Think.get.pl eq 0">class="current"</if> ><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=0')}" style="color:rgb(115, 115, 115)">晒图（{$pic}）</a></li>
+                <li <if condition="$Think.get.pl eq 1">class="current"</if> ><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=1')}" style="color:rgb(115, 115, 115)">好评（{$good}）</a></li>
+                <li <if condition="$Think.get.pl eq 2">class="current"</if> ><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=2')}" style="color:rgb(115, 115, 115)">中评（{$middle}）</a></li>
+                <li <if condition="$Think.get.pl eq 3">class="current"</if> ><a href="{:U('project/scenicdetail?id='.$id.'&type='.$type.'&pl=3')}" style="color:rgb(115, 115, 115)">差评（{$bad}）</a></li>
+            </ul>
+        </div>
+        <div class="ment_list">
+            <ul>
+                <volist name="comment" id="vo" key="k">
+                <li  <if condition="$k gt 2">class='moreall'</if> >
+                    <div class="ment_left">
+                        <img src="{$vo.usericon|picture}" alt="">
+                    </div>
+                    <div class="ment_right">
+                        <ul>
+                            <li>
+                                <p class="name_str">
+                                    <i>{$vo.username}</i>
+                                    <em>
+                                        <if condition="$vo.star eq 1"><img src="__IMG__/star1.png" style='width:90px' alt="">
+                                            <elseif condition="$vo.star eq 2"/><img src="__IMG__/star2.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 3"/><img src="__IMG__/star3.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 4"/><img src="__IMG__/star4.png" style='width:90px'alt="">
+                                            <elseif condition="$vo.star eq 5"/><img src="__IMG__/star5.png" style='width:90px' alt="">
+                                        </if>
+                                    </em>
+                                </p>
+                            </li>
+                            <li class="text_com">{$vo.content}</li>
+                            <li class="com_img">
+                                <if condition="$vo['icon'] neq 0">
+                                    <img src="{$vo.icon|picture}" alt="" style="width:40px;height:40px">
+                                    <else /><img src="" alt="" style="width:40px;height:40px"></if>
+
+                            </li>
+                            <li class="time_com">{$vo.time|date='Y-m-d h:i:s',###}</li>
+                        </ul>
+                    </div>
+                </li>
+               </volist>
+            </ul>
+
+            <p class="all_com">
+                <input type="button" value="查看全部评价"  id="moreall">
+            </p>
+        </div>
+
+    </div>
+
+    <div class="recom_lsit">
+        <p class="recom_tt">
+            <i>为你推荐</i>
+        </p>
+        <div class="scroll_dom scroll">
+            <ul>
+                <volist name="tj" id="vo">
+                <li>
+                    <a href="{:U('Project/scenicdetail?id='.$vo['id'].'&type=3'.'&model=room')}" >
+                        <img src="{$vo.icon|picture}" alt="">
+                        <div class="recom_dom">
+                    <span>
+                        <i>{$vo.name}</i>
+                        <!--<p>
+                            <em>￥</em>
+                            <i>{$vo.price}</i>
+                            <em>起</em>
+                        </p>-->
+                    </span>
+                            <p>{$vo.content}</p>
+                        </div>
+                    </a>
+                </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+
+    $(function () {
+        var pl="{$Think.get.pl}"
+
+        if(pl!=''){
+            $(window).scrollTop(1500)
+        }
+        $("#price").html('￥'+"{$room.price}");
+        $('.moreall').hide()
+    })
+    $(document).on("click","#moreall",function () {
+        $('.moreall').show()
+    })
+    var id="{$Think.get.id}";
+    $(document).on("click","#fapinlun",function () {
+        var shoptype="{$shoptype}"
+        var id="{$Think.get.id}"
+        var type="{$Think.get.type}"
+
+        if(shoptype==0){
+            location.href='/Home/user/fapinlun?id='+id+'&type='+type
+        }else{
+            location.href='/Home/mer/fapinlun?id='+id+'&type='+type
+        }
+
+    })
+
+
+    $(document).on("click","#yuding",function () {
+        var islogin="{$islogin}"
+        if(islogin==0){
+            layer.msg('您还未登录,请先登录');return false;
+        }
+        var num=$('#num').val();
+        //console.log(id,num,$('.this_pic').attr('data-id'));return
+        location.href='/Wap/project/menpiaopay/id/'+id+'/num/'+num+'/type/'+$('.this_pic').attr('data-id');
+
+    })
+
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':3},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                collection.attr("src","/Public/Wap/image/icon/hert.png");
+                //collection.css("background-image","url('/Public/Home/__IMG__/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                collection.attr("src","/Public/Wap/image/icon/aattt.png");
+                //collection.css("width",'17px');collection.css("height",'17px');
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+</script>
+<script>
+
+    $(function () {
+
+        $(".sel_menp ul:first-child li:last-child p").click(function () {
+            $(this).addClass("this_pic").siblings("p").removeClass("this_pic");
+            $("#price").html('￥'+$(this).attr('price'));
+            return;
+
+            if ($(this).hasClass("thisck")){
+
+
+                if ($(this).next("div").css("display")=="block"){
+
+                    $(this).next("div").css("display","none");
+                }else {
+                    $(".dis_sesl ul:first-child li:last-child .taoc_zo").css("display","none");
+                    $(this).next("div").css("display","block");
+                }
+
+            }else {
+
+                $(".dis_sesl ul:first-child li:last-child .taoc_zo").css("display","none");
+                $(this).siblings("p").removeClass("thisck");
+                $(this).addClass("thisck");
+            }
+        })
+
+
+    })
+
+</script>
+</html>
+<script type="text/javascript" src="//api.map.baidu.com/api?ak=5l7vk4yZYN2wHPV4I3E9GTdMHbjM1XkG&type=lite&v=1.0"></script>
+<script>
+
+    /*百度地图API功能*/
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point, 15);
+    var marker = new BMap.Marker(point);  // 创建标注
+    map.addOverlay(marker);
+
+</script>

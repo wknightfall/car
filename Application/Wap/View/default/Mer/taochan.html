@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="">
+        套餐管理
+        <i class="tt_bianji" id="addtao">添加套餐</i>
+    </div>
+
+    <div class="celec_na">
+
+        <ul>
+
+            <if condition="$issale eq 0 || $issale eq 1">
+                <li><a href="{:U('mer/taochan?issale=2')}">全部</a></li>
+                <else />
+                <li class="this_pag"><a href="{:U('mer/taochan?issale=2')}">全部</a></li>
+            </if>
+            <if condition="$issale eq 1">
+                <li class="this_pag"><a href="{:U('mer/taochan?issale=1')}">上架套餐</a></li>
+                <else />
+                <li><a href="{:U('mer/taochan?issale=1')}">上架套餐</a></li>
+            </if>
+            <if condition="$issale eq 0">
+                <li class="this_pag"><a href="{:U('mer/taochan?issale=0')}">下架套餐</a></li>
+                <else />
+                <li><a href="{:U('mer/taochan?issale=0')}">下架套餐</a></li>
+            </if>
+        </ul>
+    </div>
+
+    <!--list-->
+    <div class="dind_list">
+        <ul id="food">
+            <notempty name="lists">
+                <volist name="lists" id="vo">
+                <li>
+                <p class="list_tt">
+                    <i>ID号:{$vo.id}</i>
+                    <em>数量：{$vo.roomnum}</em>
+                </p>
+                <span class="list_ma">
+                    <img src="{$vo.icon|picture}" alt="">
+                    <span>
+                        <p>{$vo.name}</p>
+                        <p>{$vo.content|mb_substr=###,0,60}</p>
+                        <em>
+                            <!--<i>人数：5人</i>
+                            <i>单价：¥500</i>
+                            <i>数量：5</i>-->
+                        </em>
+                    </span>
+                </span>
+
+                        <p class="list_ft">
+                            <i>套餐价格：<em>￥{$vo.price}</em></i>
+                            <if condition="$vo.issale eq 1">
+                            <span class="xiaj">
+                                <input type="button" value="下架" class="actgoods" data-id="{$vo.id}" acttype="notsale"/>
+                            </span>
+                            <else />
+                            <span class="mer_ii">
+                                <input type="button" value="上架" class="actgoods" data-id="{$vo.id}" acttype="onsale"/>
+                                <input type="button" value="编辑" class="editgoods" data-id="{$vo.id}"/>
+                                <input type="button" value="删除" class="actgoods" data-id="{$vo.id}" acttype="del"/>
+                            </span>
+                            </if>
+                        </p>
+
+
+
+            </li>
+                </volist>
+                <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+            </notempty>
+
+
+
+        </ul>
+    </div>
+
+
+    <include file="public/merfooter" />
+
+</div>
+
+</body>
+<script>
+    page=1;
+    var   url="{:U('mer/taochan')}";
+    var issale='{$Think.get.issale}'
+    var shoptype="{$shoptype}"
+    $(window).scroll(
+            function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+
+                    $.post(url,{'page':page,'issale':issale},function (da) {
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            $('#food').append(obj.msg);
+                            page++;
+                        }else{
+                            //$('.molink').addClass('nothing');
+
+                            layer.msg('没有更多了哦~');
+                        }
+                    })
+
+                }
+            });
+
+
+    $(document).on("click","#addtao",function () {
+
+        location.href='/Wap/mer/addtao';
+    })
+    $(document).on("click",".editgoods",function () {
+        var id = $(this).attr('data-id')
+        var type = $(this).attr('acttype')
+        var shoptype="{$shoptype}"
+
+            location.href='/Wap/mer/edittao/id/'+id;
+
+
+
+    })
+    $(document).on("click",".actgoods",function () {
+        var id = $(this).attr('data-id')
+        var type = $(this).attr('acttype')
+        if(type=='del'){
+            layer.confirm('确定删除吗？', {
+                btn : [ '确定', '取消' ]
+            }, function(index) {
+                layer.close(index);
+                $.post("/Wap/mer/goods",{'id':id,'type':type},function(da){
+
+                    var obj = jQuery.parseJSON(da);
+                    if(obj.code==200){
+                        layer.msg('操作成功',function () {
+                            location.reload();
+                        })
+
+                    }else{
+                        layer.msg('操作失败')
+                    }
+                });
+
+            });
+        }else{
+            $.post("/Wap/mer/goods",{'id':id,'type':type},function(da){
+
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg('操作成功',function () {
+                        location.reload();
+                    })
+                }else{
+                    layer.msg('操作失败')
+                }
+            });
+        }
+
+    })
+    $(document).on("click",".isover",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/mer/dingdan",{'id':id,'type':'isover'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('确认成功')
+                location.reload();
+
+            }else{
+                layer.msg('确认失败')
+
+            }
+        });
+    })
+    $(document).on("click","#chaxun",function () {
+
+
+        var date1=$('#date_demo1').html();
+        var date2=$('#date_demo2').html();
+        console.log(date1,date2);
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Home/mer/dingdan/date1/'+date1+'/date2/'+date2;
+    })
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo2',
+        min: 'today',
+        showBottom: true,
+        type: 'datetime'
+    });
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo1',
+        min: 'today',
+        showBottom: true,
+        type: 'datetime'
+    });
+</script>

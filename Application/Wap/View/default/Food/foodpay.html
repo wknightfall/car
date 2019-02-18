@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+
+    <!---->
+    <div class="head_tdom">
+        <img src="__IMG__/icon/return.png" onclick="history.go(-1)">
+       {$room.name}
+    </div>
+    <div class="head_dd"></div>
+    <!---->
+
+    <div class="head_tto">{$room.name}私房菜预定(套餐及其他)</div>
+    <div class="head_ttd"><i>预定规则：</i>订单提交需支付全部菲佣，如订单不确认将全额退款至
+        您的付款账户。订单确认后不可取消修改</div>
+    <div class="head_ttb">商品清单 </div>
+
+    <div class="ord_list">
+        <ul>
+            <volist name="food" id="vo">
+            <li>
+                <img src="{$vo.goodsicon|picture}" alt="">
+                <span>
+                    <ul>
+                        <li>{$vo.goodsid|modelField='room','name'}</li>
+                        <li>{$vo.goodsid|modelField='room','content'}</li>
+                        <li>
+                            <em><i>￥</i>{$vo.goodsid|modelField='room','price'}</em>
+                            <p>X{$vo.goodsnum}</p>
+                        </li>
+                    </ul>
+                </span>
+            </li>
+            </volist>
+
+
+        </ul>
+    </div>
+
+    <div class="fs_titl">请选择支付方式 </div>
+
+    <div class="pay_dom">
+
+        <ul class="list_zf">
+            <li>
+                <div class="list_left">
+                    <img src="__IMG__/icon/zhifu_1.png" alt="">
+                    <p>余额 (¥{$user.balance})</p>
+                </div>
+                <div class="list_chked">
+                    <p></p>
+                </div>
+            </li>
+            <li>
+                <div class="list_left">
+                    <img src="__IMG__/icon/zhifu_2.png" alt="">
+                    <p>支付宝支付</p>
+                </div>
+                <div class="list_chked">
+                    <p></p>
+                </div>
+            </li>
+            <li>
+                <div class="list_left">
+                    <img src="__IMG__/icon/zhifu_3.png" alt="">
+                    <p>微信支付</p>
+                </div>
+                <div class="list_chked">
+                    <p></p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="pay_mony">
+        <i> <p>总支付：</p>￥{$money}</i>
+    </div>
+    <div class="warning_info">温馨提示：提交订单后，将为您保留15分钟，请及时支付。</div>
+    </div>
+
+    <div class="pay_butt_box"></div>
+    <div class="pay_tutt">
+        <p><i>￥</i>{$money}</p>
+        <p id="pay">提交订单</p>
+    </div>
+
+</body>
+<script>
+   $(document).on("click","#pay",function () {
+        var orderno = "{$Think.get.orderno}";
+
+       if (paytype == 0) {
+           layer.msg('请选择支付方式!');return false;
+       }
+        $.post("/Home/Ajax/checkorder",{'orderno':orderno},function(da){
+            var checkobj = jQuery.parseJSON(da);
+            if(checkobj.code==200){
+                layer.msg('此订单已支付完成');
+            }else{
+                //console.log(orderno,type);return;
+                //余额支付
+                if(paytype == 1){
+                    $.post("/Home/Pay/pay",{'orderno':orderno},function(da){
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            layer.msg(obj.msg,function () {
+                                location.reload()
+                                //location.href='/Home/Pay/pay/id/'+id+'/orderno/'+obj.msg;
+                            });
+                        }else{
+                            layer.msg(obj.msg);
+                        }
+                    });
+                }else if(paytype == 2){
+                    location.href='/Home/Pay/testpay/orderno/'+orderno;return;
+                }else if(paytype == 3){
+                    layer.msg('暂未开通微信支付');
+                }
+
+            }
+        });
+
+
+
+    })
+
+
+</script>
+</html>

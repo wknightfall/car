@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/plugin.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <link type="text/css" href="__CSS__/swiper.css" rel="stylesheet" />
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+    <link>
+    <style>
+        html, body {position: relative;height: 100%;}
+        body {background: #eee;font-family: Helvetica Neue, Helvetica, Arial, sans-serif;font-size: 14px;color:#000;margin: 0;padding: 0;}
+        .swiper-container {width: 100%;height: 100%;}
+        .swiper-slide {text-align: center;font-size: 18px;background: #fff; /* Center slide text vertically */display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;}
+        .moreall{display:none}
+    </style>
+</head>
+<body>
+<!--头部-->
+<include file="Public/header" />
+
+<!--正文-->
+<div class="hotel_ttis">
+    <img src="__IMG__/icon/return.png" onclick="history.go(-1)">
+    <p>{$Think.get.id|modelField='usermember','name'} <i>五星级</i><img src="__IMG__/icon/heart_0.png" alt="" class="icon2" data-id="{$Think.get.id}"></p>
+</div>
+<div class="htl_info">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <img src="__IMG__/body/htl_1.png" alt="" class="swiper-slide">
+            <img src="__IMG__/body/htl_2.png" alt="" class="swiper-slide">
+            <img src="__IMG__/body/htl_3.png" alt="" class="swiper-slide">
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<div class="info_text">
+
+    <div class="info_tts">
+        <span class="macht_in">
+        <i>￥</i>
+        <em>{$hotel.price}</em>
+        <i>起</i>
+    </span>
+        <div class="youhui">
+            <if condition="$huodong eq 1"> <p>优惠活动</p><i>满{$hd.topmoney}减{$hd.price}</i></if>
+        </div>
+    </div>
+
+    <div class="htl_adds">
+        <p>酒店地址：{$hotel.addr}</p>
+        <p> 联系电话：<i>{$hotel.tel}</i></p>
+    </div>
+
+</div>
+
+<div class="timer_sel">
+    <div class="on_live">
+        <i>入住</i>
+        <input id="date_demo1" name="date_demo1" type="text" placeholder="--请选择入住时间--" />
+        <script>
+            laydate.render({
+                elem: '#date_demo1',
+                min: 'today',
+                showBottom: false
+            });
+        </script>
+    </div>
+    <div class="time_live">
+        <p><i id="daynum">1</i>晚</p>
+    </div>
+    <div class="out_live">
+        <i>离店</i>
+        <input id="date_demo2" name="date_demo2" type="text" placeholder="--请选择离店时间--"  />
+        <script>
+            laydate.render({
+                elem: '#date_demo2',
+                min: 'today',
+                showBottom: false
+            });
+        </script>
+    </div>
+</div>
+
+<div class="tep_num">
+
+    <ul>
+        <li>选择房型：</li>
+        <li class="sel_bed"  class="ched_bed" id="roomid">
+
+            <volist name="room" id="vo">
+                <i value="{$vo.id}">{$vo.name}</i>
+            </volist>
+
+        </li>
+    </ul>
+    <ul>
+        <li>购买数量：</li>
+        <li>
+            <div class="shop_num">
+                <p></p>
+                <input type="text" value="1" name="num">
+                <p></p>
+            </div>
+        </li>
+    </ul>
+    <ul>
+        <li></li>
+        <li>
+            <input type="button" value="立即预订" id="yuding">
+        </li>
+    </ul>
+</div>
+
+<div class="comment">
+    <p class="com_tt">
+        <i>评价</i>
+        <em>（{$total}）</em>
+    </p>
+    <div class="com_list">
+        <ul>
+            <li <if condition="$Think.get.pl eq 5">class="current"</if> >
+                <a href="{:U('house/hoteldetail?id='.$id.'&type='.$type.'&pl=5')}" style="color:rgb(115, 115, 115)">全部评价（{$total} ) </a></li>
+            <li <if condition="$Think.get.pl eq 0">class="current"</if> >
+                <a href="{:U('house/hoteldetail?id='.$id.'&type='.$type.'&pl=0')}" style="color:rgb(115, 115, 115)">晒图（{$pic}）</a></li>
+            <li <if condition="$Think.get.pl eq 1">class="current"</if> >
+                <a href="{:U('house/hoteldetail?id='.$id.'&type='.$type.'&pl=1')}" style="color:rgb(115, 115, 115)">好评（{$good}）</a></li>
+            <li <if condition="$Think.get.pl eq 2">class="current"</if> >
+                <a href="{:U('house/hoteldetail?id='.$id.'&type='.$type.'&pl=2')}" style="color:rgb(115, 115, 115)">中评（{$middle}）</a></li>
+            <li <if condition="$Think.get.pl eq 3">class="current"</if> >
+                <a href="{:U('house/hoteldetail?id='.$id.'&type='.$type.'&pl=3')}" style="color:rgb(115, 115, 115)">差评（{$bad}）</a></li>
+        </ul>
+    </div>
+    <div class="ment_list">
+        <ul>
+           <volist name="comment" id="vo" key="k">
+            <li <if condition="$k gt 3">class='moreall'</if> >
+                <div class="ment_left">
+                    <img src="{$vo.usericon|picture}" alt="" style="width:47.5px;height: 47.5px;border-radius:50%">
+                </div>
+                <div class="ment_right">
+                    <ul>
+                        <li>
+                            <p class="name_str">
+                                <i>{$vo.username}</i>
+                                <em>
+                                    <if condition="$vo.star eq 1"><img src="__IMG__/star1.png" style='width:80px' alt="">
+                                        <elseif condition="$vo.star eq 2"/><img src="__IMG__/star2.png" style='width:80px'alt="">
+                                        <elseif condition="$vo.star eq 3"/><img src="__IMG__/star3.png" style='width:80px'alt="">
+                                        <elseif condition="$vo.star eq 4"/><img src="__IMG__/star4.png" style='width:80px'alt="">
+                                        <elseif condition="$vo.star eq 5"/><img src="__IMG__/star5.png" style='width:80px' alt="">
+                                    </if>
+                                </em>
+                            </p>
+                        </li>
+                        <li class="text_com">{$vo.content}</li>
+                        <li class="com_img">
+                            <if condition="$vo['icon'] neq 0">
+                                <img src="{$vo.icon|picture}" alt="" style="width:40px;height:40px"></if>
+                        </li>
+                        <li class="time_com">{$vo.time|date='Y-m-d h:i:s',###}</li>
+                    </ul>
+                </div>
+            </li>
+            </volist>
+        </ul>
+       <!-- <ul>
+            <li>
+                <div class="ment_left">
+                    <img src="image/body/tx_03.jpg" alt="">
+                </div>
+                <div class="ment_right">
+                    <ul>
+                        <li>
+                            <p class="name_str">
+                                <i>小跟班</i>
+                                <em>
+                                    <img src="image/icon/star.png" alt="">
+                                    <img src="image/icon/star.png" alt="">
+                                    <img src="image/icon/star.png" alt="">
+                                    <img src="image/icon/star.png" alt="">
+                                    <img src="image/icon/star.png" alt="">
+                                </em>
+                            </p>
+                        </li>
+                        <li class="text_com">很不错的酒店很不错的酒店，服务很周到，好评好评，下次还会来的</li>
+                        <li class="com_img">
+                            <img src="image/body/pinlun_img1.png" alt="">
+                            <img src="image/body/pinlun_img2.png" alt="">
+                        </li>
+                        <li class="time_com">2014-04-25  12:22:22</li>
+                    </ul>
+                </div>
+            </li>
+
+        </ul>-->
+
+            <p class="all_com">
+                <input type="button" value="查看全部评价" class="molink">
+            </p>
+    </div>
+
+</div>
+
+<div class="htl_jiesao">
+    <p class="title_p">
+        <img src="__IMG__/body/ttb.jpg" alt="">
+        <i>酒店介绍</i>
+    </p>
+    {$hotel.detail}
+</div>
+
+<div class="img_jiesao">
+    <p class="title_p">
+        <img src="__IMG__/body/ttb.jpg" alt="">
+        <i>酒店环境</i>
+    </p>
+    <span class="img_ls">
+            <!--<img src="{$hotel.icon1|picture}" alt="" style="width: 167.5px;height: 107.5px">
+            <img src="{$hotel.icon1|picture}" alt="" style="width: 167.5px;height: 107.5px">
+            <img src="{$hotel.icon1|picture}" alt="" style="width: 167.5px;height: 107.5px">
+            <img src="{$hotel.icon1|picture}" alt="" style="width: 167.5px;height: 107.5px">-->
+
+         <img src="{$hotel.icon1|picture}" alt="" style="width: 46%;height: 107.5px">
+            <img src="{$hotel.icon1|picture}" alt="" style="width: 46%;height: 107.5px">
+            <img src="{$hotel.icon1|picture}" alt="" style="width: 46%;height: 107.5px">
+            <img src="{$hotel.icon1|picture}" alt="" style="width: 46%;height: 107.5px">
+        </span>
+</div>
+
+<div class="map_dom">
+    <p class="title_p">
+        <img src="__IMG__/body/ttb.jpg" alt="">
+        <i>交通指南</i>
+    </p>
+    <div class="map">
+        <div id="container"></div>
+        <span class="route">
+            <p>距离海口美兰国际机场23公里，乘坐出租车约40分钟</p>
+            <p>距离海口火车站27.2公里，乘坐出租车约50分钟</p>
+        </span>
+    </div>
+</div>
+
+<div class="recom_lsit">
+    <p class="recom_tt">
+        <i>为你推荐</i>
+    </p>
+    <div class="scroll_dom">
+        <ul>
+            <volist name='tj' id="vo">
+            <li>
+                <a href="{:U('wap/house/hoteldetail?id='.$vo['id'].'&type=1')}"><img src="{$vo.icon|picture}" alt=""  style="width: 165px;height: 143.5px">
+                    <div class="recom_dom">
+                    <span>
+                        <i>{$vo.name}</i>
+                        <p>
+                            <em>￥</em>
+                            <i>{$vo.price}</i>
+                            <em>起</em>
+                        </p>
+                    </span>
+                        <p>{$vo.content}</p>
+                    </div>
+                </a>
+            </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="//api.map.baidu.com/api?ak=5l7vk4yZYN2wHPV4I3E9GTdMHbjM1XkG&type=lite&v=1.0"></script>
+<script type="text/javascript" src="__JS__/swiper.min.js"></script>
+<script>
+
+    $(function () {
+        var pl="{$Think.get.pl}"
+        if(pl!=''){
+
+            $(window).scrollTop(500)
+        }
+    })
+    $(document).on("click","#yuding",function () {
+        var id=roomid;
+        var num=$('input[name=num]').val();
+        var date1=$('#date_demo1').val();
+        var date2=$('#date_demo2').val();
+        console.log(id,num,date1,date2);
+        if(id==0){
+            layer.tips('请选择房型!', '#roomid', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return;
+        }else if(date1==''){
+            layer.tips('请选择入住日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return;
+        }else if(date2==''){
+            layer.tips('请选择退房日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return;
+        }else if(date1 >= date2){
+            layer.tips('入驻日期不能晚于退房日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });return;
+        }
+
+        location.href='/Wap/house/pay/id/'+id+'/num/'+num+'/date1/'+date1+'/date2/'+date2;
+    })
+
+    $(document).on("click",".icon2",function () {
+        var id = $(this).attr('data-id')
+        var collection = $(this);
+        $.post("/Home/Ajax/collection",{'id':id,'type':1},function(da){
+            var num = collection.html();
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                collection.attr("src","/Public/Wap/image/icon/hert.png");
+                //collection.css("background-image","url('/Public/Home/img/gud/ligcjj_03.jpg')");
+            }else if(obj.code==201){
+                collection.attr("src","/Public/Wap/image/icon/aattt.png");
+                //collection.css("width",'17px');collection.css("height",'17px');
+            }else{
+                layer.msg(obj.msg);
+            }
+        });
+    })
+    $(document).on("click",".molink",function () {
+        $('.moreall').show()
+    })
+
+</script>
+<script>
+    var log='{$hotel.log}'
+    var lat='{$hotel.lat}'
+    /*百度地图API功能*/
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(log, lat);
+    map.centerAndZoom(point, 15);
+    var marker = new BMap.Marker(point);  // 创建标注
+    map.addOverlay(marker);
+
+    /*swiper*/
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        slidesPerGroup: 3,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        }/*,
+        prevButton:'.swiper-button-prev',
+        nextButton:'.swiper-button-next',*/
+    });
+
+</script>

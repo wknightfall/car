@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{:C(WEB_SITE_TITLE)}</title>
+    <link type="text/css" href="__CSS__/per_public.css" rel="stylesheet"/>
+    <link type="text/css" href="__CSS__/per_main.css" rel="stylesheet"/>
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/per_public.js"></script>
+    <script type="text/javascript" src="__JS__/per_plugin.js"></script>
+    <script src="/Public/Wap/plugin/laydate/laydate.js"></script>
+</head>
+<body>
+
+<div class="my_body">
+    <!--head-->
+    <div class="yue_heada">
+        <img src="__IMG__/person/icon/iconfont.png" alt="" >
+        我的论坛
+        <img src="__IMG__/person/icon/timl.png" alt="" class="ch_cel">
+
+        <div class="data_up">
+            <input type="text" id="date_demo1">
+            <i>-</i>
+            <input type="text" id="date_demo2">
+            <input type="button" value="查询" id="chaxun">
+        </div>
+
+    </div>
+
+    <div class="celec_lun">
+
+        <ul>
+            <li class="this_lunpag"><a href="{:U('luntan')}">我发表的</a></li>
+            <li><a href="{:U('gentie')}">我跟帖的</a></li>
+            <li><a href="{:U('mer/fatie')}">发表帖子</a></li>
+        </ul>
+    </div>
+
+    <!--list-->
+    <div class="luntan_list">
+        <ul id="food">
+            <notempty name="lists">
+                <volist name="lists" id="vo">
+            <li>
+                <p>{$vo.name}</p>
+                <em>
+                    <i><a href="javascript:">{$vo.pl}回应</a></i>
+                    <if condition="$vo['lasttime'] eq 0">
+                     <i>暂无回应</i>
+                    <else /><i>{$vo.lasttime|format_date}</i></if>
+
+                </em>
+            </li>
+                </volist>
+                <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+            </notempty>
+
+        </ul>
+
+    </div>
+
+
+    <include file="public/merfooter" />
+
+</div>
+
+</body>
+<script>
+    page=1;
+    var   url="{:U('mer/luntan')}";
+    $(window).scroll(
+            function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+
+                    $.post(url,{'page':page},function (da) {
+                        var obj = jQuery.parseJSON(da);
+                        if(obj.code==200){
+                            $('#food').append(obj.msg);
+                            page++;
+                        }else{
+                            //$('.molink').addClass('nothing');
+
+                            layer.msg('没有更多了哦~');
+                        }
+                    })
+
+                }
+            });
+
+    $(document).on("click","#chaxun",function () {
+        var date1=$('#date_demo1').val();
+        var date2=$('#date_demo2').val();
+        //console.log(date1,date2);return;
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date1>=date2){
+            layer.tips('开始日期不能晚于结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Wap/mer/luntan/date1/'+date1+'/date2/'+date2;
+    })
+
+
+
+
+    $(document).on("click",".editcomment",function () {
+        var id = $(this).attr('data-id')
+        var plid = $(this).attr('plid')
+        var model = $(this).attr('model')
+        location.href='/Wap/user/fapinlun?id='+id+'&model='+model+'&plid='+plid+'&edit=1';
+
+    })
+
+    $(document).on("click",".delcomment",function () {
+        var id = $(this).attr('data-id')
+        layer.confirm('确定删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function(index) {
+            layer.close(index);
+
+            $.post("/Wap/user/pl", {'id': id, 'type':'del'}, function (da) {
+
+                var obj = jQuery.parseJSON(da);
+                if (obj.code == 200) {
+                    layer.msg('删除成功', function () {
+                        location.reload();
+                    })
+                } else {
+                    layer.msg('删除失败')
+                }
+            });
+        })
+    })
+
+
+</script>
+</html>
+<script>
+
+    /*适应高度不够*/
+    set_heiget();
+
+    $(window).resize(function () {
+
+        set_heiget();
+    })
+
+    /*适应高度不够*/
+    function set_heiget() {
+
+        if ($("body").height() < $(document).height()) {
+
+            $("body").height($(document).height());
+            $("body").css("background", "#ffffff");
+        }
+
+    }
+
+    $(".ch_cel").click(function () {
+
+        $(".data_up").slideToggle();
+    })
+
+
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo2',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>
+<script>
+    laydate.render({
+        elem: '#date_demo1',
+
+        showBottom: true,
+        type: 'date'
+    });
+</script>

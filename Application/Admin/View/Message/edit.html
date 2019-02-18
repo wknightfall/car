@@ -1,0 +1,79 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>查看</h2>
+    </div>
+    <ul class="tab-nav nav">
+
+
+        <li class="current"><a href="javascript:void(0)">基本信息</a></li>
+
+
+    </ul>
+    
+    <form action="{:U()}" method="post" class="form-horizontal">
+    <input type="hidden" name="tid" value="{$vo[id]}">
+    <div class="tab-content">
+        <div class="form-item">
+            <label class="item-label">姓名<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large"  value="{$vo['name']}" disabled>
+            </div>
+        </div>
+
+
+        <!--<div class="form-item">
+            <label class="item-label">电话</label>
+            <div class="controls">
+                <input type="text" class="text input-large"  value="{$vo.mobile}" disabled>
+            </div>
+        </div>
+
+
+        <div class="form-item">
+            <label class="item-label">邮箱</label>
+            <div class="controls">
+                <input type="text" class="text input-large" value="{$vo.email}" disabled>
+            </div>
+        </div>-->
+
+        <div class="form-item">
+            <label class="item-label">留言时间</label>
+            <div class="controls">
+                <input type="text" class="text input-large" value="{$vo['create_time']|date='Y-m-d H:i:s',###}" disabled>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">留言内容</label>
+            <div class="controls">
+               <textarea style="width:400px; height:100px;" disabled>{$vo.content}</textarea>
+            </div>
+        </div>
+
+
+
+        <!--<div class="form-item">
+            <label class="item-label">留言回复</label>
+            <div class="controls">
+                <textarea style="width:400px; height:100px;" name="content"></textarea>
+            </div>
+        </div>
+-->
+        <div class="form-item">
+           <!-- <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">回复</button>-->
+            <a href="{:U('index')}" class="btn btn-return">返 回</a>
+        </div>
+    </div>
+
+    </form>
+</block>
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('Message/index')}');
+
+    </script>
+</block>
+

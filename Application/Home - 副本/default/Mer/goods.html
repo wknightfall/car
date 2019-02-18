@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="__IMG__/pub/t_logo.gif" type="image/x-icon"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link type="text/css" href="__CSS__/main.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/mer.css" rel="stylesheet" />
+    <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__JS__/public.js"></script>
+    <script type="text/javascript" src="__JS__/person.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <!--时间=插件-->
+    <script type="text/javascript" src="__JS__/timeDate/dateRange.js"></script>
+    <script type="text/javascript" src="__JS__/timeDate/monthPicker.js"></script>
+    <link type="text/css" href="__CSS__/timeDate/dateRange.css" rel="stylesheet" />
+    <link type="text/css" href="__CSS__/timeDate/monthPicker.css" rel="stylesheet" />
+    <!--特效-->
+  <!--  <script type="text/javascript" src="__JS__/plugin.js"></script>-->
+</head>
+<body><include file="Public/zx" />
+<!--标题信息栏-->
+<div class="her_imsg">
+    <include file="Public/header" />
+</div>
+
+<!--顶部菜单-->
+<div class="heda_nav">
+    <include file="Public/nav" />
+</div>
+<!--分割线-->
+<div class="split_line"></div>
+<!--当前位置-->
+<!-- >>>>>>>>>main<<<<<<<<<<< -->
+<section>
+    <div class="psc_mb">
+        <div class="perle_list">
+            <div class="txkk_bor">
+                <div class="txkk_bod" style="background: url('{$user.avatar}')"></div>
+                <div class="name_id">
+                    <p>{$user.name}</p>
+                    <em>ID:{$user.id}</em>
+                </div>
+            </div>
+            <div class="list_per">
+                <ul>
+                    <a href="{:U('mer/luntan')}"><li><span><p>我的论坛</p></span></li></a>
+                    <a href="{:U('mer/message')}"><li><span><p>我的留言</p></span></li></a>
+                    <a href="{:U('mer/goods?issale=2')}"><li class="per_chd" ><span><p>商品管理</p></span></li></a>
+                    <a href="{:U('mer/youhui')}"><li><span><p>优惠活动</p></span></li></a>
+                    <a href="{:U('mer/dingdan?isover=2')}"><li><span><p>订单管理</p></span></li></a>
+                    <a href="{:U('mer/caiwu')}"><li><span><p>财务</p></span></li></a>
+                    <a href="{:U('mer/shangjia')}"><li><span><p>商家信息</p></span></li></a>
+                </ul>
+            </div>
+        </div>
+        <!---->
+        <div class="perrg_imsg">
+            <!--订单部分-->
+            <div class="shangp_gul">
+                <div class="per_ttmg">
+                    <!--最新订单-->
+                    <div class="guanli_ttt">商品管理</div>
+                    <div class="lun_ttle">
+                        <ul>
+                            <if condition="$issale eq 0 || $issale eq 1">
+                                <li><a href="{:U('mer/goods?issale=2')}">全部商品</a></li>
+                                <else />
+                                <li class="fatie_genb"><a href="{:U('mer/goods?issale=2')}">全部商品</a></li>
+                            </if>
+                            <if condition="$issale eq 1">
+                                <li class="fatie_genb"><a href="{:U('mer/goods?issale=1')}">上架商品</a></li>
+                                <else />
+                                <li><a href="{:U('mer/goods?issale=1')}">上架商品</a></li>
+                            </if>
+                            <if condition="$issale eq 0">
+                                <li class="fatie_genb"><a href="{:U('mer/goods?issale=0')}">下架商品</a></li>
+                                <else />
+                                <li><a href="{:U('mer/goods?issale=0')}">下架商品</a></li>
+                            </if>
+                        </ul>
+                        <if condition="$shoptype eq 1">
+                            <span class="xincp_fod" ><input type="button" value="新增房型" id="add"></span>
+                        <elseif condition="$shoptype eq 2" />
+                            <span class="xincp_fod">
+                                <input type="button" value="新增菜品" id="add">
+                                <input type="button" value="新增套餐" id="addtao">
+                            </span>
+                            <elseif condition="$shoptype eq 3" />
+                            <span class="xincp_fod" ><input type="button" value="新增景区" id="add"></span>
+                        </if>
+
+
+                    </div>
+                </div>
+
+                <!---->
+                <div class="shnp_list">
+                    <ul>
+                        <li>
+                            <ul>
+                                <if condition="$shoptype eq 3"> <li>景区</li>
+                                  <elseif condition="$shoptype eq 2" /><li>菜品</li>
+                                    <elseif condition="$shoptype eq 1" /><li>房型</li>
+                                </if>
+                                <li>ID号</li>
+                                <if condition="$shoptype eq 3">
+                                    <li>成人票价</li>
+                                    <else />
+                                    <li>价格</li>
+                                    </if>
+
+                                <if condition="$shoptype eq 3">
+                                    <li>儿童票价</li>
+                                    <else />
+                                <li>数量</li>
+                                </if>
+
+                                <li>操作</li>
+                            </ul>
+                        </li>
+                        <notempty name="lists">
+                        <volist name="lists" id="vo">
+                        <li>
+                            <ul>
+                                <li>
+                                    <img src="{$vo.icon|picture}" alt="">
+                                    <div>
+                                        <p>{$vo.name}</p>
+                                        <span>
+                                            <img src="__IMG__/psc/ppp_03.jpg" alt="">
+                                            <img src="__IMG__/psc/ppp_03.jpg" alt="">
+                                            <img src="__IMG__/psc/ppp_03.jpg" alt="">
+                                            <img src="__IMG__/psc/ppp_03.jpg" alt="">
+                                            <em>4.6分</em>
+                                           <!-- <em>{$vo.pl}条评论</em>-->
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <li>{$vo.id}</li>
+
+                                <li>{$vo.price}</li>
+                                <if condition="$shoptype eq 3"><li>{$vo.childprice}</li>
+                                    <elseif condition="$shoptype eq 2" /><li>{$vo.roomnum}</li>
+                                    <elseif condition="$shoptype eq 1" /><li>{$vo.roomnum}</li>
+                                </if>
+
+
+                                <if condition="$vo.issale eq 1">
+                                <li class="actgoods" data-id="{$vo.id}" acttype="notsale" style="cursor: pointer">下架</li>
+                                    <else />
+                                    <li class="sxn_btn">
+                                        <ul>
+                                            <li class="actgoods" data-id="{$vo.id}" acttype="onsale">上架</li>
+                                            <li class="editgoods" data-id="{$vo.id}">编辑</li>
+                                            <li class="actgoods" data-id="{$vo.id}" acttype="del">删除</li>
+                                        </ul>
+                                    </li>
+                                    </if>
+                            </ul>
+                        </li>
+                       </volist>
+                        <else /><p style="text-align:center;">暂时还没有记录哦~~ ！</p>
+                        </notempty>
+                    </ul>
+                </div>
+
+                <!---->
+                <div class="page_ll">
+                    <if condition="$fanye eq 1">
+                        <ul>{$page}</ul>
+
+                        <span><p>到</p><input type="text"  id="pagenum" value="{$Think.get.p}"><p>页</p><i id="gotopage">确定</i></span>
+                    </if>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------底部--------->
+<include file="Public/footer" />
+</body>
+<script>
+
+    $(document).on("click","#chaxun",function () {
+
+
+        var date1=$('#date_demo1').html();
+        var date2=$('#date_demo2').html();
+        console.log(date1,date2);
+        if(date1==''){
+            layer.tips('请选择开始日期!', '#date_demo1', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }else if(date2==''){
+            layer.tips('请选择结束日期!', '#date_demo2', {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            return false;
+        }
+        location.href='/Home/mer/dingdan/date1/'+date1+'/date2/'+date2;
+    })
+    $(document).on("click","#add",function () {
+        var shoptyp="{$shoptype}"
+        if(shoptyp==1){
+            location.href='/Home/mer/addgoods';
+        }else if(shoptyp==2){
+            location.href='/Home/mer/addfood';
+        }else if(shoptyp==3){
+            location.href='/Home/mer/addmenpiao';
+        }
+
+    })
+    $(document).on("click","#addtao",function () {
+
+            location.href='/Home/mer/taochan';
+     })
+    $(document).on("click",".editgoods",function () {
+        var id = $(this).attr('data-id')
+        var type = $(this).attr('acttype')
+        var shoptype="{$shoptype}"
+        if(shoptype==1){
+            location.href='/Home/mer/editgoods/id/'+id;
+        }else if(shoptype==2){
+            location.href='/Home/mer/editfood/id/'+id;
+        }else if(shoptype==3){
+            location.href='/Home/mer/editmenpiao/id/'+id;
+        }
+
+
+    })
+    $(document).on("click",".actgoods",function () {
+        var id = $(this).attr('data-id')
+        var type = $(this).attr('acttype')
+        if(type=='del'){
+            layer.confirm('确定删除吗？', {
+                btn : [ '确定', '取消' ]
+            }, function(index) {
+                layer.close(index);
+                $.post("/Home/mer/goods",{'id':id,'type':type},function(da){
+
+                    var obj = jQuery.parseJSON(da);
+                    if(obj.code==200){
+                        layer.msg('操作成功',function () {
+                            location.reload();
+                        })
+
+                    }else{
+                        layer.msg('操作失败')
+                    }
+                });
+
+            });
+        }else{
+            $.post("/Home/mer/goods",{'id':id,'type':type},function(da){
+
+                var obj = jQuery.parseJSON(da);
+                if(obj.code==200){
+                    layer.msg('操作成功',function () {
+                        location.reload();
+                    })
+
+                }else{
+                    layer.msg('操作失败')
+                }
+            });
+        }
+
+    })
+    $(document).on("click",".isover",function () {
+        var id = $(this).attr('data-id')
+
+        $.post("/Home/mer/dingdan",{'id':id,'type':'isover'},function(da){
+
+            var obj = jQuery.parseJSON(da);
+            if(obj.code==200){
+                layer.msg('确认成功',function () {
+                    location.reload();
+                })
+
+
+            }else{
+                layer.msg('确认失败')
+
+            }
+        });
+    })
+    $(document).on("click","#gotopage",function () {
+
+        var page = $('#pagenum').val();
+        if(/^\d+$/.test(page)){
+
+        }else{
+            layer.msg('页码必要是数字！');
+            return;
+        }
+        var url=location.href
+        if(url.indexOf('p/')>0){
+            var a=url.split('/')
+            a.pop()
+            var c=a.join('/');
+            var u=c+'/'+page+'.html'
+            location.href=u
+        }else{
+            var a=url.split('.')
+            location.href=a[0]+'/p/'+page+'.html';
+        }
+
+
+    })
+
+</script>
+</html>
